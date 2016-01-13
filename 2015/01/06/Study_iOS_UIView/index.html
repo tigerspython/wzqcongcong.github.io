@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Study iOS - UIView | 闷骚的悟空</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Developing Applications for iOS 观后感系列：UIView相关视频章节：7
+
+UIView 的 init与 UIViewController 的 init 类似，UIView 的 init 也有2种形式：一种是从 storyboard 中释放出来，另一种是在代码中直接调用相关的 init 函数。两种只会选择一种来完成 init。
+
+来自 storyboard： awa">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Study iOS - UIView">
+<meta property="og:url" content="http://hi.zongquan.wang/2015/01/06/Study_iOS_UIView/index.html">
+<meta property="og:site_name" content="闷骚的悟空">
+<meta property="og:description" content="Developing Applications for iOS 观后感系列：UIView相关视频章节：7
+
+UIView 的 init与 UIViewController 的 init 类似，UIView 的 init 也有2种形式：一种是从 storyboard 中释放出来，另一种是在代码中直接调用相关的 init 函数。两种只会选择一种来完成 init。
+
+来自 storyboard： awa">
+<meta property="og:image" content="http://hi.zongquan.wang/img/Study_iOS_UIView/7.1.Coordinate.png">
+<meta property="og:image" content="http://hi.zongquan.wang/img/Study_iOS_UIView/7.2.Coordinate.png">
+<meta property="og:image" content="http://hi.zongquan.wang/img/Study_iOS_UIView/7.6.Redraw.png">
+<meta property="og:image" content="http://hi.zongquan.wang/img/Study_iOS_UIView/7.7.UIGestureRecognizer.png">
+<meta property="og:image" content="http://hi.zongquan.wang/img/Study_iOS_UIView/7.8.UIGestureRecognizer.png">
+<meta property="og:image" content="http://hi.zongquan.wang/img/Study_iOS_UIView/7.9.UIGestureRecognizer.png">
+<meta property="og:updated_time" content="2015-11-10T02:03:41.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Study iOS - UIView">
+<meta name="twitter:description" content="Developing Applications for iOS 观后感系列：UIView相关视频章节：7
+
+UIView 的 init与 UIViewController 的 init 类似，UIView 的 init 也有2种形式：一种是从 storyboard 中释放出来，另一种是在代码中直接调用相关的 init 函数。两种只会选择一种来完成 init。
+
+来自 storyboard： awa">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  
+
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" type="text/css">
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-58630641-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  
+
+
+  <script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?f927b4d849de0fa8e031f36bf6a21e78";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+
+  <script src="//fast.eager.io/RfF1U61Tb7.js"></script>
+
+  
+</head>
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-main" class="header-inner">
+    <div class="outer">
+      <a href="/" id="logo"><span class="site-title">闷骚的悟空</span></a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about/me.html">Me</a>
+        
+      </nav>
+      
+        <nav id="sub-nav">
+          <div class="profile" id="profile-nav">
+            <a id="profile-anchor" href="javascript:;"><img class="avatar" src="/img/me.jpg"><i class="fa fa-caret-down"></i></a>
+          </div>
+        </nav>
+      
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit"> </button><input type="hidden" name="sitesearch" value="http://hi.zongquan.wang"></form>
+      </div>
+    </div>
+  </div>
+  <div id="main-nav-mobile" class="header-sub header-inner">
+    <table class="menu outer">
+      <tr>
+        
+          <td><a class="main-nav-link" href="/">Home</a></td>
+        
+          <td><a class="main-nav-link" href="/archives">Archives</a></td>
+        
+          <td><a class="main-nav-link" href="/about/me.html">Me</a></td>
+        
+        <td>
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><input type="hidden" name="sitesearch" value="http://hi.zongquan.wang"></form>
+        </td>
+      </tr>
+    </table>
+  </div>
+</header>
+
+    <div class="outer">
+      
+        <aside id="profile">
+  <div class="inner profile-inner">
+    <div class="base-info profile-block">
+      <img class="shake freez shake-hard" id="avatar" src="/img/me.jpg">
+      <h2 id="name">闷骚的悟空</h2>
+      <h3 id="subname">立一业谋生 择一城终老 携一人白首</h2>
+      <h3 id="title">Mac &amp; iOS Developer &amp; Designer</h3>
+      <span id="location"><i class="fa fa-map-marker"></i>Suzhou, China</span>
+      <a class="shake shake-rotate" id="follow" href="https://github.com/wzqcongcong/">FOLLOW</a>
+    </div>
+    <div class="article-info profile-block">
+      <div class="article-info-block">
+        20
+        <span>posts</span>
+      </div>
+      <div class="article-info-block">
+        12
+        <span>tags</span>
+      </div>
+    </div>
+    
+    <div class="contact-info profile-block">
+      <table class="contact-list">
+        <tr>
+          
+          <td><a href="mailto:wzqcongcong@sina.com" target="_blank" title="send"><i class="fa fa-send"></i></a></td>
+          
+          <td><a href="http://github.com/wzqcongcong" target="_blank" title="github"><i class="fa fa-github"></i></a></td>
+          
+          <td><a href="https://twitter.com/wzqcongcong" target="_blank" title="twitter"><i class="fa fa-twitter"></i></a></td>
+          
+          <td><a href="/atom.xml" target="_blank" title="rss"><i class="fa fa-rss"></i></a></td>
+          
+        </tr>
+      </table>
+    </div>
+    
+    
+  </div>
+</aside>
+
+      
+      <section id="main"><article id="post-Study_iOS_UIView" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Study iOS - UIView
+    </h1>
+  
+
+        <div class="article-meta">
+          
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2015/01/06/Study_iOS_UIView/">
+      <time datetime="2015-01-06T13:23:11.000Z" itemprop="datePublished">2015-01-06</time>
+    </a>
+  </div>
+
+
+          
+  <div class="article-category">
+  	<i class="fa fa-folder"></i>
+    <a class="article-category-link" href="/categories/开发/">开发</a>
+  </div>
+
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+                
+        <h3 id="Developing_Applications_for_iOS_观后感系列：UIView">Developing Applications for iOS 观后感系列：UIView</h3><p><em>相关视频章节：7</em></p>
+<hr>
+<h3 id="UIView_的_init">UIView 的 init</h3><p>与 UIViewController 的 init 类似，UIView 的 init 也有2种形式：一种是从 storyboard 中释放出来，另一种是在代码中直接调用相关的 init 函数。两种只会选择一种来完成 init。</p>
+<ol>
+<li><p><strong>来自 storyboard：</strong> <em><code>awakeFromNib</code></em></p>
+<p> awakeFromNib 是 NSObject 的函数，颤抖吧。</p>
+</li>
+<li><p><strong>来自 code：</strong> <em><code>initWithFrame:(CGRect)rect</code></em></p>
+</li>
+</ol>
+<p>因为有这2种 init 方式，所以，如果希望在 init 阶段做一些 setup，那么这2个地方都要执行 setup。因为从 storyboard 释放出来的 init 方式只会调用 awakeFromNib，不会调用 initWithFrame:；同样，code 中调用 initWithFrame: 进行的 init 方式也不会再调用 awakeFromNib。</p>
+<h3 id="Coordinate">Coordinate</h3><p><img src="/img/Study_iOS_UIView/7.1.Coordinate.png" alt="Coordinate"></p>
+<p><img src="/img/Study_iOS_UIView/7.2.Coordinate.png" alt="Coordinate"></p>
+<a id="more"></a>
+<h3 id="Draw">Draw</h3><p>基于 CPU 进行绘制时，靠的是 <em><code>drawRect:</code></em> 这个函数。如何实现自己的 <em><code>drawRect:</code></em> 呢？两种方式：</p>
+<ul>
+<li><p><strong>Core Graphics （C API）</strong></p>
+<ol>
+<li><p>获取 draw 操作所在的 <em><code>context</code></em>。<strong>注意</strong>，每次调用 <em><code>drawRect:</code></em> 时，iOS 都会重新给你提供一个新的 context，只有这个最新的对本次 <em><code>drawRect:</code></em> 才是有效的，因此不要去 cache 之前的某个 context 来复用，因为它对本次的 <em><code>drawRect:</code></em> 是无效的。</p>
+<p> context 决定了 <em><code>drawRect:</code></em> 操作发生在哪里（Screen，Offscreen，PDF，Printer 等）。通过在 <em><code>drawRect:</code></em> 中调用 <em><code>UIGraphicsGetCurrentContext()</code></em> 来获取当前 CGContextRef。</p>
+</li>
+<li><p>创建 path</p>
+</li>
+<li><p>设置 color、font、width 等等属性</p>
+</li>
+<li><p>调用 stroke 或者 fill 进行绘制</p>
+</li>
+</ol>
+</li>
+<li><p><strong>UIBezierPath（Cocoa API）</strong></p>
+<p>  利用 UIBezierPath 会得到一个 object，然后直接通过该 object 来 stroke 或者 fill。UIBezierPath 是不需要设置 context 的，它会自动地在当前 context 下进行绘制。</p>
+<p>  可以利用 UIBezierPath 来 clip 你的后续绘制操作：</p>
+<pre><code>UIBezierPath *roundedRect = [UIBezierPath bezierPathWithRoundedRec<span class="variable">t:rect</span> cornerRadiu<span class="variable">s:radius</span>];
+[roundedRect addClip]; // this would clip <span class="keyword">all</span> drawing <span class="keyword">to</span> <span class="keyword">be</span> inside the roundedRect
+</code></pre></li>
+</ul>
+<p>基于 GPU 的 draw 用的是另一套机制：Layer。本篇未涉及。</p>
+<h3 id="Redraw">Redraw</h3><p><img src="/img/Study_iOS_UIView/7.6.Redraw.png" alt="Redraw"></p>
+<h3 id="UIGestureRecognizer">UIGestureRecognizer</h3><p>两种添加方式：</p>
+<ol>
+<li><p><code>code 中添加</code></p>
+<p> <img src="/img/Study_iOS_UIView/7.7.UIGestureRecognizer.png" alt="UIGestureRecognizer"></p>
+<p> <img src="/img/Study_iOS_UIView/7.8.UIGestureRecognizer.png" alt="UIGestureRecognizer"></p>
+<p> <img src="/img/Study_iOS_UIView/7.9.UIGestureRecognizer.png" alt="UIGestureRecognizer"></p>
+</li>
+<li><p><code>storyboard 中拖放 UIGestureRecognizer 控件，并设置 target-action。</code></p>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a href="http://hi.zongquan.wang/2015/01/06/Study_iOS_UIView/#disqus_thread" class="article-comment-link">Comments</a>
+      
+
+      <a data-url="http://hi.zongquan.wang/2015/01/06/Study_iOS_UIView/" data-id="cijccxdde000dpysbg0mq4g2v" class="article-share-link">Share</a>
+
+      <div id="article-baidu-share" class="bdsharebuttonbox">
+        <a href="#" class="bds_weixin" data-cmd="weixin" title="WeiXin"></a>
+      </div>
+      <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":["mshare","weixin","tsina","tqq","qzone","qq","sqq","tqf","t163","renren","douban","huaban","taobao","tieba","kaixin001","tsohu","meilishuo","mogujie","sdo","youdao","twi","fbook","linkedin","mail","copy","print"],"bdPic":"","bdStyle":"1","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UI/">UI</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/01/06/Study_iOS_Animation/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Study iOS - UIView Animation
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/01/05/Study_iOS_Misc/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Study iOS - Misc</div>
+    </a>
+  
+</nav>
+
+
+  
+</article>
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+</section>
+      
+        <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">recents</h3>
+    <div class="widget">
+      <ul id="recent-post" class="">
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2016/01/12/Hack_XtraFinder/" class="thumbnail">
+  
+    <span style="background-image:url(/img/Hack_XtraFinder/alert.png
+)" alt="Hack XtraFinder" class="thumbnail-image"></span>
+  
+</a>
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/开发/">开发</a></p>
+              <p class="item-title"><a href="/2016/01/12/Hack_XtraFinder/" class="title">Hack XtraFinder</a></p>
+              <p class="item-date"><time datetime="2016-01-12T15:38:55.000Z" itemprop="datePublished">2016-01-12</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2015/11/16/Xcode_Build_Settings_Products_Path/" class="thumbnail">
+  
+    <span style="background-image:url(/img/Xcode_Build_Settings_Products_Path/location.png
+)" alt="Xcode Build Settings - Products Path" class="thumbnail-image"></span>
+  
+</a>
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/开发/">开发</a></p>
+              <p class="item-title"><a href="/2015/11/16/Xcode_Build_Settings_Products_Path/" class="title">Xcode Build Settings - Products Path</a></p>
+              <p class="item-date"><time datetime="2015-11-16T12:21:54.000Z" itemprop="datePublished">2015-11-16</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2015/01/22/How_to_get_File_Attributes_in_Mac/" class="thumbnail">
+  
+    <span class="thumbnail-image thumbnail-none"></span>
+  
+</a>
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/开发/">开发</a></p>
+              <p class="item-title"><a href="/2015/01/22/How_to_get_File_Attributes_in_Mac/" class="title">How to get File Attributes in Mac</a></p>
+              <p class="item-date"><time datetime="2015-01-22T07:16:18.000Z" itemprop="datePublished">2015-01-22</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2015/01/18/Study_iOS_Hardware/" class="thumbnail">
+  
+    <span style="background-image:url(/img/Study_iOS_Hardware/17.9.CoreMotion.png
+)" alt="Study iOS - Hardware" class="thumbnail-image"></span>
+  
+</a>
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/开发/">开发</a></p>
+              <p class="item-title"><a href="/2015/01/18/Study_iOS_Hardware/" class="title">Study iOS - Hardware</a></p>
+              <p class="item-date"><time datetime="2015-01-18T07:42:25.000Z" itemprop="datePublished">2015-01-18</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2015/01/18/Study_iOS_L18N/" class="thumbnail">
+  
+    <span style="background-image:url(/img/Study_iOS_L18N/18.1.L18N.png
+)" alt="Study iOS - L18N" class="thumbnail-image"></span>
+  
+</a>
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/开发/">开发</a></p>
+              <p class="item-title"><a href="/2015/01/18/Study_iOS_L18N/" class="title">Study iOS - L18N</a></p>
+              <p class="item-date"><time datetime="2015-01-18T05:35:11.000Z" itemprop="datePublished">2015-01-18</time></p>
+            </div>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/开发/">开发</a><span class="category-list-count">20</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Animation/">Animation</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Block/">Block</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CoreData/">CoreData</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hardware/">Hardware</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac/">Mac</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Network/">Network</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sandbox/">Sandbox</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UI/">UI</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XPC/">XPC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Xcode/">Xcode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS/">iOS</a><span class="tag-list-count">13</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">tag cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Animation/" style="font-size: 10px;">Animation</a> <a href="/tags/Block/" style="font-size: 10px;">Block</a> <a href="/tags/CoreData/" style="font-size: 10px;">CoreData</a> <a href="/tags/Hardware/" style="font-size: 10px;">Hardware</a> <a href="/tags/Mac/" style="font-size: 15px;">Mac</a> <a href="/tags/Network/" style="font-size: 10px;">Network</a> <a href="/tags/Sandbox/" style="font-size: 10px;">Sandbox</a> <a href="/tags/UI/" style="font-size: 15px;">UI</a> <a href="/tags/XPC/" style="font-size: 10px;">XPC</a> <a href="/tags/Xcode/" style="font-size: 10px;">Xcode</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a><span class="archive-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+  
+  <div id="toTop" class="fa fa-chevron-up"></div>
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 1987 - 2016 闷骚的悟空<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+    </div>
+    <div style="display: none">
+      
+      	
+      	
+        <img id=favicon_1 src=/favicon.1.ico>
+      
+      	
+      	
+        <img id=favicon_2 src=/favicon.2.ico>
+      
+      	
+      	
+        <img id=favicon_3 src=/favicon.3.ico>
+      
+      	
+      	
+        <img id=favicon_4 src=/favicon.4.ico>
+      
+    </div>
+  </div>
+</footer>
+    
+
+<script>
+  var disqus_shortname = 'wzqcongcong';
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+
+ <script src="//cdn.staticfile.org/jquery/2.1.1-rc2/jquery.min.js"></script>
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/csshake.min.css">
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+<script src="/js/favico.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    var favicon = new Favico();
+    var index = -1;
+    window.setInterval(function() {
+      var random = Math.floor(Math.random() * 4);
+      index = (index + 1) % 4;
+      var image = document.getElementById('favicon_' + (index + 1));
+      favicon.image(image);
+    }, 500);
+  });
+</script>
+
+  </div>
+</body>
+</html>

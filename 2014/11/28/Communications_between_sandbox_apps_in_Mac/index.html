@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Communications between sandbox apps in Mac | 闷骚的悟空</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="由于 Mac 对 Sandbox 的种种限制，使得 Sandb app 间的通信方式与普通 non Sandbox app 间的通信方式有所不同，普通的通信方式，如 NSDistributedNotification、Distributed Objects、 XPC 等不能直接套用到 Sandbox 机制上。
+Mac 引入了 Sandbox App Group 的机制，使得同属于一个 app gr">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Communications between sandbox apps in Mac">
+<meta property="og:url" content="http://hi.zongquan.wang/2014/11/28/Communications_between_sandbox_apps_in_Mac/index.html">
+<meta property="og:site_name" content="闷骚的悟空">
+<meta property="og:description" content="由于 Mac 对 Sandbox 的种种限制，使得 Sandb app 间的通信方式与普通 non Sandbox app 间的通信方式有所不同，普通的通信方式，如 NSDistributedNotification、Distributed Objects、 XPC 等不能直接套用到 Sandbox 机制上。
+Mac 引入了 Sandbox App Group 的机制，使得同属于一个 app gr">
+<meta property="og:updated_time" content="2015-11-10T02:03:41.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Communications between sandbox apps in Mac">
+<meta name="twitter:description" content="由于 Mac 对 Sandbox 的种种限制，使得 Sandb app 间的通信方式与普通 non Sandbox app 间的通信方式有所不同，普通的通信方式，如 NSDistributedNotification、Distributed Objects、 XPC 等不能直接套用到 Sandbox 机制上。
+Mac 引入了 Sandbox App Group 的机制，使得同属于一个 app gr">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  
+
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" type="text/css">
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-58630641-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  
+
+
+  <script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?f927b4d849de0fa8e031f36bf6a21e78";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+
+  <script src="//fast.eager.io/RfF1U61Tb7.js"></script>
+
+  
+</head>
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-main" class="header-inner">
+    <div class="outer">
+      <a href="/" id="logo"><span class="site-title">闷骚的悟空</span></a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about/me.html">Me</a>
+        
+      </nav>
+      
+        <nav id="sub-nav">
+          <div class="profile" id="profile-nav">
+            <a id="profile-anchor" href="javascript:;"><img class="avatar" src="/img/me.jpg"><i class="fa fa-caret-down"></i></a>
+          </div>
+        </nav>
+      
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit"> </button><input type="hidden" name="sitesearch" value="http://hi.zongquan.wang"></form>
+      </div>
+    </div>
+  </div>
+  <div id="main-nav-mobile" class="header-sub header-inner">
+    <table class="menu outer">
+      <tr>
+        
+          <td><a class="main-nav-link" href="/">Home</a></td>
+        
+          <td><a class="main-nav-link" href="/archives">Archives</a></td>
+        
+          <td><a class="main-nav-link" href="/about/me.html">Me</a></td>
+        
+        <td>
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><input type="hidden" name="sitesearch" value="http://hi.zongquan.wang"></form>
+        </td>
+      </tr>
+    </table>
+  </div>
+</header>
+
+    <div class="outer">
+      
+        <aside id="profile">
+  <div class="inner profile-inner">
+    <div class="base-info profile-block">
+      <img class="shake freez shake-hard" id="avatar" src="/img/me.jpg">
+      <h2 id="name">闷骚的悟空</h2>
+      <h3 id="subname">立一业谋生 择一城终老 携一人白首</h2>
+      <h3 id="title">Mac &amp; iOS Developer &amp; Designer</h3>
+      <span id="location"><i class="fa fa-map-marker"></i>Suzhou, China</span>
+      <a class="shake shake-rotate" id="follow" href="https://github.com/wzqcongcong/">FOLLOW</a>
+    </div>
+    <div class="article-info profile-block">
+      <div class="article-info-block">
+        20
+        <span>posts</span>
+      </div>
+      <div class="article-info-block">
+        12
+        <span>tags</span>
+      </div>
+    </div>
+    
+    <div class="contact-info profile-block">
+      <table class="contact-list">
+        <tr>
+          
+          <td><a href="mailto:wzqcongcong@sina.com" target="_blank" title="send"><i class="fa fa-send"></i></a></td>
+          
+          <td><a href="http://github.com/wzqcongcong" target="_blank" title="github"><i class="fa fa-github"></i></a></td>
+          
+          <td><a href="https://twitter.com/wzqcongcong" target="_blank" title="twitter"><i class="fa fa-twitter"></i></a></td>
+          
+          <td><a href="/atom.xml" target="_blank" title="rss"><i class="fa fa-rss"></i></a></td>
+          
+        </tr>
+      </table>
+    </div>
+    
+    
+  </div>
+</aside>
+
+      
+      <section id="main"><article id="post-Communications_between_sandbox_apps_in_Mac" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Communications between sandbox apps in Mac
+    </h1>
+  
+
+        <div class="article-meta">
+          
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2014/11/28/Communications_between_sandbox_apps_in_Mac/">
+      <time datetime="2014-11-27T16:44:04.000Z" itemprop="datePublished">2014-11-28</time>
+    </a>
+  </div>
+
+
+          
+  <div class="article-category">
+  	<i class="fa fa-folder"></i>
+    <a class="article-category-link" href="/categories/开发/">开发</a>
+  </div>
+
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+                
+        <p>由于 Mac 对 Sandbox 的种种限制，使得 Sandb app 间的通信方式与普通 non Sandbox app 间的通信方式有所不同，普通的通信方式，如 <em><code>NSDistributedNotification</code></em>、<em><code>Distributed Objects</code></em>、 <em><code>XPC</code></em> 等不能直接套用到 Sandbox 机制上。</p>
+<p>Mac 引入了 <em><code>Sandbox App Group</code></em> 的机制，使得同属于一个 app group 的不同 app 间有了合适的通信方式。</p>
+<h3 id="Sandbox_App_Group_是什么">Sandbox App Group 是什么</h3><p>Sandbox App Group 表示由同一个 Developer ID 签名的 app group。每个 Developer ID 可以签名多个 Sandbox App Group，每个 Sandbox App Group 可以包含若干个 Sandbox app。</p>
+<p>如果想要声明一个 Sandbox app 属于某个 Sandbox App Group，需要在该 app 的 <em><code>.entitlements</code></em> 中添加一个 <em><code>com.apple.security.application-groups</code></em> array，它的每个元素表示该 app 属于的某个 Sandbox app group，用 Group Bundle ID 表示。</p>
+<p><strong><code>Group Bundle ID</code></strong> := <team-id>.com.company.XXX，<team-id> 其实也可以不用，但 Apple 的标准用法是以 <team-id> 作为 Group Bundle ID 的 prefix。</team-id></team-id></team-id></p>
+<p>每个 Sandbox App Group 会在 <em><code>~/Library/Group Containers</code></em> 下生成一个对应的目录，以 Group Bundle ID 命名。该目录的结构与 Sandbox app 的 Container 目录结构相同。该目录可以被属于该 group 的所有 Sandbox app 访问，没有限制。访问该目录的方法是调用 <em><code>[[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:]</code></em>。</p>
+<a id="more"></a>
+<h3 id="Sandbox_App_Group_能够做什么">Sandbox App Group 能够做什么</h3><p>借助 Sandbox App Group，有以下这么几种方式可以用来实现同 group 下的 app 间的通信。</p>
+<h4 id="1-_NSUserDefaults">1. NSUserDefaults</h4><p>对于单个 Sandbox app 来说，它的 <em><code>NSUserDefaults</code></em> 只能由自己访问，别的 Sandbox app 无法访问。而有了 Sandbox App Group，每个 group 可以拥有自己的 <em><code>NSUserDefaults</code></em>，而它是可以被下属的所有 Sandbox app 共享访问的。</p>
+<ul>
+<li><p>创建 Group User Defaults</p>
+<pre><code>NSUserDefaults *defaults = <span class="comment">[<span class="comment">[NSUserDefaults alloc]</span> init]</span>;
+
+<span class="comment">[defaults addSuiteNamed:&lt;Group Bundle ID&gt;]</span>;
+</code></pre></li>
+<li><p>Get</p>
+<pre><code><span class="title">[defaults persistentDomainForName:]</span><span class="comment">;</span>
+</code></pre></li>
+<li><p>Set</p>
+<pre><code>[defaults <span class="built_in">set</span>PersistentDomain: <span class="keyword">for</span>Name:]
+</code></pre></li>
+</ul>
+<p>关于 <em><code>NSUserDefaults</code></em>，有一篇 <a href="http://realmacsoftware.com/blog/shared-preferences-between-sandboxed-applications" target="_blank" rel="external">很 NB 的文章</a> 可以学习。</p>
+<p><strong>e.g.</strong> <a href="https://github.com/wzqcongcong/MyDiskCleaner" target="_blank" rel="external">MyDiskCleaner</a></p>
+<h4 id="2-_Group_Containers_目录">2. Group Containers 目录</h4><p>尽情利用吧。尽情读写吧。</p>
+<p>比如用 <em><code>FSEventStreamRef</code></em> 来监控其下的某个目录，从而将该目录的变化通知到不同的 Sandbox app 。虽然这种通信方式有点原始~~</p>
+<p>其实 <em><code>NSUserDefaults</code></em> 本质上就是存在于 Group Containers 里的 Preferences 目录中。</p>
+<p><strong>e.g.</strong> <a href="https://github.com/wzqcongcong/MyDiskCleaner" target="_blank" rel="external">MyDiskCleaner</a></p>
+<h4 id="3-_XPC">3. XPC</h4><p>是的，有了 Sandbox App Group，Sandbox app 间可以使用 XPC 了。<br>但使用方式需要有所注意。</p>
+<p><strong>使用条件</strong>：</p>
+<ul>
+<li><p>XPC Listener 必须是位于 Helper app 中，由主 app 通过 <em><code>SMLoginItemSetEnabled</code></em> 来启动该 Helper app，从而启动 XPC Listener。</p>
+</li>
+<li><p>Helper app 的 Bundle ID 必须以 Group Bundle ID 作为 prefix，即 <strong><code>Helper Bundle ID</code></strong> := <group-bundle-id>.XXX</group-bundle-id></p>
+</li>
+<li><p>Helper app 在创建 Listener 时需要使用 <em><code>[[NSXPCListener alloc] initWithMachServiceName:]</code></em>，主 app 在创建 connection 时需要使用 <em><code>[[NSXPCConnection alloc] initWithMachServiceName:options:0]</code></em>。</p>
+</li>
+<li><p>XPC service name 必须等于 Helper Bundle ID。因为实际上是，在调用 <em><code>SMLoginItemSetEnabled</code></em> 启动Helper app 后，LaunchServices 自动为其注册了一个 XPC service，而 name 就是 Helper Bundle ID。</p>
+</li>
+</ul>
+<p><strong>e.g.</strong> Apple Demo <em>“AppSandboxLoginItemXPCDemo”</em></p>
+<h4 id="4-_Distributed_Objects">4. Distributed Objects</h4><p>跟 XPC 类似，对 Distributed Objects 加些特殊设置，它也可以借助 Sandbox App Group 来实现 Sandbox app 间的通信。</p>
+<p><strong>使用条件</strong>：</p>
+<ul>
+<li><p>DOServer 端要使用 <em><code>NSMachPort</code></em> 来创建 Mach Port。</p>
+</li>
+<li><p>DOServer 端要使用 <em><code>[[NSConnection alloc] initWithReceivePort: sendPort:]</code></em> 来初始化 connection（以后需要对该 connection 设置 rootObject，也就是 DOClient 端能够访问的 DO），给它传递之前创建的 Mach Port。不要使用 <em><code>[NSConnection defaultConnection]</code></em>。</p>
+</li>
+<li><p>DOServer 端要使用 <em><code>[[NSMachBootstrapServer sharedInstance] registerPort:name:]</code></em> 来注册刚创建的 Mach Port，注册用的 name 必须以 Group Bundle ID 作为 prefix，后跟自定义的 port 名称。</p>
+<p>  <strong>注意</strong>，如果 DOServer 端位于 <em><code>SMLoginItemSetEnabled</code></em> 启动的 Helper app，那么定义的 Mach Port name 不能和该 Helper app 的 Bundle ID 同名，因为其 Bundle ID 已经被 Mac 自动用于注册 XPC Service name，会导致这里的 DO Mach Port name 注册失败。</p>
+</li>
+<li><p>DOClient 端要使用 <em><code>[NSConnection connectionWithRegisteredName: host:nil]</code></em> 来连接 DOServer 端，注册 name 就用之前 DOServer 端设置的 Mach Port name。</p>
+</li>
+</ul>
+<p><strong>e.g.</strong> <a href="https://github.com/wzqcongcong/MyDiskCleaner" target="_blank" rel="external">MyDiskCleaner</a></p>
+<h3 id="除了_Sandbox_App_Group，还有什么？">除了 Sandbox App Group，还有什么？</h3><p>我们知道，在 iOS app 中，有 <em><code>URL Scheme</code></em> 这么个机制。如果某个 app 注册了某个特殊的 <em><code>URL Scheme</code></em>，那么其他 app 可以通过访问 URL 的形式来 launch 该 app。</p>
+<p>iOS app 也是采用 Sandbox 机制的，那么在 Mac 上，该方法也是同样适用的！不管其他 app 是不是属于同一 Sandbox App Group，都可以用这种方式来 launch 该 app，并将访问的 URL 传递给该 app。而如果该 app 已经启动，那么它同样也会捕捉到被访问的 URL，从而做出响应。</p>
+<ul>
+<li><p>让 app 注册 URL Scheme</p>
+<p>  在本 app 的 Info.plsit 中，添加一个 <em><code>URL types</code></em> array，它的每个元素代表一个 <em><code>URL Schemes</code></em> array，而该 array 的每个元素就是一个 URL Scheme，通常取一个特殊的名字，用于区别其它 app 的 URL Schemes。</p>
+</li>
+<li><p>监听自己注册的 URL Scheme</p>
+<p>  在本 app 的 <em><code>applicationWillFinishLaunching:</code></em> delegate 函数中，利用如下代码注册一个系统 event listener：</p>
+<pre><code><span class="attr_selector">[[NSAppleEventManager sharedAppleEventManager]</span> <span class="tag">setEventHandler</span><span class="pseudo">:andSelector</span><span class="pseudo">:forEventClass</span><span class="pseudo">:andEventID</span>:];
+</code></pre><p>  callback 函数：</p>
+<pre><code>-(<span class="typename">void</span>)<span class="string">getUrl:</span>(NSAppleEventDescriptor *)event <span class="string">withReplyEvent:</span>(NSAppleEventDescriptor*)reply
+{
+    NSURL *url = [NSURL <span class="string">URLWithString:</span>[[event <span class="string">paramDescriptorForKeyword:</span>keyDirectObject] stringValue]];
+    ...
+}
+</code></pre><p>  <strong>注意</strong>：必须要在 <em><code>applicationWillFinishLaunching:</code></em> 中注册，否则通过这种方式启动 app 后，它无法获取被访问的 URL 信息。</p>
+</li>
+<li><p>其它 app 访问该 URL Scheme</p>
+<p>  在其它 app 中，构造 URL 并访问：</p>
+<pre><code><span class="attr_selector">[[NSWorkspace sharedWorkspace]</span> <span class="tag">openURL</span>:<span class="attr_selector">[[NSURL alloc]</span> <span class="tag">initWithScheme</span><span class="pseudo">:host</span><span class="pseudo">:path</span>:]];
+</code></pre></li>
+</ul>
+<p><strong>e.g.</strong> <a href="https://github.com/wzqcongcong/MyDiskCleaner" target="_blank" rel="external">MyDiskCleaner</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a href="http://hi.zongquan.wang/2014/11/28/Communications_between_sandbox_apps_in_Mac/#disqus_thread" class="article-comment-link">Comments</a>
+      
+
+      <a data-url="http://hi.zongquan.wang/2014/11/28/Communications_between_sandbox_apps_in_Mac/" data-id="cijccxdf1002apysbb6q2pvv1" class="article-share-link">Share</a>
+
+      <div id="article-baidu-share" class="bdsharebuttonbox">
+        <a href="#" class="bds_weixin" data-cmd="weixin" title="WeiXin"></a>
+      </div>
+      <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":["mshare","weixin","tsina","tqq","qzone","qq","sqq","tqf","t163","renren","douban","huaban","taobao","tieba","kaixin001","tsohu","meilishuo","mogujie","sdo","youdao","twi","fbook","linkedin","mail","copy","print"],"bdPic":"","bdStyle":"1","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mac/">Mac</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Sandbox/">Sandbox</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2014/11/28/XPC_mechanism_of_Mac/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          XPC mechanism of Mac
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2014/11/27/How_to_add_Login_item_for_Mac/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">How to add Login item for Mac</div>
+    </a>
+  
+</nav>
+
+
+  
+</article>
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+</section>
+      
+        <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">recents</h3>
+    <div class="widget">
+      <ul id="recent-post" class="">
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2016/01/12/Hack_XtraFinder/" class="thumbnail">
+  
+    <span style="background-image:url(/img/Hack_XtraFinder/alert.png
+)" alt="Hack XtraFinder" class="thumbnail-image"></span>
+  
+</a>
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/开发/">开发</a></p>
+              <p class="item-title"><a href="/2016/01/12/Hack_XtraFinder/" class="title">Hack XtraFinder</a></p>
+              <p class="item-date"><time datetime="2016-01-12T15:38:55.000Z" itemprop="datePublished">2016-01-12</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2015/11/16/Xcode_Build_Settings_Products_Path/" class="thumbnail">
+  
+    <span style="background-image:url(/img/Xcode_Build_Settings_Products_Path/location.png
+)" alt="Xcode Build Settings - Products Path" class="thumbnail-image"></span>
+  
+</a>
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/开发/">开发</a></p>
+              <p class="item-title"><a href="/2015/11/16/Xcode_Build_Settings_Products_Path/" class="title">Xcode Build Settings - Products Path</a></p>
+              <p class="item-date"><time datetime="2015-11-16T12:21:54.000Z" itemprop="datePublished">2015-11-16</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2015/01/22/How_to_get_File_Attributes_in_Mac/" class="thumbnail">
+  
+    <span class="thumbnail-image thumbnail-none"></span>
+  
+</a>
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/开发/">开发</a></p>
+              <p class="item-title"><a href="/2015/01/22/How_to_get_File_Attributes_in_Mac/" class="title">How to get File Attributes in Mac</a></p>
+              <p class="item-date"><time datetime="2015-01-22T07:16:18.000Z" itemprop="datePublished">2015-01-22</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2015/01/18/Study_iOS_Hardware/" class="thumbnail">
+  
+    <span style="background-image:url(/img/Study_iOS_Hardware/17.9.CoreMotion.png
+)" alt="Study iOS - Hardware" class="thumbnail-image"></span>
+  
+</a>
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/开发/">开发</a></p>
+              <p class="item-title"><a href="/2015/01/18/Study_iOS_Hardware/" class="title">Study iOS - Hardware</a></p>
+              <p class="item-date"><time datetime="2015-01-18T07:42:25.000Z" itemprop="datePublished">2015-01-18</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2015/01/18/Study_iOS_L18N/" class="thumbnail">
+  
+    <span style="background-image:url(/img/Study_iOS_L18N/18.1.L18N.png
+)" alt="Study iOS - L18N" class="thumbnail-image"></span>
+  
+</a>
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/开发/">开发</a></p>
+              <p class="item-title"><a href="/2015/01/18/Study_iOS_L18N/" class="title">Study iOS - L18N</a></p>
+              <p class="item-date"><time datetime="2015-01-18T05:35:11.000Z" itemprop="datePublished">2015-01-18</time></p>
+            </div>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/开发/">开发</a><span class="category-list-count">20</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Animation/">Animation</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Block/">Block</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CoreData/">CoreData</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hardware/">Hardware</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac/">Mac</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Network/">Network</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sandbox/">Sandbox</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UI/">UI</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XPC/">XPC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Xcode/">Xcode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS/">iOS</a><span class="tag-list-count">13</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">tag cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Animation/" style="font-size: 10px;">Animation</a> <a href="/tags/Block/" style="font-size: 10px;">Block</a> <a href="/tags/CoreData/" style="font-size: 10px;">CoreData</a> <a href="/tags/Hardware/" style="font-size: 10px;">Hardware</a> <a href="/tags/Mac/" style="font-size: 15px;">Mac</a> <a href="/tags/Network/" style="font-size: 10px;">Network</a> <a href="/tags/Sandbox/" style="font-size: 10px;">Sandbox</a> <a href="/tags/UI/" style="font-size: 15px;">UI</a> <a href="/tags/XPC/" style="font-size: 10px;">XPC</a> <a href="/tags/Xcode/" style="font-size: 10px;">Xcode</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a><span class="archive-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+  
+  <div id="toTop" class="fa fa-chevron-up"></div>
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 1987 - 2016 闷骚的悟空<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+    </div>
+    <div style="display: none">
+      
+      	
+      	
+        <img id=favicon_1 src=/favicon.1.ico>
+      
+      	
+      	
+        <img id=favicon_2 src=/favicon.2.ico>
+      
+      	
+      	
+        <img id=favicon_3 src=/favicon.3.ico>
+      
+      	
+      	
+        <img id=favicon_4 src=/favicon.4.ico>
+      
+    </div>
+  </div>
+</footer>
+    
+
+<script>
+  var disqus_shortname = 'wzqcongcong';
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+
+ <script src="//cdn.staticfile.org/jquery/2.1.1-rc2/jquery.min.js"></script>
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/csshake.min.css">
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+<script src="/js/favico.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    var favicon = new Favico();
+    var index = -1;
+    window.setInterval(function() {
+      var random = Math.floor(Math.random() * 4);
+      index = (index + 1) % 4;
+      var image = document.getElementById('favicon_' + (index + 1));
+      favicon.image(image);
+    }, 500);
+  });
+</script>
+
+  </div>
+</body>
+</html>
