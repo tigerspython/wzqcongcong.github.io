@@ -107,17 +107,17 @@ ga('send', 'pageview');
       <img class="shake freez shake-hard" id="avatar" src="/img/me.jpg">
       <h2 id="name">闷骚的悟空</h2>
       <h3 id="subname">立一业谋生 择一城终老 携一人白首</h2>
-      <h3 id="title">Mac &amp; iOS Developer &amp; Designer</h3>
+      <h3 id="title">Mac Developer &amp; Hacker</h3>
       <span id="location"><i class="fa fa-map-marker"></i>Suzhou, China</span>
       <a class="shake shake-rotate" id="follow" href="https://github.com/wzqcongcong/">FOLLOW</a>
     </div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        20
+        22
         <span>posts</span>
       </div>
       <div class="article-info-block">
-        12
+        13
         <span>tags</span>
       </div>
     </div>
@@ -144,6 +144,185 @@ ga('send', 'pageview');
 
       
       <section id="main">
+      <article id="post-How_to_install_iOSOpenDev_manually" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/29/How_to_install_iOSOpenDev_manually/">How to install iOSOpenDev manually</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2016/03/29/How_to_install_iOSOpenDev_manually/">
+      <time datetime="2016-03-29T15:30:35.000Z" itemprop="datePublished">2016-03-29</time>
+    </a>
+  </div>
+
+
+          
+  <div class="article-category">
+  	<i class="fa fa-folder"></i>
+    <a class="article-category-link" href="/categories/开发/">开发</a>
+  </div>
+
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+                
+        <p>OS X 10.10+ &amp; Xcode 7+</p>
+<p><a href="https://github.com/wzqcongcong/iOSOpenDev" target="_blank" rel="external">https://github.com/wzqcongcong/iOSOpenDev</a></p>
+<hr>
+<ol>
+<li><p><strong>Dependency</strong></p>
+<p><code>brew install ldid dpkg</code></p>
+</li>
+<li><p><strong>Theos</strong></p>
+<p><a href="https://github.com/theos/theos/wiki" target="_blank" rel="external">Wiki</a></p>
+<p><a href="http://iphonedevwiki.net/index.php/Theos/Setup" target="_blank" rel="external">Setup</a></p>
+</li>
+<li><p><strong>iOSOpenDev</strong></p>
+<p><a href="https://github.com/kokoabim/iOSOpenDev/wiki" target="_blank" rel="external">Wiki</a></p>
+<p>3.1. update <strong>.zshrc</strong></p>
+<p><code>export iOSOpenDevPath=$HOME/Tools/iOS/iOSOpenDev</code></p>
+<p><code>export iOSOpenDevDevice=</code></p>
+<p><code>export PATH=$iOSOpenDevPath:$PATH</code></p>
+<p>3.2. get <strong>iOSOpenDev</strong></p>
+<ul>
+<li><p><code>git clone --recursive https://github.com/kokoabim/iOSOpenDev.git $iOSOpenDevPath</code></p>
+</li>
+<li><p>copy the <a href="https://github.com/wzqcongcong/iOSOpenDev" target="_blank" rel="external"><strong>templates</strong></a> dir into <em>$iOSOpenDevPath</em></p>
+</li>
+</ul>
+<p>3.3. setup <strong>Xcode</strong></p>
+<ul>
+<li><p>copy the <a href="https://github.com/wzqcongcong/iOSOpenDev" target="_blank" rel="external"><strong>.xcspec</strong></a> files into <em>/Applications/Xcode/Content/Developer/Platforms/[PLATFORM_PATH]/Developer/Library/Xcode/Specifications</em> (mkdir if not existed)</p>
+</li>
+<li><p><code>mkdir -p /Applications/Xcode/Content/Developer/Platforms/[PLATFORM_PATH]/Developer/usr/bin</code></p>
+</li>
+<li><p><code>ln -fhs $iOSOpenDevPath/bin/iosod /Applications/Xcode/Content/Developer/Platforms/[PLATFORM_PATH]/Developer/usr/bin</code></p>
+</li>
+<li><p><code>ln -fhs $iOSOpenDevPath/bin/ldid /Applications/Xcode/Content/Developer/Platforms/[PLATFORM_PATH]/Developer/usr/bin</code></p>
+</li>
+</ul>
+<p>3.4. setup <strong>SDK</strong></p>
+<ul>
+<li><p>add the following key/value into <strong>[SDK_PATH]/SDKSettings.plist</strong>:</p>
+<pre><code>DefaultProperties<span class="class">.CODE_SIGNING_REQUIRED</span> =&gt; NO
+DefaultProperties<span class="class">.ENTITLEMENTS_REQUIRED</span> =&gt; NO
+DefaultProperties<span class="class">.AD_HOC_CODE_SIGNING_ALLOWED</span> =&gt; YES
+</code></pre></li>
+</ul>
+<p>3.5. setup <strong>templates</strong></p>
+<ul>
+<li><code>ln -fhs $iOSOpenDevPath/templates ~/Library/Developer/Xcode/Templates/iOSOpenDev</code></li>
+<li>open <strong>TemplateInfo.plist</strong> of <strong>Base.xctemplate</strong> and <strong>Empty Project.xctemplate</strong> with Xcode, then set the value of user defined key <em>[iOSOpenDevPath]</em> to <em>$HOME/Tools/iOS/iOSOpenDev</em>.</li>
+</ul>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a href="http://hi.zongquan.wang/2016/03/29/How_to_install_iOSOpenDev_manually/#disqus_thread" class="article-comment-link">Comments</a>
+      
+
+      <a data-url="http://hi.zongquan.wang/2016/03/29/How_to_install_iOSOpenDev_manually/" data-id="cimed77at0005susby7qt4ihh" class="article-share-link">Share</a>
+
+      <div id="article-baidu-share" class="bdsharebuttonbox">
+        <a href="#" class="bds_weixin" data-cmd="weixin" title="WeiXin"></a>
+      </div>
+      <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":["mshare","weixin","tsina","tqq","qzone","qq","sqq","tqf","t163","renren","douban","huaban","taobao","tieba","kaixin001","tsohu","meilishuo","mogujie","sdo","youdao","twi","fbook","linkedin","mail","copy","print"],"bdPic":"","bdStyle":"1","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+    
+      <article id="post-Fuck_My_29_Years_Life" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/13/Fuck_My_29_Years_Life/">Fuck My 29 Years&#39; Life</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2016/03/13/Fuck_My_29_Years_Life/">
+      <time datetime="2016-03-13T10:48:18.000Z" itemprop="datePublished">2016-03-13</time>
+    </a>
+  </div>
+
+
+          
+  <div class="article-category">
+  	<i class="fa fa-folder"></i>
+    <a class="article-category-link" href="/categories/生活/">生活</a>
+  </div>
+
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>无意间看到了这么一篇文章 <a href="http://www.ifanr.com/632328">《人工智能除了下围棋还能干啥？这篇科普文将震撼你的世界观》</a>（后面以常量“彼文”代之），点开之后，手指本能而又温柔地划了几下触摸板，用膀胱扫了一眼滚动条，尼玛好短的滚动条，这也意味着，尼玛好长的文章😂。看惯了不到140个字的微博的我，本能地想要直接关闭彼文，然后愉快地去刷会V2EX或者开发者头条，但是理智再一次告诉我，骚年，不要老吃快餐了，否则营养跟不上啊，好歹碰到这么一篇长文，何不咬着牙并快乐地看完呢，更何况这可是关于当下热门的人狗大战哟🤔。</p>
+<p>于是，在洗澡之前，我坚持看完了彼文。</p>
+<p>于是，在洗澡之后，我写下了此文。</p>
+<p>那么问题来了，洗澡中间发生了什么😂？</p>
+        
+          <p class="article-more-link shake shake-rotate">
+            <a href="/2016/03/13/Fuck_My_29_Years_Life/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a href="http://hi.zongquan.wang/2016/03/13/Fuck_My_29_Years_Life/#disqus_thread" class="article-comment-link">Comments</a>
+      
+
+      <a data-url="http://hi.zongquan.wang/2016/03/13/Fuck_My_29_Years_Life/" data-id="cimed778o0000susbdcv4sr5z" class="article-share-link">Share</a>
+
+      <div id="article-baidu-share" class="bdsharebuttonbox">
+        <a href="#" class="bds_weixin" data-cmd="weixin" title="WeiXin"></a>
+      </div>
+      <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":["mshare","weixin","tsina","tqq","qzone","qq","sqq","tqf","t163","renren","douban","huaban","taobao","tieba","kaixin001","tsohu","meilishuo","mogujie","sdo","youdao","twi","fbook","linkedin","mail","copy","print"],"bdPic":"","bdStyle":"1","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Thinking/">Thinking</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+    
       <article id="post-Hack_XtraFinder" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -194,7 +373,7 @@ ga('send', 'pageview');
         <a href="http://hi.zongquan.wang/2016/01/12/Hack_XtraFinder/#disqus_thread" class="article-comment-link">Comments</a>
       
 
-      <a data-url="http://hi.zongquan.wang/2016/01/12/Hack_XtraFinder/" data-id="cijccxdew0027pysb0caw88jd" class="article-share-link">Share</a>
+      <a data-url="http://hi.zongquan.wang/2016/01/12/Hack_XtraFinder/" data-id="cijcd61vw0027s7sbuv1hvb4j" class="article-share-link">Share</a>
 
       <div id="article-baidu-share" class="bdsharebuttonbox">
         <a href="#" class="bds_weixin" data-cmd="weixin" title="WeiXin"></a>
@@ -274,7 +453,7 @@ ga('send', 'pageview');
         <a href="http://hi.zongquan.wang/2015/11/16/Xcode_Build_Settings_Products_Path/#disqus_thread" class="article-comment-link">Comments</a>
       
 
-      <a data-url="http://hi.zongquan.wang/2015/11/16/Xcode_Build_Settings_Products_Path/" data-id="cijccxdcz0002pysb0u758g6j" class="article-share-link">Share</a>
+      <a data-url="http://hi.zongquan.wang/2015/11/16/Xcode_Build_Settings_Products_Path/" data-id="cijcd61tw0002s7sbsbsc8s39" class="article-share-link">Share</a>
 
       <div id="article-baidu-share" class="bdsharebuttonbox">
         <a href="#" class="bds_weixin" data-cmd="weixin" title="WeiXin"></a>
@@ -376,7 +555,7 @@ ga('send', 'pageview');
         <a href="http://hi.zongquan.wang/2015/01/22/How_to_get_File_Attributes_in_Mac/#disqus_thread" class="article-comment-link">Comments</a>
       
 
-      <a data-url="http://hi.zongquan.wang/2015/01/22/How_to_get_File_Attributes_in_Mac/" data-id="cijccxder0021pysbumxn26wo" class="article-share-link">Share</a>
+      <a data-url="http://hi.zongquan.wang/2015/01/22/How_to_get_File_Attributes_in_Mac/" data-id="cijcd61vq0021s7sbrt0zcc37" class="article-share-link">Share</a>
 
       <div id="article-baidu-share" class="bdsharebuttonbox">
         <a href="#" class="bds_weixin" data-cmd="weixin" title="WeiXin"></a>
@@ -394,194 +573,8 @@ ga('send', 'pageview');
 
 
     
-      <article id="post-Study_iOS_Hardware" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/01/18/Study_iOS_Hardware/">Study iOS - Hardware</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          
-  <div class="article-date">
-    <i class="fa fa-calendar"></i>
-    <a href="/2015/01/18/Study_iOS_Hardware/">
-      <time datetime="2015-01-18T07:42:25.000Z" itemprop="datePublished">2015-01-18</time>
-    </a>
-  </div>
-
-
-          
-  <div class="article-category">
-  	<i class="fa fa-folder"></i>
-    <a class="article-category-link" href="/categories/开发/">开发</a>
-  </div>
-
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="Developing_Applications_for_iOS_观后感系列：Hardware">Developing Applications for iOS 观后感系列：Hardware</h3><p><em>相关视频章节：14、17</em></p>
-<hr>
-<p>关于 iOS device 的 hardware，本篇主要了解2个方面：CoreLocation + CoreMotion</p>
-<h3 id="CoreLocation">CoreLocation</h3><ul>
-<li><p><strong><code>CLLocation</code></strong>：CoreLocation 中最基本的 class。</p>
-<p>  CLLocation 的重要 property：</p>
-<p>  <em><code>coordinate</code></em>：位置坐标，包含 latitude 和 longitude 两个元素。</p>
-<p>  <em><code>altitude</code></em>：海拔。</p>
-<p>  <em><code>horizontal/verticalAccuracy</code></em>：精度。Cellular &lt; WiFi &lt; GPS。</p>
-</li>
-<li><p><strong><code>CLLocationManager</code></strong>：用于获取 CLLocation。</p>
-<p>  使用流程：</p>
-<ol>
-<li><p><em><code>check device</code></em></p>
-<p> 主要是检查 device 是否支持以某种方式来获取某种 location，以及是否有权限来获取。</p>
-<p> 关于权限，有3中状态：Authorized、Denied、Restricted。</p>
-</li>
-<li><p><em><code>init &amp; delegate</code></em>：通过 CLLocationManager 来获取 CLLocation 可以有2种方式，一种是主动 ask（poll），一种是 delegate。通常采用 delegate 的方式，delegate 触发后，你就可以访问 CLLocationManager 的 property <em><code>location</code></em> 来获取当前的 CLLocation 了。</p>
-</li>
-<li><p><em><code>configuration</code></em></p>
-<p> 通过 property <em><code>desiredAccuracy</code></em> 来设定想要的精度。</p>
-<p> 通过 property <em><code>distanceFilter</code></em> 告诉 CLLocationManager，只有当 location 的变化超过该范围时，才去触发 update delegate。</p>
-</li>
-<li><p><em><code>start monitor</code></em></p>
-<p> 你可以进行如下几种形式的 monitor，每种 monitor 都有相应的 delegate 函数，参见文档。</p>
-<ul>
-<li><p><em><code>normal monitor</code></em>：standard monitor，通过设定精度，每当 update 触发时，就会通知 app。</p>
-</li>
-<li><p><em><code>significant change monitor</code></em>：仅当 location 发生明显变化时才通知 app，这里的 significant 并未定义具体是多少。</p>
-</li>
-<li><p><em><code>region monitor</code></em>：当 device 进入某个指定的 region 时，通知 app。</p>
-</li>
-<li><p><em><code>beacon monitor</code></em>：当 device 进入某个指定的 beacon 时，通知 app，这种 monitor 通常与 <em><code>Core Bluetooth</code></em> 相关。</p>
-</li>
-</ul>
-<p><strong>注意</strong>，当你不再需要 monitor 时，不要忘了 stop monitor。</p>
-<p><strong>注意</strong>，即使 app not running，这些 monitor 也还是能够 work 的。想要在 background 模式下继续 monitor，需要在 project 中设置一下，类似于 background fetch 的设置。当 delegate 触发后，app 就会被启动。这种情况下，<code>application:didFinishLaunchingWithOption:</code> 的 option dictionary 中就会包含一个 key <code>UIApplicationLaunchOptionsLocationKey</code>。</p>
-</li>
-</ol>
-</li>
-</ul>
-        
-          <p class="article-more-link shake shake-rotate">
-            <a href="/2015/01/18/Study_iOS_Hardware/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a href="http://hi.zongquan.wang/2015/01/18/Study_iOS_Hardware/#disqus_thread" class="article-comment-link">Comments</a>
-      
-
-      <a data-url="http://hi.zongquan.wang/2015/01/18/Study_iOS_Hardware/" data-id="cijccxdef001hpysbxyqoxwy9" class="article-share-link">Share</a>
-
-      <div id="article-baidu-share" class="bdsharebuttonbox">
-        <a href="#" class="bds_weixin" data-cmd="weixin" title="WeiXin"></a>
-      </div>
-      <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":["mshare","weixin","tsina","tqq","qzone","qq","sqq","tqf","t163","renren","douban","huaban","taobao","tieba","kaixin001","tsohu","meilishuo","mogujie","sdo","youdao","twi","fbook","linkedin","mail","copy","print"],"bdPic":"","bdStyle":"1","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
-
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hardware/">Hardware</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-    
-      <article id="post-Study_iOS_L18N" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/01/18/Study_iOS_L18N/">Study iOS - L18N</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          
-  <div class="article-date">
-    <i class="fa fa-calendar"></i>
-    <a href="/2015/01/18/Study_iOS_L18N/">
-      <time datetime="2015-01-18T05:35:11.000Z" itemprop="datePublished">2015-01-18</time>
-    </a>
-  </div>
-
-
-          
-  <div class="article-category">
-  	<i class="fa fa-folder"></i>
-    <a class="article-category-link" href="/categories/开发/">开发</a>
-  </div>
-
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="Developing_Applications_for_iOS_观后感系列：L18N">Developing Applications for iOS 观后感系列：L18N</h3><p><em>相关视频章节：18</em></p>
-<hr>
-<p>L18N 主要涉及2方面：Xcode + code。</p>
-<ul>
-<li><p><strong>Xcode</strong></p>
-<p>  首先需要在 Xcode 中设置 app 支持的语言：</p>
-<p>  <img src="/img/Study_iOS_L18N/18.1.L18N.png" alt="L18N"></p>
-<p>  然后你就可以对 storyboard 进行 L18N了，Xcode 会生成相应语言的 .strings 文件。</p>
-</li>
-<li><p><strong>code</strong></p>
-<p>  对于不在 storyboard 中的 strings 如何 L18N 呢？那就得通过 code 来处理了。</p>
-<p>  <img src="/img/Study_iOS_L18N/18.2.L18N.png" alt="L18N"></p>
-<p>  在代码中调用上述 macros 之后，可以通过下面命令自动生成 .strings 文件：</p>
-<p>  <img src="/img/Study_iOS_L18N/18.3.L18N.png" alt="L18N"></p>
-<p>  <strong>注意</strong>，当你从 <em><code>Bundle</code></em> 中获取某个文件的 path 时，其搜索顺序是：先 bundle 的 top-level 层，后 .lproj 层。</p>
-</li>
-</ul>
-        
-          <p class="article-more-link shake shake-rotate">
-            <a href="/2015/01/18/Study_iOS_L18N/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a href="http://hi.zongquan.wang/2015/01/18/Study_iOS_L18N/#disqus_thread" class="article-comment-link">Comments</a>
-      
-
-      <a data-url="http://hi.zongquan.wang/2015/01/18/Study_iOS_L18N/" data-id="cijccxdeb001dpysbxokc3t8u" class="article-share-link">Share</a>
-
-      <div id="article-baidu-share" class="bdsharebuttonbox">
-        <a href="#" class="bds_weixin" data-cmd="weixin" title="WeiXin"></a>
-      </div>
-      <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":["mshare","weixin","tsina","tqq","qzone","qq","sqq","tqf","t163","renren","douban","huaban","taobao","tieba","kaixin001","tsohu","meilishuo","mogujie","sdo","youdao","twi","fbook","linkedin","mail","copy","print"],"bdPic":"","bdStyle":"1","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
-
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UI/">UI</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-    
       <nav id="page-nav">
-        <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+        <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
       </nav>
     </section>
       
@@ -592,6 +585,41 @@ ga('send', 'pageview');
     <h3 class="widget-title">recents</h3>
     <div class="widget">
       <ul id="recent-post" class="">
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2016/03/29/How_to_install_iOSOpenDev_manually/" class="thumbnail">
+  
+    <span class="thumbnail-image thumbnail-none"></span>
+  
+</a>
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/开发/">开发</a></p>
+              <p class="item-title"><a href="/2016/03/29/How_to_install_iOSOpenDev_manually/" class="title">How to install iOSOpenDev manually</a></p>
+              <p class="item-date"><time datetime="2016-03-29T15:30:35.000Z" itemprop="datePublished">2016-03-29</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2016/03/13/Fuck_My_29_Years_Life/" class="thumbnail">
+  
+    <span style="background-image:url(/img/Fuck_My_29_Years_Life/fuck.png
+)" alt="Fuck My 29 Years&#39; Life" class="thumbnail-image"></span>
+  
+</a>
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/生活/">生活</a></p>
+              <p class="item-title"><a href="/2016/03/13/Fuck_My_29_Years_Life/" class="title">Fuck My 29 Years&#39; Life</a></p>
+              <p class="item-date"><time datetime="2016-03-13T10:48:18.000Z" itemprop="datePublished">2016-03-13</time></p>
+            </div>
+          </li>
         
           <li>
             
@@ -646,42 +674,6 @@ ga('send', 'pageview');
             </div>
           </li>
         
-          <li>
-            
-            <div class="item-thumbnail">
-              <a href="/2015/01/18/Study_iOS_Hardware/" class="thumbnail">
-  
-    <span style="background-image:url(/img/Study_iOS_Hardware/17.9.CoreMotion.png
-)" alt="Study iOS - Hardware" class="thumbnail-image"></span>
-  
-</a>
-            </div>
-            
-            <div class="item-inner">
-              <p class="item-category"><a class="article-category-link" href="/categories/开发/">开发</a></p>
-              <p class="item-title"><a href="/2015/01/18/Study_iOS_Hardware/" class="title">Study iOS - Hardware</a></p>
-              <p class="item-date"><time datetime="2015-01-18T07:42:25.000Z" itemprop="datePublished">2015-01-18</time></p>
-            </div>
-          </li>
-        
-          <li>
-            
-            <div class="item-thumbnail">
-              <a href="/2015/01/18/Study_iOS_L18N/" class="thumbnail">
-  
-    <span style="background-image:url(/img/Study_iOS_L18N/18.1.L18N.png
-)" alt="Study iOS - L18N" class="thumbnail-image"></span>
-  
-</a>
-            </div>
-            
-            <div class="item-inner">
-              <p class="item-category"><a class="article-category-link" href="/categories/开发/">开发</a></p>
-              <p class="item-title"><a href="/2015/01/18/Study_iOS_L18N/" class="title">Study iOS - L18N</a></p>
-              <p class="item-date"><time datetime="2015-01-18T05:35:11.000Z" itemprop="datePublished">2015-01-18</time></p>
-            </div>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -691,7 +683,7 @@ ga('send', 'pageview');
   <div class="widget-wrap">
     <h3 class="widget-title">categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/开发/">开发</a><span class="category-list-count">20</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/开发/">开发</a><span class="category-list-count">21</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活/">生活</a><span class="category-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -700,7 +692,7 @@ ga('send', 'pageview');
   <div class="widget-wrap">
     <h3 class="widget-title">tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Animation/">Animation</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Block/">Block</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CoreData/">CoreData</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hardware/">Hardware</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac/">Mac</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Network/">Network</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sandbox/">Sandbox</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UI/">UI</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XPC/">XPC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Xcode/">Xcode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS/">iOS</a><span class="tag-list-count">13</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Animation/">Animation</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Block/">Block</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CoreData/">CoreData</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hardware/">Hardware</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac/">Mac</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Network/">Network</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sandbox/">Sandbox</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Thinking/">Thinking</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UI/">UI</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XPC/">XPC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Xcode/">Xcode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS/">iOS</a><span class="tag-list-count">14</span></li></ul>
     </div>
   </div>
 
@@ -709,7 +701,7 @@ ga('send', 'pageview');
   <div class="widget-wrap">
     <h3 class="widget-title">tag cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Animation/" style="font-size: 10px;">Animation</a> <a href="/tags/Block/" style="font-size: 10px;">Block</a> <a href="/tags/CoreData/" style="font-size: 10px;">CoreData</a> <a href="/tags/Hardware/" style="font-size: 10px;">Hardware</a> <a href="/tags/Mac/" style="font-size: 15px;">Mac</a> <a href="/tags/Network/" style="font-size: 10px;">Network</a> <a href="/tags/Sandbox/" style="font-size: 10px;">Sandbox</a> <a href="/tags/UI/" style="font-size: 15px;">UI</a> <a href="/tags/XPC/" style="font-size: 10px;">XPC</a> <a href="/tags/Xcode/" style="font-size: 10px;">Xcode</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a>
+      <a href="/tags/Animation/" style="font-size: 10px;">Animation</a> <a href="/tags/Block/" style="font-size: 10px;">Block</a> <a href="/tags/CoreData/" style="font-size: 10px;">CoreData</a> <a href="/tags/Hardware/" style="font-size: 10px;">Hardware</a> <a href="/tags/Mac/" style="font-size: 15px;">Mac</a> <a href="/tags/Network/" style="font-size: 10px;">Network</a> <a href="/tags/Sandbox/" style="font-size: 10px;">Sandbox</a> <a href="/tags/Thinking/" style="font-size: 10px;">Thinking</a> <a href="/tags/UI/" style="font-size: 15px;">UI</a> <a href="/tags/XPC/" style="font-size: 10px;">XPC</a> <a href="/tags/Xcode/" style="font-size: 10px;">Xcode</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a>
     </div>
   </div>
 
@@ -718,7 +710,7 @@ ga('send', 'pageview');
   <div class="widget-wrap">
     <h3 class="widget-title">archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a><span class="archive-list-count">3</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a><span class="archive-list-count">3</span></li></ul>
     </div>
   </div>
 

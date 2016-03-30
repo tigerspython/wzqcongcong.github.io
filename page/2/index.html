@@ -107,17 +107,17 @@ ga('send', 'pageview');
       <img class="shake freez shake-hard" id="avatar" src="/img/me.jpg">
       <h2 id="name">闷骚的悟空</h2>
       <h3 id="subname">立一业谋生 择一城终老 携一人白首</h2>
-      <h3 id="title">Mac &amp; iOS Developer &amp; Designer</h3>
+      <h3 id="title">Mac Developer &amp; Hacker</h3>
       <span id="location"><i class="fa fa-map-marker"></i>Suzhou, China</span>
       <a class="shake shake-rotate" id="follow" href="https://github.com/wzqcongcong/">FOLLOW</a>
     </div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        20
+        22
         <span>posts</span>
       </div>
       <div class="article-info-block">
-        12
+        13
         <span>tags</span>
       </div>
     </div>
@@ -144,6 +144,192 @@ ga('send', 'pageview');
 
       
       <section id="main">
+      <article id="post-Study_iOS_Hardware" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/01/18/Study_iOS_Hardware/">Study iOS - Hardware</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2015/01/18/Study_iOS_Hardware/">
+      <time datetime="2015-01-18T07:42:25.000Z" itemprop="datePublished">2015-01-18</time>
+    </a>
+  </div>
+
+
+          
+  <div class="article-category">
+  	<i class="fa fa-folder"></i>
+    <a class="article-category-link" href="/categories/开发/">开发</a>
+  </div>
+
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="Developing_Applications_for_iOS_观后感系列：Hardware">Developing Applications for iOS 观后感系列：Hardware</h3><p><em>相关视频章节：14、17</em></p>
+<hr>
+<p>关于 iOS device 的 hardware，本篇主要了解2个方面：CoreLocation + CoreMotion</p>
+<h3 id="CoreLocation">CoreLocation</h3><ul>
+<li><p><strong><code>CLLocation</code></strong>：CoreLocation 中最基本的 class。</p>
+<p>  CLLocation 的重要 property：</p>
+<p>  <em><code>coordinate</code></em>：位置坐标，包含 latitude 和 longitude 两个元素。</p>
+<p>  <em><code>altitude</code></em>：海拔。</p>
+<p>  <em><code>horizontal/verticalAccuracy</code></em>：精度。Cellular &lt; WiFi &lt; GPS。</p>
+</li>
+<li><p><strong><code>CLLocationManager</code></strong>：用于获取 CLLocation。</p>
+<p>  使用流程：</p>
+<ol>
+<li><p><em><code>check device</code></em></p>
+<p> 主要是检查 device 是否支持以某种方式来获取某种 location，以及是否有权限来获取。</p>
+<p> 关于权限，有3中状态：Authorized、Denied、Restricted。</p>
+</li>
+<li><p><em><code>init &amp; delegate</code></em>：通过 CLLocationManager 来获取 CLLocation 可以有2种方式，一种是主动 ask（poll），一种是 delegate。通常采用 delegate 的方式，delegate 触发后，你就可以访问 CLLocationManager 的 property <em><code>location</code></em> 来获取当前的 CLLocation 了。</p>
+</li>
+<li><p><em><code>configuration</code></em></p>
+<p> 通过 property <em><code>desiredAccuracy</code></em> 来设定想要的精度。</p>
+<p> 通过 property <em><code>distanceFilter</code></em> 告诉 CLLocationManager，只有当 location 的变化超过该范围时，才去触发 update delegate。</p>
+</li>
+<li><p><em><code>start monitor</code></em></p>
+<p> 你可以进行如下几种形式的 monitor，每种 monitor 都有相应的 delegate 函数，参见文档。</p>
+<ul>
+<li><p><em><code>normal monitor</code></em>：standard monitor，通过设定精度，每当 update 触发时，就会通知 app。</p>
+</li>
+<li><p><em><code>significant change monitor</code></em>：仅当 location 发生明显变化时才通知 app，这里的 significant 并未定义具体是多少。</p>
+</li>
+<li><p><em><code>region monitor</code></em>：当 device 进入某个指定的 region 时，通知 app。</p>
+</li>
+<li><p><em><code>beacon monitor</code></em>：当 device 进入某个指定的 beacon 时，通知 app，这种 monitor 通常与 <em><code>Core Bluetooth</code></em> 相关。</p>
+</li>
+</ul>
+<p><strong>注意</strong>，当你不再需要 monitor 时，不要忘了 stop monitor。</p>
+<p><strong>注意</strong>，即使 app not running，这些 monitor 也还是能够 work 的。想要在 background 模式下继续 monitor，需要在 project 中设置一下，类似于 background fetch 的设置。当 delegate 触发后，app 就会被启动。这种情况下，<code>application:didFinishLaunchingWithOption:</code> 的 option dictionary 中就会包含一个 key <code>UIApplicationLaunchOptionsLocationKey</code>。</p>
+</li>
+</ol>
+</li>
+</ul>
+        
+          <p class="article-more-link shake shake-rotate">
+            <a href="/2015/01/18/Study_iOS_Hardware/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a href="http://hi.zongquan.wang/2015/01/18/Study_iOS_Hardware/#disqus_thread" class="article-comment-link">Comments</a>
+      
+
+      <a data-url="http://hi.zongquan.wang/2015/01/18/Study_iOS_Hardware/" data-id="cijcd61va001hs7sb4rfix6ay" class="article-share-link">Share</a>
+
+      <div id="article-baidu-share" class="bdsharebuttonbox">
+        <a href="#" class="bds_weixin" data-cmd="weixin" title="WeiXin"></a>
+      </div>
+      <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":["mshare","weixin","tsina","tqq","qzone","qq","sqq","tqf","t163","renren","douban","huaban","taobao","tieba","kaixin001","tsohu","meilishuo","mogujie","sdo","youdao","twi","fbook","linkedin","mail","copy","print"],"bdPic":"","bdStyle":"1","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hardware/">Hardware</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+    
+      <article id="post-Study_iOS_L18N" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/01/18/Study_iOS_L18N/">Study iOS - L18N</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2015/01/18/Study_iOS_L18N/">
+      <time datetime="2015-01-18T05:35:11.000Z" itemprop="datePublished">2015-01-18</time>
+    </a>
+  </div>
+
+
+          
+  <div class="article-category">
+  	<i class="fa fa-folder"></i>
+    <a class="article-category-link" href="/categories/开发/">开发</a>
+  </div>
+
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="Developing_Applications_for_iOS_观后感系列：L18N">Developing Applications for iOS 观后感系列：L18N</h3><p><em>相关视频章节：18</em></p>
+<hr>
+<p>L18N 主要涉及2方面：Xcode + code。</p>
+<ul>
+<li><p><strong>Xcode</strong></p>
+<p>  首先需要在 Xcode 中设置 app 支持的语言：</p>
+<p>  <img src="/img/Study_iOS_L18N/18.1.L18N.png" alt="L18N"></p>
+<p>  然后你就可以对 storyboard 进行 L18N了，Xcode 会生成相应语言的 .strings 文件。</p>
+</li>
+<li><p><strong>code</strong></p>
+<p>  对于不在 storyboard 中的 strings 如何 L18N 呢？那就得通过 code 来处理了。</p>
+<p>  <img src="/img/Study_iOS_L18N/18.2.L18N.png" alt="L18N"></p>
+<p>  在代码中调用上述 macros 之后，可以通过下面命令自动生成 .strings 文件：</p>
+<p>  <img src="/img/Study_iOS_L18N/18.3.L18N.png" alt="L18N"></p>
+<p>  <strong>注意</strong>，当你从 <em><code>Bundle</code></em> 中获取某个文件的 path 时，其搜索顺序是：先 bundle 的 top-level 层，后 .lproj 层。</p>
+</li>
+</ul>
+        
+          <p class="article-more-link shake shake-rotate">
+            <a href="/2015/01/18/Study_iOS_L18N/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a href="http://hi.zongquan.wang/2015/01/18/Study_iOS_L18N/#disqus_thread" class="article-comment-link">Comments</a>
+      
+
+      <a data-url="http://hi.zongquan.wang/2015/01/18/Study_iOS_L18N/" data-id="cijcd61v6001ds7sb3f9gv05l" class="article-share-link">Share</a>
+
+      <div id="article-baidu-share" class="bdsharebuttonbox">
+        <a href="#" class="bds_weixin" data-cmd="weixin" title="WeiXin"></a>
+      </div>
+      <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":["mshare","weixin","tsina","tqq","qzone","qq","sqq","tqf","t163","renren","douban","huaban","taobao","tieba","kaixin001","tsohu","meilishuo","mogujie","sdo","youdao","twi","fbook","linkedin","mail","copy","print"],"bdPic":"","bdStyle":"1","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UI/">UI</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+    
       <article id="post-Study_iOS_Misc_UI" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -203,7 +389,7 @@ ga('send', 'pageview');
         <a href="http://hi.zongquan.wang/2015/01/17/Study_iOS_Misc_UI/#disqus_thread" class="article-comment-link">Comments</a>
       
 
-      <a data-url="http://hi.zongquan.wang/2015/01/17/Study_iOS_Misc_UI/" data-id="cijccxde20010pysbnpo9av18" class="article-share-link">Share</a>
+      <a data-url="http://hi.zongquan.wang/2015/01/17/Study_iOS_Misc_UI/" data-id="cijcd61ur0010s7sbiad6eb0l" class="article-share-link">Share</a>
 
       <div id="article-baidu-share" class="bdsharebuttonbox">
         <a href="#" class="bds_weixin" data-cmd="weixin" title="WeiXin"></a>
@@ -287,7 +473,7 @@ ga('send', 'pageview');
         <a href="http://hi.zongquan.wang/2015/01/11/Study_iOS_CoreData/#disqus_thread" class="article-comment-link">Comments</a>
       
 
-      <a data-url="http://hi.zongquan.wang/2015/01/11/Study_iOS_CoreData/" data-id="cijccxdeh001mpysb0wygimci" class="article-share-link">Share</a>
+      <a data-url="http://hi.zongquan.wang/2015/01/11/Study_iOS_CoreData/" data-id="cijcd61ve001ms7sbzeh1nkfo" class="article-share-link">Share</a>
 
       <div id="article-baidu-share" class="bdsharebuttonbox">
         <a href="#" class="bds_weixin" data-cmd="weixin" title="WeiXin"></a>
@@ -366,172 +552,7 @@ ga('send', 'pageview');
         <a href="http://hi.zongquan.wang/2015/01/11/Study_iOS_UITableView/#disqus_thread" class="article-comment-link">Comments</a>
       
 
-      <a data-url="http://hi.zongquan.wang/2015/01/11/Study_iOS_UITableView/" data-id="cijccxddi000jpysbj9pzcb85" class="article-share-link">Share</a>
-
-      <div id="article-baidu-share" class="bdsharebuttonbox">
-        <a href="#" class="bds_weixin" data-cmd="weixin" title="WeiXin"></a>
-      </div>
-      <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":["mshare","weixin","tsina","tqq","qzone","qq","sqq","tqf","t163","renren","douban","huaban","taobao","tieba","kaixin001","tsohu","meilishuo","mogujie","sdo","youdao","twi","fbook","linkedin","mail","copy","print"],"bdPic":"","bdStyle":"1","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
-
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UI/">UI</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-    
-      <article id="post-Study_iOS_UIScrollView" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/01/11/Study_iOS_UIScrollView/">Study iOS - UIScrollView</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          
-  <div class="article-date">
-    <i class="fa fa-calendar"></i>
-    <a href="/2015/01/11/Study_iOS_UIScrollView/">
-      <time datetime="2015-01-11T05:46:10.000Z" itemprop="datePublished">2015-01-11</time>
-    </a>
-  </div>
-
-
-          
-  <div class="article-category">
-  	<i class="fa fa-folder"></i>
-    <a class="article-category-link" href="/categories/开发/">开发</a>
-  </div>
-
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="Developing_Applications_for_iOS_观后感系列：UIScrollView">Developing Applications for iOS 观后感系列：UIScrollView</h3><p><em>相关视频章节：10</em></p>
-<hr>
-<p><strong><code>UIScrollView</code></strong> 是 iOS 中很基础很重要的一种 UIView，用于呈现远大于 app window 大小的 content area，用户通过 <em><code>swiping</code></em> 手势可以在 content area 中进行 scroll，通过 <em><code>pinching</code></em> 手势可以进行 content 的 zoom。就像是拿着一个放大镜在四处移动着观察一副很大的地图。</p>
-<p>UIScrollView 也是很多其它重要 UIView 的 super class，例如 <a href="../../../../2015/01/11/Study_iOS_UITableView/"><em><code>UITableView</code></em></a>、<em><code>UICollectionView</code></em>、<a href="../../../../2015/01/11/Study_iOS_Common_UI/"><em><code>UITextView</code></em></a> 等等。</p>
-<h4 id="创建_UIScrollView">创建 UIScrollView</h4><p>通过 Storyboard 或者代码中通过 alloc initWithFrame。</p>
-        
-          <p class="article-more-link shake shake-rotate">
-            <a href="/2015/01/11/Study_iOS_UIScrollView/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a href="http://hi.zongquan.wang/2015/01/11/Study_iOS_UIScrollView/#disqus_thread" class="article-comment-link">Comments</a>
-      
-
-      <a data-url="http://hi.zongquan.wang/2015/01/11/Study_iOS_UIScrollView/" data-id="cijccxddl000npysb95ryurfo" class="article-share-link">Share</a>
-
-      <div id="article-baidu-share" class="bdsharebuttonbox">
-        <a href="#" class="bds_weixin" data-cmd="weixin" title="WeiXin"></a>
-      </div>
-      <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":["mshare","weixin","tsina","tqq","qzone","qq","sqq","tqf","t163","renren","douban","huaban","taobao","tieba","kaixin001","tsohu","meilishuo","mogujie","sdo","youdao","twi","fbook","linkedin","mail","copy","print"],"bdPic":"","bdStyle":"1","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
-
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UI/">UI</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-    
-      <article id="post-Study_iOS_Segue" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/01/10/Study_iOS_Segue/">Study iOS - Segue</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          
-  <div class="article-date">
-    <i class="fa fa-calendar"></i>
-    <a href="/2015/01/10/Study_iOS_Segue/">
-      <time datetime="2015-01-10T15:01:35.000Z" itemprop="datePublished">2015-01-10</time>
-    </a>
-  </div>
-
-
-          
-  <div class="article-category">
-  	<i class="fa fa-folder"></i>
-    <a class="article-category-link" href="/categories/开发/">开发</a>
-  </div>
-
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="Developing_Applications_for_iOS_观后感系列：Segue">Developing Applications for iOS 观后感系列：Segue</h3><p><em>相关视频章节：6，15，16</em></p>
-<hr>
-<p><em><code>Segue</code></em>，中文为“继续”的意思，在 iOS 开发中，其 class 为 <em><code>UIStoryboardSegue</code></em>，用于 storyboard 中不同 UIViewController 之间的转场，即从一个 UIViewController scene 转场到另一个 UIViewController scene。你可以从一个 UIControl、UIBarItem、UIView、UIViewController 等等，向另一个 UIViewController 建立 Segue。</p>
-<h3 id="如何创建_Segue">如何创建 Segue</h3><p>起点（UIControl、UIBarItem、UIView、UIViewController 等等）</p>
-<p>⇩</p>
-<p><em><code>Control</code></em> + <em><code>Drag</code></em></p>
-<p>⇩</p>
-<p>终点（UIViewController）</p>
-<p>⇩</p>
-<p>设置 Segue 的 Identifier</p>
-<h3 id="Segue_如何执行">Segue 如何执行</h3><ol>
-<li><p><strong>触发 Segue</strong>：假如你从 UIButton 建立了一个 Segue，那么 button 点击时，就会触发 Segue。但有时你也需要从代码中手动触发 Segue，此时就需要调用 UIViewController 的 API：<code>-(void)performSegueWithIdentifier:(NSString *)segueID sender:(id)sender</code>。</p>
-</li>
-<li><p><strong>询问 Segue 是否允许执行</strong>：实现这个 delegate：<code>-(BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender</code>，如果不实现，默认就是允许所有 Segue。</p>
-</li>
-<li><p><strong>准备 Segue</strong>：真正呈现 <em><code>destination UIViewController</code></em> 之前，你需要为该 Segue 作 preparation。也就是说，Segue 会给 <em><code>source UIViewController</code></em> 机会去准备好将要呈现的 destination UIViewController。可以理解成 destination UIViewController 的 init。这一 preparation 过程是通过实现如下 delegate 来完成的：</p>
-<pre><code>-(<span class="typename">void</span>)<span class="string">prepareForSegue:</span>(UIStoryboardSegue *)segue <span class="string">sender:</span>(id)sender
-{
-    <span class="keyword">if</span> ([segue.identifier <span class="string">isEqualToString:</span>@<span class="string">"XXX"</span>]) {
-        <span class="keyword">if</span> ([segue.destinationViewController <span class="string">isKindOfClass:</span>[XXXViewController <span class="class"><span class="keyword">class</span>]]) {</span>
-            XXXViewController *xxxVC = (XXXViewController *)segue.destinationViewController;
-            xxxVC.xxxProperty = XXX; <span class="comment">// setup xxxVC</span>
-        }
-    }
-}
-</code></pre><p> <strong>注意</strong>，要记住之前 <a href="../../../../2015/01/05/Study_iOS_MVC/">MVCs</a> 中提到的原则，这个 destination UIViewController 在 source UIViewController 的 MVC 中扮演着 View 的角色，不允许 destination UIViewController 向 source UIViewController 的直接通信，而是要使用 blind 的方式，如 delegate。</p>
-<p> <strong>还要注意</strong>，几乎所有类型的 Segue 都是 init 一个 <strong>new</strong> destination UIViewController 给你，所以当你第二次 prepareForSegue 时，第一次 prepareForSegue 拿到的那个 destination UIViewController 已经不复存在了，你需要重新 setup。<strong>这里只有一个例外</strong>，就是后面要提到的 <em><code>Unwind Segue</code></em>，它返给你的 destination UIViewController 就是之前已经存在的 UIViewController，这显然是合理的。举个例子，aVC 通过普通 Segue 转场到 bVC（bVC 会被重新 init），bVC 又通过 Unwind Segue 转回到 aVC，此时，Unwind Segue 的 destination UIViewController 显然必须是之前已经存在的那个 aVC，而不应该去重新 init 一个。</p>
-<p> <strong>更要注意</strong>，prepareForSegue 在执行的时候，destination UIViewController 中的 outlet 尚未 set，因为 prepareForSegue 做的事等价于帮助 destination UIViewController 去 init。而 outlet set 是在 init 之后，viewDidLoad 之前做的。参见 <a href="../../../../2015/01/05/Study_iOS_Life_Cycle/">Life Cycle</a>。</p>
-</li>
-<li><p><strong>系统为你呈现 destination UIViewController</strong></p>
-</li>
-</ol>
-        
-          <p class="article-more-link shake shake-rotate">
-            <a href="/2015/01/10/Study_iOS_Segue/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a href="http://hi.zongquan.wang/2015/01/10/Study_iOS_Segue/#disqus_thread" class="article-comment-link">Comments</a>
-      
-
-      <a data-url="http://hi.zongquan.wang/2015/01/10/Study_iOS_Segue/" data-id="cijccxddn000rpysba3fbyun6" class="article-share-link">Share</a>
+      <a data-url="http://hi.zongquan.wang/2015/01/11/Study_iOS_UITableView/" data-id="cijcd61ud000js7sb170zdmwj" class="article-share-link">Share</a>
 
       <div id="article-baidu-share" class="bdsharebuttonbox">
         <a href="#" class="bds_weixin" data-cmd="weixin" title="WeiXin"></a>
@@ -550,7 +571,7 @@ ga('send', 'pageview');
 
     
       <nav id="page-nav">
-        <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
+        <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
       </nav>
     </section>
       
@@ -561,6 +582,41 @@ ga('send', 'pageview');
     <h3 class="widget-title">recents</h3>
     <div class="widget">
       <ul id="recent-post" class="">
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2016/03/29/How_to_install_iOSOpenDev_manually/" class="thumbnail">
+  
+    <span class="thumbnail-image thumbnail-none"></span>
+  
+</a>
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/开发/">开发</a></p>
+              <p class="item-title"><a href="/2016/03/29/How_to_install_iOSOpenDev_manually/" class="title">How to install iOSOpenDev manually</a></p>
+              <p class="item-date"><time datetime="2016-03-29T15:30:35.000Z" itemprop="datePublished">2016-03-29</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2016/03/13/Fuck_My_29_Years_Life/" class="thumbnail">
+  
+    <span style="background-image:url(/img/Fuck_My_29_Years_Life/fuck.png
+)" alt="Fuck My 29 Years&#39; Life" class="thumbnail-image"></span>
+  
+</a>
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/生活/">生活</a></p>
+              <p class="item-title"><a href="/2016/03/13/Fuck_My_29_Years_Life/" class="title">Fuck My 29 Years&#39; Life</a></p>
+              <p class="item-date"><time datetime="2016-03-13T10:48:18.000Z" itemprop="datePublished">2016-03-13</time></p>
+            </div>
+          </li>
         
           <li>
             
@@ -615,42 +671,6 @@ ga('send', 'pageview');
             </div>
           </li>
         
-          <li>
-            
-            <div class="item-thumbnail">
-              <a href="/2015/01/18/Study_iOS_Hardware/" class="thumbnail">
-  
-    <span style="background-image:url(/img/Study_iOS_Hardware/17.9.CoreMotion.png
-)" alt="Study iOS - Hardware" class="thumbnail-image"></span>
-  
-</a>
-            </div>
-            
-            <div class="item-inner">
-              <p class="item-category"><a class="article-category-link" href="/categories/开发/">开发</a></p>
-              <p class="item-title"><a href="/2015/01/18/Study_iOS_Hardware/" class="title">Study iOS - Hardware</a></p>
-              <p class="item-date"><time datetime="2015-01-18T07:42:25.000Z" itemprop="datePublished">2015-01-18</time></p>
-            </div>
-          </li>
-        
-          <li>
-            
-            <div class="item-thumbnail">
-              <a href="/2015/01/18/Study_iOS_L18N/" class="thumbnail">
-  
-    <span style="background-image:url(/img/Study_iOS_L18N/18.1.L18N.png
-)" alt="Study iOS - L18N" class="thumbnail-image"></span>
-  
-</a>
-            </div>
-            
-            <div class="item-inner">
-              <p class="item-category"><a class="article-category-link" href="/categories/开发/">开发</a></p>
-              <p class="item-title"><a href="/2015/01/18/Study_iOS_L18N/" class="title">Study iOS - L18N</a></p>
-              <p class="item-date"><time datetime="2015-01-18T05:35:11.000Z" itemprop="datePublished">2015-01-18</time></p>
-            </div>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -660,7 +680,7 @@ ga('send', 'pageview');
   <div class="widget-wrap">
     <h3 class="widget-title">categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/开发/">开发</a><span class="category-list-count">20</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/开发/">开发</a><span class="category-list-count">21</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活/">生活</a><span class="category-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -669,7 +689,7 @@ ga('send', 'pageview');
   <div class="widget-wrap">
     <h3 class="widget-title">tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Animation/">Animation</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Block/">Block</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CoreData/">CoreData</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hardware/">Hardware</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac/">Mac</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Network/">Network</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sandbox/">Sandbox</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UI/">UI</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XPC/">XPC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Xcode/">Xcode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS/">iOS</a><span class="tag-list-count">13</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Animation/">Animation</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Block/">Block</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CoreData/">CoreData</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hardware/">Hardware</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac/">Mac</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Network/">Network</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sandbox/">Sandbox</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Thinking/">Thinking</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UI/">UI</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XPC/">XPC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Xcode/">Xcode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS/">iOS</a><span class="tag-list-count">14</span></li></ul>
     </div>
   </div>
 
@@ -678,7 +698,7 @@ ga('send', 'pageview');
   <div class="widget-wrap">
     <h3 class="widget-title">tag cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Animation/" style="font-size: 10px;">Animation</a> <a href="/tags/Block/" style="font-size: 10px;">Block</a> <a href="/tags/CoreData/" style="font-size: 10px;">CoreData</a> <a href="/tags/Hardware/" style="font-size: 10px;">Hardware</a> <a href="/tags/Mac/" style="font-size: 15px;">Mac</a> <a href="/tags/Network/" style="font-size: 10px;">Network</a> <a href="/tags/Sandbox/" style="font-size: 10px;">Sandbox</a> <a href="/tags/UI/" style="font-size: 15px;">UI</a> <a href="/tags/XPC/" style="font-size: 10px;">XPC</a> <a href="/tags/Xcode/" style="font-size: 10px;">Xcode</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a>
+      <a href="/tags/Animation/" style="font-size: 10px;">Animation</a> <a href="/tags/Block/" style="font-size: 10px;">Block</a> <a href="/tags/CoreData/" style="font-size: 10px;">CoreData</a> <a href="/tags/Hardware/" style="font-size: 10px;">Hardware</a> <a href="/tags/Mac/" style="font-size: 15px;">Mac</a> <a href="/tags/Network/" style="font-size: 10px;">Network</a> <a href="/tags/Sandbox/" style="font-size: 10px;">Sandbox</a> <a href="/tags/Thinking/" style="font-size: 10px;">Thinking</a> <a href="/tags/UI/" style="font-size: 15px;">UI</a> <a href="/tags/XPC/" style="font-size: 10px;">XPC</a> <a href="/tags/Xcode/" style="font-size: 10px;">Xcode</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a>
     </div>
   </div>
 
@@ -687,7 +707,7 @@ ga('send', 'pageview');
   <div class="widget-wrap">
     <h3 class="widget-title">archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a><span class="archive-list-count">3</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a><span class="archive-list-count">3</span></li></ul>
     </div>
   </div>
 

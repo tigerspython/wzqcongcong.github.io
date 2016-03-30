@@ -4,7 +4,7 @@
   <subtitle><![CDATA[立一业谋生 择一城终老 携一人白首]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://hi.zongquan.wang/"/>
-  <updated>2016-01-13T04:58:29.000Z</updated>
+  <updated>2016-03-30T04:40:57.000Z</updated>
   <id>http://hi.zongquan.wang/</id>
   
   <author>
@@ -13,6 +13,114 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[How to install iOSOpenDev manually]]></title>
+    <link href="http://hi.zongquan.wang/2016/03/29/How_to_install_iOSOpenDev_manually/"/>
+    <id>http://hi.zongquan.wang/2016/03/29/How_to_install_iOSOpenDev_manually/</id>
+    <published>2016-03-29T15:30:35.000Z</published>
+    <updated>2016-03-30T04:40:57.000Z</updated>
+    <content type="html"><![CDATA[<p>OS X 10.10+ &amp; Xcode 7+</p>
+<p><a href="https://github.com/wzqcongcong/iOSOpenDev" target="_blank" rel="external">https://github.com/wzqcongcong/iOSOpenDev</a></p>
+<hr>
+<ol>
+<li><p><strong>Dependency</strong></p>
+<p><code>brew install ldid dpkg</code></p>
+</li>
+<li><p><strong>Theos</strong></p>
+<p><a href="https://github.com/theos/theos/wiki" target="_blank" rel="external">Wiki</a></p>
+<p><a href="http://iphonedevwiki.net/index.php/Theos/Setup" target="_blank" rel="external">Setup</a></p>
+</li>
+<li><p><strong>iOSOpenDev</strong></p>
+<p><a href="https://github.com/kokoabim/iOSOpenDev/wiki" target="_blank" rel="external">Wiki</a></p>
+<p>3.1. update <strong>.zshrc</strong></p>
+<p><code>export iOSOpenDevPath=$HOME/Tools/iOS/iOSOpenDev</code></p>
+<p><code>export iOSOpenDevDevice=</code></p>
+<p><code>export PATH=$iOSOpenDevPath:$PATH</code></p>
+<p>3.2. get <strong>iOSOpenDev</strong></p>
+<ul>
+<li><p><code>git clone --recursive https://github.com/kokoabim/iOSOpenDev.git $iOSOpenDevPath</code></p>
+</li>
+<li><p>copy the <a href="https://github.com/wzqcongcong/iOSOpenDev" target="_blank" rel="external"><strong>templates</strong></a> dir into <em>$iOSOpenDevPath</em></p>
+</li>
+</ul>
+<p>3.3. setup <strong>Xcode</strong></p>
+<ul>
+<li><p>copy the <a href="https://github.com/wzqcongcong/iOSOpenDev" target="_blank" rel="external"><strong>.xcspec</strong></a> files into <em>/Applications/Xcode/Content/Developer/Platforms/[PLATFORM_PATH]/Developer/Library/Xcode/Specifications</em> (mkdir if not existed)</p>
+</li>
+<li><p><code>mkdir -p /Applications/Xcode/Content/Developer/Platforms/[PLATFORM_PATH]/Developer/usr/bin</code></p>
+</li>
+<li><p><code>ln -fhs $iOSOpenDevPath/bin/iosod /Applications/Xcode/Content/Developer/Platforms/[PLATFORM_PATH]/Developer/usr/bin</code></p>
+</li>
+<li><p><code>ln -fhs $iOSOpenDevPath/bin/ldid /Applications/Xcode/Content/Developer/Platforms/[PLATFORM_PATH]/Developer/usr/bin</code></p>
+</li>
+</ul>
+<p>3.4. setup <strong>SDK</strong></p>
+<ul>
+<li><p>add the following key/value into <strong>[SDK_PATH]/SDKSettings.plist</strong>:</p>
+<pre><code>DefaultProperties<span class="class">.CODE_SIGNING_REQUIRED</span> =&gt; NO
+DefaultProperties<span class="class">.ENTITLEMENTS_REQUIRED</span> =&gt; NO
+DefaultProperties<span class="class">.AD_HOC_CODE_SIGNING_ALLOWED</span> =&gt; YES
+</code></pre></li>
+</ul>
+<p>3.5. setup <strong>templates</strong></p>
+<ul>
+<li><code>ln -fhs $iOSOpenDevPath/templates ~/Library/Developer/Xcode/Templates/iOSOpenDev</code></li>
+<li>open <strong>TemplateInfo.plist</strong> of <strong>Base.xctemplate</strong> and <strong>Empty Project.xctemplate</strong> with Xcode, then set the value of user defined key <em>[iOSOpenDevPath]</em> to <em>$HOME/Tools/iOS/iOSOpenDev</em>.</li>
+</ul>
+</li>
+</ol>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>OS X 10.10+ &amp; Xcode 7+</p>
+<p><a href="https://github.com/wzqcongcong/iOSOpenDev" target="_blank" rel="external">https://github.com/w]]>
+    </summary>
+    
+      <category term="iOS" scheme="http://hi.zongquan.wang/tags/iOS/"/>
+    
+      <category term="开发" scheme="http://hi.zongquan.wang/categories/%E5%BC%80%E5%8F%91/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Fuck My 29 Years' Life]]></title>
+    <link href="http://hi.zongquan.wang/2016/03/13/Fuck_My_29_Years_Life/"/>
+    <id>http://hi.zongquan.wang/2016/03/13/Fuck_My_29_Years_Life/</id>
+    <published>2016-03-13T10:48:18.000Z</published>
+    <updated>2016-03-18T14:06:48.000Z</updated>
+    <content type="html"><![CDATA[<p>无意间看到了这么一篇文章 <a href="http://www.ifanr.com/632328" target="_blank" rel="external">《人工智能除了下围棋还能干啥？这篇科普文将震撼你的世界观》</a>（后面以常量“彼文”代之），点开之后，手指本能而又温柔地划了几下触摸板，用膀胱扫了一眼滚动条，尼玛好短的滚动条，这也意味着，尼玛好长的文章😂。看惯了不到140个字的微博的我，本能地想要直接关闭彼文，然后愉快地去刷会V2EX或者开发者头条，但是理智再一次告诉我，骚年，不要老吃快餐了，否则营养跟不上啊，好歹碰到这么一篇长文，何不咬着牙并快乐地看完呢，更何况这可是关于当下热门的人狗大战哟🤔。</p>
+<p>于是，在洗澡之前，我坚持看完了彼文。</p>
+<p>于是，在洗澡之后，我写下了此文。</p>
+<p>那么问题来了，洗澡中间发生了什么😂？</p>
+<a id="more"></a>
+<p>除了捡肥皂，剩下的当然就是思考人生啦。啊哈哈。</p>
+<p><em>此文跟人狗大战、人工智能等等这些高大上的概念没有半毛钱的关系，是的，彼文只是一个药引子，感谢彼文，让我有机会好好地回头看了看我走过的路。</em></p>
+<p>说白了，这就是一篇无聊的回忆录而已，甚至连回忆录都不配，能骗多少流量就骗多少。</p>
+<p>首先套用彼文的结构，上个图：</p>
+<p><img src="/img/Fuck_My_29_Years_Life/fuck.png" alt="fuck"></p>
+<p>这么一看，原来我是从大学毕业开始步入了编程（不喜欢所谓的程序猿这个自嘲的叫法）这条不归路，已经有6年了（有种刚刚6年制小学毕业的感觉😂）。那么从小学到大学毕业，我尼玛一直在干蛋呢？虽然我是个健忘的人，虽然我的过去有些模糊了，但我还是绞尽浆糊般的脑汁地回忆着，忆着，着。</p>
+<p>一开始上小学（幼儿园就算了，记忆约等于0），那个时候就被灌输了“学好数理化，走遍天下都不怕”的极端思想，立志当个强到没朋友的学霸。除了学习，就是看圣斗士星矢，看新白娘子传奇，看西游记，以及吃小浣熊干脆面。小学时跟数学老师关系特好，曾经抱着数学竞赛习题集到老师家边吃喝边看书。那个时候，感觉做老师的都好纯洁，当然，做学生的比做老师的还要纯洁。按照彼文的话讲，<em>2000 年左右出生的人，回到一个没有个人电脑、互联网、手机的 1985 年，会比从 1985 年回到 1955 年的主角看到更大的区别。</em>小学的时候，最自豪的就是家里有大彩电，身上穿小马甲，手上集齐全套三国卡，脚下能骑大人自行车。等等，手机是什么，能吃吗？</p>
+<p>后来上了初中，日常就是跟小伙伴在回家的路上飚自行车。哦对，那个时候学校就开始开设计算机课了，教课的是个小年轻（现在想想，那个小年轻真是太low了😑，啊哈哈）。当我第一次按下电源键，打开电脑，稀里糊涂地在小年轻的指导下打开了画图程序，然后迷茫地按住鼠标乱画一通的时候，我一下子发现，啊，我画的画好好看啊😝。是的，我并没有惊叹计算机有多么的牛逼，而是继续自恋地画着画。从这一点来看，也许我注定不是一个好的程序员😂，因为缺少了那种最原始最崇高的热爱。相反，我把我最原始最崇高的热爱献给了艺术。说到这里，我不得不提一下，一个人的性格以及将来想要做什么，确实跟星座有关，其实也就是跟出生的月份有关。4月份出生的名人里，大多是艺术家，而不是编程的😳。哦，差点忘了一段，上小学时很喜欢用橡皮泥捏各种造型，以及用橡皮泥条拼各种画，当时我爸居然鄙视我搞这些东西，所以我现在一直鄙视我爸，要不是他，也许我现在已经从事艺术了。上了初中后，当然不会再去捏橡皮泥了，而是喜欢上了素描，现在我家墙上还贴着我当年的画作呢。の，初中的事似乎回忆地有点多了，但这不是巧合，对一个人的性格起塑造作用的时间段，正是初中。</p>
+<p>后来又上了高中，“学好数理化，走遍天下都不怕”这个思想植入地越发深入，学霸的理想也越发强烈。我开始变得鄙视那些就知道谈恋爱搞暧昧的同学，哼哼，要知道，我在初中就看好过一个妹纸了，虽然然后就没有然后了。你们这些个感情用事的学渣，注定没好结果，啊哈哈。依稀还记得，高三时还有个漂亮妹子想主动和我坐一桌，当时我居然跟老师说，她平时老爱玩，会影响我学习的🤓。哎，估计人家现在孩子都可以打酱油了。不好意思，跑题了。那个时候，每个教室都有一台电脑，老师上课偶尔会用来放放PPT，不过更重要的是，中午休息或者下午放学后，我们可以插上软盘，玩会幽游白书😜。其实那个时候就已经有什么计算机竞赛了，但对于我这种只知道数理化竞赛的人来说，计算机竞赛好像没啥含金量。哎，高中对学霸来讲是最乏味的阶段了，感觉过得跟水一样平静，跟纸一样纯洁。</p>
+<p>后来又上了大学，是的，作为学霸的我，理所应当地选择了数学专业，毕竟高考数学满分嘛，不学数学对不起阅卷老师啊。然而学了之后才发现，大学里的数学好像很无聊的样纸，不是自己喜欢的东西。于是开始了本应该高中就可以做的事：翘课。翘课之后干啥捏，纯洁的我没有选择把妹，而是选择了玩游戏😂。后来，忘记了是大二还是大三，学校搞过一个讲座，是请了外面一个搞技术的人来忽悠我们，当时看到他在讲台上用命令行各种秀微操，甚是牛逼啊。妈，我要嫁给这种牛逼的人！不是，我是说我也要成为这种牛逼的人😎。正好学校也开设了C语言程序设计，你们懂的，从此一入码门深似海。其实上课期间也没学到些啥，也就是平时看看书自学点，毕竟比不上科班出身的那些计算机专业的同学。我也不知道为什么，最后大学毕业的我，居然选择研究生去学计算机。不过还好，之前学的数学对学计算机来说还算有益无害。可是艺术啊，与我命运相连的艺术就这么被抛弃了😔。上了研究生，由于是跨专业，所以大学阶段落下的计算机知识只能靠平时自己看看书来恶补了。可笑的是，即便在研究生阶段，真正有所实践的时候，也是研三帮老师搞项目赚外快的时候。那个时候真真切切地写着代码，感受着这迟来的爱，毕竟有钱赚嘛。</p>
+<p>毕业之后，我就一路走到黑地选择了编程作为工作。说真的，假如上帝给我一千万，我也许就不会以编程为生了，而是会去搞艺术，什么绘画音乐之类的，那时候编程也许会变成平时的一个兴趣爱好，可以骄傲地告诉儿子/女儿，你爹我是懂艺术的里面最会编程的😏。等下，我连妹子都没有，还是不要意淫这种太污的场景了。然而现实是相反的，每天写着代码，靠编程来养家糊口，说错了，是养自己糊口。然后等到老的时候，再重新拾起绘画这个儿时的爱好，画画小插画啥的。不过到底我还是蛮喜欢编程的，我只想一边写着代码，一边安静地做个美男子，那种感觉就像是小时候用纸盒子做机器人一样，只不过现在的玩具不是纸盒子，而是代码。</p>
+<p>我深信我还是热爱编程的，我也热爱艺术。高晓松说的好，人生不止苟且，还有编程与艺术。不好意思大紧，我抄袭你了😆。</p>
+<p>回忆录就先到此为止吧。</p>
+<p>To Be Continue</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>无意间看到了这么一篇文章 <a href="http://www.ifanr.com/632328">《人工智能除了下围棋还能干啥？这篇科普文将震撼你的世界观》</a>（后面以常量“彼文”代之），点开之后，手指本能而又温柔地划了几下触摸板，用膀胱扫了一眼滚动条，尼玛好短的滚动条，这也意味着，尼玛好长的文章😂。看惯了不到140个字的微博的我，本能地想要直接关闭彼文，然后愉快地去刷会V2EX或者开发者头条，但是理智再一次告诉我，骚年，不要老吃快餐了，否则营养跟不上啊，好歹碰到这么一篇长文，何不咬着牙并快乐地看完呢，更何况这可是关于当下热门的人狗大战哟🤔。</p>
+<p>于是，在洗澡之前，我坚持看完了彼文。</p>
+<p>于是，在洗澡之后，我写下了此文。</p>
+<p>那么问题来了，洗澡中间发生了什么😂？</p>]]>
+    
+    </summary>
+    
+      <category term="Thinking" scheme="http://hi.zongquan.wang/tags/Thinking/"/>
+    
+      <category term="生活" scheme="http://hi.zongquan.wang/categories/%E7%94%9F%E6%B4%BB/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[Hack XtraFinder]]></title>
@@ -1769,187 +1877,6 @@ Apple Demo <span class="keyword">*</span><span class="string">"AppSandboxLoginIt
       <category term="Mac" scheme="http://hi.zongquan.wang/tags/Mac/"/>
     
       <category term="XPC" scheme="http://hi.zongquan.wang/tags/XPC/"/>
-    
-      <category term="开发" scheme="http://hi.zongquan.wang/categories/%E5%BC%80%E5%8F%91/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[Communications between sandbox apps in Mac]]></title>
-    <link href="http://hi.zongquan.wang/2014/11/28/Communications_between_sandbox_apps_in_Mac/"/>
-    <id>http://hi.zongquan.wang/2014/11/28/Communications_between_sandbox_apps_in_Mac/</id>
-    <published>2014-11-27T16:44:04.000Z</published>
-    <updated>2015-11-10T02:03:41.000Z</updated>
-    <content type="html"><![CDATA[<p>由于 Mac 对 Sandbox 的种种限制，使得 Sandb app 间的通信方式与普通 non Sandbox app 间的通信方式有所不同，普通的通信方式，如 <em><code>NSDistributedNotification</code></em>、<em><code>Distributed Objects</code></em>、 <em><code>XPC</code></em> 等不能直接套用到 Sandbox 机制上。</p>
-<p>Mac 引入了 <em><code>Sandbox App Group</code></em> 的机制，使得同属于一个 app group 的不同 app 间有了合适的通信方式。</p>
-<h3 id="Sandbox_App_Group_是什么">Sandbox App Group 是什么</h3><p>Sandbox App Group 表示由同一个 Developer ID 签名的 app group。每个 Developer ID 可以签名多个 Sandbox App Group，每个 Sandbox App Group 可以包含若干个 Sandbox app。</p>
-<p>如果想要声明一个 Sandbox app 属于某个 Sandbox App Group，需要在该 app 的 <em><code>.entitlements</code></em> 中添加一个 <em><code>com.apple.security.application-groups</code></em> array，它的每个元素表示该 app 属于的某个 Sandbox app group，用 Group Bundle ID 表示。</p>
-<p><strong><code>Group Bundle ID</code></strong> := <team-id>.com.company.XXX，<team-id> 其实也可以不用，但 Apple 的标准用法是以 <team-id> 作为 Group Bundle ID 的 prefix。</team-id></team-id></team-id></p>
-<p>每个 Sandbox App Group 会在 <em><code>~/Library/Group Containers</code></em> 下生成一个对应的目录，以 Group Bundle ID 命名。该目录的结构与 Sandbox app 的 Container 目录结构相同。该目录可以被属于该 group 的所有 Sandbox app 访问，没有限制。访问该目录的方法是调用 <em><code>[[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:]</code></em>。</p>
-<a id="more"></a>
-<h3 id="Sandbox_App_Group_能够做什么">Sandbox App Group 能够做什么</h3><p>借助 Sandbox App Group，有以下这么几种方式可以用来实现同 group 下的 app 间的通信。</p>
-<h4 id="1-_NSUserDefaults">1. NSUserDefaults</h4><p>对于单个 Sandbox app 来说，它的 <em><code>NSUserDefaults</code></em> 只能由自己访问，别的 Sandbox app 无法访问。而有了 Sandbox App Group，每个 group 可以拥有自己的 <em><code>NSUserDefaults</code></em>，而它是可以被下属的所有 Sandbox app 共享访问的。</p>
-<ul>
-<li><p>创建 Group User Defaults</p>
-<pre><code>NSUserDefaults *defaults = <span class="comment">[<span class="comment">[NSUserDefaults alloc]</span> init]</span>;
-
-<span class="comment">[defaults addSuiteNamed:&lt;Group Bundle ID&gt;]</span>;
-</code></pre></li>
-<li><p>Get</p>
-<pre><code><span class="title">[defaults persistentDomainForName:]</span><span class="comment">;</span>
-</code></pre></li>
-<li><p>Set</p>
-<pre><code>[defaults <span class="built_in">set</span>PersistentDomain: <span class="keyword">for</span>Name:]
-</code></pre></li>
-</ul>
-<p>关于 <em><code>NSUserDefaults</code></em>，有一篇 <a href="http://realmacsoftware.com/blog/shared-preferences-between-sandboxed-applications" target="_blank" rel="external">很 NB 的文章</a> 可以学习。</p>
-<p><strong>e.g.</strong> <a href="https://github.com/wzqcongcong/MyDiskCleaner" target="_blank" rel="external">MyDiskCleaner</a></p>
-<h4 id="2-_Group_Containers_目录">2. Group Containers 目录</h4><p>尽情利用吧。尽情读写吧。</p>
-<p>比如用 <em><code>FSEventStreamRef</code></em> 来监控其下的某个目录，从而将该目录的变化通知到不同的 Sandbox app 。虽然这种通信方式有点原始~~</p>
-<p>其实 <em><code>NSUserDefaults</code></em> 本质上就是存在于 Group Containers 里的 Preferences 目录中。</p>
-<p><strong>e.g.</strong> <a href="https://github.com/wzqcongcong/MyDiskCleaner" target="_blank" rel="external">MyDiskCleaner</a></p>
-<h4 id="3-_XPC">3. XPC</h4><p>是的，有了 Sandbox App Group，Sandbox app 间可以使用 XPC 了。<br>但使用方式需要有所注意。</p>
-<p><strong>使用条件</strong>：</p>
-<ul>
-<li><p>XPC Listener 必须是位于 Helper app 中，由主 app 通过 <em><code>SMLoginItemSetEnabled</code></em> 来启动该 Helper app，从而启动 XPC Listener。</p>
-</li>
-<li><p>Helper app 的 Bundle ID 必须以 Group Bundle ID 作为 prefix，即 <strong><code>Helper Bundle ID</code></strong> := <group-bundle-id>.XXX</group-bundle-id></p>
-</li>
-<li><p>Helper app 在创建 Listener 时需要使用 <em><code>[[NSXPCListener alloc] initWithMachServiceName:]</code></em>，主 app 在创建 connection 时需要使用 <em><code>[[NSXPCConnection alloc] initWithMachServiceName:options:0]</code></em>。</p>
-</li>
-<li><p>XPC service name 必须等于 Helper Bundle ID。因为实际上是，在调用 <em><code>SMLoginItemSetEnabled</code></em> 启动Helper app 后，LaunchServices 自动为其注册了一个 XPC service，而 name 就是 Helper Bundle ID。</p>
-</li>
-</ul>
-<p><strong>e.g.</strong> Apple Demo <em>“AppSandboxLoginItemXPCDemo”</em></p>
-<h4 id="4-_Distributed_Objects">4. Distributed Objects</h4><p>跟 XPC 类似，对 Distributed Objects 加些特殊设置，它也可以借助 Sandbox App Group 来实现 Sandbox app 间的通信。</p>
-<p><strong>使用条件</strong>：</p>
-<ul>
-<li><p>DOServer 端要使用 <em><code>NSMachPort</code></em> 来创建 Mach Port。</p>
-</li>
-<li><p>DOServer 端要使用 <em><code>[[NSConnection alloc] initWithReceivePort: sendPort:]</code></em> 来初始化 connection（以后需要对该 connection 设置 rootObject，也就是 DOClient 端能够访问的 DO），给它传递之前创建的 Mach Port。不要使用 <em><code>[NSConnection defaultConnection]</code></em>。</p>
-</li>
-<li><p>DOServer 端要使用 <em><code>[[NSMachBootstrapServer sharedInstance] registerPort:name:]</code></em> 来注册刚创建的 Mach Port，注册用的 name 必须以 Group Bundle ID 作为 prefix，后跟自定义的 port 名称。</p>
-<p>  <strong>注意</strong>，如果 DOServer 端位于 <em><code>SMLoginItemSetEnabled</code></em> 启动的 Helper app，那么定义的 Mach Port name 不能和该 Helper app 的 Bundle ID 同名，因为其 Bundle ID 已经被 Mac 自动用于注册 XPC Service name，会导致这里的 DO Mach Port name 注册失败。</p>
-</li>
-<li><p>DOClient 端要使用 <em><code>[NSConnection connectionWithRegisteredName: host:nil]</code></em> 来连接 DOServer 端，注册 name 就用之前 DOServer 端设置的 Mach Port name。</p>
-</li>
-</ul>
-<p><strong>e.g.</strong> <a href="https://github.com/wzqcongcong/MyDiskCleaner" target="_blank" rel="external">MyDiskCleaner</a></p>
-<h3 id="除了_Sandbox_App_Group，还有什么？">除了 Sandbox App Group，还有什么？</h3><p>我们知道，在 iOS app 中，有 <em><code>URL Scheme</code></em> 这么个机制。如果某个 app 注册了某个特殊的 <em><code>URL Scheme</code></em>，那么其他 app 可以通过访问 URL 的形式来 launch 该 app。</p>
-<p>iOS app 也是采用 Sandbox 机制的，那么在 Mac 上，该方法也是同样适用的！不管其他 app 是不是属于同一 Sandbox App Group，都可以用这种方式来 launch 该 app，并将访问的 URL 传递给该 app。而如果该 app 已经启动，那么它同样也会捕捉到被访问的 URL，从而做出响应。</p>
-<ul>
-<li><p>让 app 注册 URL Scheme</p>
-<p>  在本 app 的 Info.plsit 中，添加一个 <em><code>URL types</code></em> array，它的每个元素代表一个 <em><code>URL Schemes</code></em> array，而该 array 的每个元素就是一个 URL Scheme，通常取一个特殊的名字，用于区别其它 app 的 URL Schemes。</p>
-</li>
-<li><p>监听自己注册的 URL Scheme</p>
-<p>  在本 app 的 <em><code>applicationWillFinishLaunching:</code></em> delegate 函数中，利用如下代码注册一个系统 event listener：</p>
-<pre><code><span class="attr_selector">[[NSAppleEventManager sharedAppleEventManager]</span> <span class="tag">setEventHandler</span><span class="pseudo">:andSelector</span><span class="pseudo">:forEventClass</span><span class="pseudo">:andEventID</span>:];
-</code></pre><p>  callback 函数：</p>
-<pre><code>-(<span class="typename">void</span>)<span class="string">getUrl:</span>(NSAppleEventDescriptor *)event <span class="string">withReplyEvent:</span>(NSAppleEventDescriptor*)reply
-{
-    NSURL *url = [NSURL <span class="string">URLWithString:</span>[[event <span class="string">paramDescriptorForKeyword:</span>keyDirectObject] stringValue]];
-    ...
-}
-</code></pre><p>  <strong>注意</strong>：必须要在 <em><code>applicationWillFinishLaunching:</code></em> 中注册，否则通过这种方式启动 app 后，它无法获取被访问的 URL 信息。</p>
-</li>
-<li><p>其它 app 访问该 URL Scheme</p>
-<p>  在其它 app 中，构造 URL 并访问：</p>
-<pre><code><span class="attr_selector">[[NSWorkspace sharedWorkspace]</span> <span class="tag">openURL</span>:<span class="attr_selector">[[NSURL alloc]</span> <span class="tag">initWithScheme</span><span class="pseudo">:host</span><span class="pseudo">:path</span>:]];
-</code></pre></li>
-</ul>
-<p><strong>e.g.</strong> <a href="https://github.com/wzqcongcong/MyDiskCleaner" target="_blank" rel="external">MyDiskCleaner</a></p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p>由于 Mac 对 Sandbox 的种种限制，使得 Sandb app 间的通信方式与普通 non Sandbox app 间的通信方式有所不同，普通的通信方式，如 <em><code>NSDistributedNotification</code></em>、<em><code>Distributed Objects</code></em>、 <em><code>XPC</code></em> 等不能直接套用到 Sandbox 机制上。</p>
-<p>Mac 引入了 <em><code>Sandbox App Group</code></em> 的机制，使得同属于一个 app group 的不同 app 间有了合适的通信方式。</p>
-<h3 id="Sandbox_App_Group_是什么">Sandbox App Group 是什么</h3><p>Sandbox App Group 表示由同一个 Developer ID 签名的 app group。每个 Developer ID 可以签名多个 Sandbox App Group，每个 Sandbox App Group 可以包含若干个 Sandbox app。</p>
-<p>如果想要声明一个 Sandbox app 属于某个 Sandbox App Group，需要在该 app 的 <em><code>.entitlements</code></em> 中添加一个 <em><code>com.apple.security.application-groups</code></em> array，它的每个元素表示该 app 属于的某个 Sandbox app group，用 Group Bundle ID 表示。</p>
-<p><strong><code>Group Bundle ID</code></strong> := <Team-ID>.com.company.XXX，<Team-ID> 其实也可以不用，但 Apple 的标准用法是以 <Team-ID> 作为 Group Bundle ID 的 prefix。</p>
-<p>每个 Sandbox App Group 会在 <em><code>~/Library/Group Containers</code></em> 下生成一个对应的目录，以 Group Bundle ID 命名。该目录的结构与 Sandbox app 的 Container 目录结构相同。该目录可以被属于该 group 的所有 Sandbox app 访问，没有限制。访问该目录的方法是调用 <em><code>[[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:]</code></em>。</p>]]>
-    
-    </summary>
-    
-      <category term="Mac" scheme="http://hi.zongquan.wang/tags/Mac/"/>
-    
-      <category term="Sandbox" scheme="http://hi.zongquan.wang/tags/Sandbox/"/>
-    
-      <category term="开发" scheme="http://hi.zongquan.wang/categories/%E5%BC%80%E5%8F%91/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[How to add Login item for Mac]]></title>
-    <link href="http://hi.zongquan.wang/2014/11/27/How_to_add_Login_item_for_Mac/"/>
-    <id>http://hi.zongquan.wang/2014/11/27/How_to_add_Login_item_for_Mac/</id>
-    <published>2014-11-27T14:35:05.000Z</published>
-    <updated>2015-11-10T02:03:41.000Z</updated>
-    <content type="html"><![CDATA[<p>在 Mac OS 中，有许多机制可以用于添加 Login item，不同的 Login item 类型需要用不同的方式来添加，每种方式都有自己的工作流程，应用范围，以及最终的表现效果。</p>
-<p>从开发者的角度来看，可以分成两大类，<strong>一类</strong>是在代码中通过调用 Mac 的 API 来添加，由 Mac 来自动管理 Login item；<strong>另一类</strong>是开发者直接拿 File System 开刀，手动控制。</p>
-<h2 id="类型_1">类型 1</h2><h3 id="1-_Service_Management_framework">1. Service Management framework</h3><ul>
-<li><p><strong>API</strong>: <strong><code>SMLoginItemSetEnabled</code></strong></p>
-</li>
-<li><p><strong>How</strong>: main app 的 <em><code>Contents/Library/LoginItems</code></em> 目录下包含一个 helper app，该 helper app 将作为 Login item 由 Mac 启动。</p>
-<p>  也就是说，main app 的 Build Phases 中需要添加一个 Copy Files 阶段，将 helper app deploy 到自己的上述目录下，然后，在 main app 的代码中，通过调用 <em><code>SMLoginItemSetEnabled:YES</code></em> 将 helper app 启动，同时设置成 Login item。同样，禁用该 helper app 也是由 main app 在代码中控制，调用 <em><code>SMLoginItemSetEnabled:NO</code></em> 来实现，将会杀掉 helper app，并取消 Login item。</p>
-<p>  main app 会传递给 <em><code>SMLoginItemSetEnabled</code></em> 需要启动的 helper app 的 Bundle ID，然后该 API 就会在 <em><code>Contents/Library/LoginItems</code></em> 中寻找该 helper app，执行相应的动作。</p>
-<p>  <strong>注意</strong>：helper app 的 <code>Info.plist</code> 中需要设置 <em><code>LSUIElement</code></em> 或者 <em><code>LSBackgroundOnly</code></em> 。</p>
-</li>
-<li><p>该方法添加的 Login item 对用户是不可见的，在 System Preference 中也看不到。</p>
-</li>
-<li><p><strong>e.g.</strong> <a href="https://github.com/wzqcongcong/MyDiskCleaner" target="_blank" rel="external">MyDiskCleaner</a></p>
-</li>
-</ul>
-<a id="more"></a>
-<h3 id="2-_SMJobBless">2. SMJobBless</h3><ul>
-<li><p><strong>API</strong>: <strong><code>AuthorizationCreate</code> <code>SMJobBless</code></strong></p>
-</li>
-<li><p><strong>How</strong>: 同样也是一个 main app 和一个 helper app，helper app 一般是 Command Line Tool 类型的 target。helper app deploy 到 main app 的 <em><code>Contents/Library/LaunchServices</code></em> 目录下，由 main app 将其注册到 Mac 的 <em><code>LaunchDaemon</code></em> 中，实现自启动。</p>
-<p>  main app 代码中首先需要调用 <em><code>AuthorizationCreate</code></em> 来获取 admin 权限，然后将获取到的权限连同 helper app 的 Bundle ID 一起传给 <em><code>SMJobBless</code></em>，<em><code>SMJobBless</code></em> 会将该 helper app 复制到 Mac 的 <em><code>/Library/PrivilegedHelperTools</code></em> 目录下，同时在 <em><code>/Library/LaunchDaemons</code></em> 目录下生成一个相应的 plist 文件，Mac 启动时，由 <em><code>launchctl</code></em> load 该 plist，从而 load helper app。</p>
-<p>  <strong>注意</strong>：helper app 这个 target 需要一些特殊处理。首先，需要为其新建一个 <em><code>&lt;Bundle ID&gt;-Launchd.plist</code></em>，该 plist 中会写明如何被 <em><code>launchctl</code></em> load，然后，在 Build Settings 中需要设置 <em><code>Other Linker Flags</code></em> 的值，在其中写入 helper app 的 Info.plist 和上面的 Launchd.plist。这样，在编译出的 target 可执行文件中，会有一段特殊的代码区记录着它的 Info.plist 和 Launchd.plist 信息。<em><code>SMJobBless</code></em> 调用后在 <em><code>/Library/LaunchDaemons</code></em> 目录生成的 plist 文件就是直接从 target 可执行文件中读取到的。</p>
-<p>  <strong>注意</strong>：<em><code>SMJobBless</code></em> 执行时，如果 <em><code>/Library/PrivilegedHelperTools</code></em> 目录下已经有了相同 Bundle ID 的 helper app，那么除非其 <em><code>CFBundleShortVersion</code></em> 不同，否则是不会重新覆盖的。所以当 helper app 代码发生改变时，为了希望能 deploy 新的 helper app，需要同时更新其 <em><code>CFBundleShortVersion</code></em>，这样 <em><code>SMJobBless</code></em> 才会将新的有效的 helper app deploy 到 <em><code>/Library/PrivilegedHelperTools</code></em> 目录下，并将其 load 起来。</p>
-</li>
-<li><p>该方法添加的 Login item 对用户是可见的，可执行文件和相应的 plist 文件的位置如上所述。用户可以手动执行 <em><code>launchctl</code></em> 来 load/unload。该方法不仅添加了 Login item，而且还实现了提权操作，也就是说，helper app 将会以 admin 权限来运行。</p>
-</li>
-<li><p><strong>e.g.</strong> <a href="https://github.com/wzqcongcong/AppleTunerUpdater" target="_blank" rel="external">AppleTunerUpdater</a></p>
-</li>
-</ul>
-<h3 id="3-_OS_Launch_Services">3. OS Launch Services</h3><ul>
-<li><p><strong>API</strong>: <strong><code>LSSharedFileList</code> 系列</strong></p>
-</li>
-<li><p><strong>How</strong>: 貌似过时了？文档中没有？StackOverflow 中有相关帖子介绍<a href="http://stackoverflow.com/questions/5449135/how-can-a-cocoa-application-add-itself-as-a-global-login-item" target="_blank" rel="external">【1】</a> <a href="http://stackoverflow.com/questions/14889956/launch-cocoa-application-for-all-users-during-login" target="_blank" rel="external">【2】</a></p>
-</li>
-<li><p>该方法添加的 Login item 对用户是可见的，在 System Preference 的 Users &amp; Groups 中可以查看到相应的 Login item，用户可以选择启用或者禁用。</p>
-</li>
-</ul>
-<h2 id="类型_2">类型 2</h2><h3 id="4-_LaunchAgents_/_LaunchDaemons_目录">4. LaunchAgents / LaunchDaemons 目录</h3><p>编写需要的 plist 文件，写明如何被 <em><code>launchctl</code></em> load，然后将 plist 放置到 <em><code>LaunchAgents / LaunchDaemons</code></em> 目录。</p>
-<ul>
-<li>~/Library/LaunchAgents    （user 权限，只对当前 user 有效）</li>
-<li>/Library/LaunchAgents        （root 权限，对所有 user 有效）</li>
-<li>/Library/LaunchDaemons    （root 权限，系统级别）</li>
-</ul>
-<hr>
-<pre><code>对于 non Sandbox app 来说，上述<span class="number">4</span>种方法都是可行的。
-对于 Sandbox app 来说，方法<span class="number">1</span>适用，方法<span class="number">4</span>写入 *`~/Library/LaunchAgents`* 也适用，其它方法不适用。
-</code></pre>]]></content>
-    <summary type="html">
-    <![CDATA[<p>在 Mac OS 中，有许多机制可以用于添加 Login item，不同的 Login item 类型需要用不同的方式来添加，每种方式都有自己的工作流程，应用范围，以及最终的表现效果。</p>
-<p>从开发者的角度来看，可以分成两大类，<strong>一类</strong>是在代码中通过调用 Mac 的 API 来添加，由 Mac 来自动管理 Login item；<strong>另一类</strong>是开发者直接拿 File System 开刀，手动控制。</p>
-<h2 id="类型_1">类型 1</h2><h3 id="1-_Service_Management_framework">1. Service Management framework</h3><ul>
-<li><p><strong>API</strong>: <strong><code>SMLoginItemSetEnabled</code></strong></p>
-</li>
-<li><p><strong>How</strong>: main app 的 <em><code>Contents/Library/LoginItems</code></em> 目录下包含一个 helper app，该 helper app 将作为 Login item 由 Mac 启动。</p>
-<p>  也就是说，main app 的 Build Phases 中需要添加一个 Copy Files 阶段，将 helper app deploy 到自己的上述目录下，然后，在 main app 的代码中，通过调用 <em><code>SMLoginItemSetEnabled:YES</code></em> 将 helper app 启动，同时设置成 Login item。同样，禁用该 helper app 也是由 main app 在代码中控制，调用 <em><code>SMLoginItemSetEnabled:NO</code></em> 来实现，将会杀掉 helper app，并取消 Login item。</p>
-<p>  main app 会传递给 <em><code>SMLoginItemSetEnabled</code></em> 需要启动的 helper app 的 Bundle ID，然后该 API 就会在 <em><code>Contents/Library/LoginItems</code></em> 中寻找该 helper app，执行相应的动作。</p>
-<p>  <strong>注意</strong>：helper app 的 <code>Info.plist</code> 中需要设置 <em><code>LSUIElement</code></em> 或者 <em><code>LSBackgroundOnly</code></em> 。</p>
-</li>
-<li><p>该方法添加的 Login item 对用户是不可见的，在 System Preference 中也看不到。</p>
-</li>
-<li><p><strong>e.g.</strong> <a href="https://github.com/wzqcongcong/MyDiskCleaner">MyDiskCleaner</a></p>
-</li>
-</ul>]]>
-    
-    </summary>
-    
-      <category term="Mac" scheme="http://hi.zongquan.wang/tags/Mac/"/>
     
       <category term="开发" scheme="http://hi.zongquan.wang/categories/%E5%BC%80%E5%8F%91/"/>
     
