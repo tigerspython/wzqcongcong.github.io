@@ -4,7 +4,7 @@
   <subtitle><![CDATA[立一业谋生 择一城终老 携一人白首]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://hi.zongquan.wang/"/>
-  <updated>2016-03-30T04:47:32.000Z</updated>
+  <updated>2016-03-30T08:47:58.000Z</updated>
   <id>http://hi.zongquan.wang/</id>
   
   <author>
@@ -19,11 +19,10 @@
     <link href="http://hi.zongquan.wang/2016/03/29/How_to_install_iOSOpenDev_manually/"/>
     <id>http://hi.zongquan.wang/2016/03/29/How_to_install_iOSOpenDev_manually/</id>
     <published>2016-03-29T15:30:35.000Z</published>
-    <updated>2016-03-30T04:47:32.000Z</updated>
-    <content type="html"><![CDATA[<p>OS X 10.10+ &amp; Xcode 7+</p>
-<p><a href="https://github.com/wzqcongcong/iOSOpenDev" target="_blank" rel="external">https://github.com/wzqcongcong/iOSOpenDev</a></p>
+    <updated>2016-03-30T08:47:58.000Z</updated>
+    <content type="html"><![CDATA[<p><a href="https://github.com/wzqcongcong/iOSOpenDev" target="_blank" rel="external">https://github.com/wzqcongcong/iOSOpenDev</a></p>
 <hr>
-<ol>
+<h3 id="OS_X_10-10+_&amp;_Xcode_7+">OS X 10.10+ &amp; Xcode 7+</h3><ol>
 <li><p><strong>Dependency</strong></p>
 <p><code>brew install ldid dpkg</code></p>
 </li>
@@ -34,16 +33,17 @@
 <li><p><strong>iOSOpenDev</strong></p>
 <p><a href="https://github.com/kokoabim/iOSOpenDev/wiki" target="_blank" rel="external">Wiki</a></p>
 <p>3.1. update <strong>.zshrc</strong></p>
-<p><code>export iOSOpenDevPath=$HOME/Tools/iOS/iOSOpenDev</code></p>
+<p><code>export iOSOpenDevPath=path/to/iOSOpenDev</code></p>
 <p><code>export iOSOpenDevDevice=</code></p>
 <p><code>export PATH=$iOSOpenDevPath:$PATH</code></p>
 <p>3.2. get <strong>iOSOpenDev</strong></p>
 <ul>
 <li><p><code>git clone --recursive https://github.com/kokoabim/iOSOpenDev.git $iOSOpenDevPath</code></p>
 </li>
-<li><p>copy the <a href="https://github.com/wzqcongcong/iOSOpenDev" target="_blank" rel="external"><strong>templates</strong></a> dir into <em>$iOSOpenDevPath</em></p>
+<li><p>copy the folder <a href="https://github.com/wzqcongcong/iOSOpenDev" target="_blank" rel="external"><strong>templates</strong></a> into <em>$iOSOpenDevPath</em></p>
 </li>
 </ul>
+<p>this version of <strong>templates</strong> is refined by the <a href="https://github.com/kokoabim/iOSOpenDev-Xcode-Templates" target="_blank" rel="external">original one</a>: the <em>ShellScript</em> of <em>BuildPhases</em> in <strong>TemplateInfo.plist</strong> is changed to <code>$iOSOpenDevPath/bin/iosod --xcbp</code>. and the <em>[$iOSOpenDevPath]</em> here is not that in <em>.zshrc</em>, it is a user defined key in <strong>Base.xctemplate</strong> and <strong>Empty Project.xctemplate</strong>.</p>
 <p>3.3. setup <strong>Xcode</strong></p>
 <ul>
 <li><p>copy the <a href="https://github.com/wzqcongcong/iOSOpenDev" target="_blank" rel="external"><strong>.xcspec</strong></a> files into <em>/Applications/Xcode/Content/Developer/Platforms/[PLATFORM_PATH]/Developer/Library/Xcode/Specifications</em> (mkdir if not existed)</p>
@@ -57,23 +57,26 @@
 </ul>
 <p>3.4. setup <strong>SDK</strong></p>
 <ul>
-<li><p>add the following key/value into <strong>[SDK_PATH]/SDKSettings.plist</strong>:</p>
+<li><p>modify the following key/value in <strong>[SDK_PATH]/SDKSettings.plist</strong>:</p>
 <pre><code>DefaultProperties<span class="class">.CODE_SIGNING_REQUIRED</span> =&gt; NO
 DefaultProperties<span class="class">.ENTITLEMENTS_REQUIRED</span> =&gt; NO
 DefaultProperties<span class="class">.AD_HOC_CODE_SIGNING_ALLOWED</span> =&gt; YES
+</code></pre></li>
+<li><p>in Xcode 7.3, the private framework has been removed from iOS 9.3 SDK, so maybe you want to use iOS 9.2 SDK. once you copy iOS 9.2 SDK into <em>[PLATFORM_PATH]/Developer/SDKs</em>, you should also modify <strong>[PLATFORM_PATH]/Info.plist</strong> as following, or else Xcode 7.3 can not recognize iOS 9.2 SDK in project build settings:</p>
+<pre><code>MinimumSDKVersion =&gt; <span class="number">9.2</span>
 </code></pre></li>
 </ul>
 <p>3.5. setup <strong>templates</strong></p>
 <ul>
 <li><code>ln -fhs $iOSOpenDevPath/templates ~/Library/Developer/Xcode/Templates/iOSOpenDev</code></li>
-<li>open <strong>TemplateInfo.plist</strong> of <strong>Base.xctemplate</strong> and <strong>Empty Project.xctemplate</strong> with Xcode, then set the value of user defined key <em>[iOSOpenDevPath]</em> to <em>$HOME/Tools/iOS/iOSOpenDev</em>.</li>
+<li>open <strong>TemplateInfo.plist</strong> in <strong>Base.xctemplate</strong> and <strong>Empty Project.xctemplate</strong> with Xcode, then set the value of the user defined key <em>[iOSOpenDevPath]</em> to <em>path/to/iOSOpenDev</em>.</li>
 </ul>
 </li>
 </ol>
 ]]></content>
     <summary type="html">
-    <![CDATA[<p>OS X 10.10+ &amp; Xcode 7+</p>
-<p><a href="https://github.com/wzqcongcong/iOSOpenDev" target="_blank" rel="external">https://github.com/w]]>
+    <![CDATA[<p><a href="https://github.com/wzqcongcong/iOSOpenDev" target="_blank" rel="external">https://github.com/wzqcongcong/iOSOpenDev</a></p>
+<hr>]]>
     </summary>
     
       <category term="Xcode" scheme="http://hi.zongquan.wang/tags/Xcode/"/>
