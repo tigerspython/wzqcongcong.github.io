@@ -4,7 +4,7 @@
   <subtitle><![CDATA[立一业谋生 择一城终老 携一人白首]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://hi.zongquan.wang/"/>
-  <updated>2016-03-30T04:40:57.000Z</updated>
+  <updated>2016-03-30T04:47:32.000Z</updated>
   <id>http://hi.zongquan.wang/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://hi.zongquan.wang/2016/03/29/How_to_install_iOSOpenDev_manually/"/>
     <id>http://hi.zongquan.wang/2016/03/29/How_to_install_iOSOpenDev_manually/</id>
     <published>2016-03-29T15:30:35.000Z</published>
-    <updated>2016-03-30T04:40:57.000Z</updated>
+    <updated>2016-03-30T04:47:32.000Z</updated>
     <content type="html"><![CDATA[<p>OS X 10.10+ &amp; Xcode 7+</p>
 <p><a href="https://github.com/wzqcongcong/iOSOpenDev" target="_blank" rel="external">https://github.com/wzqcongcong/iOSOpenDev</a></p>
 <hr>
@@ -76,7 +76,7 @@ DefaultProperties<span class="class">.AD_HOC_CODE_SIGNING_ALLOWED</span> =&gt; Y
 <p><a href="https://github.com/wzqcongcong/iOSOpenDev" target="_blank" rel="external">https://github.com/w]]>
     </summary>
     
-      <category term="iOS" scheme="http://hi.zongquan.wang/tags/iOS/"/>
+      <category term="Xcode" scheme="http://hi.zongquan.wang/tags/Xcode/"/>
     
       <category term="开发" scheme="http://hi.zongquan.wang/categories/%E5%BC%80%E5%8F%91/"/>
     
@@ -389,7 +389,7 @@ DefaultProperties<span class="class">.AD_HOC_CODE_SIGNING_ALLOWED</span> =&gt; Y
     <link href="http://hi.zongquan.wang/2015/01/18/Study_iOS_Hardware/"/>
     <id>http://hi.zongquan.wang/2015/01/18/Study_iOS_Hardware/</id>
     <published>2015-01-18T07:42:25.000Z</published>
-    <updated>2015-11-10T02:03:41.000Z</updated>
+    <updated>2016-03-30T04:45:54.000Z</updated>
     <content type="html"><![CDATA[<h3 id="Developing_Applications_for_iOS_观后感系列：Hardware">Developing Applications for iOS 观后感系列：Hardware</h3><p><em>相关视频章节：14、17</em></p>
 <hr>
 <p>关于 iOS device 的 hardware，本篇主要了解2个方面：CoreLocation + CoreMotion</p>
@@ -499,8 +499,6 @@ DefaultProperties<span class="class">.AD_HOC_CODE_SIGNING_ALLOWED</span> =&gt; Y
     
     </summary>
     
-      <category term="Hardware" scheme="http://hi.zongquan.wang/tags/Hardware/"/>
-    
       <category term="iOS" scheme="http://hi.zongquan.wang/tags/iOS/"/>
     
       <category term="开发" scheme="http://hi.zongquan.wang/categories/%E5%BC%80%E5%8F%91/"/>
@@ -512,7 +510,7 @@ DefaultProperties<span class="class">.AD_HOC_CODE_SIGNING_ALLOWED</span> =&gt; Y
     <link href="http://hi.zongquan.wang/2015/01/18/Study_iOS_L18N/"/>
     <id>http://hi.zongquan.wang/2015/01/18/Study_iOS_L18N/</id>
     <published>2015-01-18T05:35:11.000Z</published>
-    <updated>2015-11-10T02:03:41.000Z</updated>
+    <updated>2016-03-30T04:45:57.000Z</updated>
     <content type="html"><![CDATA[<h3 id="Developing_Applications_for_iOS_观后感系列：L18N">Developing Applications for iOS 观后感系列：L18N</h3><p><em>相关视频章节：18</em></p>
 <hr>
 <p>L18N 主要涉及2方面：Xcode + code。</p>
@@ -571,8 +569,6 @@ DefaultProperties<span class="class">.AD_HOC_CODE_SIGNING_ALLOWED</span> =&gt; Y
     
     </summary>
     
-      <category term="UI" scheme="http://hi.zongquan.wang/tags/UI/"/>
-    
       <category term="iOS" scheme="http://hi.zongquan.wang/tags/iOS/"/>
     
       <category term="开发" scheme="http://hi.zongquan.wang/categories/%E5%BC%80%E5%8F%91/"/>
@@ -584,7 +580,7 @@ DefaultProperties<span class="class">.AD_HOC_CODE_SIGNING_ALLOWED</span> =&gt; Y
     <link href="http://hi.zongquan.wang/2015/01/17/Study_iOS_Misc_UI/"/>
     <id>http://hi.zongquan.wang/2015/01/17/Study_iOS_Misc_UI/</id>
     <published>2015-01-17T07:30:03.000Z</published>
-    <updated>2015-11-10T02:03:41.000Z</updated>
+    <updated>2016-03-30T04:46:03.000Z</updated>
     <content type="html"><![CDATA[<h3 id="Developing_Applications_for_iOS_观后感系列：Misc_UI">Developing Applications for iOS 观后感系列：Misc UI</h3><p><em>相关视频章节：all</em></p>
 <hr>
 <p>之前的文章已经学习了几种 iOS 中比较大而重要的 UIView，例如 UIScrollView、UITableView 等，本篇主要了解一下其它一些比较常用的小型 UI 类型。</p>
@@ -707,8 +703,6 @@ DefaultProperties<span class="class">.AD_HOC_CODE_SIGNING_ALLOWED</span> =&gt; Y
     
     </summary>
     
-      <category term="UI" scheme="http://hi.zongquan.wang/tags/UI/"/>
-    
       <category term="iOS" scheme="http://hi.zongquan.wang/tags/iOS/"/>
     
       <category term="开发" scheme="http://hi.zongquan.wang/categories/%E5%BC%80%E5%8F%91/"/>
@@ -720,7 +714,7 @@ DefaultProperties<span class="class">.AD_HOC_CODE_SIGNING_ALLOWED</span> =&gt; Y
     <link href="http://hi.zongquan.wang/2015/01/11/Study_iOS_CoreData/"/>
     <id>http://hi.zongquan.wang/2015/01/11/Study_iOS_CoreData/</id>
     <published>2015-01-11T08:51:58.000Z</published>
-    <updated>2015-11-10T02:03:41.000Z</updated>
+    <updated>2016-03-30T04:45:50.000Z</updated>
     <content type="html"><![CDATA[<h3 id="Developing_Applications_for_iOS_观后感系列：CoreData">Developing Applications for iOS 观后感系列：CoreData</h3><p><em>相关视频章节：12，13</em></p>
 <hr>
 <p><strong><code>CoreData</code></strong> 是 iOS 提供的一套用于管理 app 的 Model 的 framework，它就像是个 object database，支持对 object 的各种操作：add、delete、query、undo、redo、autosave 等，灰常 NB。但它并不是 database 的某种实现，你可以基于持久化文件（如 sqlite 等）来使用 CoreData，也可以完全基于内存来使用。</p>
@@ -890,8 +884,6 @@ DefaultProperties<span class="class">.AD_HOC_CODE_SIGNING_ALLOWED</span> =&gt; Y
     
     </summary>
     
-      <category term="CoreData" scheme="http://hi.zongquan.wang/tags/CoreData/"/>
-    
       <category term="iOS" scheme="http://hi.zongquan.wang/tags/iOS/"/>
     
       <category term="开发" scheme="http://hi.zongquan.wang/categories/%E5%BC%80%E5%8F%91/"/>
@@ -903,7 +895,7 @@ DefaultProperties<span class="class">.AD_HOC_CODE_SIGNING_ALLOWED</span> =&gt; Y
     <link href="http://hi.zongquan.wang/2015/01/11/Study_iOS_UITableView/"/>
     <id>http://hi.zongquan.wang/2015/01/11/Study_iOS_UITableView/</id>
     <published>2015-01-11T06:42:21.000Z</published>
-    <updated>2015-11-10T02:03:41.000Z</updated>
+    <updated>2016-03-30T04:46:26.000Z</updated>
     <content type="html"><![CDATA[<h3 id="Developing_Applications_for_iOS_观后感系列：UITableView">Developing Applications for iOS 观后感系列：UITableView</h3><p><em>相关视频章节：11</em></p>
 <hr>
 <h4 id="UITableView_分类">UITableView 分类</h4><p>按内容分：</p>
@@ -993,8 +985,6 @@ DefaultProperties<span class="class">.AD_HOC_CODE_SIGNING_ALLOWED</span> =&gt; Y
     
     </summary>
     
-      <category term="UI" scheme="http://hi.zongquan.wang/tags/UI/"/>
-    
       <category term="iOS" scheme="http://hi.zongquan.wang/tags/iOS/"/>
     
       <category term="开发" scheme="http://hi.zongquan.wang/categories/%E5%BC%80%E5%8F%91/"/>
@@ -1006,7 +996,7 @@ DefaultProperties<span class="class">.AD_HOC_CODE_SIGNING_ALLOWED</span> =&gt; Y
     <link href="http://hi.zongquan.wang/2015/01/11/Study_iOS_UIScrollView/"/>
     <id>http://hi.zongquan.wang/2015/01/11/Study_iOS_UIScrollView/</id>
     <published>2015-01-11T05:46:10.000Z</published>
-    <updated>2015-11-10T02:03:41.000Z</updated>
+    <updated>2016-03-30T04:46:18.000Z</updated>
     <content type="html"><![CDATA[<h3 id="Developing_Applications_for_iOS_观后感系列：UIScrollView">Developing Applications for iOS 观后感系列：UIScrollView</h3><p><em>相关视频章节：10</em></p>
 <hr>
 <p><strong><code>UIScrollView</code></strong> 是 iOS 中很基础很重要的一种 UIView，用于呈现远大于 app window 大小的 content area，用户通过 <em><code>swiping</code></em> 手势可以在 content area 中进行 scroll，通过 <em><code>pinching</code></em> 手势可以进行 content 的 zoom。就像是拿着一个放大镜在四处移动着观察一副很大的地图。</p>
@@ -1055,8 +1045,6 @@ DefaultProperties<span class="class">.AD_HOC_CODE_SIGNING_ALLOWED</span> =&gt; Y
     
     </summary>
     
-      <category term="UI" scheme="http://hi.zongquan.wang/tags/UI/"/>
-    
       <category term="iOS" scheme="http://hi.zongquan.wang/tags/iOS/"/>
     
       <category term="开发" scheme="http://hi.zongquan.wang/categories/%E5%BC%80%E5%8F%91/"/>
@@ -1068,7 +1056,7 @@ DefaultProperties<span class="class">.AD_HOC_CODE_SIGNING_ALLOWED</span> =&gt; Y
     <link href="http://hi.zongquan.wang/2015/01/10/Study_iOS_Segue/"/>
     <id>http://hi.zongquan.wang/2015/01/10/Study_iOS_Segue/</id>
     <published>2015-01-10T15:01:35.000Z</published>
-    <updated>2015-11-10T02:03:41.000Z</updated>
+    <updated>2016-03-30T04:46:14.000Z</updated>
     <content type="html"><![CDATA[<h3 id="Developing_Applications_for_iOS_观后感系列：Segue">Developing Applications for iOS 观后感系列：Segue</h3><p><em>相关视频章节：6，15，16</em></p>
 <hr>
 <p><em><code>Segue</code></em>，中文为“继续”的意思，在 iOS 开发中，其 class 为 <em><code>UIStoryboardSegue</code></em>，用于 storyboard 中不同 UIViewController 之间的转场，即从一个 UIViewController scene 转场到另一个 UIViewController scene。你可以从一个 UIControl、UIBarItem、UIView、UIViewController 等等，向另一个 UIViewController 建立 Segue。</p>
@@ -1192,8 +1180,6 @@ DefaultProperties<span class="class">.AD_HOC_CODE_SIGNING_ALLOWED</span> =&gt; Y
     
     </summary>
     
-      <category term="UI" scheme="http://hi.zongquan.wang/tags/UI/"/>
-    
       <category term="iOS" scheme="http://hi.zongquan.wang/tags/iOS/"/>
     
       <category term="开发" scheme="http://hi.zongquan.wang/categories/%E5%BC%80%E5%8F%91/"/>
@@ -1205,7 +1191,7 @@ DefaultProperties<span class="class">.AD_HOC_CODE_SIGNING_ALLOWED</span> =&gt; Y
     <link href="http://hi.zongquan.wang/2015/01/07/Study_iOS_Network/"/>
     <id>http://hi.zongquan.wang/2015/01/07/Study_iOS_Network/</id>
     <published>2015-01-07T02:15:27.000Z</published>
-    <updated>2015-11-10T02:03:41.000Z</updated>
+    <updated>2016-03-30T04:46:10.000Z</updated>
     <content type="html"><![CDATA[<h3 id="Developing_Applications_for_iOS_观后感系列：Network">Developing Applications for iOS 观后感系列：Network</h3><p><em>相关视频章节：10</em></p>
 <hr>
 <p>iOS 中处理 Network 的 API 主要是 <em><code>NSURLSession</code></em>，当然，基于此，<em>Mattt Thompson</em> 开发了一套更加强大易用的 <em>AFNetworking</em>。不管怎样，还是很有必要了解一下 iOS 自己的 <em>NSURLSession</em> 的。</p>
@@ -1288,8 +1274,6 @@ DefaultProperties<span class="class">.AD_HOC_CODE_SIGNING_ALLOWED</span> =&gt; Y
     
     </summary>
     
-      <category term="Network" scheme="http://hi.zongquan.wang/tags/Network/"/>
-    
       <category term="iOS" scheme="http://hi.zongquan.wang/tags/iOS/"/>
     
       <category term="开发" scheme="http://hi.zongquan.wang/categories/%E5%BC%80%E5%8F%91/"/>
@@ -1301,7 +1285,7 @@ DefaultProperties<span class="class">.AD_HOC_CODE_SIGNING_ALLOWED</span> =&gt; Y
     <link href="http://hi.zongquan.wang/2015/01/06/Study_iOS_Animation/"/>
     <id>http://hi.zongquan.wang/2015/01/06/Study_iOS_Animation/</id>
     <published>2015-01-06T14:29:21.000Z</published>
-    <updated>2015-11-10T02:03:41.000Z</updated>
+    <updated>2016-03-30T04:45:46.000Z</updated>
     <content type="html"><![CDATA[<h3 id="Developing_Applications_for_iOS_观后感系列：UIView_Animation">Developing Applications for iOS 观后感系列：UIView Animation</h3><p><em>相关视频章节：8</em></p>
 <hr>
 <p>本篇提到的 Animation 主要是基于 UIView 的，并没有涉及到基于 Layer 机制的 Animation。</p>
@@ -1397,8 +1381,6 @@ transform（translation，rotation，<span class="built_in">scale</span>）
     
     </summary>
     
-      <category term="Animation" scheme="http://hi.zongquan.wang/tags/Animation/"/>
-    
       <category term="iOS" scheme="http://hi.zongquan.wang/tags/iOS/"/>
     
       <category term="开发" scheme="http://hi.zongquan.wang/categories/%E5%BC%80%E5%8F%91/"/>
@@ -1410,7 +1392,7 @@ transform（translation，rotation，<span class="built_in">scale</span>）
     <link href="http://hi.zongquan.wang/2015/01/06/Study_iOS_UIView/"/>
     <id>http://hi.zongquan.wang/2015/01/06/Study_iOS_UIView/</id>
     <published>2015-01-06T13:23:11.000Z</published>
-    <updated>2015-11-10T02:03:41.000Z</updated>
+    <updated>2016-03-30T04:46:30.000Z</updated>
     <content type="html"><![CDATA[<h3 id="Developing_Applications_for_iOS_观后感系列：UIView">Developing Applications for iOS 观后感系列：UIView</h3><p><em>相关视频章节：7</em></p>
 <hr>
 <h3 id="UIView_的_init">UIView 的 init</h3><p>与 UIViewController 的 init 类似，UIView 的 init 也有2种形式：一种是从 storyboard 中释放出来，另一种是在代码中直接调用相关的 init 函数。两种只会选择一种来完成 init。</p>
@@ -1476,8 +1458,6 @@ transform（translation，rotation，<span class="built_in">scale</span>）
 <p><img src="/img/Study_iOS_UIView/7.2.Coordinate.png" alt="Coordinate"></p>]]>
     
     </summary>
-    
-      <category term="UI" scheme="http://hi.zongquan.wang/tags/UI/"/>
     
       <category term="iOS" scheme="http://hi.zongquan.wang/tags/iOS/"/>
     
@@ -1710,7 +1690,7 @@ transform（translation，rotation，<span class="built_in">scale</span>）
     <link href="http://hi.zongquan.wang/2014/12/03/Just_a_little_tips_about_Block/"/>
     <id>http://hi.zongquan.wang/2014/12/03/Just_a_little_tips_about_Block/</id>
     <published>2014-12-03T09:35:36.000Z</published>
-    <updated>2015-11-10T02:03:41.000Z</updated>
+    <updated>2016-03-30T04:45:42.000Z</updated>
     <content type="html"><![CDATA[<p>大爱 <em><code>Block</code></em>，方便易用，但是，有些坑还是需要认真对待的~~</p>
 <p>其实问题主要是关于内存管理的。</p>
 <h4 id="1-_捕获闭包的状态">1. 捕获闭包的状态</h4><p>一切问题的起源：<em><code>Block</code></em> 除了包含一段可执行代码，更重要的是，它还会捕获（<em><code>capture</code></em>）其闭包内的状态。</p>
@@ -1813,8 +1793,6 @@ dispatch_group_async<span class="list">(<span class="keyword">_operationsGroup</
     
     </summary>
     
-      <category term="Block" scheme="http://hi.zongquan.wang/tags/Block/"/>
-    
       <category term="Mac" scheme="http://hi.zongquan.wang/tags/Mac/"/>
     
       <category term="开发" scheme="http://hi.zongquan.wang/categories/%E5%BC%80%E5%8F%91/"/>
@@ -1826,7 +1804,7 @@ dispatch_group_async<span class="list">(<span class="keyword">_operationsGroup</
     <link href="http://hi.zongquan.wang/2014/11/28/XPC_mechanism_of_Mac/"/>
     <id>http://hi.zongquan.wang/2014/11/28/XPC_mechanism_of_Mac/</id>
     <published>2014-11-27T16:44:50.000Z</published>
-    <updated>2015-11-10T02:03:41.000Z</updated>
+    <updated>2016-03-30T04:46:36.000Z</updated>
     <content type="html"><![CDATA[<p>在 Mac 中，进程间的通信机制，除了 <em><code>NSDistributedNotification</code></em>、<em><code>Distributed Objects</code></em>，还有 XPC。XPC 可以在同一个 app 的不同 bundle 间使用，也可以在不同的 app 间使用。</p>
 <p>XPC 机制是通过 <em><code>NSXPCConnection</code></em> 作为 channel 来通信的，每个 <em><code>NSXPCConnection</code></em> 有 <em>Client</em> 和 <em>Listener</em> 两个 endpoint。</p>
 <h3 id="1-_XPC_角色">1. XPC 角色</h3><h4 id="Listener">Listener</h4><p>通过 <em><code>NSXPCListener</code></em> API 来创建 Listener，并指定该 Listener 的 <em><code>NSXPCListenerDelegate</code></em>，该 delegate 需要实现的函数是 <em><code>(BOOL)listener:shouldAcceptNewConnection:</code></em>。该 delegate 函数用于决定是否响应新的 connection，并设置该 connection 的 <em><code>exportedInterface</code></em> 和 <em><code>exportedObject</code></em>。</p>
@@ -1875,8 +1853,6 @@ Apple Demo <span class="keyword">*</span><span class="string">"AppSandboxLoginIt
     </summary>
     
       <category term="Mac" scheme="http://hi.zongquan.wang/tags/Mac/"/>
-    
-      <category term="XPC" scheme="http://hi.zongquan.wang/tags/XPC/"/>
     
       <category term="开发" scheme="http://hi.zongquan.wang/categories/%E5%BC%80%E5%8F%91/"/>
     
