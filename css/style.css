@@ -2081,3 +2081,8 @@ pre .javascript .function {
   font-weight: bold;
   margin-bottom: 8px;
 }
+.article-copyright {
+  margin: 20px auto;
+  width: 80%;
+  text-align: center;
+}
