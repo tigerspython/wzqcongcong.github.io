@@ -5,25 +5,16 @@
   
   <title>Study iOS - Network | 闷骚的悟空</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Developing Applications for iOS 观后感系列：Network相关视频章节：10
-
-iOS 中处理 Network 的 API 主要是 NSURLSession，当然，基于此，Mattt Thompson 开发了一套更加强大易用的 AFNetworking。不管怎样，还是很有必要了解一下 iOS 自己的 NSURLSession 的。
-NSURLSession 的一般使">
+  <meta name="description" content="Developing Applications for iOS 观后感系列：Network相关视频章节：10">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Study iOS - Network">
 <meta property="og:url" content="http://hi.zongquan.wang/2015/01/07/Study_iOS_Network/index.html">
 <meta property="og:site_name" content="闷骚的悟空">
-<meta property="og:description" content="Developing Applications for iOS 观后感系列：Network相关视频章节：10
-
-iOS 中处理 Network 的 API 主要是 NSURLSession，当然，基于此，Mattt Thompson 开发了一套更加强大易用的 AFNetworking。不管怎样，还是很有必要了解一下 iOS 自己的 NSURLSession 的。
-NSURLSession 的一般使">
-<meta property="og:updated_time" content="2016-03-30T04:46:10.000Z">
+<meta property="og:description" content="Developing Applications for iOS 观后感系列：Network相关视频章节：10">
+<meta property="og:updated_time" content="2016-04-08T01:23:43.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Study iOS - Network">
-<meta name="twitter:description" content="Developing Applications for iOS 观后感系列：Network相关视频章节：10
-
-iOS 中处理 Network 的 API 主要是 NSURLSession，当然，基于此，Mattt Thompson 开发了一套更加强大易用的 AFNetworking。不管怎样，还是很有必要了解一下 iOS 自己的 NSURLSession 的。
-NSURLSession 的一般使">
+<meta name="twitter:description" content="Developing Applications for iOS 观后感系列：Network相关视频章节：10">
   
   
     <link rel="icon" href="/favicon.ico">
@@ -189,6 +180,7 @@ ga('send', 'pageview');
       
                 
         <h3 id="Developing_Applications_for_iOS_观后感系列：Network">Developing Applications for iOS 观后感系列：Network</h3><p><em>相关视频章节：10</em></p>
+<a id="more"></a>
 <hr>
 <p>iOS 中处理 Network 的 API 主要是 <em><code>NSURLSession</code></em>，当然，基于此，<em>Mattt Thompson</em> 开发了一套更加强大易用的 <em>AFNetworking</em>。不管怎样，还是很有必要了解一下 iOS 自己的 <em>NSURLSession</em> 的。</p>
 <h4 id="NSURLSession_的一般使用流程："><em>NSURLSession</em> 的一般使用流程：</h4><pre><code><span class="built_in">NSURLRequest</span> *request = [<span class="built_in">NSURLRequest</span> requestWithURL:XXX];
@@ -213,9 +205,6 @@ ga('send', 'pageview');
 </li>
 </ul>
 </li>
-</ol>
-<a id="more"></a>
-<ol>
 <li><p><strong><code>NSURLSession</code></strong>：有了 configuration，就可以创建 session 了。session 的 init 方式决定了 network events 的 handle 方式，以及 handle 操作的执行环境是哪里。主要有2种 init 方式：</p>
 <ul>
 <li><p><code>+(NSURLSession *)sessionWithConfiguration:(NSURLSessionConfiguration *)configuration delegate:(id&lt;NSURLSessionDelegate&gt;)delegate delegateQueue:(NSOperationQueue *)queue</code>：</p>
@@ -242,12 +231,39 @@ ga('send', 'pageview');
 
       
     </div>
+    
+      <div class ="post-donate">
+    <div id="donate_tip" class="donate_tip center">
+        <a id="btn_donate" class="btn_donate" href="javascript:;"></a>
+        <span class="donate_tip_txt">
+		   打赏
+        </span>
+        <br>
+      </div>
+	<div id="donate_guide" class="donate_tip center hidden">
+		<div class="donate_item">
+			<span class="donate_item_txt" style="color:#1dabec">支付宝打赏</span>
+			<img src="/img/zhifubaoV2.png" alt="支付宝打赏">
+		</div>
+		<div class="donate_item">
+			<span class="donate_item_txt" style="color:#22cf28">微信打赏</span>
+			<img src="/img/weixinV2.png" alt="微信打赏">
+		</div>
+    </div>
+	<script type="text/javascript">
+		document.getElementById('btn_donate').onclick = function(){
+			$('#donate_tip').addClass('hidden');
+			$('#donate_guide').removeClass('hidden');
+		}
+	</script>
+</div>
+    
     <footer class="article-footer">
       
         <a href="http://hi.zongquan.wang/2015/01/07/Study_iOS_Network/#disqus_thread" class="article-comment-link">Comments</a>
       
 
-      <a data-url="http://hi.zongquan.wang/2015/01/07/Study_iOS_Network/" data-id="cimem53sq000oj4sbt3ozils1" class="article-share-link">Share</a>
+      <a data-url="http://hi.zongquan.wang/2015/01/07/Study_iOS_Network/" data-id="cimrgmugo000ooqsbr0v7dj6x" class="article-share-link">Share</a>
 
       <div id="article-baidu-share" class="bdsharebuttonbox">
         <a href="#" class="bds_weixin" data-cmd="weixin" title="WeiXin"></a>
@@ -408,15 +424,6 @@ ga('send', 'pageview');
     <h3 class="widget-title">tags</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac/">Mac</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Thinking/">Thinking</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Xcode/">Xcode</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS/">iOS</a><span class="tag-list-count">13</span></li></ul>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">tag cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/Mac/" style="font-size: 16.67px;">Mac</a> <a href="/tags/Thinking/" style="font-size: 10px;">Thinking</a> <a href="/tags/Xcode/" style="font-size: 13.33px;">Xcode</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a>
     </div>
   </div>
 

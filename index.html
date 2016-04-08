@@ -178,69 +178,21 @@ ga('send', 'pageview');
     
     <div class="article-entry" itemprop="articleBody">
       
-                
-        <p><a href="https://github.com/wzqcongcong/iOSOpenDev" target="_blank" rel="external">https://github.com/wzqcongcong/iOSOpenDev</a></p>
-<hr>
-<h3 id="OS_X_10-10+_&amp;_Xcode_7+">OS X 10.10+ &amp; Xcode 7+</h3><ol>
-<li><p><strong>Dependency</strong></p>
-<p><code>brew install ldid dpkg</code></p>
-</li>
-<li><p><strong>Theos</strong></p>
-<p><a href="https://github.com/theos/theos/wiki" target="_blank" rel="external">Wiki</a></p>
-<p><a href="http://iphonedevwiki.net/index.php/Theos/Setup" target="_blank" rel="external">Setup</a></p>
-</li>
-<li><p><strong>iOSOpenDev</strong></p>
-<p><a href="https://github.com/kokoabim/iOSOpenDev/wiki" target="_blank" rel="external">Wiki</a></p>
-<p>3.1. update <strong>.zshrc</strong></p>
-<p><code>export iOSOpenDevPath=path/to/iOSOpenDev</code></p>
-<p><code>export iOSOpenDevDevice=</code></p>
-<p><code>export PATH=$iOSOpenDevPath:$PATH</code></p>
-<p>3.2. get <strong>iOSOpenDev</strong></p>
-<ul>
-<li><p><code>git clone --recursive https://github.com/kokoabim/iOSOpenDev.git $iOSOpenDevPath</code></p>
-</li>
-<li><p>copy the folder <a href="https://github.com/wzqcongcong/iOSOpenDev" target="_blank" rel="external"><strong>templates</strong></a> into <em>$iOSOpenDevPath</em></p>
-</li>
-</ul>
-<p>this version of <strong>templates</strong> is refined by the <a href="https://github.com/kokoabim/iOSOpenDev-Xcode-Templates" target="_blank" rel="external">original one</a>: the <em>ShellScript</em> of <em>BuildPhases</em> in <strong>TemplateInfo.plist</strong> is changed to <code>$iOSOpenDevPath/bin/iosod --xcbp</code>. and the <em>[$iOSOpenDevPath]</em> here is not that in <em>.zshrc</em>, it is a user defined key in <strong>Base.xctemplate</strong> and <strong>Empty Project.xctemplate</strong>.</p>
-<p>3.3. setup <strong>Xcode</strong></p>
-<ul>
-<li><p>copy the <a href="https://github.com/wzqcongcong/iOSOpenDev" target="_blank" rel="external"><strong>.xcspec</strong></a> files into <em>/Applications/Xcode/Content/Developer/Platforms/[PLATFORM_PATH]/Developer/Library/Xcode/Specifications</em> (mkdir if not existed)</p>
-</li>
-<li><p><code>mkdir -p /Applications/Xcode/Content/Developer/Platforms/[PLATFORM_PATH]/Developer/usr/bin</code></p>
-</li>
-<li><p><code>ln -fhs $iOSOpenDevPath/bin/iosod /Applications/Xcode/Content/Developer/Platforms/[PLATFORM_PATH]/Developer/usr/bin</code></p>
-</li>
-<li><p><code>ln -fhs $iOSOpenDevPath/bin/ldid /Applications/Xcode/Content/Developer/Platforms/[PLATFORM_PATH]/Developer/usr/bin</code></p>
-</li>
-</ul>
-<p>3.4. setup <strong>SDK</strong></p>
-<ul>
-<li><p>modify the following key/value in <strong>[SDK_PATH]/SDKSettings.plist</strong>:</p>
-<pre><code>DefaultProperties<span class="class">.CODE_SIGNING_REQUIRED</span> =&gt; NO
-DefaultProperties<span class="class">.ENTITLEMENTS_REQUIRED</span> =&gt; NO
-DefaultProperties<span class="class">.AD_HOC_CODE_SIGNING_ALLOWED</span> =&gt; YES
-</code></pre></li>
-<li><p>in Xcode 7.3, the private framework has been removed from iOS 9.3 SDK, so maybe you want to use iOS 9.2 SDK. once you copy iOS 9.2 SDK into <em>[PLATFORM_PATH]/Developer/SDKs</em>, you should also modify <strong>[PLATFORM_PATH]/Info.plist</strong> as following, or else Xcode 7.3 can not recognize iOS 9.2 SDK in project build settings:</p>
-<pre><code>MinimumSDKVersion =&gt; <span class="number">9.2</span>
-</code></pre></li>
-</ul>
-<p>3.5. setup <strong>templates</strong></p>
-<ul>
-<li><code>ln -fhs $iOSOpenDevPath/templates ~/Library/Developer/Xcode/Templates/iOSOpenDev</code></li>
-<li>open <strong>TemplateInfo.plist</strong> in <strong>Base.xctemplate</strong> and <strong>Empty Project.xctemplate</strong> with Xcode, then set the value of the user defined key <em>[iOSOpenDevPath]</em> to <em>path/to/iOSOpenDev</em>.</li>
-</ul>
-</li>
-</ol>
-
+        <p><a href="https://github.com/wzqcongcong/iOSOpenDev">https://github.com/wzqcongcong/iOSOpenDev</a></p>
+        
+          <p class="article-more-link shake shake-rotate">
+            <a href="/2016/03/29/How_to_install_iOSOpenDev_manually/#more">Read More</a>
+          </p>
+        
       
     </div>
+    
     <footer class="article-footer">
       
         <a href="http://hi.zongquan.wang/2016/03/29/How_to_install_iOSOpenDev_manually/#disqus_thread" class="article-comment-link">Comments</a>
       
 
-      <a data-url="http://hi.zongquan.wang/2016/03/29/How_to_install_iOSOpenDev_manually/" data-id="cimem53tk001ij4sbfb1scs5z" class="article-share-link">Share</a>
+      <a data-url="http://hi.zongquan.wang/2016/03/29/How_to_install_iOSOpenDev_manually/" data-id="cimrgmuhf001ioqsbi2vtwq9i" class="article-share-link">Share</a>
 
       <div id="article-baidu-share" class="bdsharebuttonbox">
         <a href="#" class="bds_weixin" data-cmd="weixin" title="WeiXin"></a>
@@ -293,9 +245,6 @@ DefaultProperties<span class="class">.AD_HOC_CODE_SIGNING_ALLOWED</span> =&gt; Y
     <div class="article-entry" itemprop="articleBody">
       
         <p>无意间看到了这么一篇文章 <a href="http://www.ifanr.com/632328">《人工智能除了下围棋还能干啥？这篇科普文将震撼你的世界观》</a>（后面以常量“彼文”代之），点开之后，手指本能而又温柔地划了几下触摸板，用膀胱扫了一眼滚动条，尼玛好短的滚动条，这也意味着，尼玛好长的文章😂。看惯了不到140个字的微博的我，本能地想要直接关闭彼文，然后愉快地去刷会V2EX或者开发者头条，但是理智再一次告诉我，骚年，不要老吃快餐了，否则营养跟不上啊，好歹碰到这么一篇长文，何不咬着牙并快乐地看完呢，更何况这可是关于当下热门的人狗大战哟🤔。</p>
-<p>于是，在洗澡之前，我坚持看完了彼文。</p>
-<p>于是，在洗澡之后，我写下了此文。</p>
-<p>那么问题来了，洗澡中间发生了什么😂？</p>
         
           <p class="article-more-link shake shake-rotate">
             <a href="/2016/03/13/Fuck_My_29_Years_Life/#more">Read More</a>
@@ -303,12 +252,13 @@ DefaultProperties<span class="class">.AD_HOC_CODE_SIGNING_ALLOWED</span> =&gt; Y
         
       
     </div>
+    
     <footer class="article-footer">
       
         <a href="http://hi.zongquan.wang/2016/03/13/Fuck_My_29_Years_Life/#disqus_thread" class="article-comment-link">Comments</a>
       
 
-      <a data-url="http://hi.zongquan.wang/2016/03/13/Fuck_My_29_Years_Life/" data-id="cimem53tz001uj4sbyfw3h01f" class="article-share-link">Share</a>
+      <a data-url="http://hi.zongquan.wang/2016/03/13/Fuck_My_29_Years_Life/" data-id="cimrgmuhr001uoqsbwhdrl4iu" class="article-share-link">Share</a>
 
       <div id="article-baidu-share" class="bdsharebuttonbox">
         <a href="#" class="bds_weixin" data-cmd="weixin" title="WeiXin"></a>
@@ -361,9 +311,6 @@ DefaultProperties<span class="class">.AD_HOC_CODE_SIGNING_ALLOWED</span> =&gt; Y
     <div class="article-entry" itemprop="articleBody">
       
         <p>事情是这样的，我的系统是 OS X 10.11，就是那个有 SIP 的 10.11 😂。然后我装了一个 Finder 的插件：XtraFinder，这个插件有些功能在 10.11 下是不 work 的，所以插件作者出于好心，在检测到你的系统是 10.11 且 SIP 没有关闭的情况下，会弹出一个 alert 窗口作为提醒。</p>
-<p><img src="/img/Hack_XtraFinder/alert.png" alt="Alert"></p>
-<p>那么问题来了，作者检测 SIP 是否关闭的方法有个 bug，导致我明明是完全关闭了 SIP，但插件却认为 SIP 还在启用。第二个问题，这个 alert 每次重启插件（包括每次重启系统）时都会弹出来啊，出来啊，来啊，啊，搞得你每次都要去点一下确认才能将其关闭，烦的很 😒。我曾经给作者发邮件，希望他能 update 一下，只弹一次 alert 就好。当然了，作者没有鸟我。</p>
-<p>作为偶尔会用 Hopper Disassembler 偷窥一下别人代码的我，就开始意淫能不能 hack 一下这个插件，改掉这个恶心的行为。</p>
         
           <p class="article-more-link shake shake-rotate">
             <a href="/2016/01/12/Hack_XtraFinder/#more">Read More</a>
@@ -371,12 +318,13 @@ DefaultProperties<span class="class">.AD_HOC_CODE_SIGNING_ALLOWED</span> =&gt; Y
         
       
     </div>
+    
     <footer class="article-footer">
       
         <a href="http://hi.zongquan.wang/2016/01/12/Hack_XtraFinder/#disqus_thread" class="article-comment-link">Comments</a>
       
 
-      <a data-url="http://hi.zongquan.wang/2016/01/12/Hack_XtraFinder/" data-id="cimem53tv001rj4sbtsvmy24g" class="article-share-link">Share</a>
+      <a data-url="http://hi.zongquan.wang/2016/01/12/Hack_XtraFinder/" data-id="cimrgmuhm001roqsbqs37cka4" class="article-share-link">Share</a>
 
       <div id="article-baidu-share" class="bdsharebuttonbox">
         <a href="#" class="bds_weixin" data-cmd="weixin" title="WeiXin"></a>
@@ -430,20 +378,6 @@ DefaultProperties<span class="class">.AD_HOC_CODE_SIGNING_ALLOWED</span> =&gt; Y
       
         <p>假设一个 Project 的路径是 <code>XXX/ProjectX</code>。</p>
 <p>当 build 完成后，我们会关注 2 个与 <strong>Product Files</strong> 有关的 settings ：</p>
-<p><strong><code>$BUILT_PRODUCTS_DIR</code></strong> 和 <strong><code>$TARGET_BUILD_DIR</code></strong></p>
-<p>这 2 个 settings 决定了我们 build 出来的 Products 被放置到了哪里。</p>
-<h4 id="官方解释">官方解释</h4><ul>
-<li><p><strong><code>$BUILT_PRODUCTS_DIR</code></strong>：Directory path. Identifies the directory under which all the product’s files can be found. This directory contains either product files or symbolic links to them.</p>
-</li>
-<li><p><strong><code>$TARGET_BUILD_DIR</code></strong>：Directory path. Identifies the root of the directory hierarchy that contains the product’s files (no intermediate build files).</p>
-</li>
-</ul>
-<p>乍一看好像都是用来存放 <strong>Product Files</strong> 的目录，但是它们的作用是不一样的：</p>
-<p>刚编译完的时候，Xcode 会先把 <strong>Product Files</strong> 生成到 <strong><code>$BUILT_PRODUCTS_DIR</code></strong> 中，然后再根据具体的 configuration 来决定要不要对生成的 <strong>Product Files</strong> 进行 deploy，如果不需要 deploy，那么 <strong>Product Files</strong> 最后还是留在 <strong><code>$BUILT_PRODUCTS_DIR</code></strong> 中，如果需要 deploy，那么 <strong>Product Files</strong> 会被 move 到 <strong><code>$TARGET_BUILD_DIR</code></strong> 中，而原来的 <strong><code>$BUILT_PRODUCTS_DIR</code></strong> 中就只有 symbolic links 了。</p>
-<h4 id="举个例子">举个例子</h4><p>普通的 app 在 build 完之后，一般放置在 <code>$BUILT_PRODUCTS_DIR</code> 中即可，而对于 Xcode Plugin 来说，在 build 完之后一般会直接将其 deploy 到 Xcode 的 <strong>Plug-ins</strong> 目录中，此时 <code>$TARGET_BUILD_DIR</code> 就是 <strong>Plug-ins</strong> 目录，而 <code>$BUILT_PRODUCTS_DIR</code> 中只有 Plugin 的 symbolic links。</p>
-<p><em>可以 clone 一下我之前写的一个<a href="https://github.com/wzqcongcong/AtAutoCompletion">小插件</a>，build 一下看结果。</em></p>
-<hr>
-<h4 id="下面就看一下这_2_个路径是如何设置的">下面就看一下这 2 个路径是如何设置的</h4>
         
           <p class="article-more-link shake shake-rotate">
             <a href="/2015/11/16/Xcode_Build_Settings_Products_Path/#more">Read More</a>
@@ -451,12 +385,13 @@ DefaultProperties<span class="class">.AD_HOC_CODE_SIGNING_ALLOWED</span> =&gt; Y
         
       
     </div>
+    
     <footer class="article-footer">
       
         <a href="http://hi.zongquan.wang/2015/11/16/Xcode_Build_Settings_Products_Path/#disqus_thread" class="article-comment-link">Comments</a>
       
 
-      <a data-url="http://hi.zongquan.wang/2015/11/16/Xcode_Build_Settings_Products_Path/" data-id="cimem53s10002j4sbjk0vhwi1" class="article-share-link">Share</a>
+      <a data-url="http://hi.zongquan.wang/2015/11/16/Xcode_Build_Settings_Products_Path/" data-id="cimrgmug30002oqsbs7zfdqzp" class="article-share-link">Share</a>
 
       <div id="article-baidu-share" class="bdsharebuttonbox">
         <a href="#" class="bds_weixin" data-cmd="weixin" title="WeiXin"></a>
@@ -509,43 +444,6 @@ DefaultProperties<span class="class">.AD_HOC_CODE_SIGNING_ALLOWED</span> =&gt; Y
     <div class="article-entry" itemprop="articleBody">
       
         <h4 id="Mac_File_Attributes">Mac File Attributes</h4><p>在 Mac 开发中，想要获取 file 或者 dir 的属性，有这么4种方式：</p>
-<ul>
-<li><p><strong>Linux C api</strong></p>
-<p>  <code>int lstat(const char *restrict path, struct stat *restrict buf)</code></p>
-<p>  获取到的 stat 有如下属性：</p>
-<pre><code><span class="keyword">struct</span> stat { <span class="comment">/* when _DARWIN_FEATURE_64_BIT_INODE is defined */</span>
-    <span class="keyword">dev_t</span>           st_dev;           <span class="comment">/* ID of device containing file */</span>
-    <span class="keyword">mode_t</span>          st_mode;          <span class="comment">/* Mode of file (see below) */</span>
-    <span class="keyword">nlink_t</span>         st_nlink;         <span class="comment">/* Number of hard links */</span>
-    <span class="keyword">ino_t</span>           st_ino;           <span class="comment">/* File serial number */</span>
-    <span class="keyword">uid_t</span>           st_uid;           <span class="comment">/* User ID of the file */</span>
-    <span class="keyword">gid_t</span>           st_gid;           <span class="comment">/* Group ID of the file */</span>
-    <span class="keyword">dev_t</span>           st_rdev;          <span class="comment">/* Device ID */</span>
-    <span class="keyword">struct</span> timespec st_atimespec;     <span class="comment">/* time of last access */</span>
-    <span class="keyword">struct</span> timespec st_mtimespec;     <span class="comment">/* time of last data modification */</span>
-    <span class="keyword">struct</span> timespec st_ctimespec;     <span class="comment">/* time of last status change */</span>
-    <span class="keyword">struct</span> timespec st_birthtimespec; <span class="comment">/* time of file creation(birth) */</span>
-    <span class="keyword">off_t</span>           st_size;          <span class="comment">/* file size, in bytes */</span>
-    <span class="keyword">blkcnt_t</span>        st_blocks;        <span class="comment">/* blocks allocated for file */</span>
-    <span class="keyword">blksize_t</span>       st_blksize;       <span class="comment">/* optimal blocksize for I/O */</span>
-    <span class="keyword">uint32_t</span>        st_flags;         <span class="comment">/* user defined flags for file */</span>
-    <span class="keyword">uint32_t</span>        st_gen;           <span class="comment">/* file generation number */</span>
-};
-</code></pre></li>
-</ul>
-<ul>
-<li><p><strong>Metadata</strong></p>
-<p>  这种方式是基于 Spotlight 的，优点是在访问大量文件时速度快，缺点是要依赖 Spotlight 功能的开启。当 Spotlight 获取到 item 的 metadata 后，就可以通过下面2种方法来获取这些 metadata：</p>
-<ul>
-<li><p><code>CFTypeRef MDItemCopyAttribute(MDItemRef item, CFStringRef name)</code>，metadata attribute key 格式为 kMDItemXXX，详见文档。</p>
-</li>
-<li><p><code>NSMetadataQuery</code>，通过执行 Spotlight 查询来获取 result，metadata attribute key 格式同上。</p>
-<p><strong>注意</strong>，这种方式是基于 Spotlight 获取到了这些 metadata，否则拿到的值可能就是 NULL 了。</p>
-<p><strong>另外</strong>，在 terminal 中，这种方式也有相应的命令 <code>mdls</code> 可以使用。</p>
-</li>
-</ul>
-</li>
-</ul>
         
           <p class="article-more-link shake shake-rotate">
             <a href="/2015/01/22/How_to_get_File_Attributes_in_Mac/#more">Read More</a>
@@ -553,12 +451,13 @@ DefaultProperties<span class="class">.AD_HOC_CODE_SIGNING_ALLOWED</span> =&gt; Y
         
       
     </div>
+    
     <footer class="article-footer">
       
         <a href="http://hi.zongquan.wang/2015/01/22/How_to_get_File_Attributes_in_Mac/#disqus_thread" class="article-comment-link">Comments</a>
       
 
-      <a data-url="http://hi.zongquan.wang/2015/01/22/How_to_get_File_Attributes_in_Mac/" data-id="cimem53tn001lj4sb7g61t3i9" class="article-share-link">Share</a>
+      <a data-url="http://hi.zongquan.wang/2015/01/22/How_to_get_File_Attributes_in_Mac/" data-id="cimrgmuhh001loqsbcumfsf0t" class="article-share-link">Share</a>
 
       <div id="article-baidu-share" class="bdsharebuttonbox">
         <a href="#" class="bds_weixin" data-cmd="weixin" title="WeiXin"></a>
@@ -696,15 +595,6 @@ DefaultProperties<span class="class">.AD_HOC_CODE_SIGNING_ALLOWED</span> =&gt; Y
     <h3 class="widget-title">tags</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac/">Mac</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Thinking/">Thinking</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Xcode/">Xcode</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS/">iOS</a><span class="tag-list-count">13</span></li></ul>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">tag cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/Mac/" style="font-size: 16.67px;">Mac</a> <a href="/tags/Thinking/" style="font-size: 10px;">Thinking</a> <a href="/tags/Xcode/" style="font-size: 13.33px;">Xcode</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a>
     </div>
   </div>
 

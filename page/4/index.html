@@ -179,23 +179,6 @@ ga('send', 'pageview');
     <div class="article-entry" itemprop="articleBody">
       
         <h3 id="Developing_Applications_for_iOS_观后感系列：Misc">Developing Applications for iOS 观后感系列：Misc</h3><p><em>相关视频章节：all</em></p>
-<hr>
-<h4 id="NSObject">NSObject</h4><ul>
-<li><p><code>(NSString *)description</code>：当你自己实现一个 myClass 时，如果实现了 <code>(NSString *)description</code> 这个函数，那么你就可以利用 <code>NSLog(@&quot;%@&quot;, myClassInstance)</code> 来输出 description 的内容了，这里的 <em><code>%@</code></em> 会被替换成 <code>[myClassInstance description]</code>。</p>
-</li>
-<li><p><code>(id)copy</code>：得到 object 的 unmutable 版，不管 object 本身是不是 mutable 的。</p>
-</li>
-<li><p><code>(id)mutableCopy</code>：得到 object 的 mutable 版，不管 object 本身是不是 mutable 的。</p>
-<p>  <strong>注意</strong>，并不是所有的 class 都实现了 copy 和 mutableCopy 机制，如果没有实现，而你调用了，就会抛出异常。另外，这2种 copy 操作效率很高，所以不要有所担心。</p>
-</li>
-</ul>
-<h4 id="UIFont">UIFont</h4><ul>
-<li><p>给文本内容（content）设定字体的最佳方式：<code>UIFont *font = [UIFont preferredFontForTextStyle:UIFontTextStyleXXX]</code></p>
-</li>
-<li><p>给控件（例如 button 的 title）设定字体的最佳方式：<code>UIFont *font = [UIFont systemFontOfSize:(CGFloat)pointSize]</code></p>
-<p>  <strong>注意</strong>，preferredFontForTextStyle: 也可以用于设定控件字体，但反过来 systemFontOfSize: 却不能用于设定 content 字体。</p>
-</li>
-</ul>
         
           <p class="article-more-link shake shake-rotate">
             <a href="/2015/01/05/Study_iOS_Misc/#more">Read More</a>
@@ -203,12 +186,13 @@ ga('send', 'pageview');
         
       
     </div>
+    
     <footer class="article-footer">
       
         <a href="http://hi.zongquan.wang/2015/01/05/Study_iOS_Misc/#disqus_thread" class="article-comment-link">Comments</a>
       
 
-      <a data-url="http://hi.zongquan.wang/2015/01/05/Study_iOS_Misc/" data-id="cimem53sw000uj4sbg97to7hw" class="article-share-link">Share</a>
+      <a data-url="http://hi.zongquan.wang/2015/01/05/Study_iOS_Misc/" data-id="cimrgmugt000uoqsbypkj8qq1" class="article-share-link">Share</a>
 
       <div id="article-baidu-share" class="bdsharebuttonbox">
         <a href="#" class="bds_weixin" data-cmd="weixin" title="WeiXin"></a>
@@ -261,27 +245,6 @@ ga('send', 'pageview');
     <div class="article-entry" itemprop="articleBody">
       
         <h3 id="Developing_Applications_for_iOS_观后感系列：Life_Cycle">Developing Applications for iOS 观后感系列：Life Cycle</h3><p><em>相关视频章节：5，17</em></p>
-<hr>
-<p>这里提到的 Life Cycle 主要包括2方面：</p>
-<ul>
-<li><p>Application 的 Life Cycle</p>
-</li>
-<li><p>UIViewController 的 Life Cycle</p>
-</li>
-</ul>
-<h3 id="Application_的_Life_Cycle">Application 的 Life Cycle</h3><p>Application 的 Life Cycle 是靠一些 <em><code>UIApplicationDelegate</code></em> 函数来控制的。</p>
-<p>新建一个 iOS 项目的时候，在 Xcode 生成的 AppDelegate.m 中，已经列出了常用的几个 delegate 函数：</p>
-<ul>
-<li><p><code>(BOOL)application:(UIApplication *)application willFinishLaunchingWithOptions:(NSDictionary *)launchOptions</code>：app 即将完成启动。诸如响应 openURL 这样的事情，需要在这里做，在 app 彻底启动完毕之前，从 launchOptions 中拿到 URL。</p>
-</li>
-<li><p><code>(BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions</code>：app 彻底启动完毕。这里一般做 app 的初始化操作。</p>
-</li>
-<li><p><code>(void)applicationDidBecomeActive:(UIApplication *)application</code>：app 变得 active，也就是说，app 的 UI 可以接收 events 了。这通常是发生在 app 启动后出现 UI 的时候，或者从其它 app 切换而来的时候。伴随该 delegate 有一个 notification <em><code>UIApplicationDidBecomeActiveNotification</code></em>。</p>
-</li>
-<li><p><code>(void)applicationWillResignActive:(UIApplication *)application</code>：app 变得 not active，也就是说，app 的 UI 无法接收 events 了。这通常是发生在切换到其它 app 的时候，或者双击 Home 的时候，或者接听电话的时候。总之就是，该 app 的 UI 已经不再是 iOS 的 first responder UI 了。伴随该 delegate 有一个 notification <em><code>UIApplicationWillResignActiveNotification</code></em>。</p>
-<p>  通常利用以上2个 delegate，来暂停并保存当前 UI 状态，然后在之后重新恢复 UI 状态。</p>
-</li>
-</ul>
         
           <p class="article-more-link shake shake-rotate">
             <a href="/2015/01/05/Study_iOS_Life_Cycle/#more">Read More</a>
@@ -289,12 +252,13 @@ ga('send', 'pageview');
         
       
     </div>
+    
     <footer class="article-footer">
       
         <a href="http://hi.zongquan.wang/2015/01/05/Study_iOS_Life_Cycle/#disqus_thread" class="article-comment-link">Comments</a>
       
 
-      <a data-url="http://hi.zongquan.wang/2015/01/05/Study_iOS_Life_Cycle/" data-id="cimem53t10010j4sb75ue17ht" class="article-share-link">Share</a>
+      <a data-url="http://hi.zongquan.wang/2015/01/05/Study_iOS_Life_Cycle/" data-id="cimrgmuh00010oqsbb84f4u0b" class="article-share-link">Share</a>
 
       <div id="article-baidu-share" class="bdsharebuttonbox">
         <a href="#" class="bds_weixin" data-cmd="weixin" title="WeiXin"></a>
@@ -346,30 +310,21 @@ ga('send', 'pageview');
     
     <div class="article-entry" itemprop="articleBody">
       
-                
         <p>iOS学习起步阶段，抽空看完了 Stanford 老头的 Developing Applications for iOS 系列视频，挺不错的，浅显易懂。打算把“观后感”做成笔记，挑些重要的点，理一理，省得以后还要重新看整个教程的文档。</p>
-<h3 id="Developing_Applications_for_iOS_观后感系列：MVC_设计模式">Developing Applications for iOS 观后感系列：MVC 设计模式</h3><p><em>相关视频章节：1</em></p>
-<hr>
-<p>先上图！</p>
-<p><img src="/img/Study_iOS_MVC/1.0.MVC.png" alt="MVC"></p>
-<p>这幅图描述的是单一的 <strong><code>MVC</code></strong> 模式。普通的 iOS 开发就靠这个 MVC 模式走遍天下了。（有牛人开创了个 <a href="https://github.com/ReactiveCocoa/ReactiveCocoa" target="_blank" rel="external">ReactiveCocoa 模式</a>）</p>
-<h4 id="理解一下_MVC_模式：">理解一下 MVC 模式：</h4><ol>
-<li>V 和 M 永远也不能在一起，无法做直接通信。C -&gt; M 存在单向的直接通信。C -&gt; V 存在单向的直接通信。也就是说，C 永远是老大，它负责吩咐 V 和 M 办事，而且不受 V 和 M 的直接影响。</li>
-<li>通过将 V 设置成 C 的 <em><code>outlet</code></em> <em>(Control Drag)</em>，可以实现 C 对 V 的直接通信，即 C -&gt; V。而 V –&gt; C 的间接通信方式包括2种：<em><code>target-action</code></em> 以及 <em><code>delegate（data source 也可以理解成 delegate）</code></em>。</li>
-<li>C -&gt; M 是理所当然的。而 M –&gt; C 的间接通信是通过 <em><code>Notification &amp; KVO</code></em> 实现的。</li>
-</ol>
-<p>基于单个的 MVC，我们可以构建复杂的多 MVC。</p>
-<p><img src="/img/Study_iOS_MVC/1.1.MVCs.png" alt="MVCs"></p>
-<p><strong>但不管多复杂，总是坚持这个原则</strong>：一个 MVC 是作为另一个 MVC 的 V 部分而存在的，也就是说，父 MVC 中的 C 控制的是子 MVC 中的 C，而不是直接去干预子 MVC 中的 V。当然，多个 MVC 是可以共享同一个 M 的，毕竟 Notification 是广播性质的，可以有多个 Observer。</p>
-
+        
+          <p class="article-more-link shake shake-rotate">
+            <a href="/2015/01/05/Study_iOS_MVC/#more">Read More</a>
+          </p>
+        
       
     </div>
+    
     <footer class="article-footer">
       
         <a href="http://hi.zongquan.wang/2015/01/05/Study_iOS_MVC/#disqus_thread" class="article-comment-link">Comments</a>
       
 
-      <a data-url="http://hi.zongquan.wang/2015/01/05/Study_iOS_MVC/" data-id="cimem53sy000xj4sbtjbo1nb7" class="article-share-link">Share</a>
+      <a data-url="http://hi.zongquan.wang/2015/01/05/Study_iOS_MVC/" data-id="cimrgmugx000xoqsbteaz9yi5" class="article-share-link">Share</a>
 
       <div id="article-baidu-share" class="bdsharebuttonbox">
         <a href="#" class="bds_weixin" data-cmd="weixin" title="WeiXin"></a>
@@ -423,26 +378,6 @@ ga('send', 'pageview');
       
         <p>大爱 <em><code>Block</code></em>，方便易用，但是，有些坑还是需要认真对待的~~</p>
 <p>其实问题主要是关于内存管理的。</p>
-<h4 id="1-_捕获闭包的状态">1. 捕获闭包的状态</h4><p>一切问题的起源：<em><code>Block</code></em> 除了包含一段可执行代码，更重要的是，它还会捕获（<em><code>capture</code></em>）其闭包内的状态。</p>
-<p>例（1）：</p>
-<pre><code>- (<span class="keyword">void</span>)testMethod {
-    <span class="keyword">int</span> a = <span class="number">1</span>;
-    <span class="keyword">void</span> (^testBlock)(<span class="keyword">void</span>) = ^{
-        NSLog(@<span class="string">"Integer is: %i"</span>, a);
-    };
-    a = <span class="number">2</span>;
-    testBlock(); <span class="comment">// output is still 1.</span>
-}
-</code></pre><p>在定义 testBlock 时，它会捕获 a 的<strong>类型、值以及修饰符</strong>。但是，捕获只意味着对 a 做了一次<strong>快照</strong>，而并不是真正地拥有 a。也就是说，在定义 testBlock 的时候，外界 a 的值是多少，它捕获进来的值就是多少。外界对 a 值的修改不会影响到 testBlock，同样 testBlock 内部对 a 值的修改也不会影响到外界。</p>
-<p><strong>注意</strong>：</p>
-<ul>
-<li><p>捕获闭包的状态是发生在 <em><code>Block</code></em> 定义的时候！而不是 <em><code>Block</code></em> 真正 run 的时候！</p>
-</li>
-<li><p>捕获的是<strong>类型 + 值 + 修饰符</strong>，而不单单是值！</p>
-</li>
-<li><p>对于标量来说，因为 <em><code>Block</code></em> 只是捕获了该变量的值，当然是无法对其进行有效地修改。而对于对象指针来说，捕获进来的是指针的值，无法修改指针的值表示不能让该指针指向另一个对象，但这不影响 <em><code>Block</code></em> 对该指针所指的对象进行操作。例如，如果例（1）中的 a 换成一个数组指针，在 <em><code>Block</code></em> 内部我们是可以做类似于 <code>[a addObject:]</code> 这种操作的，外界可以看到对指针所指对象的修改。前提是我们要在 <em><code>Block</code></em> 定义之前就要给 a 所指的对象分配好内存，即在外界 <code>NSMutableArray *a = [[NSMutableArray alloc] init]</code>，之后在 <em><code>Block</code></em> 内部就可以任意修改该对象了，而不是修改该对象的指针。</p>
-</li>
-</ul>
         
           <p class="article-more-link shake shake-rotate">
             <a href="/2014/12/03/Just_a_little_tips_about_Block/#more">Read More</a>
@@ -450,12 +385,13 @@ ga('send', 'pageview');
         
       
     </div>
+    
     <footer class="article-footer">
       
         <a href="http://hi.zongquan.wang/2014/12/03/Just_a_little_tips_about_Block/#disqus_thread" class="article-comment-link">Comments</a>
       
 
-      <a data-url="http://hi.zongquan.wang/2014/12/03/Just_a_little_tips_about_Block/" data-id="cimem53tg001fj4sbbatpxb82" class="article-share-link">Share</a>
+      <a data-url="http://hi.zongquan.wang/2014/12/03/Just_a_little_tips_about_Block/" data-id="cimrgmuhc001foqsbli1mky1b" class="article-share-link">Share</a>
 
       <div id="article-baidu-share" class="bdsharebuttonbox">
         <a href="#" class="bds_weixin" data-cmd="weixin" title="WeiXin"></a>
@@ -508,17 +444,6 @@ ga('send', 'pageview');
     <div class="article-entry" itemprop="articleBody">
       
         <p>在 Mac 中，进程间的通信机制，除了 <em><code>NSDistributedNotification</code></em>、<em><code>Distributed Objects</code></em>，还有 XPC。XPC 可以在同一个 app 的不同 bundle 间使用，也可以在不同的 app 间使用。</p>
-<p>XPC 机制是通过 <em><code>NSXPCConnection</code></em> 作为 channel 来通信的，每个 <em><code>NSXPCConnection</code></em> 有 <em>Client</em> 和 <em>Listener</em> 两个 endpoint。</p>
-<h3 id="1-_XPC_角色">1. XPC 角色</h3><h4 id="Listener">Listener</h4><p>通过 <em><code>NSXPCListener</code></em> API 来创建 Listener，并指定该 Listener 的 <em><code>NSXPCListenerDelegate</code></em>，该 delegate 需要实现的函数是 <em><code>(BOOL)listener:shouldAcceptNewConnection:</code></em>。该 delegate 函数用于决定是否响应新的 connection，并设置该 connection 的 <em><code>exportedInterface</code></em> 和 <em><code>exportedObject</code></em>。</p>
-<ul>
-<li><p><em><code>exportedObject</code></em>：Listener 的导出对象，提供接口供 Client 访问。</p>
-</li>
-<li><p><em><code>exportedInterface</code></em>：列举出 <em><code>exportedObject</code></em> 能够导出哪些可用的接口供 Client 调用，函数原型通常是：<em>`(void)doTaskWithInfo:(NSDictionary </em>)info callback:(void(^)(NSDictionary <em>dic))callback`</em>。</p>
-</li>
-</ul>
-<h4 id="Client">Client</h4><p>Client 通过 <em><code>NSXPCConnection</code></em> API 来创建一个新的 connection，并指定该 connection 的 <em><code>remoteObjectInterface</code></em>，它代表 Listener 端的 <em><code>exportedInterface</code></em>。然后就可以通过 <em><code>remoteObjectProxyWithErrorHandler:</code></em> 来获取 Listener 端的 <em><code>exportedObject</code></em>，调用其导出的接口。Listener 在执行自己的导出函数时，可以通过调用传递进来的 callback 向 Client 端 send back 数据。</p>
-<h4 id="NSXPCConnection">NSXPCConnection</h4><p><em><code>NSXPCConnection</code></em> 的发起是单向的，只能由 Client 端到 Listener 端，因为每一个发起的 connection 必须要由 Listener 端通过 <em><code>NSXPCListenerDelegate</code></em> 函数来决定是否要进行响应。但 Client 和 Listener 都可以有自己的 <em><code>exportedObject</code></em> 和 <em><code>remoteObjectProxy</code></em>，在 connect 之后可以相互访问对方，一方的 <em><code>exportedObject</code></em> 对应另一方的 <em><code>remoteObjectProxy</code></em>。参见 Apple 文档中的图示。</p>
-<p><strong>注意</strong>：不管是 Client 还是 Listener，设置自己的 <em><code>exportedObject</code></em> 和 <em><code>remoteObjectProxy</code></em> 必须要先于调用 <em><code>resume</code></em>。</p>
         
           <p class="article-more-link shake shake-rotate">
             <a href="/2014/11/28/XPC_mechanism_of_Mac/#more">Read More</a>
@@ -526,12 +451,13 @@ ga('send', 'pageview');
         
       
     </div>
+    
     <footer class="article-footer">
       
         <a href="http://hi.zongquan.wang/2014/11/28/XPC_mechanism_of_Mac/#disqus_thread" class="article-comment-link">Comments</a>
       
 
-      <a data-url="http://hi.zongquan.wang/2014/11/28/XPC_mechanism_of_Mac/" data-id="cimem53sd0007j4sbmjvqwkf6" class="article-share-link">Share</a>
+      <a data-url="http://hi.zongquan.wang/2014/11/28/XPC_mechanism_of_Mac/" data-id="cimrgmugd0007oqsbsq9xywn7" class="article-share-link">Share</a>
 
       <div id="article-baidu-share" class="bdsharebuttonbox">
         <a href="#" class="bds_weixin" data-cmd="weixin" title="WeiXin"></a>
@@ -669,15 +595,6 @@ ga('send', 'pageview');
     <h3 class="widget-title">tags</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac/">Mac</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Thinking/">Thinking</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Xcode/">Xcode</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS/">iOS</a><span class="tag-list-count">13</span></li></ul>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">tag cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/Mac/" style="font-size: 16.67px;">Mac</a> <a href="/tags/Thinking/" style="font-size: 10px;">Thinking</a> <a href="/tags/Xcode/" style="font-size: 13.33px;">Xcode</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a>
     </div>
   </div>
 

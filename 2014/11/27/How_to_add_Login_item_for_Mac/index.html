@@ -5,22 +5,16 @@
   
   <title>How to add Login item for Mac | 闷骚的悟空</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="在 Mac OS 中，有许多机制可以用于添加 Login item，不同的 Login item 类型需要用不同的方式来添加，每种方式都有自己的工作流程，应用范围，以及最终的表现效果。
-从开发者的角度来看，可以分成两大类，一类是在代码中通过调用 Mac 的 API 来添加，由 Mac 来自动管理 Login item；另一类是开发者直接拿 File System 开刀，手动控制。
-类型 11. S">
+  <meta name="description" content="在 Mac OS 中，有许多机制可以用于添加 Login item，不同的 Login item 类型需要用不同的方式来添加，每种方式都有自己的工作流程，应用范围，以及最终的表现效果。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="How to add Login item for Mac">
 <meta property="og:url" content="http://hi.zongquan.wang/2014/11/27/How_to_add_Login_item_for_Mac/index.html">
 <meta property="og:site_name" content="闷骚的悟空">
-<meta property="og:description" content="在 Mac OS 中，有许多机制可以用于添加 Login item，不同的 Login item 类型需要用不同的方式来添加，每种方式都有自己的工作流程，应用范围，以及最终的表现效果。
-从开发者的角度来看，可以分成两大类，一类是在代码中通过调用 Mac 的 API 来添加，由 Mac 来自动管理 Login item；另一类是开发者直接拿 File System 开刀，手动控制。
-类型 11. S">
-<meta property="og:updated_time" content="2015-11-10T02:03:41.000Z">
+<meta property="og:description" content="在 Mac OS 中，有许多机制可以用于添加 Login item，不同的 Login item 类型需要用不同的方式来添加，每种方式都有自己的工作流程，应用范围，以及最终的表现效果。">
+<meta property="og:updated_time" content="2016-04-08T01:23:43.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="How to add Login item for Mac">
-<meta name="twitter:description" content="在 Mac OS 中，有许多机制可以用于添加 Login item，不同的 Login item 类型需要用不同的方式来添加，每种方式都有自己的工作流程，应用范围，以及最终的表现效果。
-从开发者的角度来看，可以分成两大类，一类是在代码中通过调用 Mac 的 API 来添加，由 Mac 来自动管理 Login item；另一类是开发者直接拿 File System 开刀，手动控制。
-类型 11. S">
+<meta name="twitter:description" content="在 Mac OS 中，有许多机制可以用于添加 Login item，不同的 Login item 类型需要用不同的方式来添加，每种方式都有自己的工作流程，应用范围，以及最终的表现效果。">
   
   
     <link rel="icon" href="/favicon.ico">
@@ -186,6 +180,7 @@ ga('send', 'pageview');
       
                 
         <p>在 Mac OS 中，有许多机制可以用于添加 Login item，不同的 Login item 类型需要用不同的方式来添加，每种方式都有自己的工作流程，应用范围，以及最终的表现效果。</p>
+<a id="more"></a>
 <p>从开发者的角度来看，可以分成两大类，<strong>一类</strong>是在代码中通过调用 Mac 的 API 来添加，由 Mac 来自动管理 Login item；<strong>另一类</strong>是开发者直接拿 File System 开刀，手动控制。</p>
 <h2 id="类型_1">类型 1</h2><h3 id="1-_Service_Management_framework">1. Service Management framework</h3><ul>
 <li><p><strong>API</strong>: <strong><code>SMLoginItemSetEnabled</code></strong></p>
@@ -200,7 +195,6 @@ ga('send', 'pageview');
 <li><p><strong>e.g.</strong> <a href="https://github.com/wzqcongcong/MyDiskCleaner" target="_blank" rel="external">MyDiskCleaner</a></p>
 </li>
 </ul>
-<a id="more"></a>
 <h3 id="2-_SMJobBless">2. SMJobBless</h3><ul>
 <li><p><strong>API</strong>: <strong><code>AuthorizationCreate</code> <code>SMJobBless</code></strong></p>
 </li>
@@ -229,17 +223,44 @@ ga('send', 'pageview');
 <li>/Library/LaunchDaemons    （root 权限，系统级别）</li>
 </ul>
 <hr>
-<pre><code>对于 non Sandbox app 来说，上述<span class="number">4</span>种方法都是可行的。
-对于 Sandbox app 来说，方法<span class="number">1</span>适用，方法<span class="number">4</span>写入 *`~/Library/LaunchAgents`* 也适用，其它方法不适用。
-</code></pre>
+<p>总结：</p>
+<p>对于 non Sandbox app 来说，上述4种方法都是可行的。<br>对于 Sandbox app 来说，方法1适用，方法4写入 <em><code>~/Library/LaunchAgents</code></em> 也适用，其它方法不适用。</p>
+
       
     </div>
+    
+      <div class ="post-donate">
+    <div id="donate_tip" class="donate_tip center">
+        <a id="btn_donate" class="btn_donate" href="javascript:;"></a>
+        <span class="donate_tip_txt">
+		   打赏
+        </span>
+        <br>
+      </div>
+	<div id="donate_guide" class="donate_tip center hidden">
+		<div class="donate_item">
+			<span class="donate_item_txt" style="color:#1dabec">支付宝打赏</span>
+			<img src="/img/zhifubaoV2.png" alt="支付宝打赏">
+		</div>
+		<div class="donate_item">
+			<span class="donate_item_txt" style="color:#22cf28">微信打赏</span>
+			<img src="/img/weixinV2.png" alt="微信打赏">
+		</div>
+    </div>
+	<script type="text/javascript">
+		document.getElementById('btn_donate').onclick = function(){
+			$('#donate_tip').addClass('hidden');
+			$('#donate_guide').removeClass('hidden');
+		}
+	</script>
+</div>
+    
     <footer class="article-footer">
       
         <a href="http://hi.zongquan.wang/2014/11/27/How_to_add_Login_item_for_Mac/#disqus_thread" class="article-comment-link">Comments</a>
       
 
-      <a data-url="http://hi.zongquan.wang/2014/11/27/How_to_add_Login_item_for_Mac/" data-id="cimem53tr001oj4sbc1aq26jy" class="article-share-link">Share</a>
+      <a data-url="http://hi.zongquan.wang/2014/11/27/How_to_add_Login_item_for_Mac/" data-id="cimrgmuhj001ooqsbmxb9vrrn" class="article-share-link">Share</a>
 
       <div id="article-baidu-share" class="bdsharebuttonbox">
         <a href="#" class="bds_weixin" data-cmd="weixin" title="WeiXin"></a>
@@ -395,15 +416,6 @@ ga('send', 'pageview');
     <h3 class="widget-title">tags</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac/">Mac</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Thinking/">Thinking</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Xcode/">Xcode</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS/">iOS</a><span class="tag-list-count">13</span></li></ul>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">tag cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/Mac/" style="font-size: 16.67px;">Mac</a> <a href="/tags/Thinking/" style="font-size: 10px;">Thinking</a> <a href="/tags/Xcode/" style="font-size: 13.33px;">Xcode</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a>
     </div>
   </div>
 

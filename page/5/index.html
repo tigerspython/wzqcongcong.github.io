@@ -179,11 +179,6 @@ ga('send', 'pageview');
     <div class="article-entry" itemprop="articleBody">
       
         <p>由于 Mac 对 Sandbox 的种种限制，使得 Sandb app 间的通信方式与普通 non Sandbox app 间的通信方式有所不同，普通的通信方式，如 <em><code>NSDistributedNotification</code></em>、<em><code>Distributed Objects</code></em>、 <em><code>XPC</code></em> 等不能直接套用到 Sandbox 机制上。</p>
-<p>Mac 引入了 <em><code>Sandbox App Group</code></em> 的机制，使得同属于一个 app group 的不同 app 间有了合适的通信方式。</p>
-<h3 id="Sandbox_App_Group_是什么">Sandbox App Group 是什么</h3><p>Sandbox App Group 表示由同一个 Developer ID 签名的 app group。每个 Developer ID 可以签名多个 Sandbox App Group，每个 Sandbox App Group 可以包含若干个 Sandbox app。</p>
-<p>如果想要声明一个 Sandbox app 属于某个 Sandbox App Group，需要在该 app 的 <em><code>.entitlements</code></em> 中添加一个 <em><code>com.apple.security.application-groups</code></em> array，它的每个元素表示该 app 属于的某个 Sandbox app group，用 Group Bundle ID 表示。</p>
-<p><strong><code>Group Bundle ID</code></strong> := <Team-ID>.com.company.XXX，<Team-ID> 其实也可以不用，但 Apple 的标准用法是以 <Team-ID> 作为 Group Bundle ID 的 prefix。</p>
-<p>每个 Sandbox App Group 会在 <em><code>~/Library/Group Containers</code></em> 下生成一个对应的目录，以 Group Bundle ID 命名。该目录的结构与 Sandbox app 的 Container 目录结构相同。该目录可以被属于该 group 的所有 Sandbox app 访问，没有限制。访问该目录的方法是调用 <em><code>[[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:]</code></em>。</p>
         
           <p class="article-more-link shake shake-rotate">
             <a href="/2014/11/28/Communications_between_sandbox_apps_in_Mac/#more">Read More</a>
@@ -191,12 +186,13 @@ ga('send', 'pageview');
         
       
     </div>
+    
     <footer class="article-footer">
       
         <a href="http://hi.zongquan.wang/2014/11/28/Communications_between_sandbox_apps_in_Mac/#disqus_thread" class="article-comment-link">Comments</a>
       
 
-      <a data-url="http://hi.zongquan.wang/2014/11/28/Communications_between_sandbox_apps_in_Mac/" data-id="cimem53u1001zj4sb4rjbd7hi" class="article-share-link">Share</a>
+      <a data-url="http://hi.zongquan.wang/2014/11/28/Communications_between_sandbox_apps_in_Mac/" data-id="cimrgmuht001zoqsbrfie6yka" class="article-share-link">Share</a>
 
       <div id="article-baidu-share" class="bdsharebuttonbox">
         <a href="#" class="bds_weixin" data-cmd="weixin" title="WeiXin"></a>
@@ -249,20 +245,6 @@ ga('send', 'pageview');
     <div class="article-entry" itemprop="articleBody">
       
         <p>在 Mac OS 中，有许多机制可以用于添加 Login item，不同的 Login item 类型需要用不同的方式来添加，每种方式都有自己的工作流程，应用范围，以及最终的表现效果。</p>
-<p>从开发者的角度来看，可以分成两大类，<strong>一类</strong>是在代码中通过调用 Mac 的 API 来添加，由 Mac 来自动管理 Login item；<strong>另一类</strong>是开发者直接拿 File System 开刀，手动控制。</p>
-<h2 id="类型_1">类型 1</h2><h3 id="1-_Service_Management_framework">1. Service Management framework</h3><ul>
-<li><p><strong>API</strong>: <strong><code>SMLoginItemSetEnabled</code></strong></p>
-</li>
-<li><p><strong>How</strong>: main app 的 <em><code>Contents/Library/LoginItems</code></em> 目录下包含一个 helper app，该 helper app 将作为 Login item 由 Mac 启动。</p>
-<p>  也就是说，main app 的 Build Phases 中需要添加一个 Copy Files 阶段，将 helper app deploy 到自己的上述目录下，然后，在 main app 的代码中，通过调用 <em><code>SMLoginItemSetEnabled:YES</code></em> 将 helper app 启动，同时设置成 Login item。同样，禁用该 helper app 也是由 main app 在代码中控制，调用 <em><code>SMLoginItemSetEnabled:NO</code></em> 来实现，将会杀掉 helper app，并取消 Login item。</p>
-<p>  main app 会传递给 <em><code>SMLoginItemSetEnabled</code></em> 需要启动的 helper app 的 Bundle ID，然后该 API 就会在 <em><code>Contents/Library/LoginItems</code></em> 中寻找该 helper app，执行相应的动作。</p>
-<p>  <strong>注意</strong>：helper app 的 <code>Info.plist</code> 中需要设置 <em><code>LSUIElement</code></em> 或者 <em><code>LSBackgroundOnly</code></em> 。</p>
-</li>
-<li><p>该方法添加的 Login item 对用户是不可见的，在 System Preference 中也看不到。</p>
-</li>
-<li><p><strong>e.g.</strong> <a href="https://github.com/wzqcongcong/MyDiskCleaner">MyDiskCleaner</a></p>
-</li>
-</ul>
         
           <p class="article-more-link shake shake-rotate">
             <a href="/2014/11/27/How_to_add_Login_item_for_Mac/#more">Read More</a>
@@ -270,12 +252,13 @@ ga('send', 'pageview');
         
       
     </div>
+    
     <footer class="article-footer">
       
         <a href="http://hi.zongquan.wang/2014/11/27/How_to_add_Login_item_for_Mac/#disqus_thread" class="article-comment-link">Comments</a>
       
 
-      <a data-url="http://hi.zongquan.wang/2014/11/27/How_to_add_Login_item_for_Mac/" data-id="cimem53tr001oj4sbc1aq26jy" class="article-share-link">Share</a>
+      <a data-url="http://hi.zongquan.wang/2014/11/27/How_to_add_Login_item_for_Mac/" data-id="cimrgmuhj001ooqsbmxb9vrrn" class="article-share-link">Share</a>
 
       <div id="article-baidu-share" class="bdsharebuttonbox">
         <a href="#" class="bds_weixin" data-cmd="weixin" title="WeiXin"></a>
@@ -413,15 +396,6 @@ ga('send', 'pageview');
     <h3 class="widget-title">tags</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac/">Mac</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Thinking/">Thinking</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Xcode/">Xcode</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS/">iOS</a><span class="tag-list-count">13</span></li></ul>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">tag cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/Mac/" style="font-size: 16.67px;">Mac</a> <a href="/tags/Thinking/" style="font-size: 10px;">Thinking</a> <a href="/tags/Xcode/" style="font-size: 13.33px;">Xcode</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a>
     </div>
   </div>
 

@@ -5,44 +5,17 @@
   
   <title>Study iOS - Life Cycle | 闷骚的悟空</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Developing Applications for iOS 观后感系列：Life Cycle相关视频章节：5，17
-
-这里提到的 Life Cycle 主要包括2方面：
-
-Application 的 Life Cycle
-
-UIViewController 的 Life Cycle
-
-
-Application 的 Life CycleApplication 的 Life Cycle 是靠一些">
+  <meta name="description" content="Developing Applications for iOS 观后感系列：Life Cycle相关视频章节：5，17">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Study iOS - Life Cycle">
 <meta property="og:url" content="http://hi.zongquan.wang/2015/01/05/Study_iOS_Life_Cycle/index.html">
 <meta property="og:site_name" content="闷骚的悟空">
-<meta property="og:description" content="Developing Applications for iOS 观后感系列：Life Cycle相关视频章节：5，17
-
-这里提到的 Life Cycle 主要包括2方面：
-
-Application 的 Life Cycle
-
-UIViewController 的 Life Cycle
-
-
-Application 的 Life CycleApplication 的 Life Cycle 是靠一些">
+<meta property="og:description" content="Developing Applications for iOS 观后感系列：Life Cycle相关视频章节：5，17">
 <meta property="og:image" content="http://hi.zongquan.wang/img/Study_iOS_Life_Cycle/17.0.ApplicationLifeCycle.png">
-<meta property="og:updated_time" content="2015-11-10T02:03:41.000Z">
+<meta property="og:updated_time" content="2016-04-08T01:23:43.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Study iOS - Life Cycle">
-<meta name="twitter:description" content="Developing Applications for iOS 观后感系列：Life Cycle相关视频章节：5，17
-
-这里提到的 Life Cycle 主要包括2方面：
-
-Application 的 Life Cycle
-
-UIViewController 的 Life Cycle
-
-
-Application 的 Life CycleApplication 的 Life Cycle 是靠一些">
+<meta name="twitter:description" content="Developing Applications for iOS 观后感系列：Life Cycle相关视频章节：5，17">
   
   
     <link rel="icon" href="/favicon.ico">
@@ -208,6 +181,7 @@ ga('send', 'pageview');
       
                 
         <h3 id="Developing_Applications_for_iOS_观后感系列：Life_Cycle">Developing Applications for iOS 观后感系列：Life Cycle</h3><p><em>相关视频章节：5，17</em></p>
+<a id="more"></a>
 <hr>
 <p>这里提到的 Life Cycle 主要包括2方面：</p>
 <ul>
@@ -228,9 +202,6 @@ ga('send', 'pageview');
 <li><p><code>(void)applicationWillResignActive:(UIApplication *)application</code>：app 变得 not active，也就是说，app 的 UI 无法接收 events 了。这通常是发生在切换到其它 app 的时候，或者双击 Home 的时候，或者接听电话的时候。总之就是，该 app 的 UI 已经不再是 iOS 的 first responder UI 了。伴随该 delegate 有一个 notification <em><code>UIApplicationWillResignActiveNotification</code></em>。</p>
 <p>  通常利用以上2个 delegate，来暂停并保存当前 UI 状态，然后在之后重新恢复 UI 状态。</p>
 </li>
-</ul>
-<a id="more"></a>
-<ul>
 <li><p><code>(void)applicationDidEnterBackground:(UIApplication *)application</code>：app 进入 background。<strong>注意</strong>，当发生 applicationWillResignActive 后，并不一定会发生 applicationDidEnterBackground，例如，运行该 app 时突然双击 Home 或者接听电话，此时，只会发生applicationWillResignActive。只有等到该 app 进入 background 后，例如已经切换到其它 app 后，才会发生 applicationDidEnterBackground。<strong>此外</strong>，iOS 留给该 delegate 的运行时间很短，如果想在这里做些费时的操作，可以借助 <em><code>beginBackgroundTaskWithExpirationHandler:</code></em>。伴随该 delegate 有一个 notification <em><code>UIApplicationDidEnterBackgroundNotification</code></em>。</p>
 </li>
 <li><p><code>(void)applicationWillEnterForeground:(UIApplication *)application</code>：app 即将重新回到 foreground。通常做些 undo applicationDidEnterBackground 的操作。applicationWillEnterForeground 发生之后，很快就会发生 applicationDidBecomeActive。<strong>但注意</strong>，app 启动的时候，并没有 applicationWillEnterForeground，而是直接 applicationDidBecomeActive。所以要理解前面提到的“重新”二字，app 启动时并不是重新，只有发生 applicationDidEnterBackground 后，才对应地有“重新”的意思。伴随该 delegate 有一个 notification <em><code>UIApplicationWillEnterForegroundNotification</code></em>。</p>
@@ -291,12 +262,39 @@ ga('send', 'pageview');
 
       
     </div>
+    
+      <div class ="post-donate">
+    <div id="donate_tip" class="donate_tip center">
+        <a id="btn_donate" class="btn_donate" href="javascript:;"></a>
+        <span class="donate_tip_txt">
+		   打赏
+        </span>
+        <br>
+      </div>
+	<div id="donate_guide" class="donate_tip center hidden">
+		<div class="donate_item">
+			<span class="donate_item_txt" style="color:#1dabec">支付宝打赏</span>
+			<img src="/img/zhifubaoV2.png" alt="支付宝打赏">
+		</div>
+		<div class="donate_item">
+			<span class="donate_item_txt" style="color:#22cf28">微信打赏</span>
+			<img src="/img/weixinV2.png" alt="微信打赏">
+		</div>
+    </div>
+	<script type="text/javascript">
+		document.getElementById('btn_donate').onclick = function(){
+			$('#donate_tip').addClass('hidden');
+			$('#donate_guide').removeClass('hidden');
+		}
+	</script>
+</div>
+    
     <footer class="article-footer">
       
         <a href="http://hi.zongquan.wang/2015/01/05/Study_iOS_Life_Cycle/#disqus_thread" class="article-comment-link">Comments</a>
       
 
-      <a data-url="http://hi.zongquan.wang/2015/01/05/Study_iOS_Life_Cycle/" data-id="cimem53t10010j4sb75ue17ht" class="article-share-link">Share</a>
+      <a data-url="http://hi.zongquan.wang/2015/01/05/Study_iOS_Life_Cycle/" data-id="cimrgmuh00010oqsbb84f4u0b" class="article-share-link">Share</a>
 
       <div id="article-baidu-share" class="bdsharebuttonbox">
         <a href="#" class="bds_weixin" data-cmd="weixin" title="WeiXin"></a>
@@ -457,15 +455,6 @@ ga('send', 'pageview');
     <h3 class="widget-title">tags</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac/">Mac</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Thinking/">Thinking</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Xcode/">Xcode</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS/">iOS</a><span class="tag-list-count">13</span></li></ul>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">tag cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/Mac/" style="font-size: 16.67px;">Mac</a> <a href="/tags/Thinking/" style="font-size: 10px;">Thinking</a> <a href="/tags/Xcode/" style="font-size: 13.33px;">Xcode</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a>
     </div>
   </div>
 

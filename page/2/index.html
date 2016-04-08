@@ -179,46 +179,6 @@ ga('send', 'pageview');
     <div class="article-entry" itemprop="articleBody">
       
         <h3 id="Developing_Applications_for_iOS_观后感系列：Hardware">Developing Applications for iOS 观后感系列：Hardware</h3><p><em>相关视频章节：14、17</em></p>
-<hr>
-<p>关于 iOS device 的 hardware，本篇主要了解2个方面：CoreLocation + CoreMotion</p>
-<h3 id="CoreLocation">CoreLocation</h3><ul>
-<li><p><strong><code>CLLocation</code></strong>：CoreLocation 中最基本的 class。</p>
-<p>  CLLocation 的重要 property：</p>
-<p>  <em><code>coordinate</code></em>：位置坐标，包含 latitude 和 longitude 两个元素。</p>
-<p>  <em><code>altitude</code></em>：海拔。</p>
-<p>  <em><code>horizontal/verticalAccuracy</code></em>：精度。Cellular &lt; WiFi &lt; GPS。</p>
-</li>
-<li><p><strong><code>CLLocationManager</code></strong>：用于获取 CLLocation。</p>
-<p>  使用流程：</p>
-<ol>
-<li><p><em><code>check device</code></em></p>
-<p> 主要是检查 device 是否支持以某种方式来获取某种 location，以及是否有权限来获取。</p>
-<p> 关于权限，有3中状态：Authorized、Denied、Restricted。</p>
-</li>
-<li><p><em><code>init &amp; delegate</code></em>：通过 CLLocationManager 来获取 CLLocation 可以有2种方式，一种是主动 ask（poll），一种是 delegate。通常采用 delegate 的方式，delegate 触发后，你就可以访问 CLLocationManager 的 property <em><code>location</code></em> 来获取当前的 CLLocation 了。</p>
-</li>
-<li><p><em><code>configuration</code></em></p>
-<p> 通过 property <em><code>desiredAccuracy</code></em> 来设定想要的精度。</p>
-<p> 通过 property <em><code>distanceFilter</code></em> 告诉 CLLocationManager，只有当 location 的变化超过该范围时，才去触发 update delegate。</p>
-</li>
-<li><p><em><code>start monitor</code></em></p>
-<p> 你可以进行如下几种形式的 monitor，每种 monitor 都有相应的 delegate 函数，参见文档。</p>
-<ul>
-<li><p><em><code>normal monitor</code></em>：standard monitor，通过设定精度，每当 update 触发时，就会通知 app。</p>
-</li>
-<li><p><em><code>significant change monitor</code></em>：仅当 location 发生明显变化时才通知 app，这里的 significant 并未定义具体是多少。</p>
-</li>
-<li><p><em><code>region monitor</code></em>：当 device 进入某个指定的 region 时，通知 app。</p>
-</li>
-<li><p><em><code>beacon monitor</code></em>：当 device 进入某个指定的 beacon 时，通知 app，这种 monitor 通常与 <em><code>Core Bluetooth</code></em> 相关。</p>
-</li>
-</ul>
-<p><strong>注意</strong>，当你不再需要 monitor 时，不要忘了 stop monitor。</p>
-<p><strong>注意</strong>，即使 app not running，这些 monitor 也还是能够 work 的。想要在 background 模式下继续 monitor，需要在 project 中设置一下，类似于 background fetch 的设置。当 delegate 触发后，app 就会被启动。这种情况下，<code>application:didFinishLaunchingWithOption:</code> 的 option dictionary 中就会包含一个 key <code>UIApplicationLaunchOptionsLocationKey</code>。</p>
-</li>
-</ol>
-</li>
-</ul>
         
           <p class="article-more-link shake shake-rotate">
             <a href="/2015/01/18/Study_iOS_Hardware/#more">Read More</a>
@@ -226,12 +186,13 @@ ga('send', 'pageview');
         
       
     </div>
+    
     <footer class="article-footer">
       
         <a href="http://hi.zongquan.wang/2015/01/18/Study_iOS_Hardware/#disqus_thread" class="article-comment-link">Comments</a>
       
 
-      <a data-url="http://hi.zongquan.wang/2015/01/18/Study_iOS_Hardware/" data-id="cimem53t70016j4sbjvxj969h" class="article-share-link">Share</a>
+      <a data-url="http://hi.zongquan.wang/2015/01/18/Study_iOS_Hardware/" data-id="cimrgmuh40016oqsbciwdyu5p" class="article-share-link">Share</a>
 
       <div id="article-baidu-share" class="bdsharebuttonbox">
         <a href="#" class="bds_weixin" data-cmd="weixin" title="WeiXin"></a>
@@ -284,22 +245,6 @@ ga('send', 'pageview');
     <div class="article-entry" itemprop="articleBody">
       
         <h3 id="Developing_Applications_for_iOS_观后感系列：L18N">Developing Applications for iOS 观后感系列：L18N</h3><p><em>相关视频章节：18</em></p>
-<hr>
-<p>L18N 主要涉及2方面：Xcode + code。</p>
-<ul>
-<li><p><strong>Xcode</strong></p>
-<p>  首先需要在 Xcode 中设置 app 支持的语言：</p>
-<p>  <img src="/img/Study_iOS_L18N/18.1.L18N.png" alt="L18N"></p>
-<p>  然后你就可以对 storyboard 进行 L18N了，Xcode 会生成相应语言的 .strings 文件。</p>
-</li>
-<li><p><strong>code</strong></p>
-<p>  对于不在 storyboard 中的 strings 如何 L18N 呢？那就得通过 code 来处理了。</p>
-<p>  <img src="/img/Study_iOS_L18N/18.2.L18N.png" alt="L18N"></p>
-<p>  在代码中调用上述 macros 之后，可以通过下面命令自动生成 .strings 文件：</p>
-<p>  <img src="/img/Study_iOS_L18N/18.3.L18N.png" alt="L18N"></p>
-<p>  <strong>注意</strong>，当你从 <em><code>Bundle</code></em> 中获取某个文件的 path 时，其搜索顺序是：先 bundle 的 top-level 层，后 .lproj 层。</p>
-</li>
-</ul>
         
           <p class="article-more-link shake shake-rotate">
             <a href="/2015/01/18/Study_iOS_L18N/#more">Read More</a>
@@ -307,12 +252,13 @@ ga('send', 'pageview');
         
       
     </div>
+    
     <footer class="article-footer">
       
         <a href="http://hi.zongquan.wang/2015/01/18/Study_iOS_L18N/#disqus_thread" class="article-comment-link">Comments</a>
       
 
-      <a data-url="http://hi.zongquan.wang/2015/01/18/Study_iOS_L18N/" data-id="cimem53t40013j4sbog5rm370" class="article-share-link">Share</a>
+      <a data-url="http://hi.zongquan.wang/2015/01/18/Study_iOS_L18N/" data-id="cimrgmuh20013oqsbcvjttlji" class="article-share-link">Share</a>
 
       <div id="article-baidu-share" class="bdsharebuttonbox">
         <a href="#" class="bds_weixin" data-cmd="weixin" title="WeiXin"></a>
@@ -365,18 +311,6 @@ ga('send', 'pageview');
     <div class="article-entry" itemprop="articleBody">
       
         <h3 id="Developing_Applications_for_iOS_观后感系列：Misc_UI">Developing Applications for iOS 观后感系列：Misc UI</h3><p><em>相关视频章节：all</em></p>
-<hr>
-<p>之前的文章已经学习了几种 iOS 中比较大而重要的 UIView，例如 UIScrollView、UITableView 等，本篇主要了解一下其它一些比较常用的小型 UI 类型。</p>
-<h3 id="UITextView">UITextView</h3><p><strong><code>UITextView</code></strong> 提供了一个 multi-line、selectable、editable、scrollable 的编辑区，通过 <em><code>NSMutableAttributedString</code></em> 来设定它的文本内容和各种属性。</p>
-<p>UITextView 有3个比较重要的 property，它们共同完成整个 UITextView 内容的显示。</p>
-<ul>
-<li><p><em><code>textStorage</code></em>：NSTextStorage 是 NSMutableAttributedString 的 subclass，也就是说，UITextView 的文本内容和文本属性是通过该 property 来决定的，对其赋值什么样的 NSMutableAttributedString，就会显示什么样的内容。</p>
-</li>
-<li><p><em><code>textContainer</code></em>：NSTextContainer 决定了 NSTextStorage 将会布局在整个 UITextView 的哪个区域中，即 where text can be。你甚至可以通过它来指定一个 <em><code>exclusion zones</code></em>（例如一个 image），这样 NSTextStorage 就会围绕这个 exclusion  zones 来布局，如同 Word 中的图片环绕效果，灰常 NB。</p>
-</li>
-<li><p><em><code>layoutManager</code></em>：前面2个 property，一个决定内容，一个决定样式，那么剩下的 NSLayoutManager 就是负责从 NSTextStorage 中获取到 text，然后将它们 lay down 到 NSTextContainer 设定的有效区域中。</p>
-</li>
-</ul>
         
           <p class="article-more-link shake shake-rotate">
             <a href="/2015/01/17/Study_iOS_Misc_UI/#more">Read More</a>
@@ -384,12 +318,13 @@ ga('send', 'pageview');
         
       
     </div>
+    
     <footer class="article-footer">
       
         <a href="http://hi.zongquan.wang/2015/01/17/Study_iOS_Misc_UI/#disqus_thread" class="article-comment-link">Comments</a>
       
 
-      <a data-url="http://hi.zongquan.wang/2015/01/17/Study_iOS_Misc_UI/" data-id="cimem53st000rj4sbgfsy6rso" class="article-share-link">Share</a>
+      <a data-url="http://hi.zongquan.wang/2015/01/17/Study_iOS_Misc_UI/" data-id="cimrgmugr000roqsbmxlbldyu" class="article-share-link">Share</a>
 
       <div id="article-baidu-share" class="bdsharebuttonbox">
         <a href="#" class="bds_weixin" data-cmd="weixin" title="WeiXin"></a>
@@ -442,25 +377,6 @@ ga('send', 'pageview');
     <div class="article-entry" itemprop="articleBody">
       
         <h3 id="Developing_Applications_for_iOS_观后感系列：CoreData">Developing Applications for iOS 观后感系列：CoreData</h3><p><em>相关视频章节：12，13</em></p>
-<hr>
-<p><strong><code>CoreData</code></strong> 是 iOS 提供的一套用于管理 app 的 Model 的 framework，它就像是个 object database，支持对 object 的各种操作：add、delete、query、undo、redo、autosave 等，灰常 NB。但它并不是 database 的某种实现，你可以基于持久化文件（如 sqlite 等）来使用 CoreData，也可以完全基于内存来使用。</p>
-<p>使用 CoreData 会涉及 Xcode 和 code 两方面。</p>
-<p>首先看一下在 Xcode 中需要做什么。</p>
-<h3 id="创建_Data_Model">创建 Data Model</h3><ul>
-<li><p>类似于 .storyboard 文件，这里你需要创建一个 <em><code>.xcdatamodeld</code></em> 文件，它存储了 app 的 Data Model。.xcdatamodeld 文件内容如下：</p>
-<p>  <img src="/img/Study_iOS_CoreData/12.0.CoreData.png" alt="CoreData"></p>
-<p>  就像设计数据库的 ER 图，在这里，你需要设计好 object 对应的 <em><code>Entity</code></em>。这里的 Entity 会对应到 code 中的 <em><code>NSManagedObject（或其 subclass）</code></em>。</p>
-<p>  <img src="/img/Study_iOS_CoreData/12.1.CoreData.png" alt="CoreData"></p>
-<p>  <img src="/img/Study_iOS_CoreData/12.2.CoreData.png" alt="CoreData"></p>
-</li>
-<li><p>Model 构建好了之后，下面就需要创建出与这些 Entity 对应的 NSManagedObject，供 code 中使用。</p>
-<p>  <img src="/img/Study_iOS_CoreData/12.12.CoreData.Add.png" alt="CoreData"></p>
-<p>  <img src="/img/Study_iOS_CoreData/12.13.CoreData.Add.png" alt="CoreData"></p>
-<p>  这样我们就可以直接使用这些 NSManagedObject subclass 了，而且也可以方便地访问它们的 properties，而不用去调用繁琐的 valueForKey 和 setValue:forKey。</p>
-<p>  <strong>注意</strong>，以后当我们修改了 Model 的 Entity 后，需要重新执行一遍这一步，来更新这些 NSManagedObject subclass。这也意味着，这些 .h 和 .m 会被重新生成。所以这里常常使用的一个技巧是，为这些 NSManagedObject subclass 添加 <em><code>category</code></em>，在 category 中创建一些额外的函数供 NSManagedObject subclass 使用，这样以后更新 NSManagedObject subclass 时，只有最原本的 .h 和 .m 文件被重新生成，而不会影响到我们的 category。</p>
-</li>
-</ul>
-<p>Xcode 这边基本就完成了，下面开始进入 code。</p>
         
           <p class="article-more-link shake shake-rotate">
             <a href="/2015/01/11/Study_iOS_CoreData/#more">Read More</a>
@@ -468,12 +384,13 @@ ga('send', 'pageview');
         
       
     </div>
+    
     <footer class="article-footer">
       
         <a href="http://hi.zongquan.wang/2015/01/11/Study_iOS_CoreData/#disqus_thread" class="article-comment-link">Comments</a>
       
 
-      <a data-url="http://hi.zongquan.wang/2015/01/11/Study_iOS_CoreData/" data-id="cimem53tb0019j4sb6n7pyl7p" class="article-share-link">Share</a>
+      <a data-url="http://hi.zongquan.wang/2015/01/11/Study_iOS_CoreData/" data-id="cimrgmuh70019oqsby0s41b3w" class="article-share-link">Share</a>
 
       <div id="article-baidu-share" class="bdsharebuttonbox">
         <a href="#" class="bds_weixin" data-cmd="weixin" title="WeiXin"></a>
@@ -526,20 +443,6 @@ ga('send', 'pageview');
     <div class="article-entry" itemprop="articleBody">
       
         <h3 id="Developing_Applications_for_iOS_观后感系列：UITableView">Developing Applications for iOS 观后感系列：UITableView</h3><p><em>相关视频章节：11</em></p>
-<hr>
-<h4 id="UITableView_分类">UITableView 分类</h4><p>按内容分：</p>
-<ul>
-<li><p><em><code>dynamic</code></em>：在 storyboard 中设定 prototype，在代码中 load 内容。<em>（本篇主要涉及 dynamic NSTableView）</em></p>
-</li>
-<li><p><em><code>static</code></em>：完全在 storyboard 中设定。</p>
-</li>
-</ul>
-<p>按样式分：</p>
-<p><em><code>ungrouped</code></em> / <em><code>grouped</code></em></p>
-<p>示例：</p>
-<p><img src="/img/Study_iOS_UITableView/11.0.UITableView.png" alt="UITableView"></p>
-<h4 id="UITableView_的构成">UITableView 的构成</h4><p>与 Mac 上的NSTableView 不同，iOS 中的 UITableView 都是一维的，只有一列。</p>
-<p><img src="/img/Study_iOS_UITableView/11.1.UITableView.png" alt="UITableView"> <img src="/img/Study_iOS_UITableView/11.2.UITableView.png" alt="UITableView"></p>
         
           <p class="article-more-link shake shake-rotate">
             <a href="/2015/01/11/Study_iOS_UITableView/#more">Read More</a>
@@ -547,12 +450,13 @@ ga('send', 'pageview');
         
       
     </div>
+    
     <footer class="article-footer">
       
         <a href="http://hi.zongquan.wang/2015/01/11/Study_iOS_UITableView/#disqus_thread" class="article-comment-link">Comments</a>
       
 
-      <a data-url="http://hi.zongquan.wang/2015/01/11/Study_iOS_UITableView/" data-id="cimem53sj000fj4sbvvrcpe6a" class="article-share-link">Share</a>
+      <a data-url="http://hi.zongquan.wang/2015/01/11/Study_iOS_UITableView/" data-id="cimrgmugi000foqsb3divm1g3" class="article-share-link">Share</a>
 
       <div id="article-baidu-share" class="bdsharebuttonbox">
         <a href="#" class="bds_weixin" data-cmd="weixin" title="WeiXin"></a>
@@ -690,15 +594,6 @@ ga('send', 'pageview');
     <h3 class="widget-title">tags</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac/">Mac</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Thinking/">Thinking</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Xcode/">Xcode</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS/">iOS</a><span class="tag-list-count">13</span></li></ul>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">tag cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/Mac/" style="font-size: 16.67px;">Mac</a> <a href="/tags/Thinking/" style="font-size: 10px;">Thinking</a> <a href="/tags/Xcode/" style="font-size: 13.33px;">Xcode</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a>
     </div>
   </div>
 

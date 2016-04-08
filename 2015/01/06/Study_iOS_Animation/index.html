@@ -5,28 +5,16 @@
   
   <title>Study iOS - UIView Animation | 闷骚的悟空</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Developing Applications for iOS 观后感系列：UIView Animation相关视频章节：8
-
-本篇提到的 Animation 主要是基于 UIView 的，并没有涉及到基于 Layer 机制的 Animation。
-基于 UIView 的 Animation 有以下3种：
-Animation of UIView Property首先一定要明确一点：animatio">
+  <meta name="description" content="Developing Applications for iOS 观后感系列：UIView Animation相关视频章节：8">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Study iOS - UIView Animation">
 <meta property="og:url" content="http://hi.zongquan.wang/2015/01/06/Study_iOS_Animation/index.html">
 <meta property="og:site_name" content="闷骚的悟空">
-<meta property="og:description" content="Developing Applications for iOS 观后感系列：UIView Animation相关视频章节：8
-
-本篇提到的 Animation 主要是基于 UIView 的，并没有涉及到基于 Layer 机制的 Animation。
-基于 UIView 的 Animation 有以下3种：
-Animation of UIView Property首先一定要明确一点：animatio">
-<meta property="og:updated_time" content="2016-03-30T04:45:46.000Z">
+<meta property="og:description" content="Developing Applications for iOS 观后感系列：UIView Animation相关视频章节：8">
+<meta property="og:updated_time" content="2016-04-08T01:23:43.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Study iOS - UIView Animation">
-<meta name="twitter:description" content="Developing Applications for iOS 观后感系列：UIView Animation相关视频章节：8
-
-本篇提到的 Animation 主要是基于 UIView 的，并没有涉及到基于 Layer 机制的 Animation。
-基于 UIView 的 Animation 有以下3种：
-Animation of UIView Property首先一定要明确一点：animatio">
+<meta name="twitter:description" content="Developing Applications for iOS 观后感系列：UIView Animation相关视频章节：8">
   
   
     <link rel="icon" href="/favicon.ico">
@@ -192,6 +180,7 @@ ga('send', 'pageview');
       
                 
         <h3 id="Developing_Applications_for_iOS_观后感系列：UIView_Animation">Developing Applications for iOS 观后感系列：UIView Animation</h3><p><em>相关视频章节：8</em></p>
+<a id="more"></a>
 <hr>
 <p>本篇提到的 Animation 主要是基于 UIView 的，并没有涉及到基于 Layer 机制的 Animation。</p>
 <p>基于 UIView 的 Animation 有以下3种：</p>
@@ -210,7 +199,6 @@ transform（translation，rotation，<span class="built_in">scale</span>）
 <p><code>completionBlock</code> 表示 animation 呈现结束后要做的事，如果 animation 成功地呈现完毕，finished 为 YES，否则，若中断了，则返回 NO。</p>
 <p><strong>注意</strong>：animation 是在该 API 返回后开始的，而该 API 返回的时刻是 <code>animationsBlock</code> 执行完毕的时刻。<strong>也就是说</strong>，调用该 API 后，会立刻执行其 <code>animationsBlock</code>，执行完后就立刻返回，然后 animation 开始呈现。所以对 UIView property 的修改在 <code>animationsBlock</code> 执行完后就立即生效了，只不过 property 的变化要经过 duration 才呈现完毕。</p>
 <p><strong>另外</strong>：finished 何时为 NO？如果在该 animation 开始后，又调用了该 API 对相同的 property 开始了另一个 animation，这样前一个 animation 没做完就得中断去做另一个 animation 了，这种情况下，前一个 animation 的 completionBlock 的 finished 就为 NO 了。</p>
-<a id="more"></a>
 <h3 id="Animation_of_Entire_UIView">Animation of Entire UIView</h3><p>例如整个 UIView 的 flipping、dissolving、curling 等效果，在呈现这些效果的同时，你可以对整个 UIView 进行任意修改，改变其 appearance。</p>
 <p>实现这一类 animation 的 API 是 UIView 的 <code>class method</code>：</p>
 <pre><code>+(<span class="keyword">void</span>)transitionWithView:(<span class="built_in">UIView</span> *)viewToModify
@@ -265,12 +253,39 @@ animator.delegate = aDelegate<span class="comment">;</span>
 
       
     </div>
+    
+      <div class ="post-donate">
+    <div id="donate_tip" class="donate_tip center">
+        <a id="btn_donate" class="btn_donate" href="javascript:;"></a>
+        <span class="donate_tip_txt">
+		   打赏
+        </span>
+        <br>
+      </div>
+	<div id="donate_guide" class="donate_tip center hidden">
+		<div class="donate_item">
+			<span class="donate_item_txt" style="color:#1dabec">支付宝打赏</span>
+			<img src="/img/zhifubaoV2.png" alt="支付宝打赏">
+		</div>
+		<div class="donate_item">
+			<span class="donate_item_txt" style="color:#22cf28">微信打赏</span>
+			<img src="/img/weixinV2.png" alt="微信打赏">
+		</div>
+    </div>
+	<script type="text/javascript">
+		document.getElementById('btn_donate').onclick = function(){
+			$('#donate_tip').addClass('hidden');
+			$('#donate_guide').removeClass('hidden');
+		}
+	</script>
+</div>
+    
     <footer class="article-footer">
       
         <a href="http://hi.zongquan.wang/2015/01/06/Study_iOS_Animation/#disqus_thread" class="article-comment-link">Comments</a>
       
 
-      <a data-url="http://hi.zongquan.wang/2015/01/06/Study_iOS_Animation/" data-id="cimem53te001cj4sbqfrd1223" class="article-share-link">Share</a>
+      <a data-url="http://hi.zongquan.wang/2015/01/06/Study_iOS_Animation/" data-id="cimrgmuh9001coqsbc2izbeh1" class="article-share-link">Share</a>
 
       <div id="article-baidu-share" class="bdsharebuttonbox">
         <a href="#" class="bds_weixin" data-cmd="weixin" title="WeiXin"></a>
@@ -431,15 +446,6 @@ animator.delegate = aDelegate<span class="comment">;</span>
     <h3 class="widget-title">tags</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac/">Mac</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Thinking/">Thinking</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Xcode/">Xcode</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS/">iOS</a><span class="tag-list-count">13</span></li></ul>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">tag cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/Mac/" style="font-size: 16.67px;">Mac</a> <a href="/tags/Thinking/" style="font-size: 10px;">Thinking</a> <a href="/tags/Xcode/" style="font-size: 13.33px;">Xcode</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a>
     </div>
   </div>
 

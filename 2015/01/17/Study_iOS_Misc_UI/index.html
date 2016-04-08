@@ -5,29 +5,20 @@
   
   <title>Study iOS - Misc UI | 闷骚的悟空</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Developing Applications for iOS 观后感系列：Misc UI相关视频章节：all
-
-之前的文章已经学习了几种 iOS 中比较大而重要的 UIView，例如 UIScrollView、UITableView 等，本篇主要了解一下其它一些比较常用的小型 UI 类型。
-UITextViewUITextView 提供了一个 multi-line、selectable、edit">
+  <meta name="description" content="Developing Applications for iOS 观后感系列：Misc UI相关视频章节：all">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Study iOS - Misc UI">
 <meta property="og:url" content="http://hi.zongquan.wang/2015/01/17/Study_iOS_Misc_UI/index.html">
 <meta property="og:site_name" content="闷骚的悟空">
-<meta property="og:description" content="Developing Applications for iOS 观后感系列：Misc UI相关视频章节：all
-
-之前的文章已经学习了几种 iOS 中比较大而重要的 UIView，例如 UIScrollView、UITableView 等，本篇主要了解一下其它一些比较常用的小型 UI 类型。
-UITextViewUITextView 提供了一个 multi-line、selectable、edit">
+<meta property="og:description" content="Developing Applications for iOS 观后感系列：Misc UI相关视频章节：all">
 <meta property="og:image" content="http://hi.zongquan.wang/img/Study_iOS_Misc_UI/18.10.Settings.png">
 <meta property="og:image" content="http://hi.zongquan.wang/img/Study_iOS_Misc_UI/18.11.Settings.png">
 <meta property="og:image" content="http://hi.zongquan.wang/img/Study_iOS_Misc_UI/18.12.Settings.png">
 <meta property="og:image" content="http://hi.zongquan.wang/img/Study_iOS_Misc_UI/18.13.Settings.png">
-<meta property="og:updated_time" content="2016-03-30T04:46:03.000Z">
+<meta property="og:updated_time" content="2016-04-08T01:23:43.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Study iOS - Misc UI">
-<meta name="twitter:description" content="Developing Applications for iOS 观后感系列：Misc UI相关视频章节：all
-
-之前的文章已经学习了几种 iOS 中比较大而重要的 UIView，例如 UIScrollView、UITableView 等，本篇主要了解一下其它一些比较常用的小型 UI 类型。
-UITextViewUITextView 提供了一个 multi-line、selectable、edit">
+<meta name="twitter:description" content="Developing Applications for iOS 观后感系列：Misc UI相关视频章节：all">
   
   
     <link rel="icon" href="/favicon.ico">
@@ -193,6 +184,7 @@ ga('send', 'pageview');
       
                 
         <h3 id="Developing_Applications_for_iOS_观后感系列：Misc_UI">Developing Applications for iOS 观后感系列：Misc UI</h3><p><em>相关视频章节：all</em></p>
+<a id="more"></a>
 <hr>
 <p>之前的文章已经学习了几种 iOS 中比较大而重要的 UIView，例如 UIScrollView、UITableView 等，本篇主要了解一下其它一些比较常用的小型 UI 类型。</p>
 <h3 id="UITextView">UITextView</h3><p><strong><code>UITextView</code></strong> 提供了一个 multi-line、selectable、editable、scrollable 的编辑区，通过 <em><code>NSMutableAttributedString</code></em> 来设定它的文本内容和各种属性。</p>
@@ -205,7 +197,6 @@ ga('send', 'pageview');
 <li><p><em><code>layoutManager</code></em>：前面2个 property，一个决定内容，一个决定样式，那么剩下的 NSLayoutManager 就是负责从 NSTextStorage 中获取到 text，然后将它们 lay down 到 NSTextContainer 设定的有效区域中。</p>
 </li>
 </ul>
-<a id="more"></a>
 <h3 id="UITextField">UITextField</h3><p><strong><code>UITextField</code></strong> 就像是 UILabel 的升级版，它是 editable 的。这里主要了解下 <em><code>UITextFieldDelegate</code></em> 以及 <em><code>Keyboard</code></em> 的使用。当然 UITextView 也有这些东西，这里就不赘述了。</p>
 <ul>
 <li><p>当 UITextField 成为 <em><code>first responder</code></em> 时，iOS 的 Keyboard 就会自动弹出。有2种方式可以实现：</p>
@@ -299,12 +290,39 @@ ga('send', 'pageview');
 
       
     </div>
+    
+      <div class ="post-donate">
+    <div id="donate_tip" class="donate_tip center">
+        <a id="btn_donate" class="btn_donate" href="javascript:;"></a>
+        <span class="donate_tip_txt">
+		   打赏
+        </span>
+        <br>
+      </div>
+	<div id="donate_guide" class="donate_tip center hidden">
+		<div class="donate_item">
+			<span class="donate_item_txt" style="color:#1dabec">支付宝打赏</span>
+			<img src="/img/zhifubaoV2.png" alt="支付宝打赏">
+		</div>
+		<div class="donate_item">
+			<span class="donate_item_txt" style="color:#22cf28">微信打赏</span>
+			<img src="/img/weixinV2.png" alt="微信打赏">
+		</div>
+    </div>
+	<script type="text/javascript">
+		document.getElementById('btn_donate').onclick = function(){
+			$('#donate_tip').addClass('hidden');
+			$('#donate_guide').removeClass('hidden');
+		}
+	</script>
+</div>
+    
     <footer class="article-footer">
       
         <a href="http://hi.zongquan.wang/2015/01/17/Study_iOS_Misc_UI/#disqus_thread" class="article-comment-link">Comments</a>
       
 
-      <a data-url="http://hi.zongquan.wang/2015/01/17/Study_iOS_Misc_UI/" data-id="cimem53st000rj4sbgfsy6rso" class="article-share-link">Share</a>
+      <a data-url="http://hi.zongquan.wang/2015/01/17/Study_iOS_Misc_UI/" data-id="cimrgmugr000roqsbmxlbldyu" class="article-share-link">Share</a>
 
       <div id="article-baidu-share" class="bdsharebuttonbox">
         <a href="#" class="bds_weixin" data-cmd="weixin" title="WeiXin"></a>
@@ -465,15 +483,6 @@ ga('send', 'pageview');
     <h3 class="widget-title">tags</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac/">Mac</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Thinking/">Thinking</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Xcode/">Xcode</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS/">iOS</a><span class="tag-list-count">13</span></li></ul>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">tag cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/Mac/" style="font-size: 16.67px;">Mac</a> <a href="/tags/Thinking/" style="font-size: 10px;">Thinking</a> <a href="/tags/Xcode/" style="font-size: 13.33px;">Xcode</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a>
     </div>
   </div>
 

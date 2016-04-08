@@ -6,32 +6,20 @@
   <title>Xcode Build Settings - Products Path | 闷骚的悟空</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="假设一个 Project 的路径是 XXX/ProjectX。
-当 build 完成后，我们会关注 2 个与 Product Files 有关的 settings ：
-$BUILT_PRODUCTS_DIR 和 $TARGET_BUILD_DIR
-这 2 个 settings 决定了我们 build 出来的 Products 被放置到了哪里。
-官方解释
-$BUILT_PRODUCTS_DIR：Di">
+当 build 完成后，我们会关注 2 个与 Product Files 有关的 settings ：">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Xcode Build Settings - Products Path">
 <meta property="og:url" content="http://hi.zongquan.wang/2015/11/16/Xcode_Build_Settings_Products_Path/index.html">
 <meta property="og:site_name" content="闷骚的悟空">
 <meta property="og:description" content="假设一个 Project 的路径是 XXX/ProjectX。
-当 build 完成后，我们会关注 2 个与 Product Files 有关的 settings ：
-$BUILT_PRODUCTS_DIR 和 $TARGET_BUILD_DIR
-这 2 个 settings 决定了我们 build 出来的 Products 被放置到了哪里。
-官方解释
-$BUILT_PRODUCTS_DIR：Di">
+当 build 完成后，我们会关注 2 个与 Product Files 有关的 settings ：">
 <meta property="og:image" content="http://hi.zongquan.wang/img/Xcode_Build_Settings_Products_Path/location.png">
 <meta property="og:image" content="http://hi.zongquan.wang/img/Xcode_Build_Settings_Products_Path/build_products_path.png">
-<meta property="og:updated_time" content="2016-01-11T01:35:22.000Z">
+<meta property="og:updated_time" content="2016-04-08T01:23:43.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Xcode Build Settings - Products Path">
 <meta name="twitter:description" content="假设一个 Project 的路径是 XXX/ProjectX。
-当 build 完成后，我们会关注 2 个与 Product Files 有关的 settings ：
-$BUILT_PRODUCTS_DIR 和 $TARGET_BUILD_DIR
-这 2 个 settings 决定了我们 build 出来的 Products 被放置到了哪里。
-官方解释
-$BUILT_PRODUCTS_DIR：Di">
+当 build 完成后，我们会关注 2 个与 Product Files 有关的 settings ：">
   
   
     <link rel="icon" href="/favicon.ico">
@@ -198,6 +186,7 @@ ga('send', 'pageview');
                 
         <p>假设一个 Project 的路径是 <code>XXX/ProjectX</code>。</p>
 <p>当 build 完成后，我们会关注 2 个与 <strong>Product Files</strong> 有关的 settings ：</p>
+<a id="more"></a>
 <p><strong><code>$BUILT_PRODUCTS_DIR</code></strong> 和 <strong><code>$TARGET_BUILD_DIR</code></strong></p>
 <p>这 2 个 settings 决定了我们 build 出来的 Products 被放置到了哪里。</p>
 <h4 id="官方解释">官方解释</h4><ul>
@@ -211,8 +200,7 @@ ga('send', 'pageview');
 <h4 id="举个例子">举个例子</h4><p>普通的 app 在 build 完之后，一般放置在 <code>$BUILT_PRODUCTS_DIR</code> 中即可，而对于 Xcode Plugin 来说，在 build 完之后一般会直接将其 deploy 到 Xcode 的 <strong>Plug-ins</strong> 目录中，此时 <code>$TARGET_BUILD_DIR</code> 就是 <strong>Plug-ins</strong> 目录，而 <code>$BUILT_PRODUCTS_DIR</code> 中只有 Plugin 的 symbolic links。</p>
 <p><em>可以 clone 一下我之前写的一个<a href="https://github.com/wzqcongcong/AtAutoCompletion" target="_blank" rel="external">小插件</a>，build 一下看结果。</em></p>
 <hr>
-<h4 id="下面就看一下这_2_个路径是如何设置的">下面就看一下这 2 个路径是如何设置的</h4><a id="more"></a>
-<p><strong>首先解释一些相关的 settings：</strong></p>
+<h4 id="下面就看一下这_2_个路径是如何设置的">下面就看一下这 2 个路径是如何设置的</h4><p><strong>首先解释一些相关的 settings：</strong></p>
 <p><strong>settingName (settingDisplayNameInXcodeBuildSettings)</strong></p>
 <ul>
 <li><p><strong><code>$SRCROOT</code></strong>：<code>XXX/ProjectX</code></p>
@@ -256,12 +244,39 @@ ga('send', 'pageview');
 
       
     </div>
+    
+      <div class ="post-donate">
+    <div id="donate_tip" class="donate_tip center">
+        <a id="btn_donate" class="btn_donate" href="javascript:;"></a>
+        <span class="donate_tip_txt">
+		   打赏
+        </span>
+        <br>
+      </div>
+	<div id="donate_guide" class="donate_tip center hidden">
+		<div class="donate_item">
+			<span class="donate_item_txt" style="color:#1dabec">支付宝打赏</span>
+			<img src="/img/zhifubaoV2.png" alt="支付宝打赏">
+		</div>
+		<div class="donate_item">
+			<span class="donate_item_txt" style="color:#22cf28">微信打赏</span>
+			<img src="/img/weixinV2.png" alt="微信打赏">
+		</div>
+    </div>
+	<script type="text/javascript">
+		document.getElementById('btn_donate').onclick = function(){
+			$('#donate_tip').addClass('hidden');
+			$('#donate_guide').removeClass('hidden');
+		}
+	</script>
+</div>
+    
     <footer class="article-footer">
       
         <a href="http://hi.zongquan.wang/2015/11/16/Xcode_Build_Settings_Products_Path/#disqus_thread" class="article-comment-link">Comments</a>
       
 
-      <a data-url="http://hi.zongquan.wang/2015/11/16/Xcode_Build_Settings_Products_Path/" data-id="cimem53s10002j4sbjk0vhwi1" class="article-share-link">Share</a>
+      <a data-url="http://hi.zongquan.wang/2015/11/16/Xcode_Build_Settings_Products_Path/" data-id="cimrgmug30002oqsbs7zfdqzp" class="article-share-link">Share</a>
 
       <div id="article-baidu-share" class="bdsharebuttonbox">
         <a href="#" class="bds_weixin" data-cmd="weixin" title="WeiXin"></a>
@@ -422,15 +437,6 @@ ga('send', 'pageview');
     <h3 class="widget-title">tags</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac/">Mac</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Thinking/">Thinking</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Xcode/">Xcode</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS/">iOS</a><span class="tag-list-count">13</span></li></ul>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">tag cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/Mac/" style="font-size: 16.67px;">Mac</a> <a href="/tags/Thinking/" style="font-size: 10px;">Thinking</a> <a href="/tags/Xcode/" style="font-size: 13.33px;">Xcode</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a>
     </div>
   </div>
 

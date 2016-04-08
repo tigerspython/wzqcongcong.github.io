@@ -5,52 +5,22 @@
   
   <title>Study iOS - L18N | 闷骚的悟空</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Developing Applications for iOS 观后感系列：L18N相关视频章节：18
-
-L18N 主要涉及2方面：Xcode + code。
-
-Xcode
-  首先需要在 Xcode 中设置 app 支持的语言：
-  
-  然后你就可以对 storyboard 进行 L18N了，Xcode 会生成相应语言的 .strings 文件。
-
-code
-  对于不在 storyboard">
+  <meta name="description" content="Developing Applications for iOS 观后感系列：L18N相关视频章节：18">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Study iOS - L18N">
 <meta property="og:url" content="http://hi.zongquan.wang/2015/01/18/Study_iOS_L18N/index.html">
 <meta property="og:site_name" content="闷骚的悟空">
-<meta property="og:description" content="Developing Applications for iOS 观后感系列：L18N相关视频章节：18
-
-L18N 主要涉及2方面：Xcode + code。
-
-Xcode
-  首先需要在 Xcode 中设置 app 支持的语言：
-  
-  然后你就可以对 storyboard 进行 L18N了，Xcode 会生成相应语言的 .strings 文件。
-
-code
-  对于不在 storyboard">
+<meta property="og:description" content="Developing Applications for iOS 观后感系列：L18N相关视频章节：18">
 <meta property="og:image" content="http://hi.zongquan.wang/img/Study_iOS_L18N/18.1.L18N.png">
 <meta property="og:image" content="http://hi.zongquan.wang/img/Study_iOS_L18N/18.2.L18N.png">
 <meta property="og:image" content="http://hi.zongquan.wang/img/Study_iOS_L18N/18.3.L18N.png">
 <meta property="og:image" content="http://hi.zongquan.wang/img/Study_iOS_L18N/18.6.L18N.NSNumberFormatter.png">
 <meta property="og:image" content="http://hi.zongquan.wang/img/Study_iOS_L18N/18.7.L18N.NSDateFormatter.png">
 <meta property="og:image" content="http://hi.zongquan.wang/img/Study_iOS_L18N/18.8.L18N.NSString.png">
-<meta property="og:updated_time" content="2016-03-30T04:45:57.000Z">
+<meta property="og:updated_time" content="2016-04-08T01:23:43.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Study iOS - L18N">
-<meta name="twitter:description" content="Developing Applications for iOS 观后感系列：L18N相关视频章节：18
-
-L18N 主要涉及2方面：Xcode + code。
-
-Xcode
-  首先需要在 Xcode 中设置 app 支持的语言：
-  
-  然后你就可以对 storyboard 进行 L18N了，Xcode 会生成相应语言的 .strings 文件。
-
-code
-  对于不在 storyboard">
+<meta name="twitter:description" content="Developing Applications for iOS 观后感系列：L18N相关视频章节：18">
   
   
     <link rel="icon" href="/favicon.ico">
@@ -216,6 +186,7 @@ ga('send', 'pageview');
       
                 
         <h3 id="Developing_Applications_for_iOS_观后感系列：L18N">Developing Applications for iOS 观后感系列：L18N</h3><p><em>相关视频章节：18</em></p>
+<a id="more"></a>
 <hr>
 <p>L18N 主要涉及2方面：Xcode + code。</p>
 <ul>
@@ -232,7 +203,6 @@ ga('send', 'pageview');
 <p>  <strong>注意</strong>，当你从 <em><code>Bundle</code></em> 中获取某个文件的 path 时，其搜索顺序是：先 bundle 的 top-level 层，后 .lproj 层。</p>
 </li>
 </ul>
-<a id="more"></a>
 <h3 id="Locale">Locale</h3><p>提到 L18N，就不得不提 Locale，因为它是整个 L18N 得以实现的基础。此外，Locale 也决定了 date 和 number 的格式。</p>
 <p><strong>注意</strong>，Locale 和 language 不是等价的，language 一样的时候，Locale 不一定一样。</p>
 <ul>
@@ -254,12 +224,39 @@ ga('send', 'pageview');
 
       
     </div>
+    
+      <div class ="post-donate">
+    <div id="donate_tip" class="donate_tip center">
+        <a id="btn_donate" class="btn_donate" href="javascript:;"></a>
+        <span class="donate_tip_txt">
+		   打赏
+        </span>
+        <br>
+      </div>
+	<div id="donate_guide" class="donate_tip center hidden">
+		<div class="donate_item">
+			<span class="donate_item_txt" style="color:#1dabec">支付宝打赏</span>
+			<img src="/img/zhifubaoV2.png" alt="支付宝打赏">
+		</div>
+		<div class="donate_item">
+			<span class="donate_item_txt" style="color:#22cf28">微信打赏</span>
+			<img src="/img/weixinV2.png" alt="微信打赏">
+		</div>
+    </div>
+	<script type="text/javascript">
+		document.getElementById('btn_donate').onclick = function(){
+			$('#donate_tip').addClass('hidden');
+			$('#donate_guide').removeClass('hidden');
+		}
+	</script>
+</div>
+    
     <footer class="article-footer">
       
         <a href="http://hi.zongquan.wang/2015/01/18/Study_iOS_L18N/#disqus_thread" class="article-comment-link">Comments</a>
       
 
-      <a data-url="http://hi.zongquan.wang/2015/01/18/Study_iOS_L18N/" data-id="cimem53t40013j4sbog5rm370" class="article-share-link">Share</a>
+      <a data-url="http://hi.zongquan.wang/2015/01/18/Study_iOS_L18N/" data-id="cimrgmuh20013oqsbcvjttlji" class="article-share-link">Share</a>
 
       <div id="article-baidu-share" class="bdsharebuttonbox">
         <a href="#" class="bds_weixin" data-cmd="weixin" title="WeiXin"></a>
@@ -420,15 +417,6 @@ ga('send', 'pageview');
     <h3 class="widget-title">tags</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac/">Mac</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Thinking/">Thinking</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Xcode/">Xcode</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS/">iOS</a><span class="tag-list-count">13</span></li></ul>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">tag cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/Mac/" style="font-size: 16.67px;">Mac</a> <a href="/tags/Thinking/" style="font-size: 10px;">Thinking</a> <a href="/tags/Xcode/" style="font-size: 13.33px;">Xcode</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a>
     </div>
   </div>
 

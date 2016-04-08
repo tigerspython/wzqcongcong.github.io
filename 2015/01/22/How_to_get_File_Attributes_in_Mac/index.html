@@ -5,31 +5,16 @@
   
   <title>How to get File Attributes in Mac | 闷骚的悟空</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Mac File Attributes在 Mac 开发中，想要获取 file 或者 dir 的属性，有这么4种方式：
-
-Linux C api
-  int lstat(const char *restrict path, struct stat *restrict buf)
-  获取到的 stat 有如下属性：
-struct stat { /* when _DARWIN_FEATURE_64_BI">
+  <meta name="description" content="Mac File Attributes在 Mac 开发中，想要获取 file 或者 dir 的属性，有这么4种方式：">
 <meta property="og:type" content="article">
 <meta property="og:title" content="How to get File Attributes in Mac">
 <meta property="og:url" content="http://hi.zongquan.wang/2015/01/22/How_to_get_File_Attributes_in_Mac/index.html">
 <meta property="og:site_name" content="闷骚的悟空">
-<meta property="og:description" content="Mac File Attributes在 Mac 开发中，想要获取 file 或者 dir 的属性，有这么4种方式：
-
-Linux C api
-  int lstat(const char *restrict path, struct stat *restrict buf)
-  获取到的 stat 有如下属性：
-struct stat { /* when _DARWIN_FEATURE_64_BI">
-<meta property="og:updated_time" content="2015-11-10T02:03:41.000Z">
+<meta property="og:description" content="Mac File Attributes在 Mac 开发中，想要获取 file 或者 dir 的属性，有这么4种方式：">
+<meta property="og:updated_time" content="2016-04-08T01:23:43.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="How to get File Attributes in Mac">
-<meta name="twitter:description" content="Mac File Attributes在 Mac 开发中，想要获取 file 或者 dir 的属性，有这么4种方式：
-
-Linux C api
-  int lstat(const char *restrict path, struct stat *restrict buf)
-  获取到的 stat 有如下属性：
-struct stat { /* when _DARWIN_FEATURE_64_BI">
+<meta name="twitter:description" content="Mac File Attributes在 Mac 开发中，想要获取 file 或者 dir 的属性，有这么4种方式：">
   
   
     <link rel="icon" href="/favicon.ico">
@@ -195,6 +180,7 @@ ga('send', 'pageview');
       
                 
         <h4 id="Mac_File_Attributes">Mac File Attributes</h4><p>在 Mac 开发中，想要获取 file 或者 dir 的属性，有这么4种方式：</p>
+<a id="more"></a>
 <ul>
 <li><p><strong>Linux C api</strong></p>
 <p>  <code>int lstat(const char *restrict path, struct stat *restrict buf)</code></p>
@@ -232,7 +218,6 @@ ga('send', 'pageview');
 </ul>
 </li>
 </ul>
-<a id="more"></a>
 <ul>
 <li><p><strong>NSFileManager</strong></p>
 <p>  通过调用 NSFileManager 的 <code>attributesOfItemAtPath:error:</code> 也可以拿到 file 的 attribute，attribute key 格式为 <code>NSFileXXX</code>，详见文档。</p>
@@ -261,12 +246,39 @@ ga('send', 'pageview');
 
       
     </div>
+    
+      <div class ="post-donate">
+    <div id="donate_tip" class="donate_tip center">
+        <a id="btn_donate" class="btn_donate" href="javascript:;"></a>
+        <span class="donate_tip_txt">
+		   打赏
+        </span>
+        <br>
+      </div>
+	<div id="donate_guide" class="donate_tip center hidden">
+		<div class="donate_item">
+			<span class="donate_item_txt" style="color:#1dabec">支付宝打赏</span>
+			<img src="/img/zhifubaoV2.png" alt="支付宝打赏">
+		</div>
+		<div class="donate_item">
+			<span class="donate_item_txt" style="color:#22cf28">微信打赏</span>
+			<img src="/img/weixinV2.png" alt="微信打赏">
+		</div>
+    </div>
+	<script type="text/javascript">
+		document.getElementById('btn_donate').onclick = function(){
+			$('#donate_tip').addClass('hidden');
+			$('#donate_guide').removeClass('hidden');
+		}
+	</script>
+</div>
+    
     <footer class="article-footer">
       
         <a href="http://hi.zongquan.wang/2015/01/22/How_to_get_File_Attributes_in_Mac/#disqus_thread" class="article-comment-link">Comments</a>
       
 
-      <a data-url="http://hi.zongquan.wang/2015/01/22/How_to_get_File_Attributes_in_Mac/" data-id="cimem53tn001lj4sb7g61t3i9" class="article-share-link">Share</a>
+      <a data-url="http://hi.zongquan.wang/2015/01/22/How_to_get_File_Attributes_in_Mac/" data-id="cimrgmuhh001loqsbcumfsf0t" class="article-share-link">Share</a>
 
       <div id="article-baidu-share" class="bdsharebuttonbox">
         <a href="#" class="bds_weixin" data-cmd="weixin" title="WeiXin"></a>
@@ -427,15 +439,6 @@ ga('send', 'pageview');
     <h3 class="widget-title">tags</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac/">Mac</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Thinking/">Thinking</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Xcode/">Xcode</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS/">iOS</a><span class="tag-list-count">13</span></li></ul>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">tag cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/Mac/" style="font-size: 16.67px;">Mac</a> <a href="/tags/Thinking/" style="font-size: 10px;">Thinking</a> <a href="/tags/Xcode/" style="font-size: 13.33px;">Xcode</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a>
     </div>
   </div>
 

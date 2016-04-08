@@ -5,16 +5,12 @@
   
   <title>Study iOS - CoreData | 闷骚的悟空</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Developing Applications for iOS 观后感系列：CoreData相关视频章节：12，13
-
-CoreData 是 iOS 提供的一套用于管理 app 的 Model 的 framework，它就像是个 object database，支持对 object 的各种操作：add、delete、query、undo、redo、autosave 等，灰常 NB。但它并不是 da">
+  <meta name="description" content="Developing Applications for iOS 观后感系列：CoreData相关视频章节：12，13">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Study iOS - CoreData">
 <meta property="og:url" content="http://hi.zongquan.wang/2015/01/11/Study_iOS_CoreData/index.html">
 <meta property="og:site_name" content="闷骚的悟空">
-<meta property="og:description" content="Developing Applications for iOS 观后感系列：CoreData相关视频章节：12，13
-
-CoreData 是 iOS 提供的一套用于管理 app 的 Model 的 framework，它就像是个 object database，支持对 object 的各种操作：add、delete、query、undo、redo、autosave 等，灰常 NB。但它并不是 da">
+<meta property="og:description" content="Developing Applications for iOS 观后感系列：CoreData相关视频章节：12，13">
 <meta property="og:image" content="http://hi.zongquan.wang/img/Study_iOS_CoreData/12.0.CoreData.png">
 <meta property="og:image" content="http://hi.zongquan.wang/img/Study_iOS_CoreData/12.1.CoreData.png">
 <meta property="og:image" content="http://hi.zongquan.wang/img/Study_iOS_CoreData/12.2.CoreData.png">
@@ -25,12 +21,10 @@ CoreData 是 iOS 提供的一套用于管理 app 的 Model 的 framework，它�
 <meta property="og:image" content="http://hi.zongquan.wang/img/Study_iOS_CoreData/12.14.CoreData.Add.png">
 <meta property="og:image" content="http://hi.zongquan.wang/img/Study_iOS_CoreData/12.17.CoreData.Delete.png">
 <meta property="og:image" content="http://hi.zongquan.wang/img/Study_iOS_CoreData/13.2.NSFetchedResultsController.png">
-<meta property="og:updated_time" content="2016-03-30T04:45:50.000Z">
+<meta property="og:updated_time" content="2016-04-08T01:23:43.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Study iOS - CoreData">
-<meta name="twitter:description" content="Developing Applications for iOS 观后感系列：CoreData相关视频章节：12，13
-
-CoreData 是 iOS 提供的一套用于管理 app 的 Model 的 framework，它就像是个 object database，支持对 object 的各种操作：add、delete、query、undo、redo、autosave 等，灰常 NB。但它并不是 da">
+<meta name="twitter:description" content="Developing Applications for iOS 观后感系列：CoreData相关视频章节：12，13">
   
   
     <link rel="icon" href="/favicon.ico">
@@ -196,6 +190,7 @@ ga('send', 'pageview');
       
                 
         <h3 id="Developing_Applications_for_iOS_观后感系列：CoreData">Developing Applications for iOS 观后感系列：CoreData</h3><p><em>相关视频章节：12，13</em></p>
+<a id="more"></a>
 <hr>
 <p><strong><code>CoreData</code></strong> 是 iOS 提供的一套用于管理 app 的 Model 的 framework，它就像是个 object database，支持对 object 的各种操作：add、delete、query、undo、redo、autosave 等，灰常 NB。但它并不是 database 的某种实现，你可以基于持久化文件（如 sqlite 等）来使用 CoreData，也可以完全基于内存来使用。</p>
 <p>使用 CoreData 会涉及 Xcode 和 code 两方面。</p>
@@ -215,7 +210,6 @@ ga('send', 'pageview');
 </li>
 </ul>
 <p>Xcode 这边基本就完成了，下面开始进入 code。</p>
-<a id="more"></a>
 <h3 id="NSManagedObjectContext">NSManagedObjectContext</h3><p>CoreData 的基本要素就是 NSManagedObject。那么如何获取我们的 NSManagedObject 呢？答案就是从 <em><code>NSManagedObjectContext</code></em> 中获取。</p>
 <p>有2种方式来获取这个 NSManagedObjectContext：</p>
 <ol>
@@ -342,12 +336,39 @@ ga('send', 'pageview');
 
       
     </div>
+    
+      <div class ="post-donate">
+    <div id="donate_tip" class="donate_tip center">
+        <a id="btn_donate" class="btn_donate" href="javascript:;"></a>
+        <span class="donate_tip_txt">
+		   打赏
+        </span>
+        <br>
+      </div>
+	<div id="donate_guide" class="donate_tip center hidden">
+		<div class="donate_item">
+			<span class="donate_item_txt" style="color:#1dabec">支付宝打赏</span>
+			<img src="/img/zhifubaoV2.png" alt="支付宝打赏">
+		</div>
+		<div class="donate_item">
+			<span class="donate_item_txt" style="color:#22cf28">微信打赏</span>
+			<img src="/img/weixinV2.png" alt="微信打赏">
+		</div>
+    </div>
+	<script type="text/javascript">
+		document.getElementById('btn_donate').onclick = function(){
+			$('#donate_tip').addClass('hidden');
+			$('#donate_guide').removeClass('hidden');
+		}
+	</script>
+</div>
+    
     <footer class="article-footer">
       
         <a href="http://hi.zongquan.wang/2015/01/11/Study_iOS_CoreData/#disqus_thread" class="article-comment-link">Comments</a>
       
 
-      <a data-url="http://hi.zongquan.wang/2015/01/11/Study_iOS_CoreData/" data-id="cimem53tb0019j4sb6n7pyl7p" class="article-share-link">Share</a>
+      <a data-url="http://hi.zongquan.wang/2015/01/11/Study_iOS_CoreData/" data-id="cimrgmuh70019oqsby0s41b3w" class="article-share-link">Share</a>
 
       <div id="article-baidu-share" class="bdsharebuttonbox">
         <a href="#" class="bds_weixin" data-cmd="weixin" title="WeiXin"></a>
@@ -508,15 +529,6 @@ ga('send', 'pageview');
     <h3 class="widget-title">tags</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac/">Mac</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Thinking/">Thinking</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Xcode/">Xcode</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS/">iOS</a><span class="tag-list-count">13</span></li></ul>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">tag cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/Mac/" style="font-size: 16.67px;">Mac</a> <a href="/tags/Thinking/" style="font-size: 10px;">Thinking</a> <a href="/tags/Xcode/" style="font-size: 13.33px;">Xcode</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a>
     </div>
   </div>
 

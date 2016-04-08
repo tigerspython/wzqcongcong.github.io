@@ -5,26 +5,20 @@
   
   <title>Hack XtraFinder | 闷骚的悟空</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="事情是这样的，我的系统是 OS X 10.11，就是那个有 SIP 的 10.11 😂。然后我装了一个 Finder 的插件：XtraFinder，这个插件有些功能在 10.11 下是不 work 的，所以插件作者出于好心，在检测到你的系统是 10.11 且 SIP 没有关闭的情况下，会弹出一个 alert 窗口作为提醒。
-
-那么问题来了，作者检测 SIP 是否关闭的方法有个 bug，导致我明明">
+  <meta name="description" content="事情是这样的，我的系统是 OS X 10.11，就是那个有 SIP 的 10.11 😂。然后我装了一个 Finder 的插件：XtraFinder，这个插件有些功能在 10.11 下是不 work 的，所以插件作者出于好心，在检测到你的系统是 10.11 且 SIP 没有关闭的情况下，会弹出一个 alert 窗口作为提醒。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hack XtraFinder">
 <meta property="og:url" content="http://hi.zongquan.wang/2016/01/12/Hack_XtraFinder/index.html">
 <meta property="og:site_name" content="闷骚的悟空">
-<meta property="og:description" content="事情是这样的，我的系统是 OS X 10.11，就是那个有 SIP 的 10.11 😂。然后我装了一个 Finder 的插件：XtraFinder，这个插件有些功能在 10.11 下是不 work 的，所以插件作者出于好心，在检测到你的系统是 10.11 且 SIP 没有关闭的情况下，会弹出一个 alert 窗口作为提醒。
-
-那么问题来了，作者检测 SIP 是否关闭的方法有个 bug，导致我明明">
+<meta property="og:description" content="事情是这样的，我的系统是 OS X 10.11，就是那个有 SIP 的 10.11 😂。然后我装了一个 Finder 的插件：XtraFinder，这个插件有些功能在 10.11 下是不 work 的，所以插件作者出于好心，在检测到你的系统是 10.11 且 SIP 没有关闭的情况下，会弹出一个 alert 窗口作为提醒。">
 <meta property="og:image" content="http://hi.zongquan.wang/img/Hack_XtraFinder/alert.png">
 <meta property="og:image" content="http://hi.zongquan.wang/img/Hack_XtraFinder/hopper1.png">
 <meta property="og:image" content="http://hi.zongquan.wang/img/Hack_XtraFinder/hopper2.png">
 <meta property="og:image" content="http://hi.zongquan.wang/img/Hack_XtraFinder/hex1.png">
-<meta property="og:updated_time" content="2016-01-13T04:58:29.000Z">
+<meta property="og:updated_time" content="2016-04-08T01:23:43.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hack XtraFinder">
-<meta name="twitter:description" content="事情是这样的，我的系统是 OS X 10.11，就是那个有 SIP 的 10.11 😂。然后我装了一个 Finder 的插件：XtraFinder，这个插件有些功能在 10.11 下是不 work 的，所以插件作者出于好心，在检测到你的系统是 10.11 且 SIP 没有关闭的情况下，会弹出一个 alert 窗口作为提醒。
-
-那么问题来了，作者检测 SIP 是否关闭的方法有个 bug，导致我明明">
+<meta name="twitter:description" content="事情是这样的，我的系统是 OS X 10.11，就是那个有 SIP 的 10.11 😂。然后我装了一个 Finder 的插件：XtraFinder，这个插件有些功能在 10.11 下是不 work 的，所以插件作者出于好心，在检测到你的系统是 10.11 且 SIP 没有关闭的情况下，会弹出一个 alert 窗口作为提醒。">
   
   
     <link rel="icon" href="/favicon.ico">
@@ -190,10 +184,10 @@ ga('send', 'pageview');
       
                 
         <p>事情是这样的，我的系统是 OS X 10.11，就是那个有 SIP 的 10.11 😂。然后我装了一个 Finder 的插件：XtraFinder，这个插件有些功能在 10.11 下是不 work 的，所以插件作者出于好心，在检测到你的系统是 10.11 且 SIP 没有关闭的情况下，会弹出一个 alert 窗口作为提醒。</p>
+<a id="more"></a>
 <p><img src="/img/Hack_XtraFinder/alert.png" alt="Alert"></p>
 <p>那么问题来了，作者检测 SIP 是否关闭的方法有个 bug，导致我明明是完全关闭了 SIP，但插件却认为 SIP 还在启用。第二个问题，这个 alert 每次重启插件（包括每次重启系统）时都会弹出来啊，出来啊，来啊，啊，搞得你每次都要去点一下确认才能将其关闭，烦的很 😒。我曾经给作者发邮件，希望他能 update 一下，只弹一次 alert 就好。当然了，作者没有鸟我。</p>
 <p>作为偶尔会用 Hopper Disassembler 偷窥一下别人代码的我，就开始意淫能不能 hack 一下这个插件，改掉这个恶心的行为。</p>
-<a id="more"></a>
 <h3 id="工具">工具</h3><ul>
 <li>Hopper Disassembler</li>
 <li>Hex Fiend</li>
@@ -224,12 +218,39 @@ ga('send', 'pageview');
 
       
     </div>
+    
+      <div class ="post-donate">
+    <div id="donate_tip" class="donate_tip center">
+        <a id="btn_donate" class="btn_donate" href="javascript:;"></a>
+        <span class="donate_tip_txt">
+		   打赏
+        </span>
+        <br>
+      </div>
+	<div id="donate_guide" class="donate_tip center hidden">
+		<div class="donate_item">
+			<span class="donate_item_txt" style="color:#1dabec">支付宝打赏</span>
+			<img src="/img/zhifubaoV2.png" alt="支付宝打赏">
+		</div>
+		<div class="donate_item">
+			<span class="donate_item_txt" style="color:#22cf28">微信打赏</span>
+			<img src="/img/weixinV2.png" alt="微信打赏">
+		</div>
+    </div>
+	<script type="text/javascript">
+		document.getElementById('btn_donate').onclick = function(){
+			$('#donate_tip').addClass('hidden');
+			$('#donate_guide').removeClass('hidden');
+		}
+	</script>
+</div>
+    
     <footer class="article-footer">
       
         <a href="http://hi.zongquan.wang/2016/01/12/Hack_XtraFinder/#disqus_thread" class="article-comment-link">Comments</a>
       
 
-      <a data-url="http://hi.zongquan.wang/2016/01/12/Hack_XtraFinder/" data-id="cimem53tv001rj4sbtsvmy24g" class="article-share-link">Share</a>
+      <a data-url="http://hi.zongquan.wang/2016/01/12/Hack_XtraFinder/" data-id="cimrgmuhm001roqsbqs37cka4" class="article-share-link">Share</a>
 
       <div id="article-baidu-share" class="bdsharebuttonbox">
         <a href="#" class="bds_weixin" data-cmd="weixin" title="WeiXin"></a>
@@ -390,15 +411,6 @@ ga('send', 'pageview');
     <h3 class="widget-title">tags</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac/">Mac</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Thinking/">Thinking</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Xcode/">Xcode</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS/">iOS</a><span class="tag-list-count">13</span></li></ul>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">tag cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/Mac/" style="font-size: 16.67px;">Mac</a> <a href="/tags/Thinking/" style="font-size: 10px;">Thinking</a> <a href="/tags/Xcode/" style="font-size: 13.33px;">Xcode</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a>
     </div>
   </div>
 

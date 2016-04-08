@@ -6,36 +6,18 @@
   <title>Just a little tips about Objective-C Block | 闷骚的悟空</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="大爱 Block，方便易用，但是，有些坑还是需要认真对待的~~
-其实问题主要是关于内存管理的。
-1. 捕获闭包的状态一切问题的起源：Block 除了包含一段可执行代码，更重要的是，它还会捕获（capture）其闭包内的状态。
-例（1）：
-- (void)testMethod {
-    int a = 1;
-    void (^testBlock)(void) = ^{
-        NSLo">
+其实问题主要是关于内存管理的。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Just a little tips about Objective-C Block">
 <meta property="og:url" content="http://hi.zongquan.wang/2014/12/03/Just_a_little_tips_about_Block/index.html">
 <meta property="og:site_name" content="闷骚的悟空">
 <meta property="og:description" content="大爱 Block，方便易用，但是，有些坑还是需要认真对待的~~
-其实问题主要是关于内存管理的。
-1. 捕获闭包的状态一切问题的起源：Block 除了包含一段可执行代码，更重要的是，它还会捕获（capture）其闭包内的状态。
-例（1）：
-- (void)testMethod {
-    int a = 1;
-    void (^testBlock)(void) = ^{
-        NSLo">
-<meta property="og:updated_time" content="2016-03-30T04:45:42.000Z">
+其实问题主要是关于内存管理的。">
+<meta property="og:updated_time" content="2016-04-08T01:23:43.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Just a little tips about Objective-C Block">
 <meta name="twitter:description" content="大爱 Block，方便易用，但是，有些坑还是需要认真对待的~~
-其实问题主要是关于内存管理的。
-1. 捕获闭包的状态一切问题的起源：Block 除了包含一段可执行代码，更重要的是，它还会捕获（capture）其闭包内的状态。
-例（1）：
-- (void)testMethod {
-    int a = 1;
-    void (^testBlock)(void) = ^{
-        NSLo">
+其实问题主要是关于内存管理的。">
   
   
     <link rel="icon" href="/favicon.ico">
@@ -202,6 +184,7 @@ ga('send', 'pageview');
                 
         <p>大爱 <em><code>Block</code></em>，方便易用，但是，有些坑还是需要认真对待的~~</p>
 <p>其实问题主要是关于内存管理的。</p>
+<a id="more"></a>
 <h4 id="1-_捕获闭包的状态">1. 捕获闭包的状态</h4><p>一切问题的起源：<em><code>Block</code></em> 除了包含一段可执行代码，更重要的是，它还会捕获（<em><code>capture</code></em>）其闭包内的状态。</p>
 <p>例（1）：</p>
 <pre><code>- (<span class="keyword">void</span>)testMethod {
@@ -222,7 +205,6 @@ ga('send', 'pageview');
 <li><p>对于标量来说，因为 <em><code>Block</code></em> 只是捕获了该变量的值，当然是无法对其进行有效地修改。而对于对象指针来说，捕获进来的是指针的值，无法修改指针的值表示不能让该指针指向另一个对象，但这不影响 <em><code>Block</code></em> 对该指针所指的对象进行操作。例如，如果例（1）中的 a 换成一个数组指针，在 <em><code>Block</code></em> 内部我们是可以做类似于 <code>[a addObject:]</code> 这种操作的，外界可以看到对指针所指对象的修改。前提是我们要在 <em><code>Block</code></em> 定义之前就要给 a 所指的对象分配好内存，即在外界 <code>NSMutableArray *a = [[NSMutableArray alloc] init]</code>，之后在 <em><code>Block</code></em> 内部就可以任意修改该对象了，而不是修改该对象的指针。</p>
 </li>
 </ul>
-<a id="more"></a>
 <h4 id="2-_如何让_Block_跟外界共享捕获的内容">2. 如何让 Block 跟外界共享捕获的内容</h4><p>前面提到，通常 <em><code>Block</code></em> 只是对变量做了一个快照，那么如何让 block 与外界共享该变量，从而能够修改其捕获的值呢？</p>
 <p>全靠 <em><code>__block</code></em> 这个修饰符了！</p>
 <p>如果一个变量在声明的时候指定了 <em><code>__block</code></em> 这个修饰符，那就意味着，所有在该变量的作用域内定义的 block，都能够共享该变量。</p>
@@ -278,12 +260,39 @@ dispatch_group_async<span class="list">(<span class="keyword">_operationsGroup</
 
       
     </div>
+    
+      <div class ="post-donate">
+    <div id="donate_tip" class="donate_tip center">
+        <a id="btn_donate" class="btn_donate" href="javascript:;"></a>
+        <span class="donate_tip_txt">
+		   打赏
+        </span>
+        <br>
+      </div>
+	<div id="donate_guide" class="donate_tip center hidden">
+		<div class="donate_item">
+			<span class="donate_item_txt" style="color:#1dabec">支付宝打赏</span>
+			<img src="/img/zhifubaoV2.png" alt="支付宝打赏">
+		</div>
+		<div class="donate_item">
+			<span class="donate_item_txt" style="color:#22cf28">微信打赏</span>
+			<img src="/img/weixinV2.png" alt="微信打赏">
+		</div>
+    </div>
+	<script type="text/javascript">
+		document.getElementById('btn_donate').onclick = function(){
+			$('#donate_tip').addClass('hidden');
+			$('#donate_guide').removeClass('hidden');
+		}
+	</script>
+</div>
+    
     <footer class="article-footer">
       
         <a href="http://hi.zongquan.wang/2014/12/03/Just_a_little_tips_about_Block/#disqus_thread" class="article-comment-link">Comments</a>
       
 
-      <a data-url="http://hi.zongquan.wang/2014/12/03/Just_a_little_tips_about_Block/" data-id="cimem53tg001fj4sbbatpxb82" class="article-share-link">Share</a>
+      <a data-url="http://hi.zongquan.wang/2014/12/03/Just_a_little_tips_about_Block/" data-id="cimrgmuhc001foqsbli1mky1b" class="article-share-link">Share</a>
 
       <div id="article-baidu-share" class="bdsharebuttonbox">
         <a href="#" class="bds_weixin" data-cmd="weixin" title="WeiXin"></a>
@@ -444,15 +453,6 @@ dispatch_group_async<span class="list">(<span class="keyword">_operationsGroup</
     <h3 class="widget-title">tags</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac/">Mac</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Thinking/">Thinking</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Xcode/">Xcode</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS/">iOS</a><span class="tag-list-count">13</span></li></ul>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">tag cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/Mac/" style="font-size: 16.67px;">Mac</a> <a href="/tags/Thinking/" style="font-size: 10px;">Thinking</a> <a href="/tags/Xcode/" style="font-size: 13.33px;">Xcode</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a>
     </div>
   </div>
 

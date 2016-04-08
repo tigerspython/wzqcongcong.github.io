@@ -5,36 +5,21 @@
   
   <title>Study iOS - Hardware | 闷骚的悟空</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Developing Applications for iOS 观后感系列：Hardware相关视频章节：14、17
-
-关于 iOS device 的 hardware，本篇主要了解2个方面：CoreLocation + CoreMotion
-CoreLocation
-CLLocation：CoreLocation 中最基本的 class。
-  CLLocation 的重要 property：">
+  <meta name="description" content="Developing Applications for iOS 观后感系列：Hardware相关视频章节：14、17">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Study iOS - Hardware">
 <meta property="og:url" content="http://hi.zongquan.wang/2015/01/18/Study_iOS_Hardware/index.html">
 <meta property="og:site_name" content="闷骚的悟空">
-<meta property="og:description" content="Developing Applications for iOS 观后感系列：Hardware相关视频章节：14、17
-
-关于 iOS device 的 hardware，本篇主要了解2个方面：CoreLocation + CoreMotion
-CoreLocation
-CLLocation：CoreLocation 中最基本的 class。
-  CLLocation 的重要 property：">
+<meta property="og:description" content="Developing Applications for iOS 观后感系列：Hardware相关视频章节：14、17">
 <meta property="og:image" content="http://hi.zongquan.wang/img/Study_iOS_Hardware/17.9.CoreMotion.png">
 <meta property="og:image" content="http://hi.zongquan.wang/img/Study_iOS_Hardware/17.10.CoreMotion.png">
 <meta property="og:image" content="http://hi.zongquan.wang/img/Study_iOS_Hardware/17.11.CoreMotion.png">
 <meta property="og:image" content="http://hi.zongquan.wang/img/Study_iOS_Hardware/17.12.CoreMotion.png">
 <meta property="og:image" content="http://hi.zongquan.wang/img/Study_iOS_Hardware/17.13.CoreMotion.png">
-<meta property="og:updated_time" content="2016-03-30T04:45:54.000Z">
+<meta property="og:updated_time" content="2016-04-08T01:23:43.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Study iOS - Hardware">
-<meta name="twitter:description" content="Developing Applications for iOS 观后感系列：Hardware相关视频章节：14、17
-
-关于 iOS device 的 hardware，本篇主要了解2个方面：CoreLocation + CoreMotion
-CoreLocation
-CLLocation：CoreLocation 中最基本的 class。
-  CLLocation 的重要 property：">
+<meta name="twitter:description" content="Developing Applications for iOS 观后感系列：Hardware相关视频章节：14、17">
   
   
     <link rel="icon" href="/favicon.ico">
@@ -200,6 +185,7 @@ ga('send', 'pageview');
       
                 
         <h3 id="Developing_Applications_for_iOS_观后感系列：Hardware">Developing Applications for iOS 观后感系列：Hardware</h3><p><em>相关视频章节：14、17</em></p>
+<a id="more"></a>
 <hr>
 <p>关于 iOS device 的 hardware，本篇主要了解2个方面：CoreLocation + CoreMotion</p>
 <h3 id="CoreLocation">CoreLocation</h3><ul>
@@ -240,7 +226,6 @@ ga('send', 'pageview');
 </ol>
 </li>
 </ul>
-<a id="more"></a>
 <h3 id="CoreMotion">CoreMotion</h3><p>主要用于获取各种 motion sensor 的信息，如 accelerometer、gyro、magnetometer 等等。</p>
 <p>iOS 中提供的 class 是 <em><code>CMMotionManager</code></em>，你可以通过 alloc/init 来获取。<strong>但是注意</strong>，处于性能考虑，每个 app 中只能有一个全局的 CMMotionManager instance，因此你需要创建一个单例模式来实现全局单例。</p>
 <p>使用流程：</p>
@@ -265,12 +250,39 @@ ga('send', 'pageview');
 
       
     </div>
+    
+      <div class ="post-donate">
+    <div id="donate_tip" class="donate_tip center">
+        <a id="btn_donate" class="btn_donate" href="javascript:;"></a>
+        <span class="donate_tip_txt">
+		   打赏
+        </span>
+        <br>
+      </div>
+	<div id="donate_guide" class="donate_tip center hidden">
+		<div class="donate_item">
+			<span class="donate_item_txt" style="color:#1dabec">支付宝打赏</span>
+			<img src="/img/zhifubaoV2.png" alt="支付宝打赏">
+		</div>
+		<div class="donate_item">
+			<span class="donate_item_txt" style="color:#22cf28">微信打赏</span>
+			<img src="/img/weixinV2.png" alt="微信打赏">
+		</div>
+    </div>
+	<script type="text/javascript">
+		document.getElementById('btn_donate').onclick = function(){
+			$('#donate_tip').addClass('hidden');
+			$('#donate_guide').removeClass('hidden');
+		}
+	</script>
+</div>
+    
     <footer class="article-footer">
       
         <a href="http://hi.zongquan.wang/2015/01/18/Study_iOS_Hardware/#disqus_thread" class="article-comment-link">Comments</a>
       
 
-      <a data-url="http://hi.zongquan.wang/2015/01/18/Study_iOS_Hardware/" data-id="cimem53t70016j4sbjvxj969h" class="article-share-link">Share</a>
+      <a data-url="http://hi.zongquan.wang/2015/01/18/Study_iOS_Hardware/" data-id="cimrgmuh40016oqsbciwdyu5p" class="article-share-link">Share</a>
 
       <div id="article-baidu-share" class="bdsharebuttonbox">
         <a href="#" class="bds_weixin" data-cmd="weixin" title="WeiXin"></a>
@@ -431,15 +443,6 @@ ga('send', 'pageview');
     <h3 class="widget-title">tags</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac/">Mac</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Thinking/">Thinking</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Xcode/">Xcode</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS/">iOS</a><span class="tag-list-count">13</span></li></ul>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">tag cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/Mac/" style="font-size: 16.67px;">Mac</a> <a href="/tags/Thinking/" style="font-size: 10px;">Thinking</a> <a href="/tags/Xcode/" style="font-size: 13.33px;">Xcode</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a>
     </div>
   </div>
 

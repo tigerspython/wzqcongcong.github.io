@@ -179,10 +179,6 @@ ga('send', 'pageview');
     <div class="article-entry" itemprop="articleBody">
       
         <h3 id="Developing_Applications_for_iOS_观后感系列：UIScrollView">Developing Applications for iOS 观后感系列：UIScrollView</h3><p><em>相关视频章节：10</em></p>
-<hr>
-<p><strong><code>UIScrollView</code></strong> 是 iOS 中很基础很重要的一种 UIView，用于呈现远大于 app window 大小的 content area，用户通过 <em><code>swiping</code></em> 手势可以在 content area 中进行 scroll，通过 <em><code>pinching</code></em> 手势可以进行 content 的 zoom。就像是拿着一个放大镜在四处移动着观察一副很大的地图。</p>
-<p>UIScrollView 也是很多其它重要 UIView 的 super class，例如 <a href="../../../../2015/01/11/Study_iOS_UITableView/"><em><code>UITableView</code></em></a>、<em><code>UICollectionView</code></em>、<a href="../../../../2015/01/11/Study_iOS_Common_UI/"><em><code>UITextView</code></em></a> 等等。</p>
-<h4 id="创建_UIScrollView">创建 UIScrollView</h4><p>通过 Storyboard 或者代码中通过 alloc initWithFrame。</p>
         
           <p class="article-more-link shake shake-rotate">
             <a href="/2015/01/11/Study_iOS_UIScrollView/#more">Read More</a>
@@ -190,12 +186,13 @@ ga('send', 'pageview');
         
       
     </div>
+    
     <footer class="article-footer">
       
         <a href="http://hi.zongquan.wang/2015/01/11/Study_iOS_UIScrollView/#disqus_thread" class="article-comment-link">Comments</a>
       
 
-      <a data-url="http://hi.zongquan.wang/2015/01/11/Study_iOS_UIScrollView/" data-id="cimem53sl000ij4sbn47eivps" class="article-share-link">Share</a>
+      <a data-url="http://hi.zongquan.wang/2015/01/11/Study_iOS_UIScrollView/" data-id="cimrgmugk000ioqsbltjjkjfe" class="article-share-link">Share</a>
 
       <div id="article-baidu-share" class="bdsharebuttonbox">
         <a href="#" class="bds_weixin" data-cmd="weixin" title="WeiXin"></a>
@@ -248,37 +245,6 @@ ga('send', 'pageview');
     <div class="article-entry" itemprop="articleBody">
       
         <h3 id="Developing_Applications_for_iOS_观后感系列：Segue">Developing Applications for iOS 观后感系列：Segue</h3><p><em>相关视频章节：6，15，16</em></p>
-<hr>
-<p><em><code>Segue</code></em>，中文为“继续”的意思，在 iOS 开发中，其 class 为 <em><code>UIStoryboardSegue</code></em>，用于 storyboard 中不同 UIViewController 之间的转场，即从一个 UIViewController scene 转场到另一个 UIViewController scene。你可以从一个 UIControl、UIBarItem、UIView、UIViewController 等等，向另一个 UIViewController 建立 Segue。</p>
-<h3 id="如何创建_Segue">如何创建 Segue</h3><p>起点（UIControl、UIBarItem、UIView、UIViewController 等等）</p>
-<p>⇩</p>
-<p><em><code>Control</code></em> + <em><code>Drag</code></em></p>
-<p>⇩</p>
-<p>终点（UIViewController）</p>
-<p>⇩</p>
-<p>设置 Segue 的 Identifier</p>
-<h3 id="Segue_如何执行">Segue 如何执行</h3><ol>
-<li><p><strong>触发 Segue</strong>：假如你从 UIButton 建立了一个 Segue，那么 button 点击时，就会触发 Segue。但有时你也需要从代码中手动触发 Segue，此时就需要调用 UIViewController 的 API：<code>-(void)performSegueWithIdentifier:(NSString *)segueID sender:(id)sender</code>。</p>
-</li>
-<li><p><strong>询问 Segue 是否允许执行</strong>：实现这个 delegate：<code>-(BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender</code>，如果不实现，默认就是允许所有 Segue。</p>
-</li>
-<li><p><strong>准备 Segue</strong>：真正呈现 <em><code>destination UIViewController</code></em> 之前，你需要为该 Segue 作 preparation。也就是说，Segue 会给 <em><code>source UIViewController</code></em> 机会去准备好将要呈现的 destination UIViewController。可以理解成 destination UIViewController 的 init。这一 preparation 过程是通过实现如下 delegate 来完成的：</p>
-<pre><code>-(<span class="typename">void</span>)<span class="string">prepareForSegue:</span>(UIStoryboardSegue *)segue <span class="string">sender:</span>(id)sender
-{
-    <span class="keyword">if</span> ([segue.identifier <span class="string">isEqualToString:</span>@<span class="string">"XXX"</span>]) {
-        <span class="keyword">if</span> ([segue.destinationViewController <span class="string">isKindOfClass:</span>[XXXViewController <span class="class"><span class="keyword">class</span>]]) {</span>
-            XXXViewController *xxxVC = (XXXViewController *)segue.destinationViewController;
-            xxxVC.xxxProperty = XXX; <span class="comment">// setup xxxVC</span>
-        }
-    }
-}
-</code></pre><p> <strong>注意</strong>，要记住之前 <a href="../../../../2015/01/05/Study_iOS_MVC/">MVCs</a> 中提到的原则，这个 destination UIViewController 在 source UIViewController 的 MVC 中扮演着 View 的角色，不允许 destination UIViewController 向 source UIViewController 的直接通信，而是要使用 blind 的方式，如 delegate。</p>
-<p> <strong>还要注意</strong>，几乎所有类型的 Segue 都是 init 一个 <strong>new</strong> destination UIViewController 给你，所以当你第二次 prepareForSegue 时，第一次 prepareForSegue 拿到的那个 destination UIViewController 已经不复存在了，你需要重新 setup。<strong>这里只有一个例外</strong>，就是后面要提到的 <em><code>Unwind Segue</code></em>，它返给你的 destination UIViewController 就是之前已经存在的 UIViewController，这显然是合理的。举个例子，aVC 通过普通 Segue 转场到 bVC（bVC 会被重新 init），bVC 又通过 Unwind Segue 转回到 aVC，此时，Unwind Segue 的 destination UIViewController 显然必须是之前已经存在的那个 aVC，而不应该去重新 init 一个。</p>
-<p> <strong>更要注意</strong>，prepareForSegue 在执行的时候，destination UIViewController 中的 outlet 尚未 set，因为 prepareForSegue 做的事等价于帮助 destination UIViewController 去 init。而 outlet set 是在 init 之后，viewDidLoad 之前做的。参见 <a href="../../../../2015/01/05/Study_iOS_Life_Cycle/">Life Cycle</a>。</p>
-</li>
-<li><p><strong>系统为你呈现 destination UIViewController</strong></p>
-</li>
-</ol>
         
           <p class="article-more-link shake shake-rotate">
             <a href="/2015/01/10/Study_iOS_Segue/#more">Read More</a>
@@ -286,12 +252,13 @@ ga('send', 'pageview');
         
       
     </div>
+    
     <footer class="article-footer">
       
         <a href="http://hi.zongquan.wang/2015/01/10/Study_iOS_Segue/#disqus_thread" class="article-comment-link">Comments</a>
       
 
-      <a data-url="http://hi.zongquan.wang/2015/01/10/Study_iOS_Segue/" data-id="cimem53sn000lj4sbmxeex64g" class="article-share-link">Share</a>
+      <a data-url="http://hi.zongquan.wang/2015/01/10/Study_iOS_Segue/" data-id="cimrgmugm000loqsbg9msfb1h" class="article-share-link">Share</a>
 
       <div id="article-baidu-share" class="bdsharebuttonbox">
         <a href="#" class="bds_weixin" data-cmd="weixin" title="WeiXin"></a>
@@ -344,31 +311,6 @@ ga('send', 'pageview');
     <div class="article-entry" itemprop="articleBody">
       
         <h3 id="Developing_Applications_for_iOS_观后感系列：Network">Developing Applications for iOS 观后感系列：Network</h3><p><em>相关视频章节：10</em></p>
-<hr>
-<p>iOS 中处理 Network 的 API 主要是 <em><code>NSURLSession</code></em>，当然，基于此，<em>Mattt Thompson</em> 开发了一套更加强大易用的 <em>AFNetworking</em>。不管怎样，还是很有必要了解一下 iOS 自己的 <em>NSURLSession</em> 的。</p>
-<h4 id="NSURLSession_的一般使用流程："><em>NSURLSession</em> 的一般使用流程：</h4><pre><code><span class="built_in">NSURLRequest</span> *request = [<span class="built_in">NSURLRequest</span> requestWithURL:XXX];
-<span class="built_in">NSURLSessionConfiguration</span> *configuration = XXX;
-<span class="built_in">NSURLSession</span> *session = XXX; <span class="comment">// use configuration</span>
-<span class="built_in">NSURLSessionXXXTask</span> *task = [session XXXTaskWithRequest:request]; <span class="comment">// downloadTask, uploadTask, dataTask, ...</span>
-[task resume];
-</code></pre><p>基本上就是上面这几步。当然，如果使用 <em><code>NSURLSessionDelegate</code></em> 的话，还需要实现这些 delegate；如果不使用 delegate，也可以选择使用 <em><code>completionHandler</code></em> 这种 block 的方式。具体选择哪种，取决于 <em>NSURLSessionXXXTask</em> 是如何创建的，下面会详细提到。</p>
-<p>下面分别理解一下这些具体步骤：</p>
-<ol>
-<li><p><strong><code>NSURLRequest</code></strong>：比较简单，不多说了。</p>
-</li>
-<li><p><strong><code>NSURLSessionConfiguration</code></strong>：这个 configuration 控制着后面创建的 session 的若干属性。通常比较关注这3个 API：</p>
-<ul>
-<li><p><code>+(NSURLSessionConfiguration *)defaultSessionConfiguration</code>：创建一个 default session，会使用 cache，cookie 机制。</p>
-</li>
-<li><p><code>+(NSURLSessionConfiguration *) ephemeralSessionConfiguration</code>：创建一个 ephemeral session，不使用 cache，cookie 机制，所有东西都在内存中，除了下载文件时才会真正地有写入 disk 的动作。</p>
-</li>
-<li><p><code>+(NSURLSessionConfiguration *) backgroundSessionConfigurationWithIdentifier:(NSString *)identifier</code>：创建一个 background session，可以让 session 在 app 处于 background 时能够继续 run。</p>
-<p>  这种 session 会把控制权交给系统，正如之前一篇笔记（<a href="../../../../2015/01/05/Study_iOS_Life_Cycle/"><em><code>Life Cycle</code></em></a>）中讲到的那样，有个 <code>UIApplicationDelegate</code> 是专门配合这种 session 使用的，即 <code>(void)application:(UIApplication *)application handleEventsForBackgroundURLSession:(NSString *)identifier completionHandler:(void (^)())completionHandler</code>，系统首先通过这个 delegate 响应 network events 后，才会再把控制权交给你的 <em><code>NSURLSessionDelegate</code></em>。</p>
-<p>  <strong>注意</strong>，这种 session 比前面2种多了一个 <code>identifier</code>，有了它，当 app 被系统 terminate 和 relaunch 后，系统会使用同一个 identifier 重建 background session，继续之前未完成的 network transfer。但是，这里仅限于 app 是被系统 terminate 和 relaunch，如果是用户手动退出 app，则不会去重建 session。</p>
-</li>
-</ul>
-</li>
-</ol>
         
           <p class="article-more-link shake shake-rotate">
             <a href="/2015/01/07/Study_iOS_Network/#more">Read More</a>
@@ -376,12 +318,13 @@ ga('send', 'pageview');
         
       
     </div>
+    
     <footer class="article-footer">
       
         <a href="http://hi.zongquan.wang/2015/01/07/Study_iOS_Network/#disqus_thread" class="article-comment-link">Comments</a>
       
 
-      <a data-url="http://hi.zongquan.wang/2015/01/07/Study_iOS_Network/" data-id="cimem53sq000oj4sbt3ozils1" class="article-share-link">Share</a>
+      <a data-url="http://hi.zongquan.wang/2015/01/07/Study_iOS_Network/" data-id="cimrgmugo000ooqsbr0v7dj6x" class="article-share-link">Share</a>
 
       <div id="article-baidu-share" class="bdsharebuttonbox">
         <a href="#" class="bds_weixin" data-cmd="weixin" title="WeiXin"></a>
@@ -434,24 +377,6 @@ ga('send', 'pageview');
     <div class="article-entry" itemprop="articleBody">
       
         <h3 id="Developing_Applications_for_iOS_观后感系列：UIView_Animation">Developing Applications for iOS 观后感系列：UIView Animation</h3><p><em>相关视频章节：8</em></p>
-<hr>
-<p>本篇提到的 Animation 主要是基于 UIView 的，并没有涉及到基于 Layer 机制的 Animation。</p>
-<p>基于 UIView 的 Animation 有以下3种：</p>
-<h3 id="Animation_of_UIView_Property">Animation of UIView Property</h3><p><strong>首先一定要明确一点</strong>：animation 虽然是经历一定时间 show 在屏幕上的，但对 property 的值的修改却是早就已经立即生效了。</p>
-<p>UIView 的某些 property 的改变是可以施加 animation 的，例如：</p>
-<pre><code>frame
-transform（translation，rotation，<span class="built_in">scale</span>）
-<span class="built_in">alpha</span>（opacity）
-</code></pre><p>实现这一类 animation 的 API 是 UIView 的 <code>class method</code>：</p>
-<pre><code>+(<span class="keyword">void</span>)animateWithDuration:(<span class="built_in">NSTimeInterval</span>)duration
-                     delay:(<span class="built_in">NSTimeInterval</span>)delay
-                   options:(<span class="built_in">NSViewAnimationOptions</span>)options
-                animations:(<span class="keyword">void</span>(^)(<span class="keyword">void</span>))animationsBlock
-                completion:(<span class="keyword">void</span>(^)(<span class="built_in">BOOL</span> finished))completionBlock
-</code></pre><p><code>animationsBlock</code> 里面执行你对 UIView property 所做的修改。</p>
-<p><code>completionBlock</code> 表示 animation 呈现结束后要做的事，如果 animation 成功地呈现完毕，finished 为 YES，否则，若中断了，则返回 NO。</p>
-<p><strong>注意</strong>：animation 是在该 API 返回后开始的，而该 API 返回的时刻是 <code>animationsBlock</code> 执行完毕的时刻。<strong>也就是说</strong>，调用该 API 后，会立刻执行其 <code>animationsBlock</code>，执行完后就立刻返回，然后 animation 开始呈现。所以对 UIView property 的修改在 <code>animationsBlock</code> 执行完后就立即生效了，只不过 property 的变化要经过 duration 才呈现完毕。</p>
-<p><strong>另外</strong>：finished 何时为 NO？如果在该 animation 开始后，又调用了该 API 对相同的 property 开始了另一个 animation，这样前一个 animation 没做完就得中断去做另一个 animation 了，这种情况下，前一个 animation 的 completionBlock 的 finished 就为 NO 了。</p>
         
           <p class="article-more-link shake shake-rotate">
             <a href="/2015/01/06/Study_iOS_Animation/#more">Read More</a>
@@ -459,12 +384,13 @@ transform（translation，rotation，<span class="built_in">scale</span>）
         
       
     </div>
+    
     <footer class="article-footer">
       
         <a href="http://hi.zongquan.wang/2015/01/06/Study_iOS_Animation/#disqus_thread" class="article-comment-link">Comments</a>
       
 
-      <a data-url="http://hi.zongquan.wang/2015/01/06/Study_iOS_Animation/" data-id="cimem53te001cj4sbqfrd1223" class="article-share-link">Share</a>
+      <a data-url="http://hi.zongquan.wang/2015/01/06/Study_iOS_Animation/" data-id="cimrgmuh9001coqsbc2izbeh1" class="article-share-link">Share</a>
 
       <div id="article-baidu-share" class="bdsharebuttonbox">
         <a href="#" class="bds_weixin" data-cmd="weixin" title="WeiXin"></a>
@@ -517,18 +443,6 @@ transform（translation，rotation，<span class="built_in">scale</span>）
     <div class="article-entry" itemprop="articleBody">
       
         <h3 id="Developing_Applications_for_iOS_观后感系列：UIView">Developing Applications for iOS 观后感系列：UIView</h3><p><em>相关视频章节：7</em></p>
-<hr>
-<h3 id="UIView_的_init">UIView 的 init</h3><p>与 UIViewController 的 init 类似，UIView 的 init 也有2种形式：一种是从 storyboard 中释放出来，另一种是在代码中直接调用相关的 init 函数。两种只会选择一种来完成 init。</p>
-<ol>
-<li><p><strong>来自 storyboard：</strong> <em><code>awakeFromNib</code></em></p>
-<p> awakeFromNib 是 NSObject 的函数，颤抖吧。</p>
-</li>
-<li><p><strong>来自 code：</strong> <em><code>initWithFrame:(CGRect)rect</code></em></p>
-</li>
-</ol>
-<p>因为有这2种 init 方式，所以，如果希望在 init 阶段做一些 setup，那么这2个地方都要执行 setup。因为从 storyboard 释放出来的 init 方式只会调用 awakeFromNib，不会调用 initWithFrame:；同样，code 中调用 initWithFrame: 进行的 init 方式也不会再调用 awakeFromNib。</p>
-<h3 id="Coordinate">Coordinate</h3><p><img src="/img/Study_iOS_UIView/7.1.Coordinate.png" alt="Coordinate"></p>
-<p><img src="/img/Study_iOS_UIView/7.2.Coordinate.png" alt="Coordinate"></p>
         
           <p class="article-more-link shake shake-rotate">
             <a href="/2015/01/06/Study_iOS_UIView/#more">Read More</a>
@@ -536,12 +450,13 @@ transform（translation，rotation，<span class="built_in">scale</span>）
         
       
     </div>
+    
     <footer class="article-footer">
       
         <a href="http://hi.zongquan.wang/2015/01/06/Study_iOS_UIView/#disqus_thread" class="article-comment-link">Comments</a>
       
 
-      <a data-url="http://hi.zongquan.wang/2015/01/06/Study_iOS_UIView/" data-id="cimem53sg000bj4sbqxavykfq" class="article-share-link">Share</a>
+      <a data-url="http://hi.zongquan.wang/2015/01/06/Study_iOS_UIView/" data-id="cimrgmugg000boqsb031f9ad2" class="article-share-link">Share</a>
 
       <div id="article-baidu-share" class="bdsharebuttonbox">
         <a href="#" class="bds_weixin" data-cmd="weixin" title="WeiXin"></a>
@@ -679,15 +594,6 @@ transform（translation，rotation，<span class="built_in">scale</span>）
     <h3 class="widget-title">tags</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac/">Mac</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Thinking/">Thinking</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Xcode/">Xcode</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS/">iOS</a><span class="tag-list-count">13</span></li></ul>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">tag cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/Mac/" style="font-size: 16.67px;">Mac</a> <a href="/tags/Thinking/" style="font-size: 10px;">Thinking</a> <a href="/tags/Xcode/" style="font-size: 13.33px;">Xcode</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a>
     </div>
   </div>
 

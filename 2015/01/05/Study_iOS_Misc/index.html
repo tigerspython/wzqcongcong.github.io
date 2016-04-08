@@ -5,25 +5,16 @@
   
   <title>Study iOS - Misc | 闷骚的悟空</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Developing Applications for iOS 观后感系列：Misc相关视频章节：all
-
-NSObject
-(NSString *)description：当你自己实现一个 myClass 时，如果实现了 (NSString *)description 这个函数，那么你就可以利用 NSLog(@&amp;quot;%@&amp;quot;, myClassInstance) 来输出 descri">
+  <meta name="description" content="Developing Applications for iOS 观后感系列：Misc相关视频章节：all">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Study iOS - Misc">
 <meta property="og:url" content="http://hi.zongquan.wang/2015/01/05/Study_iOS_Misc/index.html">
 <meta property="og:site_name" content="闷骚的悟空">
-<meta property="og:description" content="Developing Applications for iOS 观后感系列：Misc相关视频章节：all
-
-NSObject
-(NSString *)description：当你自己实现一个 myClass 时，如果实现了 (NSString *)description 这个函数，那么你就可以利用 NSLog(@&amp;quot;%@&amp;quot;, myClassInstance) 来输出 descri">
-<meta property="og:updated_time" content="2015-11-10T02:03:41.000Z">
+<meta property="og:description" content="Developing Applications for iOS 观后感系列：Misc相关视频章节：all">
+<meta property="og:updated_time" content="2016-04-08T01:23:43.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Study iOS - Misc">
-<meta name="twitter:description" content="Developing Applications for iOS 观后感系列：Misc相关视频章节：all
-
-NSObject
-(NSString *)description：当你自己实现一个 myClass 时，如果实现了 (NSString *)description 这个函数，那么你就可以利用 NSLog(@&amp;quot;%@&amp;quot;, myClassInstance) 来输出 descri">
+<meta name="twitter:description" content="Developing Applications for iOS 观后感系列：Misc相关视频章节：all">
   
   
     <link rel="icon" href="/favicon.ico">
@@ -189,6 +180,7 @@ ga('send', 'pageview');
       
                 
         <h3 id="Developing_Applications_for_iOS_观后感系列：Misc">Developing Applications for iOS 观后感系列：Misc</h3><p><em>相关视频章节：all</em></p>
+<a id="more"></a>
 <hr>
 <h4 id="NSObject">NSObject</h4><ul>
 <li><p><code>(NSString *)description</code>：当你自己实现一个 myClass 时，如果实现了 <code>(NSString *)description</code> 这个函数，那么你就可以利用 <code>NSLog(@&quot;%@&quot;, myClassInstance)</code> 来输出 description 的内容了，这里的 <em><code>%@</code></em> 会被替换成 <code>[myClassInstance description]</code>。</p>
@@ -206,7 +198,6 @@ ga('send', 'pageview');
 <p>  <strong>注意</strong>，preferredFontForTextStyle: 也可以用于设定控件字体，但反过来 systemFontOfSize: 却不能用于设定 content 字体。</p>
 </li>
 </ul>
-<a id="more"></a>
 <h4 id="NSNotification">NSNotification</h4><ul>
 <li><p>对于向 NSNotificationCenter 注册过的 observer，如果不再需要 listen 某个 notification，必须要调用 <code>removeObserver:</code>，因为 NSNotificationCenter 对 observer 的引用方式是 <em><code>unsafe retained</code></em>，所以，如果 observer 变为 nil 了，NSNotificationCenter 会出现引用异常，造成 crash。</p>
 <p>  常见的调用 removeObserver: 的地方是 <em><code>viewWillDisappear</code></em> 或者 <em><code>dealloc</code></em>。</p>
@@ -224,12 +215,39 @@ ga('send', 'pageview');
 
       
     </div>
+    
+      <div class ="post-donate">
+    <div id="donate_tip" class="donate_tip center">
+        <a id="btn_donate" class="btn_donate" href="javascript:;"></a>
+        <span class="donate_tip_txt">
+		   打赏
+        </span>
+        <br>
+      </div>
+	<div id="donate_guide" class="donate_tip center hidden">
+		<div class="donate_item">
+			<span class="donate_item_txt" style="color:#1dabec">支付宝打赏</span>
+			<img src="/img/zhifubaoV2.png" alt="支付宝打赏">
+		</div>
+		<div class="donate_item">
+			<span class="donate_item_txt" style="color:#22cf28">微信打赏</span>
+			<img src="/img/weixinV2.png" alt="微信打赏">
+		</div>
+    </div>
+	<script type="text/javascript">
+		document.getElementById('btn_donate').onclick = function(){
+			$('#donate_tip').addClass('hidden');
+			$('#donate_guide').removeClass('hidden');
+		}
+	</script>
+</div>
+    
     <footer class="article-footer">
       
         <a href="http://hi.zongquan.wang/2015/01/05/Study_iOS_Misc/#disqus_thread" class="article-comment-link">Comments</a>
       
 
-      <a data-url="http://hi.zongquan.wang/2015/01/05/Study_iOS_Misc/" data-id="cimem53sw000uj4sbg97to7hw" class="article-share-link">Share</a>
+      <a data-url="http://hi.zongquan.wang/2015/01/05/Study_iOS_Misc/" data-id="cimrgmugt000uoqsbypkj8qq1" class="article-share-link">Share</a>
 
       <div id="article-baidu-share" class="bdsharebuttonbox">
         <a href="#" class="bds_weixin" data-cmd="weixin" title="WeiXin"></a>
@@ -390,15 +408,6 @@ ga('send', 'pageview');
     <h3 class="widget-title">tags</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac/">Mac</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Thinking/">Thinking</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Xcode/">Xcode</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS/">iOS</a><span class="tag-list-count">13</span></li></ul>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">tag cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/Mac/" style="font-size: 16.67px;">Mac</a> <a href="/tags/Thinking/" style="font-size: 10px;">Thinking</a> <a href="/tags/Xcode/" style="font-size: 13.33px;">Xcode</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a>
     </div>
   </div>
 
