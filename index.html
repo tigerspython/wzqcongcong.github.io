@@ -5,23 +5,20 @@
   
   <title>闷骚的悟空</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description">
-<meta property="og:type" content="website">
+  <meta property="og:type" content="website">
 <meta property="og:title" content="闷骚的悟空">
 <meta property="og:url" content="http://hi.zongquan.wang/index.html">
 <meta property="og:site_name" content="闷骚的悟空">
-<meta property="og:description">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="闷骚的悟空">
-<meta name="twitter:description">
   
   
     <link rel="icon" href="/favicon.ico">
   
   
 
-  <link rel="stylesheet" href="/css/style.css" type="text/css">
-  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
   
 <!-- Google Analytics -->
 <script type="text/javascript">
@@ -113,11 +110,11 @@ ga('send', 'pageview');
     </div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        22
+        23
         <span>posts</span>
       </div>
       <div class="article-info-block">
-        5
+        6
         <span>tags</span>
       </div>
     </div>
@@ -144,6 +141,177 @@ ga('send', 'pageview');
 
       
       <section id="main">
+      <article id="post-Swift_and_ObjectiveC_Mix_and_Match" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/07/25/Swift_and_ObjectiveC_Mix_and_Match/">Swift and Objective-C (Mix and Match)</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2016/07/25/Swift_and_ObjectiveC_Mix_and_Match/">
+      <time datetime="2016-07-25T09:32:53.000Z" itemprop="datePublished">2016-07-25</time>
+    </a>
+  </div>
+
+
+          
+  <div class="article-category">
+  	<i class="fa fa-folder"></i>
+    <a class="article-category-link" href="/categories/开发/">开发</a>
+  </div>
+
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+                
+        <p>Swift 与 Objective-C 混编 （to be continued）</p>
+<h3 id="Code_直接混编_+_Framework_间接混编">Code 直接混编 + Framework 间接混编</h3><hr>
+<h2 id="&lt;_Code_直接混编_&gt;">&lt; Code 直接混编 &gt;</h2><ul>
+<li><h4 id="在_Objective-C_code_中使用_Swift_code">在 Objective-C code 中使用 Swift code</h4><p>  Objective-C project: <code>Project_C</code><br>  PRODUCT_MODULE_NAME: <code>Project_C_Product</code></p>
+<ol>
+<li>in Project_C’s build settings, set up <code>&quot;Embedded Content Contains Swift Code&quot;</code> to <code>&quot;YES&quot;</code>.</li>
+<li>in Project_C’s build settings, set up <code>&quot;Objective-C Generated Interface Header Name&quot;</code> to <code>&quot;Project_C_Product-Swift.h&quot;</code>.</li>
+<li>Swift code should use <code>@objc</code> to mark what you want to expose to Objective-C code.</li>
+<li>in Objective-C code, <code>#import &quot;Project_C_Product-Swift.h&quot;</code>.</li>
+</ol>
+</li>
+<li><h4 id="在_Swift_code_中使用_Objective-C_code">在 Swift code 中使用 Objective-C code</h4><p>  Swift project: <code>Project_S</code><br>  PRODUCT_MODULE_NAME: <code>Project_S_Product</code></p>
+<ol>
+<li>in Project_S’s build settings, set up <code>&quot;Objective-C Bridging Header&quot;</code> to <code>&quot;Project_S_Product-Bridging-Header.h&quot;</code>.</li>
+<li>in <code>&quot;Project_S_Product-Bridging-Header.h&quot;</code>, <code>#import</code> every Objective-C header you want to expose to Swift code.</li>
+<li>in Swift code, <em>NO</em> need to <code>#import &quot;Project_C_Product-Bridging-Header.h&quot;</code>.</li>
+</ol>
+</li>
+</ul>
+<h2 id="&lt;_Framework_间接混编_&gt;">&lt; Framework 间接混编 &gt;</h2><ul>
+<li><h4 id="创建_Swift_framework_给_Objective-C_code_使用">创建 Swift framework 给 Objective-C code 使用</h4><p>framework product: <code>Framework_S</code></p>
+<p><strong>framework’s side:</strong></p>
+<ol>
+<li>in Framework_S’s build settings, set up <code>&quot;Objective-C Generated Interface Header Name&quot;</code> to <code>&quot;Framework_S-Swift.h&quot;</code>.</li>
+<li>use <code>@objc</code> to mark what you want to expose to Objective-C code.</li>
+<li>after Framework_S is producted, its umbrella will include the <code>&quot;Framework_S-Swift.h&quot;</code> file.</li>
+</ol>
+<p><strong>consumer’s side:</strong></p>
+<ol>
+<li>in build settings, set up <code>&quot;Embedded Content Contains Swift Code&quot;</code> to <code>&quot;YES&quot;</code>.</li>
+<li><code>@import Framework_S</code>.</li>
+</ol>
+</li>
+<li><h4 id="创建_Objective-C_framework_给_Swift_code_使用">创建 Objective-C framework 给 Swift code 使用</h4><p>framework product: <code>Framework_C</code></p>
+<p><strong>framework’s side:</strong> nothing</p>
+<p><strong>consumer’s side:</strong> <code>import Framework_C</code></p>
+</li>
+</ul>
+<hr>
+<h4 id="Apple_官方文档"><a href="https://developer.apple.com/library/ios/documentation/Swift/Conceptual/BuildingCocoaApps/MixandMatch.html" target="_blank" rel="external">Apple 官方文档</a></h4>
+      
+    </div>
+    
+    
+    <footer class="article-footer">
+      
+        <a href="http://hi.zongquan.wang/2016/07/25/Swift_and_ObjectiveC_Mix_and_Match/#disqus_thread" class="article-comment-link">Comments</a>
+      
+
+      <a data-url="http://hi.zongquan.wang/2016/07/25/Swift_and_ObjectiveC_Mix_and_Match/" data-id="cir1xl15d000m1osbelypg3qu" class="article-share-link">Share</a>
+
+      <div id="article-baidu-share" class="bdsharebuttonbox">
+        <a href="#" class="bds_weixin" data-cmd="weixin" title="WeiXin"></a>
+      </div>
+      <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":["mshare","weixin","tsina","tqq","qzone","qq","sqq","tqf","t163","renren","douban","huaban","taobao","tieba","kaixin001","tsohu","meilishuo","mogujie","sdo","youdao","twi","fbook","linkedin","mail","copy","print"],"bdPic":"","bdStyle":"1","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Swift/">Swift</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+    
+      <article id="post-Hack_Interface_Inspector" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/21/Hack_Interface_Inspector/">Hack Interface Inspector</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2016/04/21/Hack_Interface_Inspector/">
+      <time datetime="2016-04-21T12:38:11.000Z" itemprop="datePublished">2016-04-21</time>
+    </a>
+  </div>
+
+
+          
+  <div class="article-category">
+  	<i class="fa fa-folder"></i>
+    <a class="article-category-link" href="/categories/开发/">开发</a>
+  </div>
+
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>之前在 iOSRE 上看到<a href="http://bbs.iosre.com/t/mac/3373">一篇文章</a>，里面有讲到一个逆向 Mac app UI 的工具 <a href="http://www.interface-inspector.com/">Interface Inspector</a>，扫了一眼，尼玛神器啊，简直就是 Reveal 的 Mac 版。上个图感受一下它的淫威吧：</p>
+<p><img src="/img/Hack_Interface_Inspector/ii.png" alt="Interface Inspector"></p>
+<p>这么好的工具，这么贵的价格，心痒了。好吧，凭借着<a href="http://hi.zongquan.wang/2016/01/12/Hack_XtraFinder/">之前的破解经验</a>，再来搞一次吧。</p>
+        
+          <p class="article-more-link shake shake-rotate">
+            <a href="/2016/04/21/Hack_Interface_Inspector/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    
+    
+    <footer class="article-footer">
+      
+        <a href="http://hi.zongquan.wang/2016/04/21/Hack_Interface_Inspector/#disqus_thread" class="article-comment-link">Comments</a>
+      
+
+      <a data-url="http://hi.zongquan.wang/2016/04/21/Hack_Interface_Inspector/" data-id="cir1xl14m00031osb8qftt6di" class="article-share-link">Share</a>
+
+      <div id="article-baidu-share" class="bdsharebuttonbox">
+        <a href="#" class="bds_weixin" data-cmd="weixin" title="WeiXin"></a>
+      </div>
+      <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":["mshare","weixin","tsina","tqq","qzone","qq","sqq","tqf","t163","renren","douban","huaban","taobao","tieba","kaixin001","tsohu","meilishuo","mogujie","sdo","youdao","twi","fbook","linkedin","mail","copy","print"],"bdPic":"","bdStyle":"1","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mac/">Mac</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+    
       <article id="post-How_to_install_iOSOpenDev_manually" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -193,7 +361,7 @@ ga('send', 'pageview');
         <a href="http://hi.zongquan.wang/2016/03/29/How_to_install_iOSOpenDev_manually/#disqus_thread" class="article-comment-link">Comments</a>
       
 
-      <a data-url="http://hi.zongquan.wang/2016/03/29/How_to_install_iOSOpenDev_manually/" data-id="cimridwxr001i33sb3d7e7w5t" class="article-share-link">Share</a>
+      <a data-url="http://hi.zongquan.wang/2016/03/29/How_to_install_iOSOpenDev_manually/" data-id="cir1xl14r00071osbet744l23" class="article-share-link">Share</a>
 
       <div id="article-baidu-share" class="bdsharebuttonbox">
         <a href="#" class="bds_weixin" data-cmd="weixin" title="WeiXin"></a>
@@ -202,73 +370,6 @@ ga('send', 'pageview');
 
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Xcode/">Xcode</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-    
-      <article id="post-Fuck_My_29_Years_Life" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/03/13/Fuck_My_29_Years_Life/">Fuck My 29 Years&#39; Life</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          
-  <div class="article-date">
-    <i class="fa fa-calendar"></i>
-    <a href="/2016/03/13/Fuck_My_29_Years_Life/">
-      <time datetime="2016-03-13T10:48:18.000Z" itemprop="datePublished">2016-03-13</time>
-    </a>
-  </div>
-
-
-          
-  <div class="article-category">
-  	<i class="fa fa-folder"></i>
-    <a class="article-category-link" href="/categories/生活/">生活</a>
-  </div>
-
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>无意间看到了这么一篇文章 <a href="http://www.ifanr.com/632328">《人工智能除了下围棋还能干啥？这篇科普文将震撼你的世界观》</a>（后面以常量“彼文”代之），点开之后，手指本能而又温柔地划了几下触摸板，用膀胱扫了一眼滚动条，尼玛好短的滚动条，这也意味着，尼玛好长的文章😂。看惯了不到140个字的微博的我，本能地想要直接关闭彼文，然后愉快地去刷会V2EX或者开发者头条，但是理智再一次告诉我，骚年，不要老吃快餐了，否则营养跟不上啊，好歹碰到这么一篇长文，何不咬着牙并快乐地看完呢，更何况这可是关于当下热门的人狗大战哟🤔。</p>
-        
-          <p class="article-more-link shake shake-rotate">
-            <a href="/2016/03/13/Fuck_My_29_Years_Life/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    
-    
-    <footer class="article-footer">
-      
-        <a href="http://hi.zongquan.wang/2016/03/13/Fuck_My_29_Years_Life/#disqus_thread" class="article-comment-link">Comments</a>
-      
-
-      <a data-url="http://hi.zongquan.wang/2016/03/13/Fuck_My_29_Years_Life/" data-id="cimridwy8001u33sbhk2mencc" class="article-share-link">Share</a>
-
-      <div id="article-baidu-share" class="bdsharebuttonbox">
-        <a href="#" class="bds_weixin" data-cmd="weixin" title="WeiXin"></a>
-      </div>
-      <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":["mshare","weixin","tsina","tqq","qzone","qq","sqq","tqf","t163","renren","douban","huaban","taobao","tieba","kaixin001","tsohu","meilishuo","mogujie","sdo","youdao","twi","fbook","linkedin","mail","copy","print"],"bdPic":"","bdStyle":"1","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
-
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Thinking/">Thinking</a></li></ul>
 
     </footer>
   </div>
@@ -327,7 +428,7 @@ ga('send', 'pageview');
         <a href="http://hi.zongquan.wang/2016/01/12/Hack_XtraFinder/#disqus_thread" class="article-comment-link">Comments</a>
       
 
-      <a data-url="http://hi.zongquan.wang/2016/01/12/Hack_XtraFinder/" data-id="cimridwy1001r33sbanl6jgbu" class="article-share-link">Share</a>
+      <a data-url="http://hi.zongquan.wang/2016/01/12/Hack_XtraFinder/" data-id="cir1xl14o00041osbrcbd6u5x" class="article-share-link">Share</a>
 
       <div id="article-baidu-share" class="bdsharebuttonbox">
         <a href="#" class="bds_weixin" data-cmd="weixin" title="WeiXin"></a>
@@ -395,7 +496,7 @@ ga('send', 'pageview');
         <a href="http://hi.zongquan.wang/2015/11/16/Xcode_Build_Settings_Products_Path/#disqus_thread" class="article-comment-link">Comments</a>
       
 
-      <a data-url="http://hi.zongquan.wang/2015/11/16/Xcode_Build_Settings_Products_Path/" data-id="cimridwvz000233sbzhrpm02a" class="article-share-link">Share</a>
+      <a data-url="http://hi.zongquan.wang/2015/11/16/Xcode_Build_Settings_Products_Path/" data-id="cir1xl15e000p1osbtt4qd9n5" class="article-share-link">Share</a>
 
       <div id="article-baidu-share" class="bdsharebuttonbox">
         <a href="#" class="bds_weixin" data-cmd="weixin" title="WeiXin"></a>
@@ -404,73 +505,6 @@ ga('send', 'pageview');
 
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Xcode/">Xcode</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-    
-      <article id="post-How_to_get_File_Attributes_in_Mac" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/01/22/How_to_get_File_Attributes_in_Mac/">How to get File Attributes in Mac</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          
-  <div class="article-date">
-    <i class="fa fa-calendar"></i>
-    <a href="/2015/01/22/How_to_get_File_Attributes_in_Mac/">
-      <time datetime="2015-01-22T07:16:18.000Z" itemprop="datePublished">2015-01-22</time>
-    </a>
-  </div>
-
-
-          
-  <div class="article-category">
-  	<i class="fa fa-folder"></i>
-    <a class="article-category-link" href="/categories/开发/">开发</a>
-  </div>
-
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="Mac_File_Attributes">Mac File Attributes</h4><p>在 Mac 开发中，想要获取 file 或者 dir 的属性，有这么4种方式：</p>
-        
-          <p class="article-more-link shake shake-rotate">
-            <a href="/2015/01/22/How_to_get_File_Attributes_in_Mac/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    
-    
-    <footer class="article-footer">
-      
-        <a href="http://hi.zongquan.wang/2015/01/22/How_to_get_File_Attributes_in_Mac/#disqus_thread" class="article-comment-link">Comments</a>
-      
-
-      <a data-url="http://hi.zongquan.wang/2015/01/22/How_to_get_File_Attributes_in_Mac/" data-id="cimridwxt001l33sb15slcrn5" class="article-share-link">Share</a>
-
-      <div id="article-baidu-share" class="bdsharebuttonbox">
-        <a href="#" class="bds_weixin" data-cmd="weixin" title="WeiXin"></a>
-      </div>
-      <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":["mshare","weixin","tsina","tqq","qzone","qq","sqq","tqf","t163","renren","douban","huaban","taobao","tieba","kaixin001","tsohu","meilishuo","mogujie","sdo","youdao","twi","fbook","linkedin","mail","copy","print"],"bdPic":"","bdStyle":"1","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
-
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mac/">Mac</a></li></ul>
 
     </footer>
   </div>
@@ -496,6 +530,41 @@ ga('send', 'pageview');
           <li>
             
             <div class="item-thumbnail">
+              <a href="/2016/07/25/Swift_and_ObjectiveC_Mix_and_Match/" class="thumbnail">
+  
+    <span class="thumbnail-image thumbnail-none"></span>
+  
+</a>
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/开发/">开发</a></p>
+              <p class="item-title"><a href="/2016/07/25/Swift_and_ObjectiveC_Mix_and_Match/" class="title">Swift and Objective-C (Mix and Match)</a></p>
+              <p class="item-date"><time datetime="2016-07-25T09:32:53.000Z" itemprop="datePublished">2016-07-25</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2016/04/21/Hack_Interface_Inspector/" class="thumbnail">
+  
+    <span style="background-image:url(/img/Hack_Interface_Inspector/ii.png
+)" alt="Hack Interface Inspector" class="thumbnail-image"></span>
+  
+</a>
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/开发/">开发</a></p>
+              <p class="item-title"><a href="/2016/04/21/Hack_Interface_Inspector/" class="title">Hack Interface Inspector</a></p>
+              <p class="item-date"><time datetime="2016-04-21T12:38:11.000Z" itemprop="datePublished">2016-04-21</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
               <a href="/2016/03/29/How_to_install_iOSOpenDev_manually/" class="thumbnail">
   
     <span class="thumbnail-image thumbnail-none"></span>
@@ -507,24 +576,6 @@ ga('send', 'pageview');
               <p class="item-category"><a class="article-category-link" href="/categories/开发/">开发</a></p>
               <p class="item-title"><a href="/2016/03/29/How_to_install_iOSOpenDev_manually/" class="title">How to install iOSOpenDev manually</a></p>
               <p class="item-date"><time datetime="2016-03-29T15:30:35.000Z" itemprop="datePublished">2016-03-29</time></p>
-            </div>
-          </li>
-        
-          <li>
-            
-            <div class="item-thumbnail">
-              <a href="/2016/03/13/Fuck_My_29_Years_Life/" class="thumbnail">
-  
-    <span style="background-image:url(/img/Fuck_My_29_Years_Life/fuck.png
-)" alt="Fuck My 29 Years&#39; Life" class="thumbnail-image"></span>
-  
-</a>
-            </div>
-            
-            <div class="item-inner">
-              <p class="item-category"><a class="article-category-link" href="/categories/生活/">生活</a></p>
-              <p class="item-title"><a href="/2016/03/13/Fuck_My_29_Years_Life/" class="title">Fuck My 29 Years&#39; Life</a></p>
-              <p class="item-date"><time datetime="2016-03-13T10:48:18.000Z" itemprop="datePublished">2016-03-13</time></p>
             </div>
           </li>
         
@@ -564,23 +615,6 @@ ga('send', 'pageview');
             </div>
           </li>
         
-          <li>
-            
-            <div class="item-thumbnail">
-              <a href="/2015/01/22/How_to_get_File_Attributes_in_Mac/" class="thumbnail">
-  
-    <span class="thumbnail-image thumbnail-none"></span>
-  
-</a>
-            </div>
-            
-            <div class="item-inner">
-              <p class="item-category"><a class="article-category-link" href="/categories/开发/">开发</a></p>
-              <p class="item-title"><a href="/2015/01/22/How_to_get_File_Attributes_in_Mac/" class="title">How to get File Attributes in Mac</a></p>
-              <p class="item-date"><time datetime="2015-01-22T07:16:18.000Z" itemprop="datePublished">2015-01-22</time></p>
-            </div>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -590,7 +624,7 @@ ga('send', 'pageview');
   <div class="widget-wrap">
     <h3 class="widget-title">categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/开发/">开发</a><span class="category-list-count">21</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活/">生活</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/开发/">开发</a><span class="category-list-count">23</span></li></ul>
     </div>
   </div>
 
@@ -599,7 +633,7 @@ ga('send', 'pageview');
   <div class="widget-wrap">
     <h3 class="widget-title">tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac/">Mac</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Thinking/">Thinking</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Xcode/">Xcode</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS/">iOS</a><span class="tag-list-count">13</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac/">Mac</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swift/">Swift</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Xcode/">Xcode</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS/">iOS</a><span class="tag-list-count">13</span></li></ul>
     </div>
   </div>
 
@@ -658,12 +692,12 @@ ga('send', 'pageview');
 <link rel="stylesheet" type="text/css" href="/css/csshake.min.css">
 
 
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
-  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
 
 
-<script src="/js/script.js" type="text/javascript"></script>
-<script src="/js/favico.js" type="text/javascript"></script>
+<script src="/js/script.js"></script>
+<script src="/js/favico.js"></script>
 
 <script type="text/javascript">
   $(document).ready(function() {

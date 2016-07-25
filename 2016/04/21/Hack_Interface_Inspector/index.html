@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Hack Interface Inspector | 闷骚的悟空</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="之前在 iOSRE 上看到一篇文章，里面有讲到一个逆向 Mac app UI 的工具 Interface Inspector，扫了一眼，尼玛神器啊，简直就是 Reveal 的 Mac 版。上个图感受一下它的淫威吧：
+
+这么好的工具，这么贵的价格，心痒了。好吧，凭借着之前的破解经验，再来搞一次吧。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hack Interface Inspector">
+<meta property="og:url" content="http://hi.zongquan.wang/2016/04/21/Hack_Interface_Inspector/index.html">
+<meta property="og:site_name" content="闷骚的悟空">
+<meta property="og:description" content="之前在 iOSRE 上看到一篇文章，里面有讲到一个逆向 Mac app UI 的工具 Interface Inspector，扫了一眼，尼玛神器啊，简直就是 Reveal 的 Mac 版。上个图感受一下它的淫威吧：
+
+这么好的工具，这么贵的价格，心痒了。好吧，凭借着之前的破解经验，再来搞一次吧。">
+<meta property="og:image" content="http://hi.zongquan.wang/img/Hack_Interface_Inspector/ii.png">
+<meta property="og:image" content="http://hi.zongquan.wang/img/Hack_Interface_Inspector/alert.png">
+<meta property="og:image" content="http://hi.zongquan.wang/img/Hack_Interface_Inspector/launching.png">
+<meta property="og:image" content="http://hi.zongquan.wang/img/Hack_Interface_Inspector/will.png">
+<meta property="og:image" content="http://hi.zongquan.wang/img/Hack_Interface_Inspector/cert.png">
+<meta property="og:image" content="http://hi.zongquan.wang/img/Hack_Interface_Inspector/did.png">
+<meta property="og:image" content="http://hi.zongquan.wang/img/Hack_Interface_Inspector/tricky.png">
+<meta property="og:image" content="http://hi.zongquan.wang/img/Hack_Interface_Inspector/done.png">
+<meta property="og:updated_time" content="2016-05-10T07:19:32.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hack Interface Inspector">
+<meta name="twitter:description" content="之前在 iOSRE 上看到一篇文章，里面有讲到一个逆向 Mac app UI 的工具 Interface Inspector，扫了一眼，尼玛神器啊，简直就是 Reveal 的 Mac 版。上个图感受一下它的淫威吧：
+
+这么好的工具，这么贵的价格，心痒了。好吧，凭借着之前的破解经验，再来搞一次吧。">
+<meta name="twitter:image" content="http://hi.zongquan.wang/img/Hack_Interface_Inspector/ii.png">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  
+
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-58630641-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  
+
+
+  <script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?f927b4d849de0fa8e031f36bf6a21e78";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+
+  <script src="//fast.eager.io/RfF1U61Tb7.js"></script>
+
+  
+</head>
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-main" class="header-inner">
+    <div class="outer">
+      <a href="/" id="logo"><span class="site-title">闷骚的悟空</span></a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about/me.html">Me</a>
+        
+      </nav>
+      
+        <nav id="sub-nav">
+          <div class="profile" id="profile-nav">
+            <a id="profile-anchor" href="javascript:;"><img class="avatar" src="/img/me.jpg"><i class="fa fa-caret-down"></i></a>
+          </div>
+        </nav>
+      
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit"> </button><input type="hidden" name="sitesearch" value="http://hi.zongquan.wang"></form>
+      </div>
+    </div>
+  </div>
+  <div id="main-nav-mobile" class="header-sub header-inner">
+    <table class="menu outer">
+      <tr>
+        
+          <td><a class="main-nav-link" href="/">Home</a></td>
+        
+          <td><a class="main-nav-link" href="/archives">Archives</a></td>
+        
+          <td><a class="main-nav-link" href="/about/me.html">Me</a></td>
+        
+        <td>
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><input type="hidden" name="sitesearch" value="http://hi.zongquan.wang"></form>
+        </td>
+      </tr>
+    </table>
+  </div>
+</header>
+
+    <div class="outer">
+      
+        <aside id="profile">
+  <div class="inner profile-inner">
+    <div class="base-info profile-block">
+      <img class="shake freez shake-hard" id="avatar" src="/img/me.jpg">
+      <h2 id="name">闷骚的悟空</h2>
+      <h3 id="subname">立一业谋生 择一城终老 携一人白首</h2>
+      <h3 id="title">Mac Developer &amp; Hacker</h3>
+      <span id="location"><i class="fa fa-map-marker"></i>Suzhou, China</span>
+      <a class="shake shake-rotate" id="follow" href="https://github.com/wzqcongcong/">FOLLOW</a>
+    </div>
+    <div class="article-info profile-block">
+      <div class="article-info-block">
+        23
+        <span>posts</span>
+      </div>
+      <div class="article-info-block">
+        6
+        <span>tags</span>
+      </div>
+    </div>
+    
+    <div class="contact-info profile-block">
+      <table class="contact-list">
+        <tr>
+          
+          <td><a href="mailto:wzqcongcong@sina.com" target="_blank" title="send"><i class="fa fa-send"></i></a></td>
+          
+          <td><a href="http://github.com/wzqcongcong" target="_blank" title="github"><i class="fa fa-github"></i></a></td>
+          
+          <td><a href="https://twitter.com/wzqcongcong" target="_blank" title="twitter"><i class="fa fa-twitter"></i></a></td>
+          
+          <td><a href="/atom.xml" target="_blank" title="rss"><i class="fa fa-rss"></i></a></td>
+          
+        </tr>
+      </table>
+    </div>
+    
+    
+  </div>
+</aside>
+
+      
+      <section id="main"><article id="post-Hack_Interface_Inspector" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Hack Interface Inspector
+    </h1>
+  
+
+        <div class="article-meta">
+          
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2016/04/21/Hack_Interface_Inspector/">
+      <time datetime="2016-04-21T12:38:11.000Z" itemprop="datePublished">2016-04-21</time>
+    </a>
+  </div>
+
+
+          
+  <div class="article-category">
+  	<i class="fa fa-folder"></i>
+    <a class="article-category-link" href="/categories/开发/">开发</a>
+  </div>
+
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+                
+        <p>之前在 iOSRE 上看到<a href="http://bbs.iosre.com/t/mac/3373" target="_blank" rel="external">一篇文章</a>，里面有讲到一个逆向 Mac app UI 的工具 <a href="http://www.interface-inspector.com/" target="_blank" rel="external">Interface Inspector</a>，扫了一眼，尼玛神器啊，简直就是 Reveal 的 Mac 版。上个图感受一下它的淫威吧：</p>
+<p><img src="/img/Hack_Interface_Inspector/ii.png" alt="Interface Inspector"></p>
+<p>这么好的工具，这么贵的价格，心痒了。好吧，凭借着<a href="http://hi.zongquan.wang/2016/01/12/Hack_XtraFinder/">之前的破解经验</a>，再来搞一次吧。</p>
+<a id="more"></a>
+<h3 id="0-_开始">0. 开始</h3><p>首先从官网下载试用版，打开 app，直接弹出一个提示框：</p>
+<p><img src="/img/Hack_Interface_Inspector/alert.png" alt="Alert"></p>
+<p>啊哈哈，最喜欢这么直接的打招呼了。</p>
+<p>用 Hopper 加载完 <em>Interface Inspector</em> 后，可以直接奔着两个函数去了：</p>
+<p><img src="/img/Hack_Interface_Inspector/launching.png" alt="Launching"></p>
+<h3 id="1-_绕过签名校验">1. 绕过签名校验</h3><p>首先看一下 <code>[SMAppDelegate applicationWillFinishLaunching:]</code>，里面有这么一段：</p>
+<p><img src="/img/Hack_Interface_Inspector/will.png" alt="applicationWillFinishLaunching"></p>
+<p>也就是说，app 启动完成之前，会调用 <code>[[NSBundle mainBundle] codeSignState]</code> 来检查 bundle 的签名是否合法（具体如何检查后面详谈）。如果不合法，会弹出一个提示框说 “Signature of the Interface Inspector is broken”，然后 app 就直接退出了。所以我们首先要绕过这个检查。</p>
+<p>显然，<code>codeSignState</code> 这个函数并非官方 api，应该是作者自己添加的 <em>NSBundle category</em>。搜索了一下该函数名，没有找到。于是就去 app 的 <code>Frameworks</code> 目录下看看是不是由第三方库引入的。在这里有 3 个 framework：<em>DFeedback.framework</em>、<em>SMFoundation.framework</em>、<em>Sparkle.framework</em>，很明显，第一个肯定是收集用户 feedback 用的，第三个大家都知道是 update 模块，那就剩下第二个了。用 Hopper 加载 <em>SMFoundation</em>，果然搜索到了 <code>codeSignState</code> 这个函数。</p>
+<p>在这个函数里，作者是用 <code>SecStaticCodeCheckValidityWithErrors</code> 这个官方 api 来检查签名的合法性的。具体用法可以查阅文档，这里只提一下比较重要的 2 个参数<code>staticCode</code> 和 <code>requirement</code>：<code>staticCode</code> 是待校验的 <em>code object</em>，<code>requirement</code> 则表示 <code>staticCode</code> 需要满足的校验条件。作者使用的校验条件是：<code>certificate leaf = H&quot;0E1D40082148472951C6FB2DDCD8800D82629792&quot;</code>。看到这里一开始我也蒙了，这是什么鬼。后来查阅了一下文档才明白这个用法。其实就是校验一下签名证书的叶子节点是不是 <code>H&quot;0E1D40082148472951C6FB2DDCD8800D82629792&quot;</code> 这个值，而这一串字符是签名证书的 <em>SHA1 FingerPrints</em>，由 40 个 HEX 字符组成，可以在自己的开发者证书里查到：</p>
+<p><img src="/img/Hack_Interface_Inspector/cert.png" alt="Cert"></p>
+<p>也就是说，如果用别人的证书重新签名该 app，而又没有同时修改这个校验条件的话，那么最终的签名就是不合法的，app 就会闪退了。所以我们需要先把这个校验条件改掉。简单，直接把这个字符串的值改成自己开发者证书里面的 <em>SHA1 FingerPrints</em> 就好了。</p>
+<p>OK，签名校验已经绕过去了，下面就可以随意地修改 app 然后重新签名了。</p>
+<h3 id="2-_破解_License_机制">2. 破解 License 机制</h3><p><code>[SMAppDelegate applicationWillFinishLaunching:]</code> 已经没什么好看的了，接着看 <code>[SMAppDelegate applicationDidFinishLaunching:]</code>，里面有这么一段：</p>
+<p><img src="/img/Hack_Interface_Inspector/did.png" alt="applicationDidFinishLaunching"></p>
+<p>太明显了，没有 license 的话就提示用户输入序列号进行激活。顺藤摸瓜，最终找到了这么个函数 <code>[SMLicenseManager verifyLicenseWithName:code:]</code>，它就是用来验证 license 是否合法的！只要我们对它进行破解，这样随便输入任意序列号就可以激活了，啊哈哈。</p>
+<p>简单得不能再简单了，直接用 Hopper 的 <em>Modify</em> 功能修改成 <code>mov eax, 0x1</code> <code>ret</code> 即可，也就是直接返回 <code>YES</code> 通过验证。</p>
+<p>修改完成，重新签名，运行 app，啊哦，闪退了！</p>
+<h3 id="3-_作者的鬼点子">3. 作者的鬼点子</h3><p>看来还是有什么地方没改好。重新回去检查整个 <code>SMLicenseManager</code> 类，一个函数一个函数地检查，最终发现了这么个函数 <code>[SMLicenseManager load]</code>。作者在这里耍了一个小花招：</p>
+<p><img src="/img/Hack_Interface_Inspector/tricky.png" alt="Tricky"></p>
+<p>是的，我们把 <code>[SMLicenseManager verifyLicenseWithName:code:]</code> 改成了总是返回 <code>YES</code>，但是代码走到这里撞墙了，<em>Test User</em> 验证之后也返回 <code>YES</code> 了，然后 app 直接 <code>terminate:</code> 了。也就是说，作者在这里放了一个本来就是非法的 license，正常验证的话肯定是返回 <code>NO</code> 的，就不会导致直接退出了。所以我们还需要把这里的判断条件改成 <code>XXX == NO</code>，这样就没有问题了。真是淘气的作者，藏得这么深。</p>
+<p>好了，改好，重新签名，运行 app，随便输入 license 信息，啊哈哈，注册成功！</p>
+<p><img src="/img/Hack_Interface_Inspector/done.png" alt="Done"></p>
+
+      
+    </div>
+    
+      <div class="article-copyright">
+	<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a><br />本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可。
+</div>
+    
+    
+      <div class ="post-donate">
+    <div id="donate_tip" class="donate_tip center">
+        <a id="btn_donate" class="btn_donate" href="javascript:;"></a>
+        <span class="donate_tip_txt">
+		   打赏
+        </span>
+        <br>
+      </div>
+	<div id="donate_guide" class="donate_tip center hidden">
+		<div class="donate_item">
+			<span class="donate_item_txt" style="color:#1dabec">支付宝打赏</span>
+			<img src="/img/zhifubaoV2.png" alt="支付宝打赏">
+		</div>
+		<div class="donate_item">
+			<span class="donate_item_txt" style="color:#22cf28">微信打赏</span>
+			<img src="/img/weixinV2.png" alt="微信打赏">
+		</div>
+    </div>
+	<script type="text/javascript">
+		document.getElementById('btn_donate').onclick = function(){
+			$('#donate_tip').addClass('hidden');
+			$('#donate_guide').removeClass('hidden');
+		}
+	</script>
+</div>
+    
+    <footer class="article-footer">
+      
+        <a href="http://hi.zongquan.wang/2016/04/21/Hack_Interface_Inspector/#disqus_thread" class="article-comment-link">Comments</a>
+      
+
+      <a data-url="http://hi.zongquan.wang/2016/04/21/Hack_Interface_Inspector/" data-id="cir1xl14m00031osb8qftt6di" class="article-share-link">Share</a>
+
+      <div id="article-baidu-share" class="bdsharebuttonbox">
+        <a href="#" class="bds_weixin" data-cmd="weixin" title="WeiXin"></a>
+      </div>
+      <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":["mshare","weixin","tsina","tqq","qzone","qq","sqq","tqf","t163","renren","douban","huaban","taobao","tieba","kaixin001","tsohu","meilishuo","mogujie","sdo","youdao","twi","fbook","linkedin","mail","copy","print"],"bdPic":"","bdStyle":"1","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mac/">Mac</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/07/25/Swift_and_ObjectiveC_Mix_and_Match/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Swift and Objective-C (Mix and Match)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/03/29/How_to_install_iOSOpenDev_manually/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">How to install iOSOpenDev manually</div>
+    </a>
+  
+</nav>
+
+
+  
+</article>
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+</section>
+      
+        <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">recents</h3>
+    <div class="widget">
+      <ul id="recent-post" class="">
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2016/07/25/Swift_and_ObjectiveC_Mix_and_Match/" class="thumbnail">
+  
+    <span class="thumbnail-image thumbnail-none"></span>
+  
+</a>
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/开发/">开发</a></p>
+              <p class="item-title"><a href="/2016/07/25/Swift_and_ObjectiveC_Mix_and_Match/" class="title">Swift and Objective-C (Mix and Match)</a></p>
+              <p class="item-date"><time datetime="2016-07-25T09:32:53.000Z" itemprop="datePublished">2016-07-25</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2016/04/21/Hack_Interface_Inspector/" class="thumbnail">
+  
+    <span style="background-image:url(/img/Hack_Interface_Inspector/ii.png
+)" alt="Hack Interface Inspector" class="thumbnail-image"></span>
+  
+</a>
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/开发/">开发</a></p>
+              <p class="item-title"><a href="/2016/04/21/Hack_Interface_Inspector/" class="title">Hack Interface Inspector</a></p>
+              <p class="item-date"><time datetime="2016-04-21T12:38:11.000Z" itemprop="datePublished">2016-04-21</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2016/03/29/How_to_install_iOSOpenDev_manually/" class="thumbnail">
+  
+    <span class="thumbnail-image thumbnail-none"></span>
+  
+</a>
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/开发/">开发</a></p>
+              <p class="item-title"><a href="/2016/03/29/How_to_install_iOSOpenDev_manually/" class="title">How to install iOSOpenDev manually</a></p>
+              <p class="item-date"><time datetime="2016-03-29T15:30:35.000Z" itemprop="datePublished">2016-03-29</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2016/01/12/Hack_XtraFinder/" class="thumbnail">
+  
+    <span style="background-image:url(/img/Hack_XtraFinder/alert.png
+)" alt="Hack XtraFinder" class="thumbnail-image"></span>
+  
+</a>
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/开发/">开发</a></p>
+              <p class="item-title"><a href="/2016/01/12/Hack_XtraFinder/" class="title">Hack XtraFinder</a></p>
+              <p class="item-date"><time datetime="2016-01-12T15:38:55.000Z" itemprop="datePublished">2016-01-12</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2015/11/16/Xcode_Build_Settings_Products_Path/" class="thumbnail">
+  
+    <span style="background-image:url(/img/Xcode_Build_Settings_Products_Path/location.png
+)" alt="Xcode Build Settings - Products Path" class="thumbnail-image"></span>
+  
+</a>
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/开发/">开发</a></p>
+              <p class="item-title"><a href="/2015/11/16/Xcode_Build_Settings_Products_Path/" class="title">Xcode Build Settings - Products Path</a></p>
+              <p class="item-date"><time datetime="2015-11-16T12:21:54.000Z" itemprop="datePublished">2015-11-16</time></p>
+            </div>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/开发/">开发</a><span class="category-list-count">23</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac/">Mac</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swift/">Swift</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Xcode/">Xcode</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS/">iOS</a><span class="tag-list-count">13</span></li></ul>
+    </div>
+  </div>
+
+  
+  <div id="toTop" class="fa fa-chevron-up"></div>
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 1987 - 2016 闷骚的悟空<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+    </div>
+    <div style="display: none">
+      
+      	
+      	
+        <img id=favicon_1 src=/favicon.1.ico>
+      
+      	
+      	
+        <img id=favicon_2 src=/favicon.2.ico>
+      
+      	
+      	
+        <img id=favicon_3 src=/favicon.3.ico>
+      
+      	
+      	
+        <img id=favicon_4 src=/favicon.4.ico>
+      
+    </div>
+  </div>
+</footer>
+    
+
+<script>
+  var disqus_shortname = 'wzqcongcong';
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+
+ <script src="//cdn.staticfile.org/jquery/2.1.1-rc2/jquery.min.js"></script>
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/csshake.min.css">
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/favico.js"></script>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    var favicon = new Favico();
+    var index = -1;
+    window.setInterval(function() {
+      var random = Math.floor(Math.random() * 4);
+      index = (index + 1) % 4;
+      var image = document.getElementById('favicon_' + (index + 1));
+      favicon.image(image);
+    }, 500);
+  });
+</script>
+
+  </div>
+</body>
+</html>
