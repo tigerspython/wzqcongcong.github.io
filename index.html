@@ -175,7 +175,6 @@ ga('send', 'pageview');
     
     <div class="article-entry" itemprop="articleBody">
       
-                
         <p>Swift 与 Objective-C 混编 （to be continued）</p>
 <h3 id="Code_直接混编_+_Framework_间接混编">Code 直接混编 + Framework 间接混编</h3><hr>
 <h2 id="&lt;_Code_直接混编_&gt;">&lt; Code 直接混编 &gt;</h2><ul>
@@ -195,27 +194,11 @@ ga('send', 'pageview');
 </ol>
 </li>
 </ul>
-<h2 id="&lt;_Framework_间接混编_&gt;">&lt; Framework 间接混编 &gt;</h2><ul>
-<li><h4 id="创建_Swift_framework_给_Objective-C_code_使用">创建 Swift framework 给 Objective-C code 使用</h4><p>framework product: <code>Framework_S</code></p>
-<p><strong>framework’s side:</strong></p>
-<ol>
-<li>in Framework_S’s build settings, set up <code>&quot;Objective-C Generated Interface Header Name&quot;</code> to <code>&quot;Framework_S-Swift.h&quot;</code>.</li>
-<li>use <code>@objc</code> to mark what you want to expose to Objective-C code.</li>
-<li>after Framework_S is producted, its umbrella will include the <code>&quot;Framework_S-Swift.h&quot;</code> file.</li>
-</ol>
-<p><strong>consumer’s side:</strong></p>
-<ol>
-<li>in build settings, set up <code>&quot;Embedded Content Contains Swift Code&quot;</code> to <code>&quot;YES&quot;</code>.</li>
-<li><code>@import Framework_S</code>.</li>
-</ol>
-</li>
-<li><h4 id="创建_Objective-C_framework_给_Swift_code_使用">创建 Objective-C framework 给 Swift code 使用</h4><p>framework product: <code>Framework_C</code></p>
-<p><strong>framework’s side:</strong> nothing</p>
-<p><strong>consumer’s side:</strong> <code>import Framework_C</code></p>
-</li>
-</ul>
-<hr>
-<h4 id="Apple_官方文档"><a href="https://developer.apple.com/library/ios/documentation/Swift/Conceptual/BuildingCocoaApps/MixandMatch.html" target="_blank" rel="external">Apple 官方文档</a></h4>
+        
+          <p class="article-more-link shake shake-rotate">
+            <a href="/2016/07/25/Swift_and_ObjectiveC_Mix_and_Match/#more">Read More</a>
+          </p>
+        
       
     </div>
     

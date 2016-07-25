@@ -4,7 +4,7 @@
   <subtitle><![CDATA[立一业谋生 择一城终老 携一人白首]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://hi.zongquan.wang/"/>
-  <updated>2016-07-25T11:08:14.000Z</updated>
+  <updated>2016-07-25T11:11:49.000Z</updated>
   <id>http://hi.zongquan.wang/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://hi.zongquan.wang/2016/07/25/Swift_and_ObjectiveC_Mix_and_Match/"/>
     <id>http://hi.zongquan.wang/2016/07/25/Swift_and_ObjectiveC_Mix_and_Match/</id>
     <published>2016-07-25T09:32:53.000Z</published>
-    <updated>2016-07-25T11:08:14.000Z</updated>
+    <updated>2016-07-25T11:11:49.000Z</updated>
     <content type="html"><![CDATA[<p>Swift 与 Objective-C 混编 （to be continued）</p>
 <h3 id="Code_直接混编_+_Framework_间接混编">Code 直接混编 + Framework 间接混编</h3><hr>
 <h2 id="&lt;_Code_直接混编_&gt;">&lt; Code 直接混编 &gt;</h2><ul>
@@ -39,6 +39,7 @@
 </ol>
 </li>
 </ul>
+<a id="more"></a>
 <h2 id="&lt;_Framework_间接混编_&gt;">&lt; Framework 间接混编 &gt;</h2><ul>
 <li><h4 id="创建_Swift_framework_给_Objective-C_code_使用">创建 Swift framework 给 Objective-C code 使用</h4><p>framework product: <code>Framework_S</code></p>
 <p><strong>framework’s side:</strong></p>
@@ -63,7 +64,24 @@
     <summary type="html">
     <![CDATA[<p>Swift 与 Objective-C 混编 （to be continued）</p>
 <h3 id="Code_直接混编_+_Framework_间接混编">Code 直接混编 + Framework 间接混编</h3><hr>
-<h2 id="&lt;_Code_直接]]>
+<h2 id="&lt;_Code_直接混编_&gt;">&lt; Code 直接混编 &gt;</h2><ul>
+<li><h4 id="在_Objective-C_code_中使用_Swift_code">在 Objective-C code 中使用 Swift code</h4><p>  Objective-C project: <code>Project_C</code><br>  PRODUCT_MODULE_NAME: <code>Project_C_Product</code></p>
+<ol>
+<li>in Project_C’s build settings, set up <code>&quot;Embedded Content Contains Swift Code&quot;</code> to <code>&quot;YES&quot;</code>.</li>
+<li>in Project_C’s build settings, set up <code>&quot;Objective-C Generated Interface Header Name&quot;</code> to <code>&quot;Project_C_Product-Swift.h&quot;</code>.</li>
+<li>Swift code should use <code>@objc</code> to mark what you want to expose to Objective-C code.</li>
+<li>in Objective-C code, <code>#import &quot;Project_C_Product-Swift.h&quot;</code>.</li>
+</ol>
+</li>
+<li><h4 id="在_Swift_code_中使用_Objective-C_code">在 Swift code 中使用 Objective-C code</h4><p>  Swift project: <code>Project_S</code><br>  PRODUCT_MODULE_NAME: <code>Project_S_Product</code></p>
+<ol>
+<li>in Project_S’s build settings, set up <code>&quot;Objective-C Bridging Header&quot;</code> to <code>&quot;Project_S_Product-Bridging-Header.h&quot;</code>.</li>
+<li>in <code>&quot;Project_S_Product-Bridging-Header.h&quot;</code>, <code>#import</code> every Objective-C header you want to expose to Swift code.</li>
+<li>in Swift code, <em>NO</em> need to <code>#import &quot;Project_C_Product-Bridging-Header.h&quot;</code>.</li>
+</ol>
+</li>
+</ul>]]>
+    
     </summary>
     
       <category term="Swift" scheme="http://hi.zongquan.wang/tags/Swift/"/>
