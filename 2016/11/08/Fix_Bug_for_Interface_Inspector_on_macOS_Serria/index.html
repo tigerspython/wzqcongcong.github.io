@@ -3,14 +3,27 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Archives | 闷骚的悟空</title>
+  <title>Fix Bug for Interface Inspector on macOS Serria | 闷骚的悟空</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="闷骚的悟空">
-<meta property="og:url" content="http://hi.zongquan.wang/archives/page/3/index.html">
+  <meta name="description" content="之前介绍过如何破解 Interface Inspector，近来把系统升级到最新的 macOS Serria 之后，发现 Interface Inspector 不 work 了。启动倒是正常，但每次 attach app 时，总是提示无法 attach，查看 system log，发现有这么一个 error：
+
+从 log 中看出，root cause 是 mach_inject_bundle_">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Fix Bug for Interface Inspector on macOS Serria">
+<meta property="og:url" content="http://hi.zongquan.wang/2016/11/08/Fix_Bug_for_Interface_Inspector_on_macOS_Serria/index.html">
 <meta property="og:site_name" content="闷骚的悟空">
+<meta property="og:description" content="之前介绍过如何破解 Interface Inspector，近来把系统升级到最新的 macOS Serria 之后，发现 Interface Inspector 不 work 了。启动倒是正常，但每次 attach app 时，总是提示无法 attach，查看 system log，发现有这么一个 error：
+
+从 log 中看出，root cause 是 mach_inject_bundle_">
+<meta property="og:image" content="http://hi.zongquan.wang/img/Fix_Bug_for_Interface_Inspector_on_macOS_Serria/log.png">
+<meta property="og:image" content="http://hi.zongquan.wang/img/Fix_Bug_for_Interface_Inspector_on_macOS_Serria/github.png">
+<meta property="og:updated_time" content="2016-11-08T09:28:24.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="闷骚的悟空">
+<meta name="twitter:title" content="Fix Bug for Interface Inspector on macOS Serria">
+<meta name="twitter:description" content="之前介绍过如何破解 Interface Inspector，近来把系统升级到最新的 macOS Serria 之后，发现 Interface Inspector 不 work 了。启动倒是正常，但每次 attach app 时，总是提示无法 attach，查看 system log，发现有这么一个 error：
+
+从 log 中看出，root cause 是 mach_inject_bundle_">
+<meta name="twitter:image" content="http://hi.zongquan.wang/img/Fix_Bug_for_Interface_Inspector_on_macOS_Serria/log.png">
   
   
     <link rel="icon" href="/favicon.ico">
@@ -140,193 +153,130 @@ ga('send', 'pageview');
 </aside>
 
       
-      <section id="main">
-      <div class="archive-year-wrap">
-        <a href="/archives/2015" class="archive-year">2015</a>
+      <section id="main"><article id="post-Fix_Bug_for_Interface_Inspector_on_macOS_Serria" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Fix Bug for Interface Inspector on macOS Serria
+    </h1>
+  
+
+        <div class="article-meta">
+          
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2016/11/08/Fix_Bug_for_Interface_Inspector_on_macOS_Serria/">
+      <time datetime="2016-11-08T08:32:57.000Z" itemprop="datePublished">2016-11-08</time>
+    </a>
+  </div>
+
+
+          
+  <div class="article-category">
+  	<i class="fa fa-folder"></i>
+    <a class="article-category-link" href="/categories/开发/">开发</a>
+  </div>
+
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+                
+        <p>之前介绍过<a href="http://hi.zongquan.wang/2016/04/21/Hack_Interface_Inspector/">如何破解 Interface Inspector</a>，近来把系统升级到最新的 macOS Serria 之后，发现 Interface Inspector 不 work 了。启动倒是正常，但每次 attach app 时，总是提示无法 attach，查看 system log，发现有这么一个 error：</p>
+<p><img src="/img/Fix_Bug_for_Interface_Inspector_on_macOS_Serria/log.png" alt="log"></p>
+<p>从 log 中看出，root cause 是 <em>mach_inject_bundle_stub</em> 去 load <code>___pthread_set_self</code> 时失败了，而这个函数本来应该是在 <em>libSystem.B.dylb</em> 这个系统库里面的。也就是说，macOS Serria 的 <em>libSystem.B.dylb</em> 已经不再有 <code>___pthread_set_self</code> 这个函数了。于是开始 google，最后在<a href="https://twitter.com/snielsen42/status/778405531383836674" target="_blank" rel="external">一条 Twitter</a> 上发现了咋回事，是的，<code>___pthread_set_self</code> 已经被替换成了 <code>_pthread_set_self</code>。</p>
+<p>明白了咋回事，开始考虑怎么解决。</p>
+<a id="more"></a>
+<h2 id="方法_1：">方法 1：</h2><p>修改 <em>mach_inject_bundle_stub</em> 的 load 指令，从旧版系统中 copy 一份老的 <em>libSystem.B.dylb</em>，然后让 <em>mach_inject_bundle_stub</em> 去 load 这个老的库。</p>
+<h2 id="方法_2：">方法 2：</h2><p>还是修改 <em>mach_inject_bundle_stub</em>，把所有调用 <code>___pthread_set_self</code> 的地方改成调用 <code>_pthread_set_self</code>。</p>
+<p>理论上这两种方法应该都可以的吧，但是考虑到自己逆向功力不够，所以就采用了如下的正向方法 XD。</p>
+<h1 id="方法_3：">方法 3：</h1><p>我搜索了一下 <em>mach_inject_bundle_stub</em> 这个东西，发现原来是个 GitHub 上的<a href="https://github.com/wzqcongcong/mach_inject" target="_blank" rel="external">开源库</a>，Interface Inspector 就是用的这个库。app 会在 <code>/Library/Frameworks/mach_inject_bundle.framework</code> 这里安装这个库，而 <em>mach_inject_bundle_stub</em> 就是这个库里面的一个子 bundle。有了 source code 就好办了，只需要修改 code，然后重新编译替换掉 <em>mach_inject_bundle_stub</em> 这个 bundle 就好了。</p>
+<p>步骤：</p>
+<h3 id="1-_fork_it">1. fork it</h3><h3 id="2-_修改_code">2. 修改 code</h3><p><img src="/img/Fix_Bug_for_Interface_Inspector_on_macOS_Serria/github.png" alt="github"></p>
+<h3 id="3-_编译签名">3. 编译签名</h3><p>注意，这里有个小细节，app 在 load <em>mach_inject_bundle_stub</em> 这个 bundle 时，是按照 bundle id <code>com.rentzsch.mach-inject-bundle-stub</code> 来找的，所以需要把工程文件里的 bundle id 改成跟原来的 bundle id 一样。</p>
+<h3 id="4-_替换到_mach_inject_bundle-framework_里面">4. 替换到 <em>mach_inject_bundle.framework</em> 里面</h3><h3 id="5-_顺便提一个_pull_request，老代码已经年久失修了_XD">5. 顺便提一个 pull request，老代码已经年久失修了 XD</h3><p>完成之后，重新启动 app，可以正常 work 了！</p>
+
+      
+    </div>
+    
+      <div class="article-copyright">
+	<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a><br />本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可。
+</div>
+    
+    
+      <div class ="post-donate">
+    <div id="donate_tip" class="donate_tip center">
+        <a id="btn_donate" class="btn_donate" href="javascript:;"></a>
+        <span class="donate_tip_txt">
+		   打赏
+        </span>
+        <br>
       </div>
-      <section class="archives-wrap">
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    
-    <div class="archive-article-thumbnail">
-      <a href="/2015/01/11/Study_iOS_CoreData/" class="thumbnail">
-  
-    <span style="background-image:url(/img/Study_iOS_CoreData/12.0.CoreData.png
-)" alt="Study iOS - CoreData" class="thumbnail-image"></span>
-  
-</a>
+	<div id="donate_guide" class="donate_tip center hidden">
+		<div class="donate_item">
+			<span class="donate_item_txt" style="color:#1dabec">支付宝打赏</span>
+			<img src="/img/zhifubaoV2.png" alt="支付宝打赏">
+		</div>
+		<div class="donate_item">
+			<span class="donate_item_txt" style="color:#22cf28">微信打赏</span>
+			<img src="/img/weixinV2.png" alt="微信打赏">
+		</div>
     </div>
+	<script type="text/javascript">
+		document.getElementById('btn_donate').onclick = function(){
+			$('#donate_tip').addClass('hidden');
+			$('#donate_guide').removeClass('hidden');
+		}
+	</script>
+</div>
     
-    <header class="archive-article-header">
+    <footer class="article-footer">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/01/11/Study_iOS_CoreData/">Study iOS - CoreData</a>
-    </h1>
-  
+        <a href="http://hi.zongquan.wang/2016/11/08/Fix_Bug_for_Interface_Inspector_on_macOS_Serria/#disqus_thread" class="article-comment-link">Comments</a>
+      
+
+      <a data-url="http://hi.zongquan.wang/2016/11/08/Fix_Bug_for_Interface_Inspector_on_macOS_Serria/" data-id="civ9aq0a40002dfsbnqfd243p" class="article-share-link">Share</a>
+
+      <div id="article-baidu-share" class="bdsharebuttonbox">
+        <a href="#" class="bds_weixin" data-cmd="weixin" title="WeiXin"></a>
+      </div>
+      <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":["mshare","weixin","tsina","tqq","qzone","qq","sqq","tqf","t163","renren","douban","huaban","taobao","tieba","kaixin001","tsohu","meilishuo","mogujie","sdo","youdao","twi","fbook","linkedin","mail","copy","print"],"bdPic":"","bdStyle":"1","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
 
       
-        
-  <div class="archive-article-date">
-    <i class="fa fa-calendar"></i>
-    <a href="/2015/01/11/Study_iOS_CoreData/">
-      <time datetime="2015-01-11T08:51:58.000Z" itemprop="datePublished">Jan 11</time>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mac/">Mac</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/07/25/Swift_and_ObjectiveC_Mix_and_Match/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Swift and Objective-C (Mix and Match)</div>
     </a>
-  </div>
+  
+</nav>
 
 
-      
-    </header>
-  </div>
+  
 </article>
-  
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    
-    <div class="archive-article-thumbnail">
-      <a href="/2015/01/11/Study_iOS_UITableView/" class="thumbnail">
-  
-    <span style="background-image:url(/img/Study_iOS_UITableView/11.0.UITableView.png
-)" alt="Study iOS - UITableView" class="thumbnail-image"></span>
-  
-</a>
-    </div>
-    
-    <header class="archive-article-header">
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/01/11/Study_iOS_UITableView/">Study iOS - UITableView</a>
-    </h1>
-  
 
-      
-        
-  <div class="archive-article-date">
-    <i class="fa fa-calendar"></i>
-    <a href="/2015/01/11/Study_iOS_UITableView/">
-      <time datetime="2015-01-11T06:42:21.000Z" itemprop="datePublished">Jan 11</time>
-    </a>
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
   </div>
+</section>
 
-
-      
-    </header>
-  </div>
-</article>
-  
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    
-    <div class="archive-article-thumbnail">
-      <a href="/2015/01/11/Study_iOS_UIScrollView/" class="thumbnail">
-  
-    <span style="background-image:url(/img/Study_iOS_UIScrollView/10.3.UIScrollView.png
-)" alt="Study iOS - UIScrollView" class="thumbnail-image"></span>
-  
-</a>
-    </div>
-    
-    <header class="archive-article-header">
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/01/11/Study_iOS_UIScrollView/">Study iOS - UIScrollView</a>
-    </h1>
-  
-
-      
-        
-  <div class="archive-article-date">
-    <i class="fa fa-calendar"></i>
-    <a href="/2015/01/11/Study_iOS_UIScrollView/">
-      <time datetime="2015-01-11T05:46:10.000Z" itemprop="datePublished">Jan 11</time>
-    </a>
-  </div>
-
-
-      
-    </header>
-  </div>
-</article>
-  
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    
-    <div class="archive-article-thumbnail">
-      <a href="/2015/01/10/Study_iOS_Segue/" class="thumbnail">
-  
-    <span style="background-image:url(/img/Study_iOS_Segue/6.0.UINavigationController.png
-)" alt="Study iOS - Segue" class="thumbnail-image"></span>
-  
-</a>
-    </div>
-    
-    <header class="archive-article-header">
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/01/10/Study_iOS_Segue/">Study iOS - Segue</a>
-    </h1>
-  
-
-      
-        
-  <div class="archive-article-date">
-    <i class="fa fa-calendar"></i>
-    <a href="/2015/01/10/Study_iOS_Segue/">
-      <time datetime="2015-01-10T15:01:35.000Z" itemprop="datePublished">Jan 10</time>
-    </a>
-  </div>
-
-
-      
-    </header>
-  </div>
-</article>
-  
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    
-    <div class="archive-article-thumbnail">
-      <a href="/2015/01/07/Study_iOS_Network/" class="thumbnail">
-  
-    <span class="thumbnail-image thumbnail-none"></span>
-  
-</a>
-    </div>
-    
-    <header class="archive-article-header">
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/01/07/Study_iOS_Network/">Study iOS - Network</a>
-    </h1>
-  
-
-      
-        
-  <div class="archive-article-date">
-    <i class="fa fa-calendar"></i>
-    <a href="/2015/01/07/Study_iOS_Network/">
-      <time datetime="2015-01-07T02:15:27.000Z" itemprop="datePublished">Jan 7</time>
-    </a>
-  </div>
-
-
-      
-    </header>
-  </div>
-</article>
-  
-    </div></section>
-  
-      <nav id="page-nav">
-        <a class="extend prev" rel="prev" href="/archives/page/2/">&laquo; Prev</a><a class="page-number" href="/archives/">1</a><a class="page-number" href="/archives/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/archives/page/4/">4</a><a class="page-number" href="/archives/page/5/">5</a><a class="extend next" rel="next" href="/archives/page/4/">Next &raquo;</a>
-      </nav>
-    </section>
+</section>
       
         <aside id="sidebar">
   
@@ -487,7 +437,7 @@ ga('send', 'pageview');
     var dsq = document.createElement('script');
     dsq.type = 'text/javascript';
     dsq.async = true;
-    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
   })();
 </script>
