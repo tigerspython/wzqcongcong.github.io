@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta property="og:type" content="website">
 <meta property="og:title" content="闷骚的悟空">
-<meta property="og:url" content="http://hi.zongquan.wang/index.html">
+<meta property="og:url" content="https://hi.zongquan.wang/index.html">
 <meta property="og:site_name" content="闷骚的悟空">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="闷骚的悟空">
@@ -36,6 +36,12 @@ ga('send', 'pageview');
 
   
 
+
+  <script>
+  var host = "hi.zongquan.wang";
+  if ((host == window.location.host) && (window.location.protocol != "https:"))
+    window.location.protocol = "https";
+  </script>
 
   <script>
   var _hmt = _hmt || [];
@@ -74,7 +80,7 @@ ga('send', 'pageview');
         </nav>
       
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit"> </button><input type="hidden" name="sitesearch" value="http://hi.zongquan.wang"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit"> </button><input type="hidden" name="sitesearch" value="https://hi.zongquan.wang"></form>
       </div>
     </div>
   </div>
@@ -89,7 +95,7 @@ ga('send', 'pageview');
           <td><a class="main-nav-link" href="/about/me.html">Me</a></td>
         
         <td>
-          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><input type="hidden" name="sitesearch" value="http://hi.zongquan.wang"></form>
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><input type="hidden" name="sitesearch" value="https://hi.zongquan.wang"></form>
         </td>
       </tr>
     </table>
@@ -125,7 +131,7 @@ ga('send', 'pageview');
           
           <td><a href="mailto:wzqcongcong@sina.com" target="_blank" title="send"><i class="fa fa-send"></i></a></td>
           
-          <td><a href="http://github.com/wzqcongcong" target="_blank" title="github"><i class="fa fa-github"></i></a></td>
+          <td><a href="https://github.com/wzqcongcong" target="_blank" title="github"><i class="fa fa-github"></i></a></td>
           
           <td><a href="https://twitter.com/wzqcongcong" target="_blank" title="twitter"><i class="fa fa-twitter"></i></a></td>
           
@@ -175,7 +181,7 @@ ga('send', 'pageview');
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>之前介绍过<a href="http://hi.zongquan.wang/2016/04/21/Hack_Interface_Inspector/">如何破解 Interface Inspector</a>，近来把系统升级到最新的 macOS Serria 之后，发现 Interface Inspector 不 work 了。启动倒是正常，但每次 attach app 时，总是提示无法 attach，查看 system log，发现有这么一个 error：</p>
+        <p>之前介绍过<a href="https://hi.zongquan.wang/2016/04/21/Hack_Interface_Inspector/">如何破解 Interface Inspector</a>，近来把系统升级到最新的 macOS Serria 之后，发现 Interface Inspector 不 work 了。启动倒是正常，但每次 attach app 时，总是提示无法 attach，查看 system log，发现有这么一个 error：</p>
 <p><img src="/img/Fix_Bug_for_Interface_Inspector_on_macOS_Serria/log.png" alt="log"></p>
 <p>从 log 中看出，root cause 是 <em>mach_inject_bundle_stub</em> 去 load <code>___pthread_set_self</code> 时失败了，而这个函数本来应该是在 <em>libSystem.B.dylb</em> 这个系统库里面的。也就是说，macOS Serria 的 <em>libSystem.B.dylb</em> 已经不再有 <code>___pthread_set_self</code> 这个函数了。于是开始 google，最后在<a href="https://twitter.com/snielsen42/status/778405531383836674">一条 Twitter</a> 上发现了咋回事，是的，<code>___pthread_set_self</code> 已经被替换成了 <code>_pthread_set_self</code>。</p>
 <p>明白了咋回事，开始考虑怎么解决。</p>
@@ -190,15 +196,15 @@ ga('send', 'pageview');
     
     <footer class="article-footer">
       
-        <a href="http://hi.zongquan.wang/2016/11/08/Fix_Bug_for_Interface_Inspector_on_macOS_Serria/#disqus_thread" class="article-comment-link">Comments</a>
+        <a href="https://hi.zongquan.wang/2016/11/08/Fix_Bug_for_Interface_Inspector_on_macOS_Serria/#disqus_thread" class="article-comment-link">Comments</a>
       
 
-      <a data-url="http://hi.zongquan.wang/2016/11/08/Fix_Bug_for_Interface_Inspector_on_macOS_Serria/" data-id="civ9aq0a40002dfsbnqfd243p" class="article-share-link">Share</a>
+      <a data-url="https://hi.zongquan.wang/2016/11/08/Fix_Bug_for_Interface_Inspector_on_macOS_Serria/" data-id="ciwcwc76p00045nsbev0j901i" class="article-share-link">Share</a>
 
       <div id="article-baidu-share" class="bdsharebuttonbox">
         <a href="#" class="bds_weixin" data-cmd="weixin" title="WeiXin"></a>
       </div>
-      <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":["mshare","weixin","tsina","tqq","qzone","qq","sqq","tqf","t163","renren","douban","huaban","taobao","tieba","kaixin001","tsohu","meilishuo","mogujie","sdo","youdao","twi","fbook","linkedin","mail","copy","print"],"bdPic":"","bdStyle":"1","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+      <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":["mshare","weixin","tsina","tqq","qzone","qq","sqq","tqf","t163","renren","douban","huaban","taobao","tieba","kaixin001","tsohu","meilishuo","mogujie","sdo","youdao","twi","fbook","linkedin","mail","copy","print"],"bdPic":"","bdStyle":"1","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/baidushare/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
 
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mac/">Mac</a></li></ul>
@@ -275,15 +281,15 @@ ga('send', 'pageview');
     
     <footer class="article-footer">
       
-        <a href="http://hi.zongquan.wang/2016/07/25/Swift_and_ObjectiveC_Mix_and_Match/#disqus_thread" class="article-comment-link">Comments</a>
+        <a href="https://hi.zongquan.wang/2016/07/25/Swift_and_ObjectiveC_Mix_and_Match/#disqus_thread" class="article-comment-link">Comments</a>
       
 
-      <a data-url="http://hi.zongquan.wang/2016/07/25/Swift_and_ObjectiveC_Mix_and_Match/" data-id="civ9aq0bu000qdfsby9lkmspd" class="article-share-link">Share</a>
+      <a data-url="https://hi.zongquan.wang/2016/07/25/Swift_and_ObjectiveC_Mix_and_Match/" data-id="ciwcwc77k000q5nsbqm4qa4pt" class="article-share-link">Share</a>
 
       <div id="article-baidu-share" class="bdsharebuttonbox">
         <a href="#" class="bds_weixin" data-cmd="weixin" title="WeiXin"></a>
       </div>
-      <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":["mshare","weixin","tsina","tqq","qzone","qq","sqq","tqf","t163","renren","douban","huaban","taobao","tieba","kaixin001","tsohu","meilishuo","mogujie","sdo","youdao","twi","fbook","linkedin","mail","copy","print"],"bdPic":"","bdStyle":"1","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+      <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":["mshare","weixin","tsina","tqq","qzone","qq","sqq","tqf","t163","renren","douban","huaban","taobao","tieba","kaixin001","tsohu","meilishuo","mogujie","sdo","youdao","twi","fbook","linkedin","mail","copy","print"],"bdPic":"","bdStyle":"1","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/baidushare/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
 
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Swift/">Swift</a></li></ul>
@@ -332,7 +338,7 @@ ga('send', 'pageview');
       
         <p>之前在 iOSRE 上看到<a href="http://bbs.iosre.com/t/mac/3373">一篇文章</a>，里面有讲到一个逆向 Mac app UI 的工具 <a href="http://www.interface-inspector.com/">Interface Inspector</a>，扫了一眼，尼玛神器啊，简直就是 Reveal 的 Mac 版。上个图感受一下它的淫威吧：</p>
 <p><img src="/img/Hack_Interface_Inspector/ii.png" alt="Interface Inspector"></p>
-<p>这么好的工具，这么贵的价格，心痒了。好吧，凭借着<a href="http://hi.zongquan.wang/2016/01/12/Hack_XtraFinder/">之前的破解经验</a>，再来搞一次吧。</p>
+<p>这么好的工具，这么贵的价格，心痒了。好吧，凭借着<a href="https://hi.zongquan.wang/2016/01/12/Hack_XtraFinder/">之前的破解经验</a>，再来搞一次吧。</p>
         
           <p class="article-more-link shake shake-rotate">
             <a href="/2016/04/21/Hack_Interface_Inspector/#more">Read More</a>
@@ -344,15 +350,15 @@ ga('send', 'pageview');
     
     <footer class="article-footer">
       
-        <a href="http://hi.zongquan.wang/2016/04/21/Hack_Interface_Inspector/#disqus_thread" class="article-comment-link">Comments</a>
+        <a href="https://hi.zongquan.wang/2016/04/21/Hack_Interface_Inspector/#disqus_thread" class="article-comment-link">Comments</a>
       
 
-      <a data-url="http://hi.zongquan.wang/2016/04/21/Hack_Interface_Inspector/" data-id="civ9aq0a60003dfsb65angep3" class="article-share-link">Share</a>
+      <a data-url="https://hi.zongquan.wang/2016/04/21/Hack_Interface_Inspector/" data-id="ciwcwc76s00065nsbambdi1xa" class="article-share-link">Share</a>
 
       <div id="article-baidu-share" class="bdsharebuttonbox">
         <a href="#" class="bds_weixin" data-cmd="weixin" title="WeiXin"></a>
       </div>
-      <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":["mshare","weixin","tsina","tqq","qzone","qq","sqq","tqf","t163","renren","douban","huaban","taobao","tieba","kaixin001","tsohu","meilishuo","mogujie","sdo","youdao","twi","fbook","linkedin","mail","copy","print"],"bdPic":"","bdStyle":"1","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+      <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":["mshare","weixin","tsina","tqq","qzone","qq","sqq","tqf","t163","renren","douban","huaban","taobao","tieba","kaixin001","tsohu","meilishuo","mogujie","sdo","youdao","twi","fbook","linkedin","mail","copy","print"],"bdPic":"","bdStyle":"1","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/baidushare/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
 
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mac/">Mac</a></li></ul>
@@ -411,15 +417,15 @@ ga('send', 'pageview');
     
     <footer class="article-footer">
       
-        <a href="http://hi.zongquan.wang/2016/03/29/How_to_install_iOSOpenDev_manually/#disqus_thread" class="article-comment-link">Comments</a>
+        <a href="https://hi.zongquan.wang/2016/03/29/How_to_install_iOSOpenDev_manually/#disqus_thread" class="article-comment-link">Comments</a>
       
 
-      <a data-url="http://hi.zongquan.wang/2016/03/29/How_to_install_iOSOpenDev_manually/" data-id="civ9aq0au000adfsbr5ehl7ia" class="article-share-link">Share</a>
+      <a data-url="https://hi.zongquan.wang/2016/03/29/How_to_install_iOSOpenDev_manually/" data-id="ciwcwc76z000a5nsb0hvz8sdl" class="article-share-link">Share</a>
 
       <div id="article-baidu-share" class="bdsharebuttonbox">
         <a href="#" class="bds_weixin" data-cmd="weixin" title="WeiXin"></a>
       </div>
-      <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":["mshare","weixin","tsina","tqq","qzone","qq","sqq","tqf","t163","renren","douban","huaban","taobao","tieba","kaixin001","tsohu","meilishuo","mogujie","sdo","youdao","twi","fbook","linkedin","mail","copy","print"],"bdPic":"","bdStyle":"1","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+      <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":["mshare","weixin","tsina","tqq","qzone","qq","sqq","tqf","t163","renren","douban","huaban","taobao","tieba","kaixin001","tsohu","meilishuo","mogujie","sdo","youdao","twi","fbook","linkedin","mail","copy","print"],"bdPic":"","bdStyle":"1","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/baidushare/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
 
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Xcode/">Xcode</a></li></ul>
@@ -478,15 +484,15 @@ ga('send', 'pageview');
     
     <footer class="article-footer">
       
-        <a href="http://hi.zongquan.wang/2016/01/12/Hack_XtraFinder/#disqus_thread" class="article-comment-link">Comments</a>
+        <a href="https://hi.zongquan.wang/2016/01/12/Hack_XtraFinder/#disqus_thread" class="article-comment-link">Comments</a>
       
 
-      <a data-url="http://hi.zongquan.wang/2016/01/12/Hack_XtraFinder/" data-id="civ9aq0al0006dfsb1l2jjqmd" class="article-share-link">Share</a>
+      <a data-url="https://hi.zongquan.wang/2016/01/12/Hack_XtraFinder/" data-id="ciwcwc76u00075nsb10wjo8pl" class="article-share-link">Share</a>
 
       <div id="article-baidu-share" class="bdsharebuttonbox">
         <a href="#" class="bds_weixin" data-cmd="weixin" title="WeiXin"></a>
       </div>
-      <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":["mshare","weixin","tsina","tqq","qzone","qq","sqq","tqf","t163","renren","douban","huaban","taobao","tieba","kaixin001","tsohu","meilishuo","mogujie","sdo","youdao","twi","fbook","linkedin","mail","copy","print"],"bdPic":"","bdStyle":"1","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+      <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":["mshare","weixin","tsina","tqq","qzone","qq","sqq","tqf","t163","renren","douban","huaban","taobao","tieba","kaixin001","tsohu","meilishuo","mogujie","sdo","youdao","twi","fbook","linkedin","mail","copy","print"],"bdPic":"","bdStyle":"1","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/baidushare/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
 
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mac/">Mac</a></li></ul>
@@ -632,7 +638,7 @@ ga('send', 'pageview');
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 1987 - 2016 闷骚的悟空<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="https://eager.io/" target="_blank">Eager</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a href="https://eager.io/" target="_blank">Eager</a>. Theme by <a href="https://github.com/ppoffice">PPOffice</a>
     </div>
     <div style="display: none">
       
