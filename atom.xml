@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title><![CDATA[闷骚的悟空]]></title>
-  <subtitle><![CDATA[立一业谋生 择一城终老 携一人白首]]></subtitle>
+  <subtitle><![CDATA[立一业谋生|择一城终老|携一人白首]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="https://hi.zongquan.wang/"/>
-  <updated>2016-12-06T02:17:03.000Z</updated>
+  <updated>2016-12-09T03:09:10.000Z</updated>
   <id>https://hi.zongquan.wang/</id>
   
   <author>
@@ -19,8 +19,8 @@
     <link href="https://hi.zongquan.wang/2016/11/08/Fix_Bug_for_Interface_Inspector_on_macOS_Serria/"/>
     <id>https://hi.zongquan.wang/2016/11/08/Fix_Bug_for_Interface_Inspector_on_macOS_Serria/</id>
     <published>2016-11-08T08:32:57.000Z</published>
-    <updated>2016-12-06T02:17:03.000Z</updated>
-    <content type="html"><![CDATA[<p>之前介绍过<a href="https://hi.zongquan.wang/2016/04/21/Hack_Interface_Inspector/">如何破解 Interface Inspector</a>，近来把系统升级到最新的 macOS Serria 之后，发现 Interface Inspector 不 work 了。启动倒是正常，但每次 attach app 时，总是提示无法 attach，查看 system log，发现有这么一个 error：</p>
+    <updated>2016-12-09T03:09:10.000Z</updated>
+    <content type="html"><![CDATA[<p>之前介绍过<a href="../../../../2016/04/21/Hack_Interface_Inspector/">如何破解 Interface Inspector</a>，近来把系统升级到最新的 macOS Serria 之后，发现 Interface Inspector 不 work 了。启动倒是正常，但每次 attach app 时，总是提示无法 attach，查看 system log，发现有这么一个 error：</p>
 <p><img src="/img/Fix_Bug_for_Interface_Inspector_on_macOS_Serria/log.png" alt="log"></p>
 <p>从 log 中看出，root cause 是 <em>mach_inject_bundle_stub</em> 去 load <code>___pthread_set_self</code> 时失败了，而这个函数本来应该是在 <em>libSystem.B.dylb</em> 这个系统库里面的。也就是说，macOS Serria 的 <em>libSystem.B.dylb</em> 已经不再有 <code>___pthread_set_self</code> 这个函数了。于是开始 google，最后在<a href="https://twitter.com/snielsen42/status/778405531383836674" target="_blank" rel="external">一条 Twitter</a> 上发现了咋回事，是的，<code>___pthread_set_self</code> 已经被替换成了 <code>_pthread_set_self</code>。</p>
 <p>明白了咋回事，开始考虑怎么解决。</p>
@@ -33,9 +33,10 @@
 <h3 id="1-_fork_it">1. fork it</h3><h3 id="2-_修改_code">2. 修改 code</h3><p><img src="/img/Fix_Bug_for_Interface_Inspector_on_macOS_Serria/github.png" alt="github"></p>
 <h3 id="3-_编译签名">3. 编译签名</h3><p>注意，这里有个小细节，app 在 load <em>mach_inject_bundle_stub</em> 这个 bundle 时，是按照 bundle id <code>com.rentzsch.mach-inject-bundle-stub</code> 来找的，所以需要把工程文件里的 bundle id 改成跟原来的 bundle id 一样。</p>
 <h3 id="4-_替换到_mach_inject_bundle-framework_里面">4. 替换到 <em>mach_inject_bundle.framework</em> 里面</h3><h3 id="5-_顺便提一个_pull_request，老代码已经年久失修了_XD">5. 顺便提一个 pull request，老代码已经年久失修了 XD</h3><p>完成之后，重新启动 app，可以正常 work 了！</p>
+<hr>
 ]]></content>
     <summary type="html">
-    <![CDATA[<p>之前介绍过<a href="https://hi.zongquan.wang/2016/04/21/Hack_Interface_Inspector/">如何破解 Interface Inspector</a>，近来把系统升级到最新的 macOS Serria 之后，发现 Interface Inspector 不 work 了。启动倒是正常，但每次 attach app 时，总是提示无法 attach，查看 system log，发现有这么一个 error：</p>
+    <![CDATA[<p>之前介绍过<a href="../../../../2016/04/21/Hack_Interface_Inspector/">如何破解 Interface Inspector</a>，近来把系统升级到最新的 macOS Serria 之后，发现 Interface Inspector 不 work 了。启动倒是正常，但每次 attach app 时，总是提示无法 attach，查看 system log，发现有这么一个 error：</p>
 <p><img src="/img/Fix_Bug_for_Interface_Inspector_on_macOS_Serria/log.png" alt="log"></p>
 <p>从 log 中看出，root cause 是 <em>mach_inject_bundle_stub</em> 去 load <code>___pthread_set_self</code> 时失败了，而这个函数本来应该是在 <em>libSystem.B.dylb</em> 这个系统库里面的。也就是说，macOS Serria 的 <em>libSystem.B.dylb</em> 已经不再有 <code>___pthread_set_self</code> 这个函数了。于是开始 google，最后在<a href="https://twitter.com/snielsen42/status/778405531383836674">一条 Twitter</a> 上发现了咋回事，是的，<code>___pthread_set_self</code> 已经被替换成了 <code>_pthread_set_self</code>。</p>
 <p>明白了咋回事，开始考虑怎么解决。</p>]]>
@@ -44,7 +45,7 @@
     
       <category term="Mac" scheme="https://hi.zongquan.wang/tags/Mac/"/>
     
-      <category term="开发" scheme="https://hi.zongquan.wang/categories/%E5%BC%80%E5%8F%91/"/>
+      <category term="Development" scheme="https://hi.zongquan.wang/categories/Development/"/>
     
   </entry>
   
@@ -53,7 +54,7 @@
     <link href="https://hi.zongquan.wang/2016/07/25/Swift_and_ObjectiveC_Mix_and_Match/"/>
     <id>https://hi.zongquan.wang/2016/07/25/Swift_and_ObjectiveC_Mix_and_Match/</id>
     <published>2016-07-25T09:32:53.000Z</published>
-    <updated>2016-07-25T11:11:49.000Z</updated>
+    <updated>2016-12-09T03:10:01.000Z</updated>
     <content type="html"><![CDATA[<p>Swift 与 Objective-C 混编 （to be continued）</p>
 <h3 id="Code_直接混编_+_Framework_间接混编">Code 直接混编 + Framework 间接混编</h3><hr>
 <h2 id="&lt;_Code_直接混编_&gt;">&lt; Code 直接混编 &gt;</h2><ul>
@@ -65,6 +66,9 @@
 <li>in Objective-C code, <code>#import &quot;Project_C_Product-Swift.h&quot;</code>.</li>
 </ol>
 </li>
+</ul>
+<a id="more"></a>
+<ul>
 <li><h4 id="在_Swift_code_中使用_Objective-C_code">在 Swift code 中使用 Objective-C code</h4><p>  Swift project: <code>Project_S</code><br>  PRODUCT_MODULE_NAME: <code>Project_S_Product</code></p>
 <ol>
 <li>in Project_S’s build settings, set up <code>&quot;Objective-C Bridging Header&quot;</code> to <code>&quot;Project_S_Product-Bridging-Header.h&quot;</code>.</li>
@@ -73,7 +77,6 @@
 </ol>
 </li>
 </ul>
-<a id="more"></a>
 <h2 id="&lt;_Framework_间接混编_&gt;">&lt; Framework 间接混编 &gt;</h2><ul>
 <li><h4 id="创建_Swift_framework_给_Objective-C_code_使用">创建 Swift framework 给 Objective-C code 使用</h4><p>framework product: <code>Framework_S</code></p>
 <p><strong>framework’s side:</strong></p>
@@ -94,7 +97,8 @@
 </li>
 </ul>
 <hr>
-<h4 id="Apple_官方文档"><a href="https://developer.apple.com/library/ios/documentation/Swift/Conceptual/BuildingCocoaApps/MixandMatch.html" target="_blank" rel="external">Apple 官方文档</a></h4>]]></content>
+<h4 id="Apple_官方文档"><a href="https://developer.apple.com/library/ios/documentation/Swift/Conceptual/BuildingCocoaApps/MixandMatch.html" target="_blank" rel="external">Apple 官方文档</a></h4><hr>
+]]></content>
     <summary type="html">
     <![CDATA[<p>Swift 与 Objective-C 混编 （to be continued）</p>
 <h3 id="Code_直接混编_+_Framework_间接混编">Code 直接混编 + Framework 间接混编</h3><hr>
@@ -107,20 +111,13 @@
 <li>in Objective-C code, <code>#import &quot;Project_C_Product-Swift.h&quot;</code>.</li>
 </ol>
 </li>
-<li><h4 id="在_Swift_code_中使用_Objective-C_code">在 Swift code 中使用 Objective-C code</h4><p>  Swift project: <code>Project_S</code><br>  PRODUCT_MODULE_NAME: <code>Project_S_Product</code></p>
-<ol>
-<li>in Project_S’s build settings, set up <code>&quot;Objective-C Bridging Header&quot;</code> to <code>&quot;Project_S_Product-Bridging-Header.h&quot;</code>.</li>
-<li>in <code>&quot;Project_S_Product-Bridging-Header.h&quot;</code>, <code>#import</code> every Objective-C header you want to expose to Swift code.</li>
-<li>in Swift code, <em>NO</em> need to <code>#import &quot;Project_C_Product-Bridging-Header.h&quot;</code>.</li>
-</ol>
-</li>
 </ul>]]>
     
     </summary>
     
       <category term="Swift" scheme="https://hi.zongquan.wang/tags/Swift/"/>
     
-      <category term="开发" scheme="https://hi.zongquan.wang/categories/%E5%BC%80%E5%8F%91/"/>
+      <category term="Development" scheme="https://hi.zongquan.wang/categories/Development/"/>
     
   </entry>
   
@@ -129,10 +126,10 @@
     <link href="https://hi.zongquan.wang/2016/04/21/Hack_Interface_Inspector/"/>
     <id>https://hi.zongquan.wang/2016/04/21/Hack_Interface_Inspector/</id>
     <published>2016-04-21T12:38:11.000Z</published>
-    <updated>2016-12-06T02:17:03.000Z</updated>
+    <updated>2016-12-09T03:09:12.000Z</updated>
     <content type="html"><![CDATA[<p>之前在 iOSRE 上看到<a href="http://bbs.iosre.com/t/mac/3373" target="_blank" rel="external">一篇文章</a>，里面有讲到一个逆向 Mac app UI 的工具 <a href="http://www.interface-inspector.com/" target="_blank" rel="external">Interface Inspector</a>，扫了一眼，尼玛神器啊，简直就是 Reveal 的 Mac 版。上个图感受一下它的淫威吧：</p>
 <p><img src="/img/Hack_Interface_Inspector/ii.png" alt="Interface Inspector"></p>
-<p>这么好的工具，这么贵的价格，心痒了。好吧，凭借着<a href="https://hi.zongquan.wang/2016/01/12/Hack_XtraFinder/">之前的破解经验</a>，再来搞一次吧。</p>
+<p>这么好的工具，这么贵的价格，心痒了。好吧，凭借着<a href="../../../../2016/01/12/Hack_XtraFinder/">之前的破解经验</a>，再来搞一次吧。</p>
 <a id="more"></a>
 <h3 id="0-_开始">0. 开始</h3><p>首先从官网下载试用版，打开 app，直接弹出一个提示框：</p>
 <p><img src="/img/Hack_Interface_Inspector/alert.png" alt="Alert"></p>
@@ -157,17 +154,18 @@
 <p>是的，我们把 <code>[SMLicenseManager verifyLicenseWithName:code:]</code> 改成了总是返回 <code>YES</code>，但是代码走到这里撞墙了，<em>Test User</em> 验证之后也返回 <code>YES</code> 了，然后 app 直接 <code>terminate:</code> 了。也就是说，作者在这里放了一个本来就是非法的 license，正常验证的话肯定是返回 <code>NO</code> 的，就不会导致直接退出了。所以我们还需要把这里的判断条件改成 <code>XXX == NO</code>，这样就没有问题了。真是淘气的作者，藏得这么深。</p>
 <p>好了，改好，重新签名，运行 app，随便输入 license 信息，啊哈哈，注册成功！</p>
 <p><img src="/img/Hack_Interface_Inspector/done.png" alt="Done"></p>
+<hr>
 ]]></content>
     <summary type="html">
     <![CDATA[<p>之前在 iOSRE 上看到<a href="http://bbs.iosre.com/t/mac/3373">一篇文章</a>，里面有讲到一个逆向 Mac app UI 的工具 <a href="http://www.interface-inspector.com/">Interface Inspector</a>，扫了一眼，尼玛神器啊，简直就是 Reveal 的 Mac 版。上个图感受一下它的淫威吧：</p>
 <p><img src="/img/Hack_Interface_Inspector/ii.png" alt="Interface Inspector"></p>
-<p>这么好的工具，这么贵的价格，心痒了。好吧，凭借着<a href="https://hi.zongquan.wang/2016/01/12/Hack_XtraFinder/">之前的破解经验</a>，再来搞一次吧。</p>]]>
+<p>这么好的工具，这么贵的价格，心痒了。好吧，凭借着<a href="../../../../2016/01/12/Hack_XtraFinder/">之前的破解经验</a>，再来搞一次吧。</p>]]>
     
     </summary>
     
       <category term="Mac" scheme="https://hi.zongquan.wang/tags/Mac/"/>
     
-      <category term="开发" scheme="https://hi.zongquan.wang/categories/%E5%BC%80%E5%8F%91/"/>
+      <category term="Development" scheme="https://hi.zongquan.wang/categories/Development/"/>
     
   </entry>
   
@@ -176,7 +174,7 @@
     <link href="https://hi.zongquan.wang/2016/03/29/How_to_install_iOSOpenDev_manually/"/>
     <id>https://hi.zongquan.wang/2016/03/29/How_to_install_iOSOpenDev_manually/</id>
     <published>2016-03-29T15:30:35.000Z</published>
-    <updated>2016-04-08T01:23:43.000Z</updated>
+    <updated>2016-12-09T03:09:22.000Z</updated>
     <content type="html"><![CDATA[<p><a href="https://github.com/wzqcongcong/iOSOpenDev" target="_blank" rel="external">https://github.com/wzqcongcong/iOSOpenDev</a></p>
 <a id="more"></a>
 <hr>
@@ -231,6 +229,7 @@ DefaultProperties<span class="class">.AD_HOC_CODE_SIGNING_ALLOWED</span> =&gt; Y
 </ul>
 </li>
 </ol>
+<hr>
 ]]></content>
     <summary type="html">
     <![CDATA[<p><a href="https://github.com/wzqcongcong/iOSOpenDev">https://github.com/wzqcongcong/iOSOpenDev</a></p>]]>
@@ -239,7 +238,7 @@ DefaultProperties<span class="class">.AD_HOC_CODE_SIGNING_ALLOWED</span> =&gt; Y
     
       <category term="Xcode" scheme="https://hi.zongquan.wang/tags/Xcode/"/>
     
-      <category term="开发" scheme="https://hi.zongquan.wang/categories/%E5%BC%80%E5%8F%91/"/>
+      <category term="Development" scheme="https://hi.zongquan.wang/categories/Development/"/>
     
   </entry>
   
@@ -248,7 +247,7 @@ DefaultProperties<span class="class">.AD_HOC_CODE_SIGNING_ALLOWED</span> =&gt; Y
     <link href="https://hi.zongquan.wang/2016/01/12/Hack_XtraFinder/"/>
     <id>https://hi.zongquan.wang/2016/01/12/Hack_XtraFinder/</id>
     <published>2016-01-12T15:38:55.000Z</published>
-    <updated>2016-04-08T01:23:43.000Z</updated>
+    <updated>2016-12-09T03:09:14.000Z</updated>
     <content type="html"><![CDATA[<p>事情是这样的，我的系统是 OS X 10.11，就是那个有 SIP 的 10.11 😂。然后我装了一个 Finder 的插件：XtraFinder，这个插件有些功能在 10.11 下是不 work 的，所以插件作者出于好心，在检测到你的系统是 10.11 且 SIP 没有关闭的情况下，会弹出一个 alert 窗口作为提醒。</p>
 <a id="more"></a>
 <p><img src="/img/Hack_XtraFinder/alert.png" alt="Alert"></p>
@@ -281,6 +280,7 @@ DefaultProperties<span class="class">.AD_HOC_CODE_SIGNING_ALLOWED</span> =&gt; Y
 <p> 大功告成，覆盖重启插件后，再也没有弹出 alert，XtraFinder 照常 work 😆。</p>
 </li>
 </ol>
+<hr>
 ]]></content>
     <summary type="html">
     <![CDATA[<p>事情是这样的，我的系统是 OS X 10.11，就是那个有 SIP 的 10.11 😂。然后我装了一个 Finder 的插件：XtraFinder，这个插件有些功能在 10.11 下是不 work 的，所以插件作者出于好心，在检测到你的系统是 10.11 且 SIP 没有关闭的情况下，会弹出一个 alert 窗口作为提醒。</p>]]>
@@ -289,7 +289,7 @@ DefaultProperties<span class="class">.AD_HOC_CODE_SIGNING_ALLOWED</span> =&gt; Y
     
       <category term="Mac" scheme="https://hi.zongquan.wang/tags/Mac/"/>
     
-      <category term="开发" scheme="https://hi.zongquan.wang/categories/%E5%BC%80%E5%8F%91/"/>
+      <category term="Development" scheme="https://hi.zongquan.wang/categories/Development/"/>
     
   </entry>
   
@@ -298,7 +298,7 @@ DefaultProperties<span class="class">.AD_HOC_CODE_SIGNING_ALLOWED</span> =&gt; Y
     <link href="https://hi.zongquan.wang/2015/11/16/Xcode_Build_Settings_Products_Path/"/>
     <id>https://hi.zongquan.wang/2015/11/16/Xcode_Build_Settings_Products_Path/</id>
     <published>2015-11-16T12:21:54.000Z</published>
-    <updated>2016-04-08T01:23:43.000Z</updated>
+    <updated>2016-12-09T03:10:03.000Z</updated>
     <content type="html"><![CDATA[<p>假设一个 Project 的路径是 <code>XXX/ProjectX</code>。</p>
 <p>当 build 完成后，我们会关注 2 个与 <strong>Product Files</strong> 有关的 settings ：</p>
 <a id="more"></a>
@@ -356,6 +356,7 @@ DefaultProperties<span class="class">.AD_HOC_CODE_SIGNING_ALLOWED</span> =&gt; Y
 <p>一般需要 deploy 的时候，都是设置 <code>$SKIP_INSTALL</code> 为 <code>NO</code>，然后设置具体的 <code>$DSTROOT</code> 和 <code>$INSTALL_PATH</code>，所以这里忽略对 <code>$TARGET_TEMP_DIR</code> 理解。</p>
 </li>
 </ul>
+<hr>
 ]]></content>
     <summary type="html">
     <![CDATA[<p>假设一个 Project 的路径是 <code>XXX/ProjectX</code>。</p>
@@ -365,7 +366,7 @@ DefaultProperties<span class="class">.AD_HOC_CODE_SIGNING_ALLOWED</span> =&gt; Y
     
       <category term="Xcode" scheme="https://hi.zongquan.wang/tags/Xcode/"/>
     
-      <category term="开发" scheme="https://hi.zongquan.wang/categories/%E5%BC%80%E5%8F%91/"/>
+      <category term="Development" scheme="https://hi.zongquan.wang/categories/Development/"/>
     
   </entry>
   
@@ -374,7 +375,7 @@ DefaultProperties<span class="class">.AD_HOC_CODE_SIGNING_ALLOWED</span> =&gt; Y
     <link href="https://hi.zongquan.wang/2015/01/22/How_to_get_File_Attributes_in_Mac/"/>
     <id>https://hi.zongquan.wang/2015/01/22/How_to_get_File_Attributes_in_Mac/</id>
     <published>2015-01-22T07:16:18.000Z</published>
-    <updated>2016-04-08T01:23:43.000Z</updated>
+    <updated>2016-12-09T03:09:19.000Z</updated>
     <content type="html"><![CDATA[<h4 id="Mac_File_Attributes">Mac File Attributes</h4><p>在 Mac 开发中，想要获取 file 或者 dir 的属性，有这么4种方式：</p>
 <a id="more"></a>
 <ul>
@@ -439,6 +440,7 @@ DefaultProperties<span class="class">.AD_HOC_CODE_SIGNING_ALLOWED</span> =&gt; Y
 <p>  感觉好坑啊，难道打开的姿势不对~~</p>
 </li>
 </ul>
+<hr>
 ]]></content>
     <summary type="html">
     <![CDATA[<h4 id="Mac_File_Attributes">Mac File Attributes</h4><p>在 Mac 开发中，想要获取 file 或者 dir 的属性，有这么4种方式：</p>]]>
@@ -447,7 +449,7 @@ DefaultProperties<span class="class">.AD_HOC_CODE_SIGNING_ALLOWED</span> =&gt; Y
     
       <category term="Mac" scheme="https://hi.zongquan.wang/tags/Mac/"/>
     
-      <category term="开发" scheme="https://hi.zongquan.wang/categories/%E5%BC%80%E5%8F%91/"/>
+      <category term="Development" scheme="https://hi.zongquan.wang/categories/Development/"/>
     
   </entry>
   
@@ -456,7 +458,7 @@ DefaultProperties<span class="class">.AD_HOC_CODE_SIGNING_ALLOWED</span> =&gt; Y
     <link href="https://hi.zongquan.wang/2015/01/18/Study_iOS_Hardware/"/>
     <id>https://hi.zongquan.wang/2015/01/18/Study_iOS_Hardware/</id>
     <published>2015-01-18T07:42:25.000Z</published>
-    <updated>2016-04-08T01:23:43.000Z</updated>
+    <updated>2016-12-09T03:09:31.000Z</updated>
     <content type="html"><![CDATA[<h3 id="Developing_Applications_for_iOS_观后感系列：Hardware">Developing Applications for iOS 观后感系列：Hardware</h3><p><em>相关视频章节：14、17</em></p>
 <a id="more"></a>
 <hr>
@@ -520,6 +522,7 @@ DefaultProperties<span class="class">.AD_HOC_CODE_SIGNING_ALLOWED</span> =&gt; Y
 </ul>
 </li>
 </ol>
+<hr>
 ]]></content>
     <summary type="html">
     <![CDATA[<h3 id="Developing_Applications_for_iOS_观后感系列：Hardware">Developing Applications for iOS 观后感系列：Hardware</h3><p><em>相关视频章节：14、17</em></p>]]>
@@ -528,7 +531,7 @@ DefaultProperties<span class="class">.AD_HOC_CODE_SIGNING_ALLOWED</span> =&gt; Y
     
       <category term="iOS" scheme="https://hi.zongquan.wang/tags/iOS/"/>
     
-      <category term="开发" scheme="https://hi.zongquan.wang/categories/%E5%BC%80%E5%8F%91/"/>
+      <category term="Development" scheme="https://hi.zongquan.wang/categories/Development/"/>
     
   </entry>
   
@@ -537,7 +540,7 @@ DefaultProperties<span class="class">.AD_HOC_CODE_SIGNING_ALLOWED</span> =&gt; Y
     <link href="https://hi.zongquan.wang/2015/01/18/Study_iOS_L18N/"/>
     <id>https://hi.zongquan.wang/2015/01/18/Study_iOS_L18N/</id>
     <published>2015-01-18T05:35:11.000Z</published>
-    <updated>2016-04-08T01:23:43.000Z</updated>
+    <updated>2016-12-09T03:09:35.000Z</updated>
     <content type="html"><![CDATA[<h3 id="Developing_Applications_for_iOS_观后感系列：L18N">Developing Applications for iOS 观后感系列：L18N</h3><p><em>相关视频章节：18</em></p>
 <a id="more"></a>
 <hr>
@@ -574,6 +577,7 @@ DefaultProperties<span class="class">.AD_HOC_CODE_SIGNING_ALLOWED</span> =&gt; Y
 <p>  当你调用 UIImage 的 <code>imageNamed:*</code> 时，它也是会去搜索相应的 .lproj 目录的。</p>
 </li>
 </ul>
+<hr>
 ]]></content>
     <summary type="html">
     <![CDATA[<h3 id="Developing_Applications_for_iOS_观后感系列：L18N">Developing Applications for iOS 观后感系列：L18N</h3><p><em>相关视频章节：18</em></p>]]>
@@ -582,7 +586,7 @@ DefaultProperties<span class="class">.AD_HOC_CODE_SIGNING_ALLOWED</span> =&gt; Y
     
       <category term="iOS" scheme="https://hi.zongquan.wang/tags/iOS/"/>
     
-      <category term="开发" scheme="https://hi.zongquan.wang/categories/%E5%BC%80%E5%8F%91/"/>
+      <category term="Development" scheme="https://hi.zongquan.wang/categories/Development/"/>
     
   </entry>
   
@@ -591,7 +595,7 @@ DefaultProperties<span class="class">.AD_HOC_CODE_SIGNING_ALLOWED</span> =&gt; Y
     <link href="https://hi.zongquan.wang/2015/01/17/Study_iOS_Misc_UI/"/>
     <id>https://hi.zongquan.wang/2015/01/17/Study_iOS_Misc_UI/</id>
     <published>2015-01-17T07:30:03.000Z</published>
-    <updated>2016-04-08T01:23:43.000Z</updated>
+    <updated>2016-12-09T03:09:40.000Z</updated>
     <content type="html"><![CDATA[<h3 id="Developing_Applications_for_iOS_观后感系列：Misc_UI">Developing Applications for iOS 观后感系列：Misc UI</h3><p><em>相关视频章节：all</em></p>
 <a id="more"></a>
 <hr>
@@ -696,6 +700,7 @@ DefaultProperties<span class="class">.AD_HOC_CODE_SIGNING_ALLOWED</span> =&gt; Y
 <p><img src="/img/Study_iOS_Misc_UI/18.12.Settings.png" alt="Settings"></p>
 <p><img src="/img/Study_iOS_Misc_UI/18.13.Settings.png" alt="Settings"></p>
 <p><strong>注意</strong>：code 通常需要监听 NSUserDefaults 的变化，来及时获取 Settings 中新的值。</p>
+<hr>
 ]]></content>
     <summary type="html">
     <![CDATA[<h3 id="Developing_Applications_for_iOS_观后感系列：Misc_UI">Developing Applications for iOS 观后感系列：Misc UI</h3><p><em>相关视频章节：all</em></p>]]>
@@ -704,7 +709,7 @@ DefaultProperties<span class="class">.AD_HOC_CODE_SIGNING_ALLOWED</span> =&gt; Y
     
       <category term="iOS" scheme="https://hi.zongquan.wang/tags/iOS/"/>
     
-      <category term="开发" scheme="https://hi.zongquan.wang/categories/%E5%BC%80%E5%8F%91/"/>
+      <category term="Development" scheme="https://hi.zongquan.wang/categories/Development/"/>
     
   </entry>
   
@@ -713,7 +718,7 @@ DefaultProperties<span class="class">.AD_HOC_CODE_SIGNING_ALLOWED</span> =&gt; Y
     <link href="https://hi.zongquan.wang/2015/01/11/Study_iOS_CoreData/"/>
     <id>https://hi.zongquan.wang/2015/01/11/Study_iOS_CoreData/</id>
     <published>2015-01-11T08:51:58.000Z</published>
-    <updated>2016-04-08T01:23:43.000Z</updated>
+    <updated>2016-12-09T03:09:29.000Z</updated>
     <content type="html"><![CDATA[<h3 id="Developing_Applications_for_iOS_观后感系列：CoreData">Developing Applications for iOS 观后感系列：CoreData</h3><p><em>相关视频章节：12，13</em></p>
 <a id="more"></a>
 <hr>
@@ -858,6 +863,7 @@ DefaultProperties<span class="class">.AD_HOC_CODE_SIGNING_ALLOWED</span> =&gt; Y
 </li>
 </ul>
 <p>参见文档 sample code。</p>
+<hr>
 ]]></content>
     <summary type="html">
     <![CDATA[<h3 id="Developing_Applications_for_iOS_观后感系列：CoreData">Developing Applications for iOS 观后感系列：CoreData</h3><p><em>相关视频章节：12，13</em></p>]]>
@@ -866,7 +872,7 @@ DefaultProperties<span class="class">.AD_HOC_CODE_SIGNING_ALLOWED</span> =&gt; Y
     
       <category term="iOS" scheme="https://hi.zongquan.wang/tags/iOS/"/>
     
-      <category term="开发" scheme="https://hi.zongquan.wang/categories/%E5%BC%80%E5%8F%91/"/>
+      <category term="Development" scheme="https://hi.zongquan.wang/categories/Development/"/>
     
   </entry>
   
@@ -875,7 +881,7 @@ DefaultProperties<span class="class">.AD_HOC_CODE_SIGNING_ALLOWED</span> =&gt; Y
     <link href="https://hi.zongquan.wang/2015/01/11/Study_iOS_UITableView/"/>
     <id>https://hi.zongquan.wang/2015/01/11/Study_iOS_UITableView/</id>
     <published>2015-01-11T06:42:21.000Z</published>
-    <updated>2016-04-08T01:23:43.000Z</updated>
+    <updated>2016-12-09T03:09:56.000Z</updated>
     <content type="html"><![CDATA[<h3 id="Developing_Applications_for_iOS_观后感系列：UITableView">Developing Applications for iOS 观后感系列：UITableView</h3><p><em>相关视频章节：11</em></p>
 <a id="more"></a>
 <hr>
@@ -945,6 +951,7 @@ DefaultProperties<span class="class">.AD_HOC_CODE_SIGNING_ALLOWED</span> =&gt; Y
 <p> <strong>注意</strong>，用户 pull down 触发的是 Spinner 的 target-action，而不是触发 beginRefreshing。你需要在 action 中调用 beginRefreshing。</p>
 </li>
 </ol>
+<hr>
 ]]></content>
     <summary type="html">
     <![CDATA[<h3 id="Developing_Applications_for_iOS_观后感系列：UITableView">Developing Applications for iOS 观后感系列：UITableView</h3><p><em>相关视频章节：11</em></p>]]>
@@ -953,7 +960,7 @@ DefaultProperties<span class="class">.AD_HOC_CODE_SIGNING_ALLOWED</span> =&gt; Y
     
       <category term="iOS" scheme="https://hi.zongquan.wang/tags/iOS/"/>
     
-      <category term="开发" scheme="https://hi.zongquan.wang/categories/%E5%BC%80%E5%8F%91/"/>
+      <category term="Development" scheme="https://hi.zongquan.wang/categories/Development/"/>
     
   </entry>
   
@@ -962,7 +969,7 @@ DefaultProperties<span class="class">.AD_HOC_CODE_SIGNING_ALLOWED</span> =&gt; Y
     <link href="https://hi.zongquan.wang/2015/01/11/Study_iOS_UIScrollView/"/>
     <id>https://hi.zongquan.wang/2015/01/11/Study_iOS_UIScrollView/</id>
     <published>2015-01-11T05:46:10.000Z</published>
-    <updated>2016-04-08T01:23:43.000Z</updated>
+    <updated>2016-12-09T03:09:53.000Z</updated>
     <content type="html"><![CDATA[<h3 id="Developing_Applications_for_iOS_观后感系列：UIScrollView">Developing Applications for iOS 观后感系列：UIScrollView</h3><p><em>相关视频章节：10</em></p>
 <a id="more"></a>
 <hr>
@@ -1001,6 +1008,7 @@ DefaultProperties<span class="class">.AD_HOC_CODE_SIGNING_ALLOWED</span> =&gt; Y
 </ol>
 </li>
 </ul>
+<hr>
 ]]></content>
     <summary type="html">
     <![CDATA[<h3 id="Developing_Applications_for_iOS_观后感系列：UIScrollView">Developing Applications for iOS 观后感系列：UIScrollView</h3><p><em>相关视频章节：10</em></p>]]>
@@ -1009,7 +1017,7 @@ DefaultProperties<span class="class">.AD_HOC_CODE_SIGNING_ALLOWED</span> =&gt; Y
     
       <category term="iOS" scheme="https://hi.zongquan.wang/tags/iOS/"/>
     
-      <category term="开发" scheme="https://hi.zongquan.wang/categories/%E5%BC%80%E5%8F%91/"/>
+      <category term="Development" scheme="https://hi.zongquan.wang/categories/Development/"/>
     
   </entry>
   
@@ -1018,7 +1026,7 @@ DefaultProperties<span class="class">.AD_HOC_CODE_SIGNING_ALLOWED</span> =&gt; Y
     <link href="https://hi.zongquan.wang/2015/01/10/Study_iOS_Segue/"/>
     <id>https://hi.zongquan.wang/2015/01/10/Study_iOS_Segue/</id>
     <published>2015-01-10T15:01:35.000Z</published>
-    <updated>2016-04-08T01:23:43.000Z</updated>
+    <updated>2016-12-09T03:09:50.000Z</updated>
     <content type="html"><![CDATA[<h3 id="Developing_Applications_for_iOS_观后感系列：Segue">Developing Applications for iOS 观后感系列：Segue</h3><p><em>相关视频章节：6，15，16</em></p>
 <a id="more"></a>
 <hr>
@@ -1105,6 +1113,7 @@ DefaultProperties<span class="class">.AD_HOC_CODE_SIGNING_ALLOWED</span> =&gt; Y
 </ol>
 </li>
 </ul>
+<hr>
 ]]></content>
     <summary type="html">
     <![CDATA[<h3 id="Developing_Applications_for_iOS_观后感系列：Segue">Developing Applications for iOS 观后感系列：Segue</h3><p><em>相关视频章节：6，15，16</em></p>]]>
@@ -1113,7 +1122,7 @@ DefaultProperties<span class="class">.AD_HOC_CODE_SIGNING_ALLOWED</span> =&gt; Y
     
       <category term="iOS" scheme="https://hi.zongquan.wang/tags/iOS/"/>
     
-      <category term="开发" scheme="https://hi.zongquan.wang/categories/%E5%BC%80%E5%8F%91/"/>
+      <category term="Development" scheme="https://hi.zongquan.wang/categories/Development/"/>
     
   </entry>
   
@@ -1122,7 +1131,7 @@ DefaultProperties<span class="class">.AD_HOC_CODE_SIGNING_ALLOWED</span> =&gt; Y
     <link href="https://hi.zongquan.wang/2015/01/07/Study_iOS_Network/"/>
     <id>https://hi.zongquan.wang/2015/01/07/Study_iOS_Network/</id>
     <published>2015-01-07T02:15:27.000Z</published>
-    <updated>2016-04-08T01:23:43.000Z</updated>
+    <updated>2016-12-09T03:09:48.000Z</updated>
     <content type="html"><![CDATA[<h3 id="Developing_Applications_for_iOS_观后感系列：Network">Developing Applications for iOS 观后感系列：Network</h3><p><em>相关视频章节：10</em></p>
 <a id="more"></a>
 <hr>
@@ -1172,6 +1181,7 @@ DefaultProperties<span class="class">.AD_HOC_CODE_SIGNING_ALLOWED</span> =&gt; Y
 <li><p><strong>不要忘了 <code>[task resume];</code></strong></p>
 </li>
 </ol>
+<hr>
 ]]></content>
     <summary type="html">
     <![CDATA[<h3 id="Developing_Applications_for_iOS_观后感系列：Network">Developing Applications for iOS 观后感系列：Network</h3><p><em>相关视频章节：10</em></p>]]>
@@ -1180,7 +1190,7 @@ DefaultProperties<span class="class">.AD_HOC_CODE_SIGNING_ALLOWED</span> =&gt; Y
     
       <category term="iOS" scheme="https://hi.zongquan.wang/tags/iOS/"/>
     
-      <category term="开发" scheme="https://hi.zongquan.wang/categories/%E5%BC%80%E5%8F%91/"/>
+      <category term="Development" scheme="https://hi.zongquan.wang/categories/Development/"/>
     
   </entry>
   
@@ -1189,7 +1199,7 @@ DefaultProperties<span class="class">.AD_HOC_CODE_SIGNING_ALLOWED</span> =&gt; Y
     <link href="https://hi.zongquan.wang/2015/01/06/Study_iOS_Animation/"/>
     <id>https://hi.zongquan.wang/2015/01/06/Study_iOS_Animation/</id>
     <published>2015-01-06T14:29:21.000Z</published>
-    <updated>2016-04-08T01:23:43.000Z</updated>
+    <updated>2016-12-09T03:09:26.000Z</updated>
     <content type="html"><![CDATA[<h3 id="Developing_Applications_for_iOS_观后感系列：UIView_Animation">Developing Applications for iOS 观后感系列：UIView Animation</h3><p><em>相关视频章节：8</em></p>
 <a id="more"></a>
 <hr>
@@ -1261,6 +1271,7 @@ animator.delegate = aDelegate<span class="comment">;</span>
 <p> <strong>注意</strong>，如果你在 UIDynamicAnimator 的作用下，手动修改了 UIDynamicItem 的属性，那么必须调用 UIDynamicAnimator 的函数 <code>updateItemUsingCurrentState:item</code> 来让 UIDynamicAnimator 重新获取其属性，这样作用在 item 上的 UIDynamicBehavior 才能根据当前的最新状态继续产生作用力。</p>
 </li>
 </ol>
+<hr>
 ]]></content>
     <summary type="html">
     <![CDATA[<h3 id="Developing_Applications_for_iOS_观后感系列：UIView_Animation">Developing Applications for iOS 观后感系列：UIView Animation</h3><p><em>相关视频章节：8</em></p>]]>
@@ -1269,7 +1280,7 @@ animator.delegate = aDelegate<span class="comment">;</span>
     
       <category term="iOS" scheme="https://hi.zongquan.wang/tags/iOS/"/>
     
-      <category term="开发" scheme="https://hi.zongquan.wang/categories/%E5%BC%80%E5%8F%91/"/>
+      <category term="Development" scheme="https://hi.zongquan.wang/categories/Development/"/>
     
   </entry>
   
@@ -1278,7 +1289,7 @@ animator.delegate = aDelegate<span class="comment">;</span>
     <link href="https://hi.zongquan.wang/2015/01/06/Study_iOS_UIView/"/>
     <id>https://hi.zongquan.wang/2015/01/06/Study_iOS_UIView/</id>
     <published>2015-01-06T13:23:11.000Z</published>
-    <updated>2016-04-08T01:23:43.000Z</updated>
+    <updated>2016-12-09T03:09:58.000Z</updated>
     <content type="html"><![CDATA[<h3 id="Developing_Applications_for_iOS_观后感系列：UIView">Developing Applications for iOS 观后感系列：UIView</h3><p><em>相关视频章节：7</em></p>
 <a id="more"></a>
 <hr>
@@ -1327,6 +1338,7 @@ animator.delegate = aDelegate<span class="comment">;</span>
 <li><p><code>storyboard 中拖放 UIGestureRecognizer 控件，并设置 target-action。</code></p>
 </li>
 </ol>
+<hr>
 ]]></content>
     <summary type="html">
     <![CDATA[<h3 id="Developing_Applications_for_iOS_观后感系列：UIView">Developing Applications for iOS 观后感系列：UIView</h3><p><em>相关视频章节：7</em></p>]]>
@@ -1335,7 +1347,7 @@ animator.delegate = aDelegate<span class="comment">;</span>
     
       <category term="iOS" scheme="https://hi.zongquan.wang/tags/iOS/"/>
     
-      <category term="开发" scheme="https://hi.zongquan.wang/categories/%E5%BC%80%E5%8F%91/"/>
+      <category term="Development" scheme="https://hi.zongquan.wang/categories/Development/"/>
     
   </entry>
   
@@ -1344,7 +1356,7 @@ animator.delegate = aDelegate<span class="comment">;</span>
     <link href="https://hi.zongquan.wang/2015/01/05/Study_iOS_Misc/"/>
     <id>https://hi.zongquan.wang/2015/01/05/Study_iOS_Misc/</id>
     <published>2015-01-05T14:34:11.000Z</published>
-    <updated>2016-04-08T01:23:43.000Z</updated>
+    <updated>2016-12-09T03:09:43.000Z</updated>
     <content type="html"><![CDATA[<h3 id="Developing_Applications_for_iOS_观后感系列：Misc">Developing Applications for iOS 观后感系列：Misc</h3><p><em>相关视频章节：all</em></p>
 <a id="more"></a>
 <hr>
@@ -1378,6 +1390,7 @@ animator.delegate = aDelegate<span class="comment">;</span>
 <h4 id="Network_Activity_Indicator">Network Activity Indicator</h4><ul>
 <li>UIApplication 有个属性：<em><code>BOOL networkActivityIndicatorVisible</code></em>，将其设为 YES，status bar 上就会出现表示网络活动的 spinner，设为 NO，spinner 就会消失。使用时需要注意，当多个线程操作该 networkActivityIndicatorVisible 时，需要给它加个<strong>计数的机制</strong>，防止错误地开关该属性。</li>
 </ul>
+<hr>
 ]]></content>
     <summary type="html">
     <![CDATA[<h3 id="Developing_Applications_for_iOS_观后感系列：Misc">Developing Applications for iOS 观后感系列：Misc</h3><p><em>相关视频章节：all</em></p>]]>
@@ -1386,7 +1399,7 @@ animator.delegate = aDelegate<span class="comment">;</span>
     
       <category term="iOS" scheme="https://hi.zongquan.wang/tags/iOS/"/>
     
-      <category term="开发" scheme="https://hi.zongquan.wang/categories/%E5%BC%80%E5%8F%91/"/>
+      <category term="Development" scheme="https://hi.zongquan.wang/categories/Development/"/>
     
   </entry>
   
@@ -1395,7 +1408,7 @@ animator.delegate = aDelegate<span class="comment">;</span>
     <link href="https://hi.zongquan.wang/2015/01/05/Study_iOS_Life_Cycle/"/>
     <id>https://hi.zongquan.wang/2015/01/05/Study_iOS_Life_Cycle/</id>
     <published>2015-01-05T12:38:32.000Z</published>
-    <updated>2016-04-08T01:23:43.000Z</updated>
+    <updated>2016-12-09T03:09:37.000Z</updated>
     <content type="html"><![CDATA[<h3 id="Developing_Applications_for_iOS_观后感系列：Life_Cycle">Developing Applications for iOS 观后感系列：Life Cycle</h3><p><em>相关视频章节：5，17</em></p>
 <a id="more"></a>
 <hr>
@@ -1475,6 +1488,7 @@ animator.delegate = aDelegate<span class="comment">;</span>
 <p>  <strong>注意</strong>，在 viewWill/DidXXX 这4个函数里面总是需要调用 super 的对应函数。在 viewWillXXX 这2个函数里面不要做太费时的操作，因为时间有限，will 这个状态马上就会过去的。</p>
 </li>
 </ul>
+<hr>
 ]]></content>
     <summary type="html">
     <![CDATA[<h3 id="Developing_Applications_for_iOS_观后感系列：Life_Cycle">Developing Applications for iOS 观后感系列：Life Cycle</h3><p><em>相关视频章节：5，17</em></p>]]>
@@ -1483,7 +1497,7 @@ animator.delegate = aDelegate<span class="comment">;</span>
     
       <category term="iOS" scheme="https://hi.zongquan.wang/tags/iOS/"/>
     
-      <category term="开发" scheme="https://hi.zongquan.wang/categories/%E5%BC%80%E5%8F%91/"/>
+      <category term="Development" scheme="https://hi.zongquan.wang/categories/Development/"/>
     
   </entry>
   
@@ -1492,7 +1506,7 @@ animator.delegate = aDelegate<span class="comment">;</span>
     <link href="https://hi.zongquan.wang/2015/01/05/Study_iOS_MVC/"/>
     <id>https://hi.zongquan.wang/2015/01/05/Study_iOS_MVC/</id>
     <published>2015-01-05T11:38:55.000Z</published>
-    <updated>2016-04-08T01:23:43.000Z</updated>
+    <updated>2016-12-09T03:09:45.000Z</updated>
     <content type="html"><![CDATA[<p>iOS学习起步阶段，抽空看完了 Stanford 老头的 Developing Applications for iOS 系列视频，挺不错的，浅显易懂。打算把“观后感”做成笔记，挑些重要的点，理一理，省得以后还要重新看整个教程的文档。</p>
 <a id="more"></a>
 <h3 id="Developing_Applications_for_iOS_观后感系列：MVC_设计模式">Developing Applications for iOS 观后感系列：MVC 设计模式</h3><p><em>相关视频章节：1</em></p>
@@ -1508,6 +1522,7 @@ animator.delegate = aDelegate<span class="comment">;</span>
 <p>基于单个的 MVC，我们可以构建复杂的多 MVC。</p>
 <p><img src="/img/Study_iOS_MVC/1.1.MVCs.png" alt="MVCs"></p>
 <p><strong>但不管多复杂，总是坚持这个原则</strong>：一个 MVC 是作为另一个 MVC 的 V 部分而存在的，也就是说，父 MVC 中的 C 控制的是子 MVC 中的 C，而不是直接去干预子 MVC 中的 V。当然，多个 MVC 是可以共享同一个 M 的，毕竟 Notification 是广播性质的，可以有多个 Observer。</p>
+<hr>
 ]]></content>
     <summary type="html">
     <![CDATA[<p>iOS学习起步阶段，抽空看完了 Stanford 老头的 Developing Applications for iOS 系列视频，挺不错的，浅显易懂。打算把“观后感”做成笔记，挑些重要的点，理一理，省得以后还要重新看整个教程的文档。</p>]]>
@@ -1516,7 +1531,7 @@ animator.delegate = aDelegate<span class="comment">;</span>
     
       <category term="iOS" scheme="https://hi.zongquan.wang/tags/iOS/"/>
     
-      <category term="开发" scheme="https://hi.zongquan.wang/categories/%E5%BC%80%E5%8F%91/"/>
+      <category term="Development" scheme="https://hi.zongquan.wang/categories/Development/"/>
     
   </entry>
   
