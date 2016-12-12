@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Just a little tips about Objective-C Block | 闷骚的悟空</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="大爱 Block，方便易用，但是，有些坑还是需要认真对待的~~
+其实问题主要是关于内存管理的。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Just a little tips about Objective-C Block">
+<meta property="og:url" content="https://hi.zongquan.wang/2014/12/03/Just_a_little_tips_about_Block/index.html">
+<meta property="og:site_name" content="闷骚的悟空">
+<meta property="og:description" content="大爱 Block，方便易用，但是，有些坑还是需要认真对待的~~
+其实问题主要是关于内存管理的。">
+<meta property="og:updated_time" content="2016-12-12T11:53:12.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Just a little tips about Objective-C Block">
+<meta name="twitter:description" content="大爱 Block，方便易用，但是，有些坑还是需要认真对待的~~
+其实问题主要是关于内存管理的。">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  
+
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-58630641-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  
+
+
+  <script>
+  var host = "hi.zongquan.wang";
+  if ((host == window.location.host) && (window.location.protocol != "https:"))
+    window.location.protocol = "https";
+  </script>
+
+  <script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?f927b4d849de0fa8e031f36bf6a21e78";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+
+  <script src="//fast.eager.io/RfF1U61Tb7.js"></script>
+
+  
+</head>
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-main" class="header-inner">
+    <div class="outer">
+      <a href="/" id="logo"><span class="site-title">闷骚的悟空</span></a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about/me.html">Me</a>
+        
+          <a class="main-nav-link" href="/apps/apps.html">Apps</a>
+        
+      </nav>
+      
+        <nav id="sub-nav">
+          <div class="profile" id="profile-nav">
+            <a id="profile-anchor" href="javascript:;"><img class="avatar" src="/img/me.jpg"><i class="fa fa-caret-down"></i></a>
+          </div>
+        </nav>
+      
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit"> </button><input type="hidden" name="sitesearch" value="https://hi.zongquan.wang"></form>
+      </div>
+    </div>
+  </div>
+  <div id="main-nav-mobile" class="header-sub header-inner">
+    <table class="menu outer">
+      <tr>
+        
+          <td><a class="main-nav-link" href="/">Home</a></td>
+        
+          <td><a class="main-nav-link" href="/archives">Archives</a></td>
+        
+          <td><a class="main-nav-link" href="/about/me.html">Me</a></td>
+        
+          <td><a class="main-nav-link" href="/apps/apps.html">Apps</a></td>
+        
+        <td>
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><input type="hidden" name="sitesearch" value="https://hi.zongquan.wang"></form>
+        </td>
+      </tr>
+    </table>
+  </div>
+</header>
+
+    <div class="outer">
+      
+        <aside id="profile">
+  <div class="inner profile-inner">
+    <div class="base-info profile-block">
+      <img class="shake freez shake-hard" id="avatar" src="/img/me.jpg">
+      <h2 id="name">闷骚的悟空</h2>
+      <h3 id="subname">立一业谋生|择一城终老|携一人白首</h2>
+      <h3 id="title">Mac Developer &amp; Hacker</h3>
+      <span id="location"><i class="fa fa-map-marker"></i>Suzhou, China</span>
+      <a class="shake shake-rotate" id="follow" href="https://github.com/wzqcongcong/">FOLLOW</a>
+    </div>
+    <div class="article-info profile-block">
+      <div class="article-info-block">
+        24
+        <span>posts</span>
+      </div>
+      <div class="article-info-block">
+        4
+        <span>tags</span>
+      </div>
+    </div>
+    
+    <div class="contact-info profile-block">
+      <table class="contact-list">
+        <tr>
+          
+          <td><a href="mailto:wzqcongcong@sina.com" target="_blank" title="send"><i class="fa fa-send"></i></a></td>
+          
+          <td><a href="https://github.com/wzqcongcong" target="_blank" title="github"><i class="fa fa-github"></i></a></td>
+          
+          <td><a href="https://twitter.com/wzqcongcong" target="_blank" title="twitter"><i class="fa fa-twitter"></i></a></td>
+          
+          <td><a href="/atom.xml" target="_blank" title="rss"><i class="fa fa-rss"></i></a></td>
+          
+        </tr>
+      </table>
+    </div>
+    
+    
+  </div>
+</aside>
+
+      
+      <section id="main"><article id="post-Just_a_little_tips_about_Block" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Just a little tips about Objective-C Block
+    </h1>
+  
+
+        <div class="article-meta">
+          
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2014/12/03/Just_a_little_tips_about_Block/">
+      <time datetime="2014-12-03T09:35:36.000Z" itemprop="datePublished">2014-12-03</time>
+    </a>
+  </div>
+
+
+          
+  <div class="article-category">
+  	<i class="fa fa-folder"></i>
+    <a class="article-category-link" href="/categories/Development/">Development</a>
+  </div>
+
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+                
+        <p>大爱 <em><code>Block</code></em>，方便易用，但是，有些坑还是需要认真对待的~~</p>
+<p>其实问题主要是关于内存管理的。</p>
+<a id="more"></a>
+<h4 id="1-_捕获闭包的状态">1. 捕获闭包的状态</h4><p>一切问题的起源：<em><code>Block</code></em> 除了包含一段可执行代码，更重要的是，它还会捕获（<em><code>capture</code></em>）其闭包内的状态。</p>
+<p>例（1）：</p>
+<pre><code>- (<span class="keyword">void</span>)testMethod {
+    <span class="keyword">int</span> a = <span class="number">1</span>;
+    <span class="keyword">void</span> (^testBlock)(<span class="keyword">void</span>) = ^{
+        NSLog(@<span class="string">"Integer is: %i"</span>, a);
+    };
+    a = <span class="number">2</span>;
+    testBlock(); <span class="comment">// output is still 1.</span>
+}
+</code></pre><p>在定义 testBlock 时，它会捕获 a 的<strong>类型、值以及修饰符</strong>。但是，捕获只意味着对 a 做了一次<strong>快照</strong>，而并不是真正地拥有 a。也就是说，在定义 testBlock 的时候，外界 a 的值是多少，它捕获进来的值就是多少。外界对 a 值的修改不会影响到 testBlock，同样 testBlock 内部对 a 值的修改也不会影响到外界。</p>
+<p><strong>注意</strong>：</p>
+<ul>
+<li><p>捕获闭包的状态是发生在 <em><code>Block</code></em> 定义的时候！而不是 <em><code>Block</code></em> 真正 run 的时候！</p>
+</li>
+<li><p>捕获的是<strong>类型 + 值 + 修饰符</strong>，而不单单是值！</p>
+</li>
+<li><p>对于标量来说，因为 <em><code>Block</code></em> 只是捕获了该变量的值，当然是无法对其进行有效地修改。而对于对象指针来说，捕获进来的是指针的值，无法修改指针的值表示不能让该指针指向另一个对象，但这不影响 <em><code>Block</code></em> 对该指针所指的对象进行操作。例如，如果例（1）中的 a 换成一个数组指针，在 <em><code>Block</code></em> 内部我们是可以做类似于 <code>[a addObject:]</code> 这种操作的，外界可以看到对指针所指对象的修改。前提是我们要在 <em><code>Block</code></em> 定义之前就要给 a 所指的对象分配好内存，即在外界 <code>NSMutableArray *a = [[NSMutableArray alloc] init]</code>，之后在 <em><code>Block</code></em> 内部就可以任意修改该对象了，而不是修改该对象的指针。</p>
+</li>
+</ul>
+<h4 id="2-_如何让_Block_跟外界共享捕获的内容">2. 如何让 Block 跟外界共享捕获的内容</h4><p>前面提到，通常 <em><code>Block</code></em> 只是对变量做了一个快照，那么如何让 block 与外界共享该变量，从而能够修改其捕获的值呢？</p>
+<p>全靠 <em><code>__block</code></em> 这个修饰符了！</p>
+<p>如果一个变量在声明的时候指定了 <em><code>__block</code></em> 这个修饰符，那就意味着，所有在该变量的作用域内定义的 block，都能够共享该变量。</p>
+<p>例（2）：</p>
+<pre><code>- (<span class="keyword">void</span>)testMethod {
+    __block <span class="keyword">int</span> a = <span class="number">1</span>;
+    <span class="keyword">void</span> (^testBlock)(<span class="keyword">void</span>) = ^{
+        NSLog(@<span class="string">"Integer is: %i"</span>, a);
+    };
+    a = <span class="number">2</span>;
+    testBlock(); <span class="comment">// output is 2 now.</span>
+}
+</code></pre><p>虽然在 testBlock 定义的时候捕获到的值是1，但 a 是 <code>__block</code> 修饰的，在 testBlock run 之前，值被改成了2，所以 testBlock run 时能够共享到这一改变。同样，如果 testBlock 内部修改了 a 的值，外界也是会共享到的。</p>
+<h4 id="3-_当_Block_被_copy_时会发生什么">3. 当 Block 被 copy 时会发生什么</h4><p>首先要明白2点，<em><code>Block</code></em> 什么时候会被 copy，被 copy 到哪里？</p>
+<p>一般情况下，<em><code>Block</code></em> 是存储在 stack 中的，当其从 stack 弹出后就消失了。例如例（1），testBlock 是在 testMethod 的 stack 中创建的，自己 run 结束后就被销毁了。这种情况下，<em><code>Block</code></em> 不会对其捕获的变量的内存管理或者生命周期有影响。</p>
+<p>但如果 <em><code>Block</code></em> 需要被保存下来，使其在定义结束后的其它作用域下 run，那么这种情况下，它可以被 copy 到 <em><code>heap</code></em> 中进行存储。这个时候，block 被当成了 object 来看待。</p>
+<p>比较常见的一种情景，例（3）：</p>
+<pre><code>- (<span class="literal">void</span>)configureBlock {
+    <span class="built_in">self</span><span class="built_in">.</span>block = ^{
+        <span class="preprocessor">[</span><span class="built_in">self</span> doSomething<span class="preprocessor">]</span><span class="markup">;
+    };
+}</span>
+</code></pre><p>block 被存储到 self.block 中供以后调用，显然是被 copy 到了 heap 中。</p>
+<p><strong>一旦 block 被 copy，那么问题就来了！</strong></p>
+<p><em><code>Block</code></em> 会对捕获的 self 进行 <em><code>strong reference</code></em>，这极易造成 <em><code>strong reference cycle</code></em>。因为如果该 block 不释放，那么 self 就无法释放，而 block 的释放又需要 self 先被释放，deadlock！除非在 block 用完后，<code>self.block = nil</code>，先把 block 释放掉。</p>
+<p>只要 block 被这样定义，不管它是否在 run，问题都会一直存在，因为捕获是发生在 block 定义的时候，那个时候它就被 copy 到 heap 中了！</p>
+<h4 id="4-_weakSelf_和_strongSelf">4. weakSelf 和 strongSelf</h4><p>为了解决例（3）中可能的 strong reference cycle 问题，就引入了 <em><code>weakSelf</code></em>。</p>
+<p>例（4）：</p>
+<pre><code>__weak __typeof__<span class="list">(<span class="keyword">self</span>)</span> weakSelf = self<span class="comment">;</span>
+dispatch_group_async<span class="list">(<span class="keyword">_operationsGroup</span>, _operationsQueue, ^ {
+    [weakSelf doSomething]<span class="comment">;</span>
+})</span><span class="comment">;</span>
+</code></pre><p>weakSelf 发挥作用的关键在于，<em><code>Block</code></em> 捕获的是<strong>类型 + 值 + 修饰符</strong>，也就是说，它会捕获到 <code>__weak</code> 这个修饰符！这样 block 就不会对 self 进行 strong reference。</p>
+<p>采用了 <code>__weak</code> 后，block 在定义的时候不会强引用 self，当 block 在真正 run 的时候，weakSelf 要么是 self，要么是 nil。之所以会为 nil，是因为此时 self 可能已经被释放了。</p>
+<p>进一步，考虑例（5）：</p>
+<pre><code>__weak __typeof__<span class="list">(<span class="keyword">self</span>)</span> weakSelf = self<span class="comment">;</span>
+dispatch_group_async<span class="list">(<span class="keyword">_operationsGroup</span>, _operationsQueue, ^ {
+    __typeof__<span class="list">(<span class="keyword">weakSelf</span>)</span> strongSelf = weakSelf<span class="comment">;</span>
+    [strongSelf doSomething]<span class="comment">;</span>
+    [strongSelf doSomethingElse]<span class="comment">;</span>
+})</span><span class="comment">;</span>
+</code></pre><p>又来了个 <em><code>strongSelf</code></em>！有什么用处？</p>
+<p>是这样的，如果执行 doSomething 时，self 还在，而执行 doSomethingElse 时，self被释放了，这是不是有点不妥~~</p>
+<p>所以 block 在 run 时，通过内部的 strongSelf 对 self 进行 strong reference，这样可以保证，如果 weakSelf 在 block 刚 run 时是 self，那么在整个 run 的期间也一直是 self，不会让 self 被释放而变成 nil。</p>
+<p><strong>注意</strong>：这个 strongSelf 不会导致 strong reference cycle，因为它不是在 block 定义的时候被捕获进来的，它只是局部变量，只存在于 block run 的期间，当 block run 结束后，对 self 的 strong reference 就消失了。只有 weakSelf 才是在定义的时候被捕获进来的，而它又是 <code>__weak</code> 的。</p>
+<p>关于 weakSelf 和 strongSelf，有2篇文章可以帮助理解：<a href="http://www.fantageek.com/1090/understanding-weak-self-and-strong-self/" target="_blank" rel="external">【1】</a> <a href="http://dhoerl.wordpress.com/2013/04/23/i-finally-figured-out-weakself-and-strongself/" target="_blank" rel="external">【2】</a></p>
+<h4 id="5-_补充">5. 补充</h4><ul>
+<li><p>dispatch_async 对 block 的处理：会将 block copy 到 heap 中，因为它是需要异步处理的，所以需要将 block 存储下来。</p>
+</li>
+<li><p>dispatch_sync 对 block 的处理：由于是同步处理的，所以 block 只存在于当前的 stack 中，run 完就释放了，不会被存储在 heap 中。</p>
+</li>
+</ul>
+<hr>
+
+      
+    </div>
+    
+      <div class="article-copyright">
+	<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a><br />本作品采用<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可。
+</div>
+    
+    
+      <div class ="post-donate">
+    <div id="donate_tip" class="donate_tip center">
+        <a id="btn_donate" class="btn_donate" href="javascript:;"></a>
+        <span class="donate_tip_txt">
+		   Donate
+        </span>
+        <br>
+      </div>
+	<div id="donate_guide" class="donate_tip center hidden">
+		<div class="donate_item">
+			<span class="donate_item_txt" style="color:#1dabec">支付宝打赏</span>
+			<img src="/img/zhifubaoV2.png" alt="支付宝打赏">
+		</div>
+		<div class="donate_item">
+			<span class="donate_item_txt" style="color:#22cf28">微信打赏</span>
+			<img src="/img/weixinV2.png" alt="微信打赏">
+		</div>
+    </div>
+	<script type="text/javascript">
+		document.getElementById('btn_donate').onclick = function(){
+			$('#donate_tip').addClass('hidden');
+			$('#donate_guide').removeClass('hidden');
+		}
+	</script>
+</div>
+      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- hi.zongquan.wang -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-2996662524777889"
+     data-ad-slot="6722951255"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+    
+    <footer class="article-footer">
+      
+        <a href="https://hi.zongquan.wang/2014/12/03/Just_a_little_tips_about_Block/#disqus_thread" class="article-comment-link">Comments</a>
+      
+
+      <a data-url="https://hi.zongquan.wang/2014/12/03/Just_a_little_tips_about_Block/" data-id="ciwm0ujx50009vzmpfcha84wn" class="article-share-link">Share</a>
+
+      <div id="article-baidu-share" class="bdsharebuttonbox">
+        <a href="#" class="bds_weixin" data-cmd="weixin" title="WeiXin"></a>
+      </div>
+      <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":["mshare","weixin","tsina","tqq","qzone","qq","sqq","tqf","t163","renren","douban","huaban","taobao","tieba","kaixin001","tsohu","meilishuo","mogujie","sdo","youdao","twi","fbook","linkedin","mail","copy","print"],"bdPic":"","bdStyle":"1","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mac/">Mac</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/01/05/Study_iOS_MVC/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Study iOS - MVC
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2014/11/28/XPC_mechanism_of_Mac/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">XPC mechanism of Mac</div>
+    </a>
+  
+</nav>
+
+
+  
+</article>
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+</section>
+      
+        <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Development/">Development</a><span class="category-list-count">24</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac/">Mac</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swift/">Swift</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Xcode/">Xcode</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS/">iOS</a><span class="tag-list-count">13</span></li></ul>
+    </div>
+  </div>
+
+  
+    <div class="widget">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+	<!-- hi.zongquan.wang -->
+	<ins class="adsbygoogle"
+	     style="display:block"
+	     data-ad-client="ca-pub-2996662524777889"
+	     data-ad-slot="6722951255"
+	     data-ad-format="auto"></ins>
+	<script>
+	(adsbygoogle = window.adsbygoogle || []).push({});
+	</script>
+</div>
+  
+  <div id="toTop" class="fa fa-chevron-up"></div>
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 1987 - 2016 闷骚的悟空<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a href="https://eager.io/" target="_blank">Eager</a>. Theme by <a href="https://github.com/ppoffice">PPOffice</a>
+    </div>
+    <div style="display: none">
+      
+      	
+      	
+        <img id=favicon_1 src=/favicon.1.ico>
+      
+      	
+      	
+        <img id=favicon_2 src=/favicon.2.ico>
+      
+      	
+      	
+        <img id=favicon_3 src=/favicon.3.ico>
+      
+      	
+      	
+        <img id=favicon_4 src=/favicon.4.ico>
+      
+    </div>
+  </div>
+</footer>
+    
+
+<script>
+  var disqus_shortname = 'wzqcongcong';
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+
+ <script src="//cdn.staticfile.org/jquery/2.1.1-rc2/jquery.min.js"></script>
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/csshake.min.css">
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/favico.js"></script>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    var favicon = new Favico();
+    var index = -1;
+    window.setInterval(function() {
+      var random = Math.floor(Math.random() * 4);
+      index = (index + 1) % 4;
+      var image = document.getElementById('favicon_' + (index + 1));
+      favicon.image(image);
+    }, 500);
+  });
+</script>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Study iOS - Segue | 闷骚的悟空</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Developing Applications for iOS 观后感系列：Segue相关视频章节：6，15，16">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Study iOS - Segue">
+<meta property="og:url" content="https://hi.zongquan.wang/2015/01/10/Study_iOS_Segue/index.html">
+<meta property="og:site_name" content="闷骚的悟空">
+<meta property="og:description" content="Developing Applications for iOS 观后感系列：Segue相关视频章节：6，15，16">
+<meta property="og:image" content="https://hi.zongquan.wang/img/Study_iOS_Segue/6.0.UINavigationController.png">
+<meta property="og:image" content="https://hi.zongquan.wang/img/Study_iOS_Segue/6.1.UINavigationController.png">
+<meta property="og:image" content="https://hi.zongquan.wang/img/Study_iOS_Segue/6.6.UITabBarController.png">
+<meta property="og:image" content="https://hi.zongquan.wang/img/Study_iOS_Segue/6.7.UITabBarController.png">
+<meta property="og:image" content="https://hi.zongquan.wang/img/Study_iOS_Segue/6.8.UITabBarController.png">
+<meta property="og:image" content="https://hi.zongquan.wang/img/Study_iOS_Segue/15.0.EmbedSegue.png">
+<meta property="og:image" content="https://hi.zongquan.wang/img/Study_iOS_Segue/16.2.UnwindSegue.png">
+<meta property="og:updated_time" content="2016-12-12T11:53:12.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Study iOS - Segue">
+<meta name="twitter:description" content="Developing Applications for iOS 观后感系列：Segue相关视频章节：6，15，16">
+<meta name="twitter:image" content="https://hi.zongquan.wang/img/Study_iOS_Segue/6.0.UINavigationController.png">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  
+
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-58630641-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  
+
+
+  <script>
+  var host = "hi.zongquan.wang";
+  if ((host == window.location.host) && (window.location.protocol != "https:"))
+    window.location.protocol = "https";
+  </script>
+
+  <script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?f927b4d849de0fa8e031f36bf6a21e78";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+
+  <script src="//fast.eager.io/RfF1U61Tb7.js"></script>
+
+  
+</head>
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-main" class="header-inner">
+    <div class="outer">
+      <a href="/" id="logo"><span class="site-title">闷骚的悟空</span></a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about/me.html">Me</a>
+        
+          <a class="main-nav-link" href="/apps/apps.html">Apps</a>
+        
+      </nav>
+      
+        <nav id="sub-nav">
+          <div class="profile" id="profile-nav">
+            <a id="profile-anchor" href="javascript:;"><img class="avatar" src="/img/me.jpg"><i class="fa fa-caret-down"></i></a>
+          </div>
+        </nav>
+      
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit"> </button><input type="hidden" name="sitesearch" value="https://hi.zongquan.wang"></form>
+      </div>
+    </div>
+  </div>
+  <div id="main-nav-mobile" class="header-sub header-inner">
+    <table class="menu outer">
+      <tr>
+        
+          <td><a class="main-nav-link" href="/">Home</a></td>
+        
+          <td><a class="main-nav-link" href="/archives">Archives</a></td>
+        
+          <td><a class="main-nav-link" href="/about/me.html">Me</a></td>
+        
+          <td><a class="main-nav-link" href="/apps/apps.html">Apps</a></td>
+        
+        <td>
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><input type="hidden" name="sitesearch" value="https://hi.zongquan.wang"></form>
+        </td>
+      </tr>
+    </table>
+  </div>
+</header>
+
+    <div class="outer">
+      
+        <aside id="profile">
+  <div class="inner profile-inner">
+    <div class="base-info profile-block">
+      <img class="shake freez shake-hard" id="avatar" src="/img/me.jpg">
+      <h2 id="name">闷骚的悟空</h2>
+      <h3 id="subname">立一业谋生|择一城终老|携一人白首</h2>
+      <h3 id="title">Mac Developer &amp; Hacker</h3>
+      <span id="location"><i class="fa fa-map-marker"></i>Suzhou, China</span>
+      <a class="shake shake-rotate" id="follow" href="https://github.com/wzqcongcong/">FOLLOW</a>
+    </div>
+    <div class="article-info profile-block">
+      <div class="article-info-block">
+        24
+        <span>posts</span>
+      </div>
+      <div class="article-info-block">
+        4
+        <span>tags</span>
+      </div>
+    </div>
+    
+    <div class="contact-info profile-block">
+      <table class="contact-list">
+        <tr>
+          
+          <td><a href="mailto:wzqcongcong@sina.com" target="_blank" title="send"><i class="fa fa-send"></i></a></td>
+          
+          <td><a href="https://github.com/wzqcongcong" target="_blank" title="github"><i class="fa fa-github"></i></a></td>
+          
+          <td><a href="https://twitter.com/wzqcongcong" target="_blank" title="twitter"><i class="fa fa-twitter"></i></a></td>
+          
+          <td><a href="/atom.xml" target="_blank" title="rss"><i class="fa fa-rss"></i></a></td>
+          
+        </tr>
+      </table>
+    </div>
+    
+    
+  </div>
+</aside>
+
+      
+      <section id="main"><article id="post-Study_iOS_Segue" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Study iOS - Segue
+    </h1>
+  
+
+        <div class="article-meta">
+          
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2015/01/10/Study_iOS_Segue/">
+      <time datetime="2015-01-10T15:01:35.000Z" itemprop="datePublished">2015-01-10</time>
+    </a>
+  </div>
+
+
+          
+  <div class="article-category">
+  	<i class="fa fa-folder"></i>
+    <a class="article-category-link" href="/categories/Development/">Development</a>
+  </div>
+
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+                
+        <h3 id="Developing_Applications_for_iOS_观后感系列：Segue">Developing Applications for iOS 观后感系列：Segue</h3><p><em>相关视频章节：6，15，16</em></p>
+<a id="more"></a>
+<hr>
+<p><em><code>Segue</code></em>，中文为“继续”的意思，在 iOS 开发中，其 class 为 <em><code>UIStoryboardSegue</code></em>，用于 storyboard 中不同 UIViewController 之间的转场，即从一个 UIViewController scene 转场到另一个 UIViewController scene。你可以从一个 UIControl、UIBarItem、UIView、UIViewController 等等，向另一个 UIViewController 建立 Segue。</p>
+<h3 id="如何创建_Segue">如何创建 Segue</h3><p>起点（UIControl、UIBarItem、UIView、UIViewController 等等）</p>
+<p>⇩</p>
+<p><em><code>Control</code></em> + <em><code>Drag</code></em></p>
+<p>⇩</p>
+<p>终点（UIViewController）</p>
+<p>⇩</p>
+<p>设置 Segue 的 Identifier</p>
+<h3 id="Segue_如何执行">Segue 如何执行</h3><ol>
+<li><p><strong>触发 Segue</strong>：假如你从 UIButton 建立了一个 Segue，那么 button 点击时，就会触发 Segue。但有时你也需要从代码中手动触发 Segue，此时就需要调用 UIViewController 的 API：<code>-(void)performSegueWithIdentifier:(NSString *)segueID sender:(id)sender</code>。</p>
+</li>
+<li><p><strong>询问 Segue 是否允许执行</strong>：实现这个 delegate：<code>-(BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender</code>，如果不实现，默认就是允许所有 Segue。</p>
+</li>
+<li><p><strong>准备 Segue</strong>：真正呈现 <em><code>destination UIViewController</code></em> 之前，你需要为该 Segue 作 preparation。也就是说，Segue 会给 <em><code>source UIViewController</code></em> 机会去准备好将要呈现的 destination UIViewController。可以理解成 destination UIViewController 的 init。这一 preparation 过程是通过实现如下 delegate 来完成的：</p>
+<pre><code>-(<span class="typename">void</span>)<span class="string">prepareForSegue:</span>(UIStoryboardSegue *)segue <span class="string">sender:</span>(id)sender
+{
+    <span class="keyword">if</span> ([segue.identifier <span class="string">isEqualToString:</span>@<span class="string">"XXX"</span>]) {
+        <span class="keyword">if</span> ([segue.destinationViewController <span class="string">isKindOfClass:</span>[XXXViewController <span class="class"><span class="keyword">class</span>]]) {</span>
+            XXXViewController *xxxVC = (XXXViewController *)segue.destinationViewController;
+            xxxVC.xxxProperty = XXX; <span class="comment">// setup <span class="label">xxxVC</span></span>
+        }
+    }
+}
+</code></pre><p> <strong>注意</strong>，要记住之前 <a href="../../../../2015/01/05/Study_iOS_MVC/">MVCs</a> 中提到的原则，这个 destination UIViewController 在 source UIViewController 的 MVC 中扮演着 View 的角色，不允许 destination UIViewController 向 source UIViewController 的直接通信，而是要使用 blind 的方式，如 delegate。</p>
+<p> <strong>还要注意</strong>，几乎所有类型的 Segue 都是 init 一个 <strong>new</strong> destination UIViewController 给你，所以当你第二次 prepareForSegue 时，第一次 prepareForSegue 拿到的那个 destination UIViewController 已经不复存在了，你需要重新 setup。<strong>这里只有一个例外</strong>，就是后面要提到的 <em><code>Unwind Segue</code></em>，它返给你的 destination UIViewController 就是之前已经存在的 UIViewController，这显然是合理的。举个例子，aVC 通过普通 Segue 转场到 bVC（bVC 会被重新 init），bVC 又通过 Unwind Segue 转回到 aVC，此时，Unwind Segue 的 destination UIViewController 显然必须是之前已经存在的那个 aVC，而不应该去重新 init 一个。</p>
+<p> <strong>更要注意</strong>，prepareForSegue 在执行的时候，destination UIViewController 中的 outlet 尚未 set，因为 prepareForSegue 做的事等价于帮助 destination UIViewController 去 init。而 outlet set 是在 init 之后，viewDidLoad 之前做的。参见 <a href="../../../../2015/01/05/Study_iOS_Life_Cycle/">Life Cycle</a>。</p>
+</li>
+<li><p><strong>系统为你呈现 destination UIViewController</strong></p>
+</li>
+</ol>
+<h3 id="Segue_分类">Segue 分类</h3><ul>
+<li><p><strong>Push Segue</strong>：一般用于 <em><code>UINavigationController</code></em> 中。感受一下 <em><code>UINavigationController</code></em>。</p>
+<p>  <img src="/img/Study_iOS_Segue/6.0.UINavigationController.png" alt="UINavigationController"></p>
+<p>  你可以从一个 Embedded MVC 向另一个 Embedded MVC 创建 Push Segue。</p>
+<p>  每一个 Embedded MVC 都可以设定自己的 navigationItem.rightBarButtonItems 和 toolbarItems。</p>
+<p>  每一个 Embedded MVC 中的 <em><code>Back Button</code></em> 都是 UINavigationController 自动添加的，显示的是上一个 Embedded MVC 的 Title，如果上一个没有设定 Title，就显示 “Back” 字样。</p>
+<p>  <img src="/img/Study_iOS_Segue/6.1.UINavigationController.png" alt="UINavigationController"></p>
+<p>  <strong>另外</strong>，一般都是通过 Segue 来呈现 destination UIViewController 的。但极少数情况下，你可能需要通过代码手动呈现，此时，你可以利用 UINavigationController 的 API <code>pushViewController:animated:</code>，那么要 push 的那个 UIViewController 如何获取呢？利用 UIStoryBoard 的 API <code>instantiateViewControllerWithIdentifier:</code>，传入参数是你在 Storyboard 中为该 UIViewController 设定的 Identifier。两者结合起来就是：</p>
+<pre><code>-(<span class="keyword">IBAction</span>)pushViewControllerByMyself
+{
+    XXXViewController *xxxVC = [<span class="keyword">self</span><span class="variable">.storyboard</span> instantiateViewControllerWithIdentifier:<span class="string">@"XXX"</span>];
+    xxxVC<span class="variable">.xxxProperty</span> = XXX;
+    [<span class="keyword">self</span><span class="variable">.navigationController</span> pushViewController:xxxVC animated:<span class="literal">YES</span>];
+}
+</code></pre></li>
+<li><p><strong>Relationship Segue</strong>：一般用于 <em><code>UITabBarController</code></em> 中。感受一下 <em><code>UITabBarController</code></em> 。</p>
+<p>  <img src="/img/Study_iOS_Segue/6.6.UITabBarController.png" alt="UITabBarController"></p>
+<p>  <img src="/img/Study_iOS_Segue/6.7.UITabBarController.png" alt="UITabBarController"></p>
+<p>  <img src="/img/Study_iOS_Segue/6.8.UITabBarController.png" alt="UITabBarController"></p>
+</li>
+<li><p><strong>Embedded Segue</strong>：一般用于 <em><code>Container View</code></em> 中。Container View 的作用是，将一个 VC 的 self.view show 到另一个 VC 的 view 中。感受一下 <em><code>Container View</code></em> 。</p>
+<p>  <img src="/img/Study_iOS_Segue/15.0.EmbedSegue.png" alt="Container View"></p>
+<p>  创建 Embedded Segue 的方式同 Push Segue 一样，通过 <em>Control</em> + <em>Drag</em> 的方式，从 Container View 拖向 destination UIViewController，此时只有一种 Segue 可以选择，那就是 Embedded Segue。</p>
+<p>  <strong>注意</strong>，这个 Embedded Segue 是在外层 UIViewController 呈现的时候自动触发的（<em>触发的具体时间点有待进一步研究</em>），你同样是需要去 prepareForSegue，不要忘了，此时 destination UIViewController 的 outlet 尚未 set。</p>
+</li>
+<li><p><strong>Modal Segue</strong>：一般用于呈现 <em><code>Modal View Controller</code></em>。</p>
+<p>  创建 Modal Segue 的方式同 Push Segue 一样，通过 <em>Control</em> + <em>Drag</em> 的方式，从某个 UIButton（举例来说）拖向 destination UIViewController，选择 Modal 即可。当 Segue 触发时，就会以 Modal 的形式呈现 destination UIViewController。同样，你需要去 prepareForSegue。通过设定 destination UIViewController 的属性 modalTransitionStyle，可以让它以不同的动画形式呈现出来。</p>
+<p>  当然，你也可以通过代码手动地以 Modal 的形式呈现 destination UIViewController，调用 <code>presentViewContainer:animated:completion:</code> 即可，这里的 completion block 会在 destination UIViewController viewDidAppear 后被调用。</p>
+</li>
+<li><p><strong>Unwind Segue</strong>：一般用于从 <em><code>Modal View Controller</code></em> 返回到它的 presenter。通过 Unwind Segue，你也只能是返回到自己的 presenter。Unwind Segue 也可以用在 <em><code>UINavigationController</code></em> 机制中。</p>
+<p>  正如之前提到的，使用 Unwind Segue 在 prepareForSegue 时，它返给你的 destination UIViewController 就是之前已经存在的 presenter UIViewController，不会去重新 init 一个 new UIViewController。</p>
+<p>  <strong>那么创建 Unwind Segue 都需要做些什么呢？</strong></p>
+<p>  举例来说，aVC 通过 Modal Segue 的形式呈现出 bVC，现在 bVC 要通过 Unwind Segue 的形式返回到 aVC。那么要创建这个 Unwind Segue 需要2步操作：</p>
+<ol>
+<li><p>在 aVC 的代码中，实现一个如下这样原型的函数：</p>
+<pre><code>-(<span class="keyword">IBAction</span>)handleUnwindSegue:(<span class="built_in">UIStoryboardSegue</span> *)segue
+{
+    XXXViewController *bVC = (XXXViewController *)segue<span class="variable">.sourceViewController</span>; <span class="comment">// source, not destination. bVC Unwind Segue to aVC, so bVC is source.</span>
+    <span class="comment">// get what you want from bVC</span>
+}
+</code></pre></li>
+<li><p>在 bVC 的 scene 中，通过 <em>Control</em> + <em>Drag</em> 拖向下面这个 icon：</p>
+<p> <img src="/img/Study_iOS_Segue/16.2.UnwindSegue.png" alt="Unwind Segue"></p>
+<p> 然后 Xcode 就会列出 aVC 中所有你实现的那种原型的函数，选择其中匹配的那个 handleUnwindSegue:，并给该 Unwind Segue 设定 Identifier，这样就创建了 bVC 到 aVC 的一个 Unwind Segue。</p>
+<p>handleUnwindSegue: 会在 aVC 呈现后被调用，此时，bVC 会自动 dismiss。别忘了在 bVC 的代码中还是需要去 prepareForSegue 的，为这个 Unwind Segue 做 preparation，通常就是准备好供 aVC 在 handleUnwindSegue: 中访问的东西。</p>
+<p><strong>另外</strong>，这里再多提一些关于 Modal View 的东西。前面讲到了，在 aVC 通过 Unwind Segue 被呈现出来的时候，bVC 会自动 dismiss。那么如果不借助 Unwind Segue，如何在代码中手动让其 dismiss 呢。可以利用 <code>dismissViewControllerAnimated:completion:</code> 来完成。<strong>注意</strong>，这个消息不是发给 bVC 自己的，而是发给 aVC 的！查看文档就会明白，aVC 调用这个函数后，会 dismiss 掉它 present 出来的 Modal View Controller。所以，在 bVC 的代码中，你通常是这么使用该函数：</p>
+<pre><code>[self.presentingViewController <span class="string">dismissViewControllerAnimated:</span>YES <span class="string">completion:</span>XXX];
+</code></pre><p>在 bVC 中通过 self.presentingViewController 拿到 aVC。</p>
+<p>手动 dismiss 一般是用于 bVC 什么也不做就返回到 aVC，这样就不需要通过 Unwind Segue 向 aVC 返回数据。</p>
+</li>
+</ol>
+</li>
+</ul>
+<hr>
+
+      
+    </div>
+    
+      <div class="article-copyright">
+	<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a><br />本作品采用<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可。
+</div>
+    
+    
+      <div class ="post-donate">
+    <div id="donate_tip" class="donate_tip center">
+        <a id="btn_donate" class="btn_donate" href="javascript:;"></a>
+        <span class="donate_tip_txt">
+		   Donate
+        </span>
+        <br>
+      </div>
+	<div id="donate_guide" class="donate_tip center hidden">
+		<div class="donate_item">
+			<span class="donate_item_txt" style="color:#1dabec">支付宝打赏</span>
+			<img src="/img/zhifubaoV2.png" alt="支付宝打赏">
+		</div>
+		<div class="donate_item">
+			<span class="donate_item_txt" style="color:#22cf28">微信打赏</span>
+			<img src="/img/weixinV2.png" alt="微信打赏">
+		</div>
+    </div>
+	<script type="text/javascript">
+		document.getElementById('btn_donate').onclick = function(){
+			$('#donate_tip').addClass('hidden');
+			$('#donate_guide').removeClass('hidden');
+		}
+	</script>
+</div>
+      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- hi.zongquan.wang -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-2996662524777889"
+     data-ad-slot="6722951255"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+    
+    <footer class="article-footer">
+      
+        <a href="https://hi.zongquan.wang/2015/01/10/Study_iOS_Segue/#disqus_thread" class="article-comment-link">Comments</a>
+      
+
+      <a data-url="https://hi.zongquan.wang/2015/01/10/Study_iOS_Segue/" data-id="ciwm0ujxp000jvzmp9jz8yyht" class="article-share-link">Share</a>
+
+      <div id="article-baidu-share" class="bdsharebuttonbox">
+        <a href="#" class="bds_weixin" data-cmd="weixin" title="WeiXin"></a>
+      </div>
+      <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":["mshare","weixin","tsina","tqq","qzone","qq","sqq","tqf","t163","renren","douban","huaban","taobao","tieba","kaixin001","tsohu","meilishuo","mogujie","sdo","youdao","twi","fbook","linkedin","mail","copy","print"],"bdPic":"","bdStyle":"1","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/01/11/Study_iOS_UIScrollView/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Study iOS - UIScrollView
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/01/07/Study_iOS_Network/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Study iOS - Network</div>
+    </a>
+  
+</nav>
+
+
+  
+</article>
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+</section>
+      
+        <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Development/">Development</a><span class="category-list-count">24</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac/">Mac</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swift/">Swift</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Xcode/">Xcode</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS/">iOS</a><span class="tag-list-count">13</span></li></ul>
+    </div>
+  </div>
+
+  
+    <div class="widget">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+	<!-- hi.zongquan.wang -->
+	<ins class="adsbygoogle"
+	     style="display:block"
+	     data-ad-client="ca-pub-2996662524777889"
+	     data-ad-slot="6722951255"
+	     data-ad-format="auto"></ins>
+	<script>
+	(adsbygoogle = window.adsbygoogle || []).push({});
+	</script>
+</div>
+  
+  <div id="toTop" class="fa fa-chevron-up"></div>
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 1987 - 2016 闷骚的悟空<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a href="https://eager.io/" target="_blank">Eager</a>. Theme by <a href="https://github.com/ppoffice">PPOffice</a>
+    </div>
+    <div style="display: none">
+      
+      	
+      	
+        <img id=favicon_1 src=/favicon.1.ico>
+      
+      	
+      	
+        <img id=favicon_2 src=/favicon.2.ico>
+      
+      	
+      	
+        <img id=favicon_3 src=/favicon.3.ico>
+      
+      	
+      	
+        <img id=favicon_4 src=/favicon.4.ico>
+      
+    </div>
+  </div>
+</footer>
+    
+
+<script>
+  var disqus_shortname = 'wzqcongcong';
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+
+ <script src="//cdn.staticfile.org/jquery/2.1.1-rc2/jquery.min.js"></script>
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/csshake.min.css">
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/favico.js"></script>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    var favicon = new Favico();
+    var index = -1;
+    window.setInterval(function() {
+      var random = Math.floor(Math.random() * 4);
+      index = (index + 1) % 4;
+      var image = document.getElementById('favicon_' + (index + 1));
+      favicon.image(image);
+    }, 500);
+  });
+</script>
+
+  </div>
+</body>
+</html>
