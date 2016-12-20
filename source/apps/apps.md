@@ -14,7 +14,7 @@ Now support 2 update modes:
 * Use Bing's "Today Image". Update every day.
 * Choose randomly from Bing's images collection. Update by customized period.
 
-[Download Latest Release (1.1)] [1]
+[Download Latest Release (1.2)] [1]
 
 -----
 
@@ -71,7 +71,7 @@ Monitor stock capital flow & stock price of A Stock Market in China (by realtime
 
 -----
 
-[1]: https://github.com/wzqcongcong/DesktopPainter/releases/download/1.1/DesktopPainter.app.zip
+[1]: https://github.com/wzqcongcong/DesktopPainter/releases/download/1.2/DesktopPainter.app.zip
 [2]: https://github.com/wzqcongcong/MyMobileCleaner/releases/download/2.0.2/iDevice.Cleaner.zip
 [3]: https://github.com/wzqcongcong/MacGuarder/releases/download/1.0/MacGuarder.app.zip
 [4]: https://github.com/wzqcongcong/MouseFrog/releases/download/1.1/MouseFrog.app.zip
